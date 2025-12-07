@@ -154,10 +154,10 @@ function showMainContent() {
     landingPage.style.display = 'none';
   }
   
-  // Show main app
+  // Show main app - use flex to maintain drawer layout
   const mainApp = document.getElementById('app');
   if (mainApp) {
-    mainApp.style.display = 'block';
+    mainApp.style.display = 'flex';
   }
   
   console.log('Main content displayed');
