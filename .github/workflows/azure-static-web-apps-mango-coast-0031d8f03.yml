@@ -1,0 +1,33 @@
+name: Azure Static Web Apps CI/CD
+
+pr:
+  branches:
+    include:
+      - master
+trigger:
+  branches:
+    include:
+      - master
+
+jobs:
+- job: build_and_deploy_job
+  displayName: Build and Deploy Job
+  condition: or(eq(variables['Build.Reason'], 'Manual'),or(eq(variables['Build.Reason'], 'PullRequest'),eq(variables['Build.Reason'], 'IndividualCI')))
+  pool:
+    vmImage: ubuntu-latest
+  variables:
+  - group: Azure-Static-Web-Apps-mango-coast-0031d8f03-variable-group
+  steps:
+  - checkout: self
+    submodules: true
+  - task: AzureStaticWebApp@0
+    inputs:
+      azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_COAST_0031D8F03)
+###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+# For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+      app_location: "/crm-prototype" # App source code path
+      api_location: "" # Api source code path - optional
+      output_location: "" # Built app content directory - optional
+      skip_app_build: true # Skip build since this is a static site with no build process
+###### End of Repository/Build Configurations ######
+

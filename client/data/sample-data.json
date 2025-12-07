@@ -1,0 +1,16 @@
+{
+  "brands": [
+    { "id": "b1", "namn": "Mäklarkedjan X" },
+    { "id": "b2", "namn": "Fastighetsbolaget Y" }
+  ],
+  "companies": [
+    { "id": "c1", "namn": "X Malmö", "brandId": "b1", "stad": "Malmö", "status": "kund" },
+    { "id": "c2", "namn": "X Lund", "brandId": "b1", "stad": "Lund", "status": "prospekt" },
+    { "id": "c3", "namn": "Y Stockholm", "brandId": "b2", "stad": "Stockholm", "status": "ej" }
+  ],
+  "agents": [
+    { "id": "a1", "förnamn": "Anna", "efternamn": "Andersson", "email": "anna@xmalmo.se", "telefon": "070-111111", "companyId": "c1", "status": "kund", "licens": { "status": "aktiv" } },
+    { "id": "a2", "förnamn": "Björn", "efternamn": "Berg", "email": "bjorn@xlund.se", "telefon": "070-222222", "companyId": "c2", "status": "prospekt", "licens": { "status": "ingen" } },
+    { "id": "a3", "förnamn": "Cecilia", "efternamn": "Carlsson", "email": "cecilia@y-sthlm.se", "telefon": "070-333333", "companyId": "c3", "status": "ej", "licens": { "status": "test" } }
+  ]
+}

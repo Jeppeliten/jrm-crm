@@ -1,0 +1,32 @@
+{
+  "networking": {
+    "allowedIpRanges": []
+  },
+  "routes": [
+    {
+      "route": "/*.{js,css,json,jpg,jpeg,png,gif,svg,ico,woff,woff2,ttf,eot}",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["anonymous"]
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/*.{js,css,json,jpg,jpeg,png,gif,svg,ico,woff,woff2,ttf,eot}"]
+  },
+  "globalHeaders": {
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff",
+    "X-XSS-Protection": "1; mode=block",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "mimeTypes": {
+    ".js": "text/javascript",
+    ".css": "text/css",
+    ".json": "application/json"
+  }
+}

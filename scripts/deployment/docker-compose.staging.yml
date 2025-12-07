@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  crm-staging:
+    build: .
+    container_name: crm-staging
+    ports:
+      - "3001:3000"  # Staging på port 3001
+    environment:
+      - NODE_ENV=staging
+      - PORT=3000
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-staging123}
+      - ENABLE_AZURE_B2C_USER_SYNC=false
+      # Microsoft Graph API (valfritt för staging)
+      - MICROSOFT_CLIENT_ID=${MICROSOFT_CLIENT_ID}
+      - MICROSOFT_TENANT_ID=${MICROSOFT_TENANT_ID}
+      - MICROSOFT_REDIRECT_URI=http://localhost:3001/api/outlook/auth/callback
+    volumes:
+      - ./docker-data:/app/server/data
+      - ./backups:/app/backups
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.crm-staging.rule=Host(`staging.crm.ditt-företag.se`)"
+      - "traefik.http.routers.crm-staging.tls=true"
+      - "traefik.http.routers.crm-staging.tls.certresolver=letsencrypt"
+
+# Valfri databas för staging
+  # postgres-staging:
+  #   image: postgres:15
+  #   container_name: crm-postgres-staging
+  #   environment:
+  #     POSTGRES_DB: crm_staging
+  #     POSTGRES_USER: crm_user
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-staging123}
+  #   volumes:
+  #     - postgres_staging_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5433:5432"
+
+volumes:
+  postgres_staging_data:
