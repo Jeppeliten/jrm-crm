@@ -813,23 +813,30 @@ function showAddBrandForm() {
   console.log('🎯 showAddBrandForm called!');
   const html = `
     <div class="modal modal-open">
-      <div class="modal-box">
+      <div class="modal-box max-w-2xl">
         <h3 class="font-bold text-lg mb-4">Lägg till nytt varumärke</h3>
         <form id="addBrandForm" class="space-y-4">
-          <div class="form-control">
-            <label class="label"><span class="label-text">Varumärkesnamn *</span></label>
-            <input type="text" name="name" class="input input-bordered" required />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Varumärkesnamn *</span>
+            </label>
+            <input type="text" name="name" placeholder="Ange varumärkesnamn" class="input input-bordered w-full" required />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Beskrivning</span></label>
-            <textarea name="description" class="textarea textarea-bordered"></textarea>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Beskrivning</span>
+            </label>
+            <textarea name="description" placeholder="Beskriv varumärket..." class="textarea textarea-bordered w-full" rows="4"></textarea>
           </div>
           <div class="modal-action">
-            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara</button>
+            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara varumärke</button>
           </div>
         </form>
       </div>
+      <form method="dialog" class="modal-backdrop">
+        <button onclick="closeModal()">close</button>
+      </form>
     </div>
   `;
   
@@ -843,31 +850,42 @@ function showAddCompanyForm() {
   console.log('🎯 showAddCompanyForm called!');
   const html = `
     <div class="modal modal-open">
-      <div class="modal-box">
+      <div class="modal-box max-w-2xl">
         <h3 class="font-bold text-lg mb-4">Lägg till nytt företag</h3>
         <form id="addCompanyForm" class="space-y-4">
-          <div class="form-control">
-            <label class="label"><span class="label-text">Företagsnamn *</span></label>
-            <input type="text" name="name" class="input input-bordered" required />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Företagsnamn *</span>
+            </label>
+            <input type="text" name="name" placeholder="Ange företagsnamn" class="input input-bordered w-full" required />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Organisationsnummer</span></label>
-            <input type="text" name="orgNumber" class="input input-bordered" />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Organisationsnummer</span>
+            </label>
+            <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">E-post</span></label>
-            <input type="email" name="email" class="input input-bordered" />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">E-post</span>
+            </label>
+            <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Telefon</span></label>
-            <input type="tel" name="phone" class="input input-bordered" />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Telefon</span>
+            </label>
+            <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
           </div>
           <div class="modal-action">
-            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara</button>
+            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara företag</button>
           </div>
         </form>
       </div>
+      <form method="dialog" class="modal-backdrop">
+        <button onclick="closeModal()">close</button>
+      </form>
     </div>
   `;
   
@@ -881,31 +899,42 @@ function showAddAgentForm() {
   console.log('🎯 showAddAgentForm called!');
   const html = `
     <div class="modal modal-open">
-      <div class="modal-box">
+      <div class="modal-box max-w-2xl">
         <h3 class="font-bold text-lg mb-4">Lägg till ny mäklare</h3>
         <form id="addAgentForm" class="space-y-4">
-          <div class="form-control">
-            <label class="label"><span class="label-text">Namn *</span></label>
-            <input type="text" name="name" class="input input-bordered" required />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Namn *</span>
+            </label>
+            <input type="text" name="name" placeholder="För- och efternamn" class="input input-bordered w-full" required />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">E-post *</span></label>
-            <input type="email" name="email" class="input input-bordered" required />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">E-post *</span>
+            </label>
+            <input type="email" name="email" placeholder="namn@maklarforetag.se" class="input input-bordered w-full" required />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Telefon</span></label>
-            <input type="tel" name="phone" class="input input-bordered" />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Telefon</span>
+            </label>
+            <input type="tel" name="phone" placeholder="070-XXX XX XX" class="input input-bordered w-full" />
           </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Företag</span></label>
-            <input type="text" name="company" class="input input-bordered" />
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Företag</span>
+            </label>
+            <input type="text" name="company" placeholder="Mäklarföretag AB" class="input input-bordered w-full" />
           </div>
           <div class="modal-action">
-            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara</button>
+            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara mäklare</button>
           </div>
         </form>
       </div>
+      <form method="dialog" class="modal-backdrop">
+        <button onclick="closeModal()">close</button>
+      </form>
     </div>
   `;
   
