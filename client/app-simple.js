@@ -1031,6 +1031,25 @@ async function createEntity(entityType, data) {
   console.log('Creating', entityType, data);
   
   try {
+    // Temporary: Mock for entities without backend endpoints
+    if (['companies', 'brands', 'agents'].includes(entityType)) {
+      console.log('⚠️ Using mock for', entityType, '- backend endpoint not yet implemented');
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Create mock result
+      const result = {
+        id: Date.now(),
+        ...data,
+        createdAt: new Date().toISOString()
+      };
+      
+      console.log('Mock created:', result);
+      showNotification(`${entityType} skapad! (mock)`, 'success');
+      return result;
+    }
+    
     const response = await fetchWithAuth(`/api/${entityType}`, {
       method: 'POST',
       body: JSON.stringify(data)
