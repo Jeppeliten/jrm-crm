@@ -53,7 +53,10 @@ class EntraAuth {
         
         // Call initializeApp directly since we're coming back from redirect
         if (typeof window.initializeApp === 'function') {
+          console.log('Calling initializeApp from handleRedirectPromise...');
           window.initializeApp(this.account);
+        } else {
+          console.error('window.initializeApp is not available!');
         }
         
         // Also dispatch event for any other listeners
@@ -66,7 +69,8 @@ class EntraAuth {
       return null;
     } catch (error) {
       console.error('Error handling redirect:', error);
-      throw error;
+      // Don't throw - just return null and let app show login button
+      return null;
     }
   }
 

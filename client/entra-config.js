@@ -40,7 +40,12 @@ const LOGIN_REQUEST = {
 
 // Token request for API calls (includes roles claim)
 const TOKEN_REQUEST = {
-  scopes: ['User.Read'],
+  scopes: [
+    'User.Read',
+    'openid',
+    'profile',
+    'email'
+  ],
   forceRefresh: false,
 };
 
