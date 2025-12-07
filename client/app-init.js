@@ -58,6 +58,9 @@ function initializeApp(user) {
   console.log('Application initialized successfully!');
 }
 
+// Expose globally so entra-auth.js can call it
+window.initializeApp = initializeApp;
+
 function updateUserMenu(user) {
   console.log('Updating user menu for:', user);
   
