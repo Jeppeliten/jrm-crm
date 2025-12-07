@@ -40,22 +40,19 @@ const LOGIN_REQUEST = {
 
 // Token request for API calls (includes roles claim)
 const TOKEN_REQUEST = {
-  scopes: [
-    'User.Read',
-    `api://${ENTRA_CONFIG.auth.clientId}/access_as_user`
-  ],
+  scopes: ['User.Read'],
   forceRefresh: false,
 };
 
 // API Configuration
 const API_CONFIG = {
-  baseUrl: 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net/api',
+  baseUrl: 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net',
   endpoints: {
-    customers: '/customers',
-    deals: '/deals',
-    activities: '/activities',
-    users: '/users',
-    health: '/health',
+    customers: '/api/customers',
+    deals: '/api/deals',
+    activities: '/api/activities',
+    users: '/api/users',
+    health: '/api/health',
   },
 };
 
