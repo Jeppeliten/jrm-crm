@@ -53,7 +53,6 @@ router.post('/', async (req, res, next) => {
     }
     
     const company = {
-      _id: Date.now().toString(), // Mock ID
       name,
       orgNumber,
       email,
@@ -65,15 +64,16 @@ router.post('/', async (req, res, next) => {
     
     // Use mock storage if no database
     if (!db) {
-      console.log('📦 Saving to mock companies storage:', company);
-      mockCompanies.push(company);
+      console.log('📦 Saving to mock companies storage');
+      const mockCompany = { ...company, _id: Date.now().toString() };
+      mockCompanies.push(mockCompany);
       console.log('✅ Company saved to mock storage, total companies:', mockCompanies.length);
-      return res.status(201).json(company);
+      return res.status(201).json(mockCompany);
     }
     
     console.log('💾 Saving to Cosmos DB...');
     const result = await db.collection('companies').insertOne(company);
-    console.log('✅ Company saved to DB');
+    console.log('✅ Company saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...company, _id: result.insertedId });
   } catch (error) {
     console.error('❌ Error creating company:', error);

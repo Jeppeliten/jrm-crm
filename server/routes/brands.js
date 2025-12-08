@@ -42,7 +42,6 @@ router.post('/', async (req, res) => {
     }
     
     const brand = {
-      _id: Date.now().toString(),
       name,
       description,
       createdAt: new Date(),
@@ -50,12 +49,14 @@ router.post('/', async (req, res) => {
     };
     
     if (!db) {
-      console.log('📦 Saving to mock brands storage:', brand);
-      mockBrands.push(brand);
-      return res.status(201).json(brand);
+      console.log('📦 Saving to mock brands storage');
+      const mockBrand = { ...brand, _id: Date.now().toString() };
+      mockBrands.push(mockBrand);
+      return res.status(201).json(mockBrand);
     }
     
     const result = await db.collection('brands').insertOne(brand);
+    console.log('✅ Brand saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...brand, _id: result.insertedId });
   } catch (error) {
     console.error('Error creating brand:', error);

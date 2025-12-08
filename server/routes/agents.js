@@ -42,7 +42,6 @@ router.post('/', async (req, res) => {
     }
     
     const agent = {
-      _id: Date.now().toString(),
       name,
       email,
       phone,
@@ -52,12 +51,14 @@ router.post('/', async (req, res) => {
     };
     
     if (!db) {
-      console.log('📦 Saving to mock agents storage:', agent);
-      mockAgents.push(agent);
-      return res.status(201).json(agent);
+      console.log('📦 Saving to mock agents storage');
+      const mockAgent = { ...agent, _id: Date.now().toString() };
+      mockAgents.push(mockAgent);
+      return res.status(201).json(mockAgent);
     }
     
     const result = await db.collection('agents').insertOne(agent);
+    console.log('✅ Agent saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...agent, _id: result.insertedId });
   } catch (error) {
     console.error('Error creating agent:', error);
