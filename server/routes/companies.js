@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
       return res.json(mockCompanies);
     }
     
-    const companies = await db.collection('companies').find({}).toArray();
+    const companies = await db.collection('companies_v2').find({}).toArray();
     res.json(companies);
   } catch (error) {
     console.error('Error fetching companies:', error);
@@ -72,7 +72,7 @@ router.post('/', async (req, res, next) => {
     }
     
     console.log('💾 Saving to Cosmos DB...');
-    const result = await db.collection('companies').insertOne(company);
+    const result = await db.collection('companies_v2').insertOne(company);
     console.log('✅ Company saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...company, _id: result.insertedId });
   } catch (error) {

@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       return res.json(mockBrands);
     }
     
-    const brands = await db.collection('brands').find({}).toArray();
+    const brands = await db.collection('brands_v2').find({}).toArray();
     res.json(brands);
   } catch (error) {
     console.error('Error fetching brands:', error);
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
       return res.status(201).json(mockBrand);
     }
     
-    const result = await db.collection('brands').insertOne(brand);
+    const result = await db.collection('brands_v2').insertOne(brand);
     console.log('✅ Brand saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...brand, _id: result.insertedId });
   } catch (error) {
@@ -79,7 +79,7 @@ router.put('/:id', async (req, res) => {
       updatedAt: new Date()
     };
     
-    const result = await db.collection('brands').updateOne(
+    const result = await db.collection('brands_v2').updateOne(
       { _id: require('mongodb').ObjectId(id) },
       { $set: updateData }
     );
@@ -103,7 +103,7 @@ router.delete('/:id', async (req, res) => {
     const db = req.app.locals.db;
     const { id } = req.params;
     
-    const result = await db.collection('brands').deleteOne(
+    const result = await db.collection('brands_v2').deleteOne(
       { _id: require('mongodb').ObjectId(id) }
     );
     

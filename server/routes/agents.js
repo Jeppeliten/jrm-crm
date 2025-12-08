@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       return res.json(mockAgents);
     }
     
-    const agents = await db.collection('agents').find({}).toArray();
+    const agents = await db.collection('agents_v2').find({}).toArray();
     res.json(agents);
   } catch (error) {
     console.error('Error fetching agents:', error);
@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
       return res.status(201).json(mockAgent);
     }
     
-    const result = await db.collection('agents').insertOne(agent);
+    const result = await db.collection('agents_v2').insertOne(agent);
     console.log('✅ Agent saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...agent, _id: result.insertedId });
   } catch (error) {
@@ -76,7 +76,7 @@ router.put('/:id', async (req, res) => {
     const updateData = { ...req.body, updatedAt: new Date() };
     delete updateData._id;
     
-    const result = await db.collection('agents').updateOne(
+    const result = await db.collection('agents_v2').updateOne(
       { _id: require('mongodb').ObjectId(id) },
       { $set: updateData }
     );
@@ -100,7 +100,7 @@ router.delete('/:id', async (req, res) => {
     const db = req.app.locals.db;
     const { id } = req.params;
     
-    const result = await db.collection('agents').deleteOne(
+    const result = await db.collection('agents_v2').deleteOne(
       { _id: require('mongodb').ObjectId(id) }
     );
     
