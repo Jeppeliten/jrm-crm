@@ -15,34 +15,7 @@ const appState = {
 // Global flag to prevent double initialization
 let appInitialized = false;
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('🎯 app-simple.js DOM ready, waiting for authentication...');
-  
-  // Check periodically if main app is shown (after authentication)
-  const checkInterval = setInterval(() => {
-    const mainApp = document.getElementById('app');
-    const landingPage = document.getElementById('landing-page');
-    
-    if (mainApp && mainApp.style.display !== 'none' && 
-        (!landingPage || landingPage.style.display === 'none')) {
-      console.log('✅ Main app is visible, initializing CRM...');
-      clearInterval(checkInterval);
-      
-      if (!appInitialized) {
-        setTimeout(() => {
-          initializeSimpleApp();
-          appInitialized = true;
-        }, 300);
-      }
-    }
-  }, 200);
-  
-  // Timeout after 30 seconds
-  setTimeout(() => clearInterval(checkInterval), 30000);
-});
-
-// Also listen to the event as backup
+// Listen to the authentication event - this is the primary trigger
 window.addEventListener('entra-login-success', (event) => {
   console.log('🔔 entra-login-success event received in app-simple.js', event.detail);
   
@@ -51,12 +24,42 @@ window.addEventListener('entra-login-success', (event) => {
     return;
   }
   
-  // Small delay to ensure DOM is fully ready
+  // Wait for app-init.js to show main content, then initialize CRM
   setTimeout(() => {
-    console.log('🚀 Starting app initialization after login...');
-    initializeSimpleApp();
-    appInitialized = true;
-  }, 500);
+    const mainApp = document.getElementById('app');
+    const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
+    
+    if (isVisible) {
+      console.log('🚀 Starting CRM initialization after login...');
+      initializeSimpleApp();
+      appInitialized = true;
+    } else {
+      console.log('⏸️  Main app not yet visible, waiting...');
+      // If not visible yet, wait a bit more
+      setTimeout(() => {
+        console.log('🚀 Starting CRM initialization (delayed)...');
+        initializeSimpleApp();
+        appInitialized = true;
+      }, 500);
+    }
+  }, 200);
+});
+
+// Fallback: Initialize when DOM is ready AND user is already logged in
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🎯 app-simple.js DOM ready');
+  
+  // Check if user is already authenticated (page refresh case)
+  setTimeout(() => {
+    const mainApp = document.getElementById('app');
+    const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
+    
+    if (isVisible && !appInitialized) {
+      console.log('✅ User already authenticated, initializing CRM...');
+      initializeSimpleApp();
+      appInitialized = true;
+    }
+  }, 1500); // Wait for app-init.js to finish
 });
 
 function initializeSimpleApp() {

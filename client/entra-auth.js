@@ -51,15 +51,7 @@ class EntraAuth {
         this.account = response.account;
         console.log('Login successful after redirect:', this.account.username);
         
-        // Call initializeApp directly since we're coming back from redirect
-        if (typeof window.initializeApp === 'function') {
-          console.log('Calling initializeApp from handleRedirectPromise...');
-          window.initializeApp(this.account);
-        } else {
-          console.error('window.initializeApp is not available!');
-        }
-        
-        // Also dispatch event for any other listeners
+        // Dispatch event to let app know user is logged in
         window.dispatchEvent(new CustomEvent('entra-login-success', {
           detail: { user: this.account }
         }));
