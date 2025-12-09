@@ -495,47 +495,104 @@ async function showCompanyDetails(id) {
     
     const html = `
       <div class="modal modal-open">
-        <div class="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
-          <div class="flex justify-between items-start mb-4">
-            <h3 class="font-bold text-2xl">${company.name}</h3>
-            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+        <div class="modal-box max-w-5xl max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 class="font-bold text-3xl text-gray-800">${company.name}</h3>
+              <p class="text-sm text-gray-500 mt-1">${company.orgNumber || 'Inget org.nr'}</p>
+            </div>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle"></button>
           </div>
           
-          <div class="grid grid-cols-2 gap-6">
-            <div class="space-y-3">
+          <div class="divider my-4"></div>
+          
+          <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">F?retagsinformation</h4>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">Organisationsnummer</label>
-                <p class="text-base">${company.orgNumber || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Varum?rke</label>
+                <p class="text-base mt-1 font-medium">${company.brand || '-'}</p>
               </div>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">Varum?rke</label>
-                <p class="text-base">${company.brand || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Kategori</label>
+                <p class="text-base mt-1">${company.category || '-'}</p>
               </div>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">Status</label>
-                <p><span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">${company.status || 'prospekt'}</span></p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Status</label>
+                <div class="mt-1">
+                  <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
+                    ${company.status || 'prospekt'}
+                  </span>
+                </div>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Pipeline</label>
+                <p class="text-base mt-1">${company.pipeline || '-'}</p>
               </div>
             </div>
             
-            <div class="space-y-3">
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">Kontaktinformation</h4>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">E-post</label>
-                <p class="text-base">${company.email || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">E-post</label>
+                <p class="text-base mt-1">${company.email ? '<a href="mailto:' + company.email + '" class="text-blue-600 hover:text-blue-800">' + company.email + '</a>' : '-'}</p>
               </div>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">Telefon</label>
-                <p class="text-base">${company.phone || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Telefon</label>
+                <p class="text-base mt-1">${company.phone ? '<a href="tel:' + company.phone + '" class="text-blue-600 hover:text-blue-800">' + company.phone + '</a>' : '-'}</p>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Ort</label>
+                <p class="text-base mt-1">${company.city || '-'}</p>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">L?n</label>
+                <p class="text-base mt-1">${company.county || '-'}</p>
               </div>
             </div>
           </div>
           
-          <div class="modal-action">
+          <div class="divider my-6"></div>
+          
+          <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">Licensinformation</h4>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Antal licenser</label>
+                <p class="text-base mt-1 font-semibold text-2xl text-blue-600">${company.licenseCount || '0'}</p>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Produkt</label>
+                <p class="text-base mt-1">${company.product || '-'}</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">Betalning & Avtal</h4>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Betalningsinformation</label>
+                <p class="text-base mt-1">${company.paymentInfo || '-'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-action mt-8 pt-4 border-t">
             <button onclick="closeModal()" class="btn btn-ghost">St?ng</button>
+            <button onclick="closeModal(); editCompany('${company._id}')" class="btn btn-primary">Redigera f?retag</button>
           </div>
         </div>
-        <form method="dialog" class="modal-backdrop">
-          <button onclick="closeModal()">close</button>
-        </form>
+        <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
       </div>
     `;
     
@@ -553,30 +610,55 @@ async function showBrandDetails(id) {
     
     const html = `
       <div class="modal modal-open">
-        <div class="modal-box max-w-4xl">
-          <div class="flex justify-between items-start mb-4">
-            <h3 class="font-bold text-2xl">${brand.name}</h3>
-            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+        <div class="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 class="font-bold text-3xl text-gray-800">${brand.name}</h3>
+              <p class="text-sm text-gray-500 mt-1">${brand.category || 'Okategoriserad'}</p>
+            </div>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle"></button>
           </div>
           
-          <div class="space-y-3">
-            <div>
-              <label class="text-sm font-semibold text-gray-500">Beskrivning</label>
-              <p class="text-base">${brand.description || '-'}</p>
+          <div class="divider my-4"></div>
+          
+          <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">Information</h4>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Kategori</label>
+                <p class="text-base mt-1 font-medium">${brand.category || '-'}</p>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Status</label>
+                <div class="mt-1">
+                  <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full ${getStatusBadgeClass(brand.status)}">
+                    ${brand.status || 'aktiv'}
+                  </span>
+                </div>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Webbplats</label>
+                <p class="text-base mt-1">${brand.website ? '<a href="' + brand.website + '" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline">' + brand.website + ' </a>' : '-'}</p>
+              </div>
             </div>
-            <div>
-              <label class="text-sm font-semibold text-gray-500">Webbplats</label>
-              <p class="text-base">${brand.website ? `<a href="${brand.website}" target="_blank" class="text-indigo-600">${brand.website}</a>` : '-'}</p>
+            
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">Beskrivning</h4>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-base text-gray-700">${brand.description || 'Ingen beskrivning tillg?nglig'}</p>
+              </div>
             </div>
           </div>
           
-          <div class="modal-action">
+          <div class="modal-action mt-8 pt-4 border-t">
             <button onclick="closeModal()" class="btn btn-ghost">St?ng</button>
+            <button onclick="closeModal(); editBrand('${brand._id}')" class="btn btn-primary">Redigera varum?rke</button>
           </div>
         </div>
-        <form method="dialog" class="modal-backdrop">
-          <button onclick="closeModal()">close</button>
-        </form>
+        <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
       </div>
     `;
     
@@ -594,43 +676,73 @@ async function showAgentDetails(id) {
     
     const html = `
       <div class="modal modal-open">
-        <div class="modal-box max-w-4xl">
-          <div class="flex justify-between items-start mb-4">
-            <h3 class="font-bold text-2xl">${agent.name}</h3>
-            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+        <div class="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h3 class="font-bold text-3xl text-gray-800">${agent.name}</h3>
+              <p class="text-sm text-gray-500 mt-1">${agent.role || 'M?klare'} ${agent.company ? 'p? ' + agent.company : ''}</p>
+            </div>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle"></button>
           </div>
           
-          <div class="grid grid-cols-2 gap-6">
-            <div class="space-y-3">
+          <div class="divider my-4"></div>
+          
+          <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">F?retagsinformation</h4>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">F?retag</label>
-                <p class="text-base">${agent.company || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">F?retag</label>
+                <p class="text-base mt-1 font-medium">${agent.company || '-'}</p>
               </div>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">Roll</label>
-                <p class="text-base">${agent.role || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Roll</label>
+                <p class="text-base mt-1">${agent.role || '-'}</p>
+              </div>
+              
+              <div>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Status</label>
+                <div class="mt-1">
+                  <span class="px-3 py-1 inline-flex text-sm font-semibold rounded-full ${getStatusBadgeClass(agent.status)}">
+                    ${agent.status || 'aktiv'}
+                  </span>
+                </div>
               </div>
             </div>
             
-            <div class="space-y-3">
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">Kontaktinformation</h4>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">E-post</label>
-                <p class="text-base">${agent.email || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">E-post</label>
+                <p class="text-base mt-1">${agent.email ? '<a href="mailto:' + agent.email + '" class="text-blue-600 hover:text-blue-800">' + agent.email + '</a>' : '-'}</p>
               </div>
+              
               <div>
-                <label class="text-sm font-semibold text-gray-500">Telefon</label>
-                <p class="text-base">${agent.phone || '-'}</p>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Telefon</label>
+                <p class="text-base mt-1">${agent.phone ? '<a href="tel:' + agent.phone + '" class="text-blue-600 hover:text-blue-800">' + agent.phone + '</a>' : '-'}</p>
               </div>
             </div>
           </div>
           
-          <div class="modal-action">
+          <div class="divider my-6"></div>
+          
+          <div class="space-y-4">
+            <h4 class="font-semibold text-lg text-gray-700 mb-3">Licensinformation</h4>
+            
+            <div>
+              <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Licenstyp</label>
+              <p class="text-base mt-1 font-medium">${agent.licenseType || 'Ej angiven'}</p>
+            </div>
+          </div>
+          
+          <div class="modal-action mt-8 pt-4 border-t">
             <button onclick="closeModal()" class="btn btn-ghost">St?ng</button>
+            <button onclick="closeModal(); editAgent('${agent._id}')" class="btn btn-primary">Redigera m?klare</button>
           </div>
         </div>
-        <form method="dialog" class="modal-backdrop">
-          <button onclick="closeModal()">close</button>
-        </form>
+        <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
       </div>
     `;
     
