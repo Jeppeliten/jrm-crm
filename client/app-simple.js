@@ -364,7 +364,7 @@ async function fetchWithAuth(endpoint, options = {}) {
 
 // ===== TABLE RENDERING FUNCTIONS =====
 
-﻿function renderCompaniesTable(companies) {
+function renderCompaniesTable(companies) {
   const tableHtml = `
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
@@ -381,29 +381,9 @@ async function fetchWithAuth(endpoint, options = {}) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${companies.map(company => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
-            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${company.name || ''}</td>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">${company.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${company.brand || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
-                ${company.status || 'prospekt'}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.pipeline || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
-              <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
-              <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-  document.getElementById('companyTable').innerHTML = tableHtml;
-}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
                 ${company.status || 'prospekt'}
@@ -440,7 +420,7 @@ function renderBrandsTable(brands) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${brands.map(brand => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showBrandDetails(${brand._id})">
+          <tr>
             <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -481,7 +461,7 @@ function renderAgentsTable(agents) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${agents.map(agent => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showAgentDetails(${agent._id})">
+          <tr>
             <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.role || ''}</td>
@@ -986,554 +966,6 @@ function handleDropdownChange(dropdown, value, viewName) {
 }
 
 // Show forms for creating new entities
-﻿// ===== DETAIL CARD FUNCTIONS =====
-
-async function showCompanyDetails(id) {
-  try {
-    const response = await fetchWithAuth(`/api/companies/${id}`);
-    const company = await response.json();
-    
-    const html = `
-      <div class="modal modal-open">
-        <div class="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
-          <div class="flex justify-between items-start mb-4">
-            <h3 class="font-bold text-2xl">${company.name}</h3>
-            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
-          </div>
-          
-          <div class="grid grid-cols-2 gap-6">
-            <div class="space-y-3">
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Organisationsnummer</label>
-                <p class="text-base">${company.orgNumber || '-'}</p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Varumärke</label>
-                <p class="text-base">${company.brand || '-'}</p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Kategori</label>
-                <p class="text-base">${company.category || '-'}</p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Status</label>
-                <p><span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">${company.status || 'prospekt'}</span></p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Pipeline</label>
-                <p class="text-base">${company.pipeline || '-'}</p>
-              </div>
-            </div>
-            
-            <div class="space-y-3">
-              <div>
-                <label class="text-sm font-semibold text-gray-500">E-post</label>
-                <p class="text-base">${company.email || '-'}</p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Telefon</label>
-                <p class="text-base">${company.phone || '-'}</p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Ort</label>
-                <p class="text-base">${company.city || '-'}</p>
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-500">Län</label>
-                <p class="text-base">${company.county || '-'}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="divider"></div>
-          
-          <div class="grid grid-cols-2 gap-6">
-            <div>
-              <label class="text-sm font-semibold text-gray-500">Antal licenser</label>
-              <p class="text-base">${company.licenseCount || '0'}</p>
-            </div>
-            <div>
-              <label class="text-sm font-semibold text-gray-500">Produkt</label>
-              <p class="text-base">${company.product || '-'}</p>
-            </div>
-          </div>
-          
-          <div class="mt-3">
-            <label class="text-sm font-semibold text-gray-500">Betalningsinformation</label>
-            <p class="text-base">${company.paymentInfo || '-'}</p>
-          </div>
-          
-          <div class="modal-action">
-            <button onclick="editCompany('${company._id}')" class="btn btn-primary">Redigera</button>
-            <button onclick="deleteCompany('${company._id}')" class="btn btn-error">Ta bort</button>
-            <button onclick="closeModal()" class="btn btn-ghost">Stäng</button>
-          </div>
-        </div>
-        <form method="dialog" class="modal-backdrop">
-          <button onclick="closeModal()">close</button>
-        </form>
-      </div>
-    `;
-    
-    showModal(html);
-  } catch (error) {
-    console.error('Error loading company details:', error);
-    alert('Kunde inte ladda företagsdetaljer');
-  }
-}
-
-async function editCompany(id) {
-  try {
-    const response = await fetchWithAuth(`/api/companies/${id}`);
-    const company = await response.json();
-    
-    const html = `
-      <div class="modal modal-open">
-        <div class="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
-          <h3 class="font-bold text-lg mb-4">Redigera företag</h3>
-          <form id="editCompanyForm" class="space-y-3">
-            <div class="grid grid-cols-2 gap-4">
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Företagsnamn *</span></label>
-                <input type="text" name="name" value="${company.name || ''}" class="input input-bordered w-full" required />
-              </div>
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Organisationsnummer</span></label>
-                <input type="text" name="orgNumber" value="${company.orgNumber || ''}" class="input input-bordered w-full" />
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Varumärke</span></label>
-                <input type="text" name="brand" value="${company.brand || ''}" class="input input-bordered w-full" />
-              </div>
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Kategori</span></label>
-                <input type="text" name="category" value="${company.category || ''}" class="input input-bordered w-full" />
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Status</span></label>
-                <select name="status" class="select select-bordered w-full">
-                  <option value="prospekt" ${company.status === 'prospekt' ? 'selected' : ''}>Prospekt</option>
-                  <option value="kund" ${company.status === 'kund' ? 'selected' : ''}>Kund</option>
-                  <option value="inaktiv" ${company.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
-                </select>
-              </div>
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Pipeline</span></label>
-                <select name="pipeline" class="select select-bordered w-full">
-                  <option value="prospect" ${company.pipeline === 'prospect' ? 'selected' : ''}>Prospekt</option>
-                  <option value="active_customer" ${company.pipeline === 'active_customer' ? 'selected' : ''}>Aktiv kund</option>
-                  <option value="churned" ${company.pipeline === 'churned' ? 'selected' : ''}>Avslutad</option>
-                </select>
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Ort</span></label>
-                <input type="text" name="city" value="${company.city || ''}" class="input input-bordered w-full" />
-              </div>
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Län</span></label>
-                <input type="text" name="county" value="${company.county || ''}" class="input input-bordered w-full" />
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">E-post</span></label>
-                <input type="email" name="email" value="${company.email || ''}" class="input input-bordered w-full" />
-              </div>
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Telefon</span></label>
-                <input type="tel" name="phone" value="${company.phone || ''}" class="input input-bordered w-full" />
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Antal licenser</span></label>
-                <input type="number" name="licenseCount" value="${company.licenseCount || 0}" class="input input-bordered w-full" />
-              </div>
-              <div class="form-control w-full">
-                <label class="label"><span class="label-text">Produkt</span></label>
-                <input type="text" name="product" value="${company.product || ''}" class="input input-bordered w-full" />
-              </div>
-            </div>
-            
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Betalningsinformation</span></label>
-              <input type="text" name="paymentInfo" value="${company.paymentInfo || ''}" class="input input-bordered w-full" />
-            </div>
-            
-            <div class="modal-action">
-              <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-              <button type="submit" class="btn btn-primary">Spara ändringar</button>
-            </div>
-          </form>
-        </div>
-        <form method="dialog" class="modal-backdrop">
-          <button onclick="closeModal()">close</button>
-        </form>
-      </div>
-    `;
-    
-    showModal(html, async (formData) => {
-      await updateEntity('companies', id, formData);
-      loadCompanies();
-    });
-  } catch (error) {
-    console.error('Error loading company for edit:', error);
-    alert('Kunde inte ladda företag för redigering');
-  }
-}
-
-async function updateEntity(entityType, id, data) {
-  try {
-    const response = await fetchWithAuth(`/api/${entityType}/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    
-    if (!response.ok) throw new Error('Update failed');
-    alert('Uppdaterat!');
-    closeModal();
-  } catch (error) {
-    console.error(`Error updating ${entityType}:`, error);
-    alert(`Kunde inte uppdatera ${entityType}`);
-  }
-}
-
-
-
-
-// ============================================
-// BRAND DETAIL CARDS
-// ============================================
-
-async function showBrandDetails(id) {
-  try {
-    const brand = await fetchWithAuth(`/api/brands/${id}`);
-    
-    const modal = document.getElementById('modal');
-    const statusBadge = getStatusBadgeClass(brand.status || 'aktiv');
-    
-    modal.innerHTML = `
-      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-start mb-6">
-          <h2 class="text-2xl font-bold text-gray-900">Varumärke: ${brand.name || 'N/A'}</h2>
-          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Namn</label>
-            <p class="text-gray-900">${brand.name || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <span class="${statusBadge}">${brand.status || 'aktiv'}</span>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-            <p class="text-gray-900">${brand.category || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Webbplats</label>
-            <p class="text-gray-900">${brand.website || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Ramavtal</label>
-            <p class="text-gray-900">${brand.hasCentralAgreement ? 'Ja' : 'Nej'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Antal företag</label>
-            <p class="text-gray-900">${brand.companyCount || 0}</p>
-          </div>
-          <div class="col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Beskrivning</label>
-            <p class="text-gray-900">${brand.description || 'N/A'}</p>
-          </div>
-        </div>
-        
-        <div class="flex justify-end gap-2">
-          <button onclick="deleteBrand('${brand._id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-            Ta bort
-          </button>
-          <button onclick="editBrand('${brand._id}')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Redigera
-          </button>
-          <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-            Stäng
-          </button>
-        </div>
-      </div>
-    `;
-    
-    showModal();
-  } catch (error) {
-    console.error('Error loading brand details:', error);
-    alert('Kunde inte ladda varumärke');
-  }
-}
-
-async function editBrand(id) {
-  try {
-    const brand = await fetchWithAuth(`/api/brands/${id}`);
-    
-    const modal = document.getElementById('modal');
-    modal.innerHTML = `
-      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <h2 class="text-2xl font-bold mb-6">Redigera varumärke</h2>
-        <form id="editBrandForm" class="space-y-4">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Namn *</label>
-              <input type="text" name="name" value="${brand.name || ''}" required
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-              <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                <option value="aktiv" ${brand.status === 'aktiv' ? 'selected' : ''}>Aktiv</option>
-                <option value="inaktiv" ${brand.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-              <input type="text" name="category" value="${brand.category || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Webbplats</label>
-              <input type="url" name="website" value="${brand.website || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Beskrivning</label>
-              <textarea name="description" rows="3"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">${brand.description || ''}</textarea>
-            </div>
-            <div class="col-span-2">
-              <label class="flex items-center">
-                <input type="checkbox" name="hasCentralAgreement" ${brand.hasCentralAgreement ? 'checked' : ''}
-                       class="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                <span class="text-sm font-medium text-gray-700">Har ramavtal</span>
-              </label>
-            </div>
-          </div>
-          <div class="flex justify-end gap-2 mt-6">
-            <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-              Avbryt
-            </button>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              Spara
-            </button>
-          </div>
-        </form>
-      </div>
-    `;
-    
-    document.getElementById('editBrandForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {
-        name: formData.get('name'),
-        status: formData.get('status'),
-        category: formData.get('category'),
-        website: formData.get('website'),
-        description: formData.get('description'),
-        hasCentralAgreement: formData.get('hasCentralAgreement') === 'on'
-      };
-      
-      await updateEntity('brands', id, data);
-    });
-    
-    showModal();
-  } catch (error) {
-    console.error('Error loading brand for edit:', error);
-    alert('Kunde inte ladda varumärke för redigering');
-  }
-}
-
-// ============================================
-// AGENT DETAIL CARDS
-// ============================================
-
-async function showAgentDetails(id) {
-  try {
-    const agent = await fetchWithAuth(`/api/agents/${id}`);
-    
-    const modal = document.getElementById('modal');
-    const statusBadge = getStatusBadgeClass(agent.status || 'aktiv');
-    
-    modal.innerHTML = `
-      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-start mb-6">
-          <h2 class="text-2xl font-bold text-gray-900">Mäklare: ${agent.name || 'N/A'}</h2>
-          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        </div>
-        
-        <div class="grid grid-cols-2 gap-4 mb-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Namn</label>
-            <p class="text-gray-900">${agent.name || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <span class="${statusBadge}">${agent.status || 'aktiv'}</span>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">E-post</label>
-            <p class="text-gray-900">${agent.email || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-            <p class="text-gray-900">${agent.phone || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Företag</label>
-            <p class="text-gray-900">${agent.company || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Varumärke</label>
-            <p class="text-gray-900">${agent.brand || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Roll</label>
-            <p class="text-gray-900">${agent.role || 'N/A'}</p>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Licenstyp</label>
-            <p class="text-gray-900">${agent.licenseType || 'N/A'}</p>
-          </div>
-        </div>
-        
-        <div class="flex justify-end gap-2">
-          <button onclick="deleteAgent('${agent._id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-            Ta bort
-          </button>
-          <button onclick="editAgent('${agent._id}')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Redigera
-          </button>
-          <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-            Stäng
-          </button>
-        </div>
-      </div>
-    `;
-    
-    showModal();
-  } catch (error) {
-    console.error('Error loading agent details:', error);
-    alert('Kunde inte ladda mäklare');
-  }
-}
-
-async function editAgent(id) {
-  try {
-    const agent = await fetchWithAuth(`/api/agents/${id}`);
-    
-    const modal = document.getElementById('modal');
-    modal.innerHTML = `
-      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <h2 class="text-2xl font-bold mb-6">Redigera mäklare</h2>
-        <form id="editAgentForm" class="space-y-4">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Namn *</label>
-              <input type="text" name="name" value="${agent.name || ''}" required
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-              <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                <option value="aktiv" ${agent.status === 'aktiv' ? 'selected' : ''}>Aktiv</option>
-                <option value="inaktiv" ${agent.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">E-post</label>
-              <input type="email" name="email" value="${agent.email || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-              <input type="tel" name="phone" value="${agent.phone || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Företag</label>
-              <input type="text" name="company" value="${agent.company || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Varumärke</label>
-              <input type="text" name="brand" value="${agent.brand || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Roll</label>
-              <input type="text" name="role" value="${agent.role || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Licenstyp</label>
-              <input type="text" name="licenseType" value="${agent.licenseType || ''}"
-                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
-          </div>
-          <div class="flex justify-end gap-2 mt-6">
-            <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-              Avbryt
-            </button>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              Spara
-            </button>
-          </div>
-        </form>
-      </div>
-    `;
-    
-    document.getElementById('editAgentForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {
-        name: formData.get('name'),
-        status: formData.get('status'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        company: formData.get('company'),
-        brand: formData.get('brand'),
-        role: formData.get('role'),
-        licenseType: formData.get('licenseType')
-      };
-      
-      await updateEntity('agents', id, data);
-    });
-    
-    showModal();
-  } catch (error) {
-    console.error('Error loading agent for edit:', error);
-    alert('Kunde inte ladda mäklare för redigering');
-  }
-}
-
-
 function showAddBrandForm() {
   console.log('ðŸŽ¯ showAddBrandForm called!');
   const html = `
@@ -1571,88 +1003,40 @@ function showAddBrandForm() {
   });
 }
 
-﻿function showAddCompanyForm() {
-  console.log(' showAddCompanyForm called!');
+function showAddCompanyForm() {
+  console.log('ðŸŽ¯ showAddCompanyForm called!');
   const html = `
     <div class="modal modal-open">
-      <div class="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
-        <h3 class="font-bold text-lg mb-4">Lägg till nytt företag</h3>
-        <form id="addCompanyForm" class="space-y-3">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Företagsnamn *</span></label>
-              <input type="text" name="name" placeholder="Ange företagsnamn" class="input input-bordered w-full" required />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Organisationsnummer</span></label>
-              <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Varumärke</span></label>
-              <input type="text" name="brand" placeholder="T.ex. Mäklarhuset" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Kategori</span></label>
-              <input type="text" name="category" placeholder="T.ex. Nyckelkund" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Status</span></label>
-              <select name="status" class="select select-bordered w-full">
-                <option value="prospekt">Prospekt</option>
-                <option value="kund" selected>Kund</option>
-                <option value="inaktiv">Inaktiv</option>
-              </select>
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Pipeline</span></label>
-              <select name="pipeline" class="select select-bordered w-full">
-                <option value="prospect">Prospekt</option>
-                <option value="active_customer" selected>Aktiv kund</option>
-                <option value="churned">Avslutad</option>
-              </select>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Ort</span></label>
-              <input type="text" name="city" placeholder="Stockholm" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Län</span></label>
-              <input type="text" name="county" placeholder="Stockholms län" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">E-post</span></label>
-              <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Telefon</span></label>
-              <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Antal licenser</span></label>
-              <input type="number" name="licenseCount" placeholder="0" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Produkt</span></label>
-              <input type="text" name="product" placeholder="T.ex. Booli Pro" class="input input-bordered w-full" />
-            </div>
+      <div class="modal-box max-w-2xl">
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt fÃ¶retag</h3>
+        <form id="addCompanyForm" class="space-y-4">
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">FÃ¶retagsnamn *</span>
+            </label>
+            <input type="text" name="name" placeholder="Ange fÃ¶retagsnamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
-            <label class="label"><span class="label-text">Betalningsinformation</span></label>
-            <input type="text" name="paymentInfo" placeholder="Fakturaadress, avtalsnummer etc." class="input input-bordered w-full" />
+            <label class="label">
+              <span class="label-text">Organisationsnummer</span>
+            </label>
+            <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">E-post</span>
+            </label>
+            <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Telefon</span>
+            </label>
+            <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara företag</button>
+            <button type="submit" class="btn btn-primary">Spara fÃ¶retag</button>
           </div>
         </form>
       </div>
@@ -1661,6 +1045,7 @@ function showAddBrandForm() {
       </form>
     </div>
   `;
+  
   showModal(html, async (formData) => {
     await createEntity('companies', formData);
     loadCompanies();
@@ -1909,679 +1294,123 @@ console.log('Simple CRM app script loaded');
 
 
 
+// LÃ¤gg till i slutet av app-simple.js
 
-// ============================================
-// SÃ„LJTAVLA & KUNDVÃ…RD - PLACEHOLDER
-// ============================================
+// Navigation functions
+async function showCompaniesSection() {
+  loadCompanies();
+}
 
-// ============================================
-// SÄLJTAVLA (DEALS PIPELINE) - KANBAN VIEW
-// ============================================
+async function showBrandsSection() {
+  loadBrands();
+}
 
+async function showAgentsSection() {
+  loadAgents();
+}
+
+async function showImportSection() {
+  const content = document.getElementById('content');
+  content.innerHTML = `
+    <div class="p-8">
+      <h1 class="text-3xl font-bold mb-6">Importera data</h1>
+      <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-gray-600 mb-4">Ladda upp Excel-fil fÃ¶r att importera fÃ¶retag, varumÃ¤rken och mÃ¤klare</p>
+        <input type="file" accept=".xlsx,.xls" class="file-input file-input-bordered w-full max-w-xs" onchange="handleFileUpload(event)">
+      </div>
+    </div>
+  `;
+}
+
+async function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  try {
+    const response = await fetchWithAuth('/api/import/excel', {
+      method: 'POST',
+      body: formData
+    });
+    
+    alert('Import lyckades!');
+    showCompaniesSection();
+  } catch (error) {
+    console.error('Import error:', error);
+    alert('Import misslyckades');
+  }
+}
+// LÃ¤gg till i slutet av app-simple.js
+
+// Navigation functions
+async function showCompaniesSection() {
+  loadCompanies();
+}
+
+async function showBrandsSection() {
+  loadBrands();
+}
+
+async function showAgentsSection() {
+  loadAgents();
+}
+
+async function showImportSection() {
+  const content = document.getElementById('content');
+  content.innerHTML = `
+    <div class="p-8">
+      <h1 class="text-3xl font-bold mb-6">Importera data</h1>
+      <div class="bg-white rounded-lg shadow p-6">
+        <p class="text-gray-600 mb-4">Ladda upp Excel-fil fÃ¶r att importera fÃ¶retag, varumÃ¤rken och mÃ¤klare</p>
+        <input type="file" accept=".xlsx,.xls" class="file-input file-input-bordered w-full max-w-xs" onchange="handleFileUpload(event)">
+      </div>
+    </div>
+  `;
+}
+
+async function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  try {
+    const response = await fetchWithAuth('/api/import/excel', {
+      method: 'POST',
+      body: formData
+    });
+    
+    alert('Import lyckades!');
+    showCompaniesSection();
+  } catch (error) {
+    console.error('Import error:', error);
+    alert('Import misslyckades');
+  }
+}
 let dealsData = [];
 let draggedDealId = null;
 
 async function showDealsSection() {
   try {
     dealsData = await fetchWithAuth('/api/deals');
-    renderDealsKanban();
+    const content = document.getElementById('content');
+    content.innerHTML = '<div class=\"p-8\"><h1 class=\"text-3xl font-bold\">Säljtavla</h1><p class=\"text-gray-600 mt-2\">Kanban-board kommer snart...</p></div>';
   } catch (error) {
-    console.error('Error loading deals:', error);
-    document.getElementById('content').innerHTML = '<div class="p-8 text-center text-red-600">Kunde inte ladda affärer</div>';
+    console.error('Error:', error);
   }
 }
-
-function renderDealsKanban() {
-  const stages = [
-    { id: 'prospecting', name: 'Prospektering', color: 'bg-gray-100 border-gray-300' },
-    { id: 'qualified', name: 'Kvalificerad', color: 'bg-blue-100 border-blue-300' },
-    { id: 'proposal', name: 'Offert', color: 'bg-yellow-100 border-yellow-300' },
-    { id: 'negotiation', name: 'Förhandling', color: 'bg-orange-100 border-orange-300' },
-    { id: 'closed_won', name: 'Vunnen 🎉', color: 'bg-green-100 border-green-300' },
-    { id: 'closed_lost', name: 'Förlorad', color: 'bg-red-100 border-red-300' }
-  ];
-
-  const dealsByStage = {};
-  stages.forEach(stage => {
-    dealsByStage[stage.id] = dealsData.filter(d => (d.stage || 'prospecting') === stage.id);
-  });
-
-  const totalValue = dealsData
-    .filter(d => d.stage !== 'closed_lost')
-    .reduce((sum, d) => sum + (d.value || 0), 0);
-
-  const wonValue = dealsByStage.closed_won.reduce((sum, d) => sum + (d.value || 0), 0);
-
-  const content = document.getElementById('content');
-  content.innerHTML = `
-    <div class="p-8">
-      <div class="flex justify-between items-center mb-6">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">Säljtavla</h1>
-          <p class="text-gray-600 mt-1">Dra och släpp affärer mellan steg</p>
-        </div>
-        <div class="flex gap-4">
-          <div class="bg-white rounded-lg shadow px-6 py-4 border-l-4 border-blue-500">
-            <div class="text-sm text-gray-600">Pipelinevärde</div>
-            <div class="text-2xl font-bold text-gray-900">${formatCurrency(totalValue)}</div>
-          </div>
-          <div class="bg-white rounded-lg shadow px-6 py-4 border-l-4 border-green-500">
-            <div class="text-sm text-gray-600">Vunnet</div>
-            <div class="text-2xl font-bold text-green-600">${formatCurrency(wonValue)}</div>
-          </div>
-          <button onclick="showAddDealForm()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">
-            + Ny affär
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-6 gap-4 h-[calc(100vh-280px)]">
-        ${stages.map(stage => `
-          <div class="flex flex-col">
-            <div class="${stage.color} border-2 rounded-lg px-4 py-3 mb-3">
-              <h3 class="font-semibold text-gray-800">${stage.name}</h3>
-              <p class="text-sm text-gray-600">${dealsByStage[stage.id].length} affärer</p>
-              <p class="text-sm font-medium">${formatCurrency(dealsByStage[stage.id].reduce((sum, d) => sum + (d.value || 0), 0))}</p>
-            </div>
-            <div class="flex-1 space-y-3 overflow-y-auto" id="stage-${stage.id}" ondrop="dropDeal(event, '${stage.id}')" ondragover="allowDrop(event)">
-              ${dealsByStage[stage.id].map(deal => renderDealCard(deal, stage.id)).join('')}
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderDealCard(deal, stage) {
-  const daysUntilClose = deal.expectedCloseDate ? 
-    Math.ceil((new Date(deal.expectedCloseDate) - new Date()) / (1000 * 60 * 60 * 24)) : null;
-  
-  const urgencyClass = daysUntilClose !== null && daysUntilClose < 7 && stage !== 'closed_won' && stage !== 'closed_lost' ? 
-    'border-red-500' : 'border-gray-200';
-
-  return `
-    <div class="bg-white rounded-lg shadow border-2 ${urgencyClass} p-4 cursor-move hover:shadow-lg transition-shadow"
-         draggable="true" 
-         ondragstart="dragDeal(event, '${deal._id}')"
-         onclick="showDealDetails('${deal._id}')">
-      <h4 class="font-semibold text-gray-900 mb-2">${deal.title || 'Ingen titel'}</h4>
-      <p class="text-sm text-gray-600 mb-2">${deal.customer || 'Ingen kund'}</p>
-      <div class="flex justify-between items-center">
-        <span class="text-lg font-bold text-blue-600">${formatCurrency(deal.value || 0)}</span>
-        ${daysUntilClose !== null ? `
-          <span class="text-xs ${daysUntilClose < 7 ? 'text-red-600 font-semibold' : 'text-gray-500'}">
-            ${daysUntilClose < 0 ? 'Försenad!' : daysUntilClose + ' dagar'}
-          </span>
-        ` : ''}
-      </div>
-    </div>
-  `;
-}
-
-function dragDeal(event, dealId) {
-  draggedDealId = dealId;
-  event.dataTransfer.effectAllowed = 'move';
-}
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-async function dropDeal(event, newStage) {
-  event.preventDefault();
-  
-  if (!draggedDealId) return;
-
-  const deal = dealsData.find(d => d._id === draggedDealId);
-  if (!deal || deal.stage === newStage) return;
-
-  try {
-    await fetchWithAuth(`/api/deals/${draggedDealId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...deal, stage: newStage })
-    });
-
-    deal.stage = newStage;
-    
-    if (newStage === 'closed_won') {
-      showConfetti();
-    }
-    
-    renderDealsKanban();
-  } catch (error) {
-    console.error('Error updating deal stage:', error);
-    alert('Kunde inte uppdatera affär');
-  }
-  
-  draggedDealId = null;
-}
-
-function showConfetti() {
-  const confetti = document.createElement('div');
-  confetti.className = 'fixed inset-0 pointer-events-none z-50';
-  confetti.innerHTML = '🎉🎊✨💰🏆';
-  confetti.style.fontSize = '100px';
-  confetti.style.textAlign = 'center';
-  confetti.style.paddingTop = '20vh';
-  confetti.style.animation = 'fadeOut 2s ease-out';
-  document.body.appendChild(confetti);
-  setTimeout(() => confetti.remove(), 2000);
-}
-
-async function showDealDetails(dealId) {
-  const deal = dealsData.find(d => d._id === dealId);
-  if (!deal) return;
-
-  const modal = document.getElementById('modal');
-  modal.innerHTML = `
-    <div class="bg-white rounded-lg p-6 max-w-2xl w-full">
-      <div class="flex justify-between items-start mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">${deal.title || 'Affär'}</h2>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      
-      <div class="grid grid-cols-2 gap-4 mb-6">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Kund</label>
-          <p class="text-gray-900">${deal.customer || 'N/A'}</p>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Värde</label>
-          <p class="text-2xl font-bold text-blue-600">${formatCurrency(deal.value || 0)}</p>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Förväntat avslut</label>
-          <p class="text-gray-900">${deal.expectedCloseDate ? new Date(deal.expectedCloseDate).toLocaleDateString('sv-SE') : 'N/A'}</p>
-        </div>
-      </div>
-      
-      <div class="flex justify-end gap-2">
-        <button onclick="deleteDeal('${deal._id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-          Ta bort
-        </button>
-        <button onclick="editDeal('${deal._id}')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Redigera
-        </button>
-        <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-          Stäng
-        </button>
-      </div>
-    </div>
-  `;
-  
-  showModal();
-}
-
-function showAddDealForm() {
-  const modal = document.getElementById('modal');
-  modal.innerHTML = `
-    <div class="bg-white rounded-lg p-6 max-w-2xl w-full">
-      <h2 class="text-2xl font-bold mb-6">Ny affär</h2>
-      <form id="addDealForm" class="space-y-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Affärsnamn *</label>
-            <input type="text" name="title" required placeholder="T.ex. Mäklarhuset - 50 licenser"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Kund *</label>
-            <input type="text" name="customer" required placeholder="Företagsnamn"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Värde (SEK) *</label>
-            <input type="number" name="value" required placeholder="100000"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select name="stage" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-              <option value="prospecting">Prospektering</option>
-              <option value="qualified">Kvalificerad</option>
-              <option value="proposal">Offert</option>
-              <option value="negotiation">Förhandling</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Förväntat avslut</label>
-            <input type="date" name="expectedCloseDate"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-        </div>
-        <div class="flex justify-end gap-2 mt-6">
-          <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-            Avbryt
-          </button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Skapa affär
-          </button>
-        </div>
-      </form>
-    </div>
-  `;
-
-  document.getElementById('addDealForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = {
-      title: formData.get('title'),
-      customer: formData.get('customer'),
-      value: parseFloat(formData.get('value')),
-      stage: formData.get('stage'),
-      expectedCloseDate: formData.get('expectedCloseDate') || null
-    };
-
-    try {
-      await fetchWithAuth('/api/deals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      closeModal();
-      showDealsSection();
-    } catch (error) {
-      console.error('Error creating deal:', error);
-      alert('Kunde inte skapa affär');
-    }
-  });
-
-  showModal();
-}
-
-async function editDeal(dealId) {
-  const deal = dealsData.find(d => d._id === dealId);
-  if (!deal) return;
-
-  const modal = document.getElementById('modal');
-  const dateValue = deal.expectedCloseDate ? new Date(deal.expectedCloseDate).toISOString().split('T')[0] : '';
-  
-  modal.innerHTML = `
-    <div class="bg-white rounded-lg p-6 max-w-2xl w-full">
-      <h2 class="text-2xl font-bold mb-6">Redigera affär</h2>
-      <form id="editDealForm" class="space-y-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div class="col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Affärsnamn *</label>
-            <input type="text" name="title" value="${deal.title || ''}" required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Kund *</label>
-            <input type="text" name="customer" value="${deal.customer || ''}" required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Värde (SEK) *</label>
-            <input type="number" name="value" value="${deal.value || 0}" required
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select name="stage" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-              <option value="prospecting" ${deal.stage === 'prospecting' ? 'selected' : ''}>Prospektering</option>
-              <option value="qualified" ${deal.stage === 'qualified' ? 'selected' : ''}>Kvalificerad</option>
-              <option value="proposal" ${deal.stage === 'proposal' ? 'selected' : ''}>Offert</option>
-              <option value="negotiation" ${deal.stage === 'negotiation' ? 'selected' : ''}>Förhandling</option>
-              <option value="closed_won" ${deal.stage === 'closed_won' ? 'selected' : ''}>Vunnen</option>
-              <option value="closed_lost" ${deal.stage === 'closed_lost' ? 'selected' : ''}>Förlorad</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Förväntat avslut</label>
-            <input type="date" name="expectedCloseDate" value="${dateValue}"
-                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-          </div>
-        </div>
-        <div class="flex justify-end gap-2 mt-6">
-          <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-            Avbryt
-          </button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Spara
-          </button>
-        </div>
-      </form>
-    </div>
-  `;
-
-  document.getElementById('editDealForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = {
-      title: formData.get('title'),
-      customer: formData.get('customer'),
-      value: parseFloat(formData.get('value')),
-      stage: formData.get('stage'),
-      expectedCloseDate: formData.get('expectedCloseDate') || null
-    };
-
-    try {
-      await fetchWithAuth(`/api/deals/${dealId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      closeModal();
-      showDealsSection();
-    } catch (error) {
-      console.error('Error updating deal:', error);
-      alert('Kunde inte uppdatera affär');
-    }
-  });
-
-  showModal();
-}
-
-async function deleteDeal(dealId) {
-  if (!confirm('Är du säker på att du vill ta bort denna affär?')) return;
-
-  try {
-    await fetchWithAuth(`/api/deals/${dealId}`, { method: 'DELETE' });
-    closeModal();
-    showDealsSection();
-  } catch (error) {
-    console.error('Error deleting deal:', error);
-    alert('Kunde inte ta bort affär');
-  }
-}
-
-function formatCurrency(amount) {
-  return new Intl.NumberFormat('sv-SE', { 
-    style: 'currency', 
-    currency: 'SEK',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  }).format(amount);
-}
-
-
-// ============================================
-// KUNDVÅRD (CUSTOMER SUCCESS)
-// ============================================
 
 let customerCareData = [];
 
 async function showCustomerCareSection() {
   try {
-    const [companies, contracts] = await Promise.all([
-      fetchWithAuth('/api/companies'),
-      fetchWithAuth('/api/contracts').catch(() => [])
-    ]);
-
-    customerCareData = companies
-      .filter(c => c.status === 'kund')
-      .map(company => {
-        const companyContracts = contracts.filter(ct => ct.company === company.name);
-        const health = calculateCustomerHealth(company, companyContracts);
-        
-        return {
-          ...company,
-          contracts: companyContracts,
-          health,
-          lastContact: company.lastContact || null
-        };
-      })
-      .sort((a, b) => a.health.score - b.health.score);
-
-    renderCustomerCare();
+    customerCareData = await fetchWithAuth('/api/companies');
+    const content = document.getElementById('content');
+    content.innerHTML = '<div class=\"p-8\"><h1 class=\"text-3xl font-bold\">Kundvård</h1><p class=\"text-gray-600 mt-2\">Dashboard kommer snart...</p></div>';
   } catch (error) {
-    console.error('Error loading customer care data:', error);
-    document.getElementById('content').innerHTML = '<div class="p-8 text-center text-red-600">Kunde inte ladda kundvård</div>';
+    console.error('Error:', error);
   }
 }
-
-function calculateCustomerHealth(company, contracts) {
-  let score = 100;
-  const issues = [];
-
-  if (!contracts || contracts.length === 0) {
-    score -= 30;
-    issues.push('Inget kontrakt registrerat');
-  }
-
-  const totalLicenses = contracts.reduce((sum, c) => sum + (c.licenseCount || 0), 0);
-  if (totalLicenses === 0) {
-    score -= 20;
-    issues.push('Inga licenser registrerade');
-  }
-
-  if (company.lastContact) {
-    const daysSinceContact = Math.floor((new Date() - new Date(company.lastContact)) / (1000 * 60 * 60 * 24));
-    if (daysSinceContact > 90) {
-      score -= 25;
-      issues.push(`${daysSinceContact} dagar sedan senaste kontakt`);
-    }
-  } else {
-    score -= 15;
-    issues.push('Ingen kontakthistorik');
-  }
-
-  if (company.pipeline === 'churned') {
-    score -= 40;
-    issues.push('Markerad som churned');
-  }
-
-  return {
-    score: Math.max(0, score),
-    status: score >= 70 ? 'healthy' : score >= 40 ? 'at_risk' : 'critical',
-    issues
-  };
-}
-
-function renderCustomerCare() {
-  const healthyCustomers = customerCareData.filter(c => c.health.status === 'healthy');
-  const atRiskCustomers = customerCareData.filter(c => c.health.status === 'at_risk');
-  const criticalCustomers = customerCareData.filter(c => c.health.status === 'critical');
-
-  const content = document.getElementById('content');
-  content.innerHTML = `
-    <div class="p-8">
-      <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">Kundvård</h1>
-        <p class="text-gray-600 mt-1">Övervaka kundhälsa och planera uppföljningar</p>
-      </div>
-
-      <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-gray-400">
-          <div class="text-sm text-gray-600">Totalt</div>
-          <div class="text-3xl font-bold text-gray-900">${customerCareData.length}</div>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
-          <div class="text-sm text-gray-600">Friska</div>
-          <div class="text-3xl font-bold text-green-600">${healthyCustomers.length}</div>
-          <div class="text-xs text-gray-500 mt-1">${Math.round(healthyCustomers.length / customerCareData.length * 100)}%</div>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-500">
-          <div class="text-sm text-gray-600">Riskzon</div>
-          <div class="text-3xl font-bold text-yellow-600">${atRiskCustomers.length}</div>
-          <div class="text-xs text-gray-500 mt-1">Kräver uppmärksamhet</div>
-        </div>
-        <div class="bg-white rounded-lg shadow p-4 border-l-4 border-red-500">
-          <div class="text-sm text-gray-600">Kritiska</div>
-          <div class="text-3xl font-bold text-red-600">${criticalCustomers.length}</div>
-          <div class="text-xs text-gray-500 mt-1">Akut åtgärd!</div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-lg shadow">
-        <div class="border-b border-gray-200">
-          <nav class="flex">
-            <button onclick="showCustomerCareTab('critical')" id="tab-critical" 
-                    class="px-6 py-4 text-sm font-medium border-b-2 border-red-500 text-red-600">
-              Kritiska (${criticalCustomers.length})
-            </button>
-            <button onclick="showCustomerCareTab('at_risk')" id="tab-at_risk"
-                    class="px-6 py-4 text-sm font-medium text-gray-600 hover:text-gray-800">
-              Riskzon (${atRiskCustomers.length})
-            </button>
-            <button onclick="showCustomerCareTab('healthy')" id="tab-healthy"
-                    class="px-6 py-4 text-sm font-medium text-gray-600 hover:text-gray-800">
-              Friska (${healthyCustomers.length})
-            </button>
-          </nav>
-        </div>
-        
-        <div id="customerCareTabContent" class="p-6">
-          ${renderCustomerCareTab('critical')}
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function showCustomerCareTab(tabName) {
-  ['critical', 'at_risk', 'healthy'].forEach(tab => {
-    const button = document.getElementById(`tab-${tab}`);
-    if (tab === tabName) {
-      button.className = 'px-6 py-4 text-sm font-medium border-b-2 border-blue-500 text-blue-600';
-    } else {
-      button.className = 'px-6 py-4 text-sm font-medium text-gray-600 hover:text-gray-800';
-    }
-  });
-
-  document.getElementById('customerCareTabContent').innerHTML = renderCustomerCareTab(tabName);
-}
-
-function renderCustomerCareTab(status) {
-  const customers = customerCareData.filter(c => c.health.status === status);
-
-  if (customers.length === 0) {
-    return '<div class="text-center text-gray-500 py-12">Inga kunder i denna kategori 👍</div>';
-  }
-
-  return `
-    <div class="space-y-4">
-      ${customers.map(customer => `
-        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
-             onclick="showCustomerCareDetails('${customer._id}')">
-          <div class="flex justify-between items-start">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-2">
-                <h3 class="text-lg font-semibold text-gray-900">${customer.name}</h3>
-                ${getHealthBadge(customer.health)}
-              </div>
-              
-              ${customer.health.issues.length > 0 ? `
-                <div class="mb-3 space-y-1">
-                  ${customer.health.issues.map(issue => `
-                    <div class="flex items-center gap-2 text-sm text-red-600">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                      </svg>
-                      ${issue}
-                    </div>
-                  `).join('')}
-                </div>
-              ` : ''}
-              
-              <div class="grid grid-cols-4 gap-4 text-sm">
-                <div>
-                  <span class="text-gray-600">Varumärke:</span>
-                  <span class="font-medium ml-1">${customer.brand || 'N/A'}</span>
-                </div>
-                <div>
-                  <span class="text-gray-600">Licenser:</span>
-                  <span class="font-medium ml-1">${customer.licenseCount || 0}</span>
-                </div>
-                <div>
-                  <span class="text-gray-600">Ort:</span>
-                  <span class="font-medium ml-1">${customer.city || 'N/A'}</span>
-                </div>
-                <div>
-                  <span class="text-gray-600">Senaste kontakt:</span>
-                  <span class="font-medium ml-1">${customer.lastContact ? new Date(customer.lastContact).toLocaleDateString('sv-SE') : 'Aldrig'}</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="ml-4">
-              <button onclick="event.stopPropagation(); logCustomerContact('${customer._id}')" 
-                      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
-                Logga kontakt
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function getHealthBadge(health) {
-  const badges = {
-    healthy: '<span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Frisk ✓</span>',
-    at_risk: '<span class="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Risk ⚠</span>',
-    critical: '<span class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">Kritisk ⛔</span>'
-  };
-  return badges[health.status] || '';
-}
-
-function showCustomerCareDetails(companyId) {
-  showCompanyDetails(companyId);
-}
-
-function logCustomerContact(companyId) {
-  const modal = document.getElementById('modal');
-  modal.innerHTML = `
-    <div class="bg-white rounded-lg p-6 max-w-lg w-full">
-      <h2 class="text-2xl font-bold mb-6">Logga kundkontakt</h2>
-      <form id="contactLogForm" class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Typ av kontakt</label>
-          <select name="contactType" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-            <option value="call">Telefonsamtal</option>
-            <option value="meeting">Möte</option>
-            <option value="email">E-post</option>
-            <option value="visit">Platsbesök</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Anteckningar</label>
-          <textarea name="notes" rows="4" placeholder="Vad diskuterades? Nästa steg?"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Nästa uppföljning</label>
-          <input type="date" name="nextFollowUp"
-                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-        </div>
-        <div class="flex justify-end gap-2 mt-6">
-          <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-            Avbryt
-          </button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Spara kontakt
-          </button>
-        </div>
-      </form>
-    </div>
-  `;
-
-  document.getElementById('contactLogForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    try {
-      await fetchWithAuth(`/api/companies/${companyId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lastContact: new Date().toISOString() })
-      });
-      
-      closeModal();
-      showCustomerCareSection();
-    } catch (error) {
-      console.error('Error logging contact:', error);
-      alert('Kunde inte spara kontakt');
-    }
-  });
-
-  showModal();
-}
-
