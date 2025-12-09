@@ -440,7 +440,7 @@ function renderBrandsTable(brands) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${brands.map(brand => `
-          <tr>
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showBrandDetails(${brand._id})">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -481,7 +481,7 @@ function renderAgentsTable(agents) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${agents.map(agent => `
-          <tr>
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showAgentDetails(${agent._id})">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.role || ''}</td>
@@ -1210,6 +1210,328 @@ async function updateEntity(entityType, id, data) {
   }
 }
 
+
+
+
+// ============================================
+// BRAND DETAIL CARDS
+// ============================================
+
+async function showBrandDetails(id) {
+  try {
+    const brand = await fetchWithAuth(`/api/brands/${id}`);
+    
+    const modal = document.getElementById('modal');
+    const statusBadge = getStatusBadgeClass(brand.status || 'aktiv');
+    
+    modal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-start mb-6">
+          <h2 class="text-2xl font-bold text-gray-900">Varumärke: ${brand.name || 'N/A'}</h2>
+          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Namn</label>
+            <p class="text-gray-900">${brand.name || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <span class="${statusBadge}">${brand.status || 'aktiv'}</span>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+            <p class="text-gray-900">${brand.category || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Webbplats</label>
+            <p class="text-gray-900">${brand.website || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Ramavtal</label>
+            <p class="text-gray-900">${brand.hasCentralAgreement ? 'Ja' : 'Nej'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Antal företag</label>
+            <p class="text-gray-900">${brand.companyCount || 0}</p>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Beskrivning</label>
+            <p class="text-gray-900">${brand.description || 'N/A'}</p>
+          </div>
+        </div>
+        
+        <div class="flex justify-end gap-2">
+          <button onclick="deleteBrand('${brand._id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+            Ta bort
+          </button>
+          <button onclick="editBrand('${brand._id}')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Redigera
+          </button>
+          <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+            Stäng
+          </button>
+        </div>
+      </div>
+    `;
+    
+    showModal();
+  } catch (error) {
+    console.error('Error loading brand details:', error);
+    alert('Kunde inte ladda varumärke');
+  }
+}
+
+async function editBrand(id) {
+  try {
+    const brand = await fetchWithAuth(`/api/brands/${id}`);
+    
+    const modal = document.getElementById('modal');
+    modal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <h2 class="text-2xl font-bold mb-6">Redigera varumärke</h2>
+        <form id="editBrandForm" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Namn *</label>
+              <input type="text" name="name" value="${brand.name || ''}" required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="aktiv" ${brand.status === 'aktiv' ? 'selected' : ''}>Aktiv</option>
+                <option value="inaktiv" ${brand.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+              <input type="text" name="category" value="${brand.category || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Webbplats</label>
+              <input type="url" name="website" value="${brand.website || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Beskrivning</label>
+              <textarea name="description" rows="3"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">${brand.description || ''}</textarea>
+            </div>
+            <div class="col-span-2">
+              <label class="flex items-center">
+                <input type="checkbox" name="hasCentralAgreement" ${brand.hasCentralAgreement ? 'checked' : ''}
+                       class="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <span class="text-sm font-medium text-gray-700">Har ramavtal</span>
+              </label>
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 mt-6">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+              Avbryt
+            </button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              Spara
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+    
+    document.getElementById('editBrandForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {
+        name: formData.get('name'),
+        status: formData.get('status'),
+        category: formData.get('category'),
+        website: formData.get('website'),
+        description: formData.get('description'),
+        hasCentralAgreement: formData.get('hasCentralAgreement') === 'on'
+      };
+      
+      await updateEntity('brands', id, data);
+    });
+    
+    showModal();
+  } catch (error) {
+    console.error('Error loading brand for edit:', error);
+    alert('Kunde inte ladda varumärke för redigering');
+  }
+}
+
+// ============================================
+// AGENT DETAIL CARDS
+// ============================================
+
+async function showAgentDetails(id) {
+  try {
+    const agent = await fetchWithAuth(`/api/agents/${id}`);
+    
+    const modal = document.getElementById('modal');
+    const statusBadge = getStatusBadgeClass(agent.status || 'aktiv');
+    
+    modal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-start mb-6">
+          <h2 class="text-2xl font-bold text-gray-900">Mäklare: ${agent.name || 'N/A'}</h2>
+          <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Namn</label>
+            <p class="text-gray-900">${agent.name || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <span class="${statusBadge}">${agent.status || 'aktiv'}</span>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">E-post</label>
+            <p class="text-gray-900">${agent.email || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+            <p class="text-gray-900">${agent.phone || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Företag</label>
+            <p class="text-gray-900">${agent.company || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Varumärke</label>
+            <p class="text-gray-900">${agent.brand || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Roll</label>
+            <p class="text-gray-900">${agent.role || 'N/A'}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Licenstyp</label>
+            <p class="text-gray-900">${agent.licenseType || 'N/A'}</p>
+          </div>
+        </div>
+        
+        <div class="flex justify-end gap-2">
+          <button onclick="deleteAgent('${agent._id}')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+            Ta bort
+          </button>
+          <button onclick="editAgent('${agent._id}')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Redigera
+          </button>
+          <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+            Stäng
+          </button>
+        </div>
+      </div>
+    `;
+    
+    showModal();
+  } catch (error) {
+    console.error('Error loading agent details:', error);
+    alert('Kunde inte ladda mäklare');
+  }
+}
+
+async function editAgent(id) {
+  try {
+    const agent = await fetchWithAuth(`/api/agents/${id}`);
+    
+    const modal = document.getElementById('modal');
+    modal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <h2 class="text-2xl font-bold mb-6">Redigera mäklare</h2>
+        <form id="editAgentForm" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Namn *</label>
+              <input type="text" name="name" value="${agent.name || ''}" required
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                <option value="aktiv" ${agent.status === 'aktiv' ? 'selected' : ''}>Aktiv</option>
+                <option value="inaktiv" ${agent.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">E-post</label>
+              <input type="email" name="email" value="${agent.email || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+              <input type="tel" name="phone" value="${agent.phone || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Företag</label>
+              <input type="text" name="company" value="${agent.company || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Varumärke</label>
+              <input type="text" name="brand" value="${agent.brand || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Roll</label>
+              <input type="text" name="role" value="${agent.role || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Licenstyp</label>
+              <input type="text" name="licenseType" value="${agent.licenseType || ''}"
+                     class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 mt-6">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+              Avbryt
+            </button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              Spara
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+    
+    document.getElementById('editAgentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {
+        name: formData.get('name'),
+        status: formData.get('status'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        company: formData.get('company'),
+        brand: formData.get('brand'),
+        role: formData.get('role'),
+        licenseType: formData.get('licenseType')
+      };
+      
+      await updateEntity('agents', id, data);
+    });
+    
+    showModal();
+  } catch (error) {
+    console.error('Error loading agent for edit:', error);
+    alert('Kunde inte ladda mäklare för redigering');
+  }
+}
 
 
 function showAddBrandForm() {
