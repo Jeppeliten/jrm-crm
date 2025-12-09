@@ -75,7 +75,7 @@ router.post('/', async (req, res, next) => {
     console.log('ðŸ”¹ DB available:', !!req.app.locals.db);
     
     const db = req.app.locals.db;
-    const { name, orgNumber, email, phone, address } = req.body;
+    const { name, orgNumber, email, phone, address , lastContact, nextAction} = req.body;
     
     if (!name || !name.trim()) {
       console.log('âŒ Validation failed: Name required');
@@ -91,7 +91,9 @@ router.post('/', async (req, res, next) => {
         email: email?.trim() || '',
         phone: phone?.trim() || '',
         address: address?.trim() || '',
-        createdAt: new Date(),
+              lastContact: lastContact || null,
+      nextAction: nextAction || null,
+      createdAt: new Date(),
         updatedAt: new Date()
       };
       const mockCompany = { ...company, _id: Date.now().toString() };
