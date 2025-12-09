@@ -15,6 +15,36 @@ let mockCompanies = [
 ];
 
 /**
+ * GET /api/companies/:id - Get single company
+ */
+router.get('/:id', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    
+    if (!db) {
+      const company = mockCompanies.find(c => c._id === id);
+      return company ? res.json(company) : res.status(404).json({ error: 'Company not found' });
+    }
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const company = await db.collection('companies_v2').findOne(query);
+    
+    if (!company) {
+      return res.status(404).json({ error: 'Company not found' });
+    }
+    
+    res.json(company);
+  } catch (error) {
+    console.error('Error fetching company:', error);
+    res.status(500).json({ error: 'Failed to fetch company' });
+  }
+});
+
+/**
  * GET /api/companies - Get all companies
  */
 router.get('/', async (req, res) => {
@@ -140,11 +170,28 @@ router.put('/:id', async (req, res) => {
   try {
     const db = req.app.locals.db;
     const { id } = req.params;
-    const updateData = { ...req.body, updatedAt: new Date() };
-    delete updateData._id;
     
-    const result = await db.collection('companies').updateOne(
-      { _id: require('mongodb').ObjectId(id) },
+    // Clean update data
+    const updateData = { ...req.body };
+    delete updateData._id;
+    updateData.updatedAt = new Date();
+    
+    // Trim string fields
+    if (updateData.name) updateData.name = updateData.name.trim();
+    if (updateData.orgNumber) updateData.orgNumber = updateData.orgNumber.trim();
+    if (updateData.email) updateData.email = updateData.email.trim();
+    if (updateData.phone) updateData.phone = updateData.phone.trim();
+    if (updateData.brand) updateData.brand = updateData.brand.trim();
+    if (updateData.city) updateData.city = updateData.city.trim();
+    if (updateData.county) updateData.county = updateData.county.trim();
+    
+    // Handle both string IDs and ObjectIds
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('companies_v2').updateOne(
+      query,
       { $set: updateData }
     );
     
@@ -152,7 +199,7 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Company not found' });
     }
     
-    res.json({ message: 'Company updated successfully' });
+    res.json({ message: 'Company updated successfully', data: updateData });
   } catch (error) {
     console.error('Error updating company:', error);
     res.status(500).json({ error: 'Failed to update company' });
