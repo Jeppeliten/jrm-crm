@@ -1,8 +1,4 @@
-﻿// API Configuration
-const CONFIG = {
-  apiBaseUrl: 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net/api'
-};
-/**
+﻿/**
  * Simple CRM Application - Navigation and Basic Functionality
  * Simplified version without ES6 modules
  */
@@ -499,7 +495,7 @@ function getStatusBadgeClass(status) {
 async function loadBrands() {
   console.log('Loading brands data...');
   try {
-    const response = await fetchWithAuth(`${CONFIG.apiBaseUrl}/brands`);
+    const response = await fetchWithAuth('/api/brands');
     const brands = await response.json();
     renderBrandsTable(brands);
   } catch (error) {
@@ -511,7 +507,7 @@ async function loadBrands() {
 async function loadCompanies() {
   console.log('Loading companies data...');
   try {
-    const response = await fetchWithAuth(`${CONFIG.apiBaseUrl}/companies`);
+    const response = await fetchWithAuth('/api/companies');
     const companies = await response.json();
     renderCompaniesTable(companies);
   } catch (error) {
@@ -523,7 +519,7 @@ async function loadCompanies() {
 async function loadAgents() {
   console.log('Loading agents data...');
   try {
-    const response = await fetchWithAuth(`${CONFIG.apiBaseUrl}/agents`);
+    const response = await fetchWithAuth('/api/agents');
     const agents = await response.json();
     renderAgentsTable(agents);
   } catch (error) {
@@ -1290,6 +1286,8 @@ console.log('Simple CRM app script loaded');
 
 
 // Force deployment: 12/09/2025 17:00:13
+
+
 
 
 
