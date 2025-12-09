@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { updateAllAggregations } = require('../services/aggregation-service');
 
 // 🧪 TEMPORARY: In-memory storage for testing
 let mockAgents = [
@@ -71,7 +72,7 @@ router.post('/', async (req, res) => {
     console.log('🟠 Request body:', req.body);
     
     const db = req.app.locals.db;
-    const { name, email, phone, company } = req.body;
+    const { name, lastName, email, phone, registrationType, company, companyId, brand, brandId } = req.body;
     
     if (!name || !name.trim()) {
       return res.status(400).json({ error: 'Name is required' });
@@ -81,10 +82,43 @@ router.post('/', async (req, res) => {
     if (!db) {
       console.log('📦 Saving to mock agents storage');
       const agent = {
+        // Basic info
         name: name.trim(),
+        lastName: lastName?.trim() || '',
         email: email?.trim() || '',
         phone: phone?.trim() || '',
+        registrationType: registrationType?.trim() || '',
+        
+        // Company and Brand
         company: company?.trim() || '',
+        companyId: companyId || null,
+        brand: brand?.trim() || '',
+        brandId: brandId || null,
+        
+        // Address info
+        address: req.body.address?.trim() || '',
+        postalCode: req.body.postalCode?.trim() || '',
+        city: req.body.city?.trim() || '',
+        office: req.body.office?.trim() || '',
+        
+        // Mäklarpaket fields
+        brokerPackage: {
+          userId: req.body.brokerPackageUserId?.trim() || '',
+          msnName: req.body.brokerPackageMsnName?.trim() || '',
+          uid: req.body.brokerPackageUid?.trim() || '',
+          epost: req.body.brokerPackageEpost?.trim() || '',
+          active: req.body.brokerPackageActive || false,
+          customerNumber: req.body.brokerPackageCustomerNumber?.trim() || '',
+          accountNumber: req.body.brokerPackageAccountNumber?.trim() || '',
+          totalCost: parseFloat(req.body.brokerPackageTotalCost) || 0,
+          discount: parseFloat(req.body.brokerPackageDiscount) || 0
+        },
+        
+        // Products and matching
+        products: req.body.products || [],
+        matchType: req.body.matchType?.trim() || '',
+        
+        // Status and metadata
         status: req.body.status?.trim() || 'aktiv',
         role: req.body.role?.trim() || '',
         licenseType: req.body.licenseType?.trim() || '',
@@ -112,10 +146,43 @@ router.post('/', async (req, res) => {
     }
     
     const agent = {
+      // Basic info
       name: name.trim(),
+      lastName: lastName?.trim() || '',
       email: email?.trim() || '',
       phone: phone?.trim() || '',
+      registrationType: registrationType?.trim() || '',
+      
+      // Company and Brand references
       company: company?.trim() || '',
+      companyId: companyId || null,
+      brand: brand?.trim() || '',
+      brandId: brandId || null,
+      
+      // Address info
+      address: req.body.address?.trim() || '',
+      postalCode: req.body.postalCode?.trim() || '',
+      city: req.body.city?.trim() || '',
+      office: req.body.office?.trim() || '',
+      
+      // Mäklarpaket fields
+      brokerPackage: {
+        userId: req.body.brokerPackageUserId?.trim() || '',
+        msnName: req.body.brokerPackageMsnName?.trim() || '',
+        uid: req.body.brokerPackageUid?.trim() || '',
+        epost: req.body.brokerPackageEpost?.trim() || '',
+        active: req.body.brokerPackageActive || false,
+        customerNumber: req.body.brokerPackageCustomerNumber?.trim() || '',
+        accountNumber: req.body.brokerPackageAccountNumber?.trim() || '',
+        totalCost: parseFloat(req.body.brokerPackageTotalCost) || 0,
+        discount: parseFloat(req.body.brokerPackageDiscount) || 0
+      },
+      
+      // Products and matching
+      products: req.body.products || [],
+      matchType: req.body.matchType?.trim() || '',
+      
+      // Status and metadata
       status: req.body.status?.trim() || 'aktiv',
       role: req.body.role?.trim() || '',
       licenseType: req.body.licenseType?.trim() || '',
@@ -126,6 +193,10 @@ router.post('/', async (req, res) => {
     try {
       const result = await db.collection('agents_v2').insertOne(agent);
       console.log('✅ Agent saved to DB with ID:', result.insertedId);
+      
+      // Uppdatera aggregeringar för företag och varumärke
+      await updateAllAggregations(db, companyId, brandId);
+      
       res.status(201).json({ ...agent, _id: result.insertedId });
     } catch (insertError) {
       if (insertError.code === 11000) {
@@ -158,6 +229,9 @@ router.put('/:id', async (req, res) => {
       ? { _id: require('mongodb').ObjectId(id) }
       : { _id: id };
     
+    // Hämta gamla värden för att veta vilka aggregeringar som ska uppdateras
+    const oldAgent = await db.collection('agents_v2').findOne(query);
+    
     const result = await db.collection('agents_v2').updateOne(
       query,
       { $set: updateData }
@@ -165,6 +239,21 @@ router.put('/:id', async (req, res) => {
     
     if (result.matchedCount === 0) {
       return res.status(404).json({ error: 'Agent not found' });
+    }
+    
+    // Uppdatera aggregeringar för både gamla och nya företag/varumärken
+    const oldCompanyId = oldAgent?.companyId;
+    const oldBrandId = oldAgent?.brandId;
+    const newCompanyId = updateData.companyId;
+    const newBrandId = updateData.brandId;
+    
+    if (oldCompanyId) await updateAllAggregations(db, oldCompanyId, null);
+    if (oldBrandId) await updateAllAggregations(db, null, oldBrandId);
+    if (newCompanyId && newCompanyId !== oldCompanyId) {
+      await updateAllAggregations(db, newCompanyId, null);
+    }
+    if (newBrandId && newBrandId !== oldBrandId) {
+      await updateAllAggregations(db, null, newBrandId);
     }
     
     res.json({ message: 'Agent updated successfully' });
@@ -187,10 +276,18 @@ router.delete('/:id', async (req, res) => {
       ? { _id: require('mongodb').ObjectId(id) }
       : { _id: id };
     
+    // Hämta mäklaren först för att få companyId och brandId
+    const agent = await db.collection('agents_v2').findOne(query);
+    
     const result = await db.collection('agents_v2').deleteOne(query);
     
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Agent not found' });
+    }
+    
+    // Uppdatera aggregeringar efter borttagning
+    if (agent) {
+      await updateAllAggregations(db, agent.companyId, agent.brandId);
     }
     
     res.json({ message: 'Agent deleted successfully' });

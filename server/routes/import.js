@@ -224,121 +224,129 @@ async function importBrandsAndCompanies(data, db) {
   const stats = { brands: 0, companies: 0, agents: 0, contracts: 0 };
   
   for (const row of data) {
-    // Extract all relevant fields with multiple column name variants
-    const brand = row['Varumärke'] || row['Brand'] || row['varumärke'];
-    const company = row['Kund'] || row['Företag'] || row['Company'] || row['företag'];
-    const orgNumber = row['Org nr'] || row['Org.nr'] || row['OrgNr'] || row['organisationsnummer'];
-    const category = row['Kundkategori'] || row['Kategori'] || row['Category'];
-    const status = row['Status'] || row['status'];
-    const city = row['Ort'] || row['City'];
-    const county = row['Län'] || row['County'];
-    const licenseCount = row['Antal licenser'] || row['Licenses'] || row['antal_licenser'];
-    const product = row['Produkt'] || row['Product'];
-    const payment = row['Betalning'] || row['Payment'];
-    
-    // 1. Import/Update Brand (if exists)
-    if (brand && brand.trim()) {
-      const brandData = {
-        name: brand.trim(),
-        category: 'varumärke',
-        status: 'aktiv',
-        updatedAt: new Date(),
-        // Track if this brand has central agreement
-        hasCentralAgreement: category && category.toLowerCase().includes('central'),
-        companyCount: 0 // Will be calculated
-      };
+    try {
+      // Extract all relevant fields with multiple column name variants
+      const brand = row['Företag - kedja/varumärke'] || row['Varumärke'] || row['Brand'] || row['varumärke'];
+      const company = row['Företag - namn'] || row['Kund'] || row['Företag'] || row['Company'] || row['företag'];
+      const orgNumber = row['Org nr'] || row['Org.nr'] || row['OrgNr'] || row['organisationsnummer'];
+      const category = row['Kundkategori'] || row['Kategori'] || row['Category'];
+      const status = row['Status'] || row['status'];
+      const address = row['Företag - adress'] || row['Adress'] || '';
+      const postalCode = row['Företag - postnummer'] || row['Postnummer'] || '';
+      const city = row['Företag - postort'] || row['Ort'] || row['City'] || '';
+      const county = row['Län'] || row['County'];
+      const licenseCount = row['Antal licenser'] || row['Licenses'] || row['antal_licenser'];
+      const product = row['Produkt'] || row['Product'];
+      const payment = row['Betalning'] || row['Payment'];
       
-      await db.collection('brands_v2').updateOne(
-        { name: brand.trim() },
-        { 
-          $set: brandData,
-          $setOnInsert: { createdAt: new Date() }
-        },
-        { upsert: true }
-      );
-      stats.brands++;
-    }
-    
-    // 2. Import/Update Company
-    if (company && company.trim()) {
-      // Map status from Excel (aktiv/avstängd) to our system
-      let mappedStatus = 'prospekt';
-      if (status) {
-        const statusLower = status.toLowerCase();
-        if (statusLower.includes('aktiv') || statusLower === 'active') {
-          mappedStatus = 'kund';
-        } else if (statusLower.includes('avstängd') || statusLower === 'inactive') {
-          mappedStatus = 'inaktiv';
-        }
-      }
-      
-      const companyData = {
-        name: company.trim(),
-        brand: brand ? brand.trim() : null,
-        orgNumber: orgNumber ? orgNumber.trim() : null,
-        category: category || null,
-        status: mappedStatus,
-        city: city || null,
-        county: county || null,
-        licenseCount: licenseCount ? parseInt(licenseCount) : 0,
-        product: product || null,
-        paymentInfo: payment || null,
-        updatedAt: new Date(),
-        // Determine pipeline stage based on status
-        pipeline: mappedStatus === 'kund' ? 'active_customer' : 'prospect'
-      };
-      
-      // Add email and phone if available
-      if (row['E-post företag'] || row['Email']) {
-        companyData.email = row['E-post företag'] || row['Email'];
-      }
-      if (row['Telefon företag'] || row['Phone']) {
-        companyData.phone = row['Telefon företag'] || row['Phone'];
-      }
-      
-      await db.collection('companies_v2').updateOne(
-        { name: company.trim() },
-        { 
-          $set: companyData,
-          $setOnInsert: { createdAt: new Date() }
-        },
-        { upsert: true }
-      );
-      stats.companies++;
-      
-      // 3. Create/Update Contract if relevant info exists
-      if (product || payment) {
-        const contractData = {
-          company: company.trim(),
-          brand: brand ? brand.trim() : null,
-          type: (category && category.toLowerCase().includes('central')) ? 'central' : 'direct',
-          product: product || null,
-          paymentInfo: payment || null,
-          licenseCount: licenseCount ? parseInt(licenseCount) : 0,
-          status: mappedStatus === 'kund' ? 'active' : 'inactive',
-          startDate: new Date(), // You may want to extract from Excel
-          updatedAt: new Date()
+      // 1. Import/Update Brand (if exists)
+      if (brand && brand.trim()) {
+        const brandData = {
+          name: brand.trim(),
+          category: 'varumärke',
+          status: 'aktiv',
+          description: '',
+          website: '',
+          companyId: null, // Will be set if we find parent company
+          agentCount: 0,
+          updatedAt: new Date(),
+          // Track if this brand has central agreement
+          hasCentralAgreement: category && category.toLowerCase().includes('central')
         };
         
-        // Check if contract exists
-        const existingContract = await db.collection('contracts').findOne({
-          company: company.trim(),
-          brand: brand ? brand.trim() : null
-        });
-        
-        if (!existingContract) {
-          await db.collection('contracts').insertOne({
-            ...contractData,
-            createdAt: new Date()
-          });
-          stats.contracts++;
-        } else {
-          await db.collection('contracts').updateOne(
-            { _id: existingContract._id },
-            { $set: contractData }
-          );
-        }
+        await db.collection('brands_v2').updateOne(
+          { name: brand.trim() },
+          { 
+            $set: brandData,
+            $setOnInsert: { createdAt: new Date() }
+          },
+          { upsert: true }
+        );
+        stats.brands++;
       }
+      
+      // 2. Import/Update Company
+      if (company && company.trim()) {
+        // Map status from Excel (aktiv/avstängd) to our system
+        let mappedStatus = 'prospekt';
+        if (status) {
+          const statusLower = status.toLowerCase();
+          if (statusLower.includes('aktiv') || statusLower === 'active') {
+            mappedStatus = 'kund';
+          } else if (statusLower.includes('avstängd') || statusLower === 'inactive') {
+            mappedStatus = 'inaktiv';
+          }
+        }
+        
+        const companyData = {
+          name: company.trim(),
+          orgNumber: orgNumber ? orgNumber.trim() : '',
+          email: row['E-post företag'] || row['Email'] || '',
+          phone: row['Telefon företag'] || row['Phone'] || '',
+          address: address,
+          brandIds: [], // Will be updated by aggregation service
+          agentCount: 0, // Will be updated by aggregation service
+          category: category || null,
+          status: mappedStatus,
+          city: city,
+          county: county || null,
+          licenseCount: licenseCount ? parseInt(licenseCount) : 0,
+          product: product || null,
+          paymentInfo: payment || null,
+          lastContact: null,
+          nextAction: null,
+          updatedAt: new Date(),
+          // Determine pipeline stage based on status
+          pipeline: mappedStatus === 'kund' ? 'active_customer' : 'prospect'
+        };
+        
+        await db.collection('companies_v2').updateOne(
+          { name: company.trim() },
+          { 
+            $set: companyData,
+            $setOnInsert: { createdAt: new Date() }
+          },
+          { upsert: true }
+        );
+        stats.companies++;
+        
+        // 3. Create/Update Contract if relevant info exists
+        if (product || payment) {
+          const contractData = {
+            company: company.trim(),
+            brand: brand ? brand.trim() : null,
+            type: (category && category.toLowerCase().includes('central')) ? 'central' : 'direct',
+            product: product || null,
+            paymentInfo: payment || null,
+            licenseCount: licenseCount ? parseInt(licenseCount) : 0,
+            status: mappedStatus === 'kund' ? 'active' : 'inactive',
+            startDate: new Date(), // You may want to extract from Excel
+            updatedAt: new Date()
+          };
+        
+          // Check if contract exists
+          const existingContract = await db.collection('contracts').findOne({
+            company: company.trim(),
+            brand: brand ? brand.trim() : null
+          });
+        
+          if (!existingContract) {
+            await db.collection('contracts').insertOne({
+              ...contractData,
+              createdAt: new Date()
+            });
+            stats.contracts++;
+          } else {
+            await db.collection('contracts').updateOne(
+              { _id: existingContract._id },
+              { $set: contractData }
+            );
+          }
+        }
+      } // End of if (company && company.trim())
+    } catch (error) {
+      console.error('Error importing row:', error);
+      // Continue with next row
     }
   }
   
@@ -357,89 +365,131 @@ async function importBrandsAndCompanies(data, db) {
 }
 
 async function importAgents(data, db) {
+  const { updateAllAggregations } = require('../services/aggregation-service');
   let count = 0;
   
   for (const row of data) {
-    // Multiple agent columns in Excel (Mäklare 1, Mäklare 2, etc.)
-    const agents = [];
-    
-    // Try to find agent columns dynamically
-    const agentColumns = Object.keys(row).filter(key => 
-      key.toLowerCase().includes('mäklare') || key.toLowerCase().includes('agent')
-    );
-    
-    for (const col of agentColumns) {
-      const agentInfo = row[col];
-      if (agentInfo && agentInfo.trim()) {
-        // Parse agent info (could be "Name <email>" or just name)
-        const emailMatch = agentInfo.match(/([^<]+)<([^>]+)>/);
-        const name = emailMatch ? emailMatch[1].trim() : agentInfo.trim();
-        const email = emailMatch ? emailMatch[2].trim() : null;
-        
-        // Also check for separate email column
-        const emailCol = col.replace('Mäklare', 'Email').replace('mäklare', 'email');
-        const phoneCol = col.replace('Mäklare', 'Telefon').replace('mäklare', 'telefon');
-        
-        const agentEmail = email || row[emailCol] || row[col + ' Email'];
-        const agentPhone = row[phoneCol] || row[col + ' Telefon'];
-        
-        if (agentEmail || name) {
-          agents.push({
-            name,
-            email: agentEmail,
-            phone: agentPhone
-          });
-        }
-      }
-    }
-    
-    // Fallback to standard fields
-    if (agents.length === 0) {
+    try {
+      // Extract agent name and last name
+      const fullName = row['Mäklare - Namn'] || row['Namn'] || row['Name'] || row['name'];
+      if (!fullName) continue; // Skip if no name
+      
+      const nameParts = fullName.trim().split(' ');
+      const name = nameParts[0] || fullName;
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      // Basic info
       const email = row['Email'] || row['email'] || row['E-post'];
-      const name = row['Namn'] || row['Name'] || row['name'];
-      if (email || name) {
-        agents.push({
-          name: name || email,
-          email,
-          phone: row['Telefon'] || row['Phone']
+      const phone = row['Telefon'] || row['Phone'] || row['phone'];
+      const registrationType = row['Registreringstyp'] || '';
+      
+      // Company and Brand
+      const companyName = row['Företag - namn'] || row['Kund'] || row['Företag'] || row['Company'] || '';
+      const brandName = row['Företag - kedja/varumärke'] || row['Varumärke'] || row['Brand'] || '';
+      
+      // Address info
+      const address = row['Företag - adress'] || row['Adress'] || '';
+      const postalCode = row['Företag - postnummer'] || row['Postnummer'] || '';
+      const city = row['Företag - postort'] || row['Postort'] || '';
+      const office = row['Kontor där mäklaren är verksam'] || '';
+      
+      // Mäklarpaket fields
+      const brokerPackage = {
+        userId: row['Mäklarpaket.AnvändarID'] || '',
+        msnName: row['Mäklarpaket.MSNNamn'] || '',
+        uid: row['Mäklarpaket.UID'] || '',
+        epost: row['Mäklarpaket.Epost'] || email || '',
+        active: row['Mäklarpaket.Aktiv'] === true || row['Mäklarpaket.Aktiv'] === 'true' || row['Mäklarpaket.Aktiv'] === 'True',
+        customerNumber: row['Mäklarpaket.KundNr'] || '',
+        accountNumber: row['Mäklarpaket.Kontor'] || '',
+        totalCost: parseFloat(row['Mäklarpaket.Totalkostnad']) || 0,
+        discount: parseFloat(row['Mäklarpaket.Rabatt']) || 0
+      };
+      
+      // Products - handle both single and comma-separated
+      let products = [];
+      const produkter = row['Produkter'] || row['Mäklarpaket.ProduktNamn'] || '';
+      if (produkter) {
+        products = produkter.split(',').map(p => p.trim()).filter(Boolean);
+      }
+      
+      const matchType = row['Matchtyp'] || '';
+      
+      // Find company and brand IDs
+      let companyId = null;
+      let brandId = null;
+      
+      if (companyName) {
+        const company = await db.collection('companies_v2').findOne({
+          name: { $regex: new RegExp(`^${companyName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
         });
+        companyId = company?._id || null;
       }
-    }
-    
-    // Get company info
-    const company = row['Kund'] || row['Företag'] || row['Company'] || row['företag'];
-    const brand = row['Varumärke'] || row['Brand'] || row['varumärke'];
-    const product = row['Produkt'] || row['Product'];
-    const licenseType = row['Licenstyp'] || row['License Type'] || product;
-    
-    // Import each agent
-    for (const agent of agents) {
-      if (agent.email || agent.name) {
-        const agentData = {
-          name: agent.name || agent.email,
-          email: agent.email,
-          phone: agent.phone,
-          company: company || null,
-          brand: brand || null,
-          status: 'aktiv',
-          licenseType: licenseType || null,
-          role: 'Mäklare',
-          updatedAt: new Date()
-        };
-        
-        // Use email as unique key if available, otherwise name
-        const query = agent.email ? { email: agent.email } : { name: agent.name };
-        
-        await db.collection('agents_v2').updateOne(
-          query,
-          {
-            $set: agentData,
-            $setOnInsert: { createdAt: new Date() }
-          },
-          { upsert: true }
-        );
-        count++;
+      
+      if (brandName) {
+        const brand = await db.collection('brands_v2').findOne({
+          name: { $regex: new RegExp(`^${brandName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+        });
+        brandId = brand?._id || null;
       }
+      
+      const agentData = {
+        // Basic info
+        name: name,
+        lastName: lastName,
+        email: email || '',
+        phone: phone || '',
+        registrationType: registrationType,
+        
+        // Company and Brand references
+        company: companyName,
+        companyId: companyId,
+        brand: brandName,
+        brandId: brandId,
+        
+        // Address info
+        address: address,
+        postalCode: postalCode,
+        city: city,
+        office: office,
+        
+        // Mäklarpaket
+        brokerPackage: brokerPackage,
+        
+        // Products and matching
+        products: products,
+        matchType: matchType,
+        
+        // Status and metadata
+        status: 'aktiv',
+        role: 'Mäklare',
+        licenseType: row['Licenstyp'] || row['License Type'] || '',
+        updatedAt: new Date()
+      };
+      
+      // Use email as unique key if available, otherwise use name
+      const query = email ? 
+        { email: { $regex: new RegExp(`^${email.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } } : 
+        { name: name, lastName: lastName };
+      
+      const result = await db.collection('agents_v2').updateOne(
+        query,
+        {
+          $set: agentData,
+          $setOnInsert: { createdAt: new Date() }
+        },
+        { upsert: true }
+      );
+      
+      // Update aggregations if agent was inserted or company/brand changed
+      if (result.upsertedCount > 0 || result.modifiedCount > 0) {
+        await updateAllAggregations(db, companyId, brandId);
+      }
+      
+      count++;
+    } catch (error) {
+      console.error('Error importing agent:', error);
+      // Continue with next agent
     }
   }
   

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { getBrandAggregatedStats } = require('../services/aggregation-service');
 
 // 🧪 TEMPORARY: In-memory storage for testing
 let mockBrands = [
@@ -23,6 +24,35 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.error('Error fetching brands:', error);
     res.status(500).json({ error: 'Failed to fetch brands' });
+  }
+});
+
+/**
+ * GET /api/brands/:id/stats - Get statistics for a specific brand
+ */
+router.get('/:id/stats', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    
+    if (!db) {
+      return res.json({ agentCount: 0, companyId: null });
+    }
+    
+    // Använd aggregation service för fullständig statistik
+    const stats = await getBrandAggregatedStats(db, id);
+    
+    // Hämta brand för att få companyId
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const brand = await db.collection('brands_v2').findOne(query);
+    
+    res.json({ ...stats, companyId: brand?.companyId || null });
+  } catch (error) {
+    console.error('Error fetching brand stats:', error);
+    res.status(500).json({ error: 'Failed to fetch brand stats' });
   }
 });
 
@@ -117,6 +147,8 @@ router.post('/', async (req, res) => {
       category: req.body.category?.trim() || '',
       status: req.body.status?.trim() || 'aktiv',
       website: req.body.website?.trim() || '',
+      companyId: companyId || null,
+      agentCount: 0,
       createdAt: new Date(),
       updatedAt: new Date()
     };

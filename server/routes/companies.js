@@ -1,7 +1,8 @@
 ﻿const express = require('express');
 const router = express.Router();
+const { getCompanyAggregatedStats } = require('../services/aggregation-service');
 
-// ðŸ§ª TEMPORARY: In-memory storage for testing (replace with real DB later)
+// 🧪 TEMPORARY: In-memory storage for testing (replace with real DB later)
 let mockCompanies = [
   {
     _id: '1',
@@ -13,6 +14,81 @@ let mockCompanies = [
     updatedAt: new Date()
   }
 ];
+
+/**
+ * GET /api/companies/:id/stats - Get statistics for a specific company
+ */
+router.get('/:id/stats', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    
+    if (!db) {
+      return res.json({ agentCount: 0, brands: [] });
+    }
+    
+    // Count agents for this company
+    const agentCount = await db.collection('agents_v2')
+      .countDocuments({ companyId: id });
+    
+    // Get unique brands from agents
+    const agents = await db.collection('agents_v2')
+      .find({ companyId: id })
+      .toArray();
+    
+    const brandIds = [...new Set(agents.map(a => a.brandId).filter(Boolean))];
+    
+    res.json({ agentCount, brandIds, agentCount });
+  } catch (error) {
+    console.error('Error fetching company stats:', error);
+    res.status(500).json({ error: 'Failed to fetch company stats' });
+  }
+});
+
+/**
+ * GET /api/companies/:id/stats - Get statistics for a specific company
+ */
+router.get('/:id/stats', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    
+    if (!db) {
+      return res.json({ agentCount: 0, brandIds: [] });
+    }
+    
+    // Använd aggregation service för fullständig statistik
+    const stats = await getCompanyAggregatedStats(db, id);
+    
+    res.json(stats);
+  } catch (error) {
+    console.error('Error fetching company stats:', error);
+    res.status(500).json({ error: 'Failed to fetch company stats' });
+  }
+});
+
+/**
+ * GET /api/companies/:id/agents - Get agents for a specific company
+ */
+router.get('/:id/agents', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    
+    if (!db) {
+      return res.json([]);
+    }
+    
+    const agents = await db.collection('agents_v2')
+      .find({ companyId: id })
+      .toArray();
+    
+    res.json(agents);
+  } catch (error) {
+    console.error('Error fetching agents:', error);
+    res.status(500).json({ error: 'Failed to fetch agents' });
+  }
+});
 
 /**
  * GET /api/companies/:id - Get single company
@@ -75,7 +151,7 @@ router.post('/', async (req, res, next) => {
     console.log('ðŸ”¹ DB available:', !!req.app.locals.db);
     
     const db = req.app.locals.db;
-    const { name, orgNumber, email, phone, address , lastContact, nextAction} = req.body;
+    const { name, orgNumber, email, phone, address, lastContact, nextAction, brandIds } = req.body;
     
     if (!name || !name.trim()) {
       console.log('âŒ Validation failed: Name required');
@@ -84,16 +160,18 @@ router.post('/', async (req, res, next) => {
     
     // Use mock storage if no database
     if (!db) {
-      console.log('ðŸ“¦ Saving to mock companies storage');
+      console.log('📦 Saving to mock companies storage');
       const company = {
         name: name.trim(),
         orgNumber: orgNumber?.trim() || '',
         email: email?.trim() || '',
         phone: phone?.trim() || '',
         address: address?.trim() || '',
-              lastContact: lastContact || null,
-      nextAction: nextAction || null,
-      createdAt: new Date(),
+        brandIds: brandIds || [],
+        agentCount: 0,
+        lastContact: lastContact || null,
+        nextAction: nextAction || null,
+        createdAt: new Date(),
         updatedAt: new Date()
       };
       const mockCompany = { ...company, _id: Date.now().toString() };
@@ -124,6 +202,10 @@ router.post('/', async (req, res, next) => {
       email: email?.trim() || '',
       phone: phone?.trim() || '',
       address: address?.trim() || '',
+      brandIds: brandIds || [],
+      agentCount: 0,
+      lastContact: lastContact || null,
+      nextAction: nextAction || null,
       createdAt: new Date(),
       updatedAt: new Date()
     };
