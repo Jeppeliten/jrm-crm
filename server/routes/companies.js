@@ -1,11 +1,11 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 
-// 🧪 TEMPORARY: In-memory storage for testing (replace with real DB later)
+// ðŸ§ª TEMPORARY: In-memory storage for testing (replace with real DB later)
 let mockCompanies = [
   {
     _id: '1',
-    name: 'Test Företag AB',
+    name: 'Test FÃ¶retag AB',
     orgNumber: '556123-4567',
     email: 'info@test.se',
     phone: '08-123 45 67',
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     
     // Use mock data if no database
     if (!db) {
-      console.log('📦 Using mock companies data');
+      console.log('ðŸ“¦ Using mock companies data');
       return res.json(mockCompanies);
     }
     
@@ -40,21 +40,21 @@ router.get('/', async (req, res) => {
  */
 router.post('/', async (req, res, next) => {
   try {
-    console.log('🔹 POST /api/companies called');
-    console.log('🔹 Request body:', req.body);
-    console.log('🔹 DB available:', !!req.app.locals.db);
+    console.log('ðŸ”¹ POST /api/companies called');
+    console.log('ðŸ”¹ Request body:', req.body);
+    console.log('ðŸ”¹ DB available:', !!req.app.locals.db);
     
     const db = req.app.locals.db;
     const { name, orgNumber, email, phone, address } = req.body;
     
     if (!name || !name.trim()) {
-      console.log('❌ Validation failed: Name required');
+      console.log('âŒ Validation failed: Name required');
       return res.status(400).json({ error: 'Name is required' });
     }
     
     // Use mock storage if no database
     if (!db) {
-      console.log('📦 Saving to mock companies storage');
+      console.log('ðŸ“¦ Saving to mock companies storage');
       const company = {
         name: name.trim(),
         orgNumber: orgNumber?.trim() || '',
@@ -66,7 +66,7 @@ router.post('/', async (req, res, next) => {
       };
       const mockCompany = { ...company, _id: Date.now().toString() };
       mockCompanies.push(mockCompany);
-      console.log('✅ Company saved to mock storage, total companies:', mockCompanies.length);
+      console.log('âœ… Company saved to mock storage, total companies:', mockCompanies.length);
       return res.status(201).json(mockCompany);
     }
     
@@ -77,11 +77,11 @@ router.post('/', async (req, res, next) => {
     });
     
     if (existingCompany) {
-      console.log('⚠️  Company with this name already exists:', existingCompany.name);
+      console.log('âš ï¸  Company with this name already exists:', existingCompany.name);
       return res.status(409).json({ 
-        error: 'Ett företag med detta namn finns redan',
-        message: `Företaget "${existingCompany.name}" är redan registrerat. Vänligen använd ett annat namn.`,
-        suggestion: `Försök med "${name.trim()} AB" eller lägg till ett organisationsnummer för att skilja dem åt.`
+        error: 'Ett fÃ¶retag med detta namn finns redan',
+        message: `FÃ¶retaget "${existingCompany.name}" Ã¤r redan registrerat. VÃ¤nligen anvÃ¤nd ett annat namn.`,
+        suggestion: `FÃ¶rsÃ¶k med "${name.trim()} AB" eller lÃ¤gg till ett organisationsnummer fÃ¶r att skilja dem Ã¥t.`
       });
     }
     
@@ -96,30 +96,30 @@ router.post('/', async (req, res, next) => {
       updatedAt: new Date()
     };
     
-    console.log('💾 Saving to Cosmos DB...');
-    console.log('💾 Document to insert:', company);
+    console.log('ðŸ’¾ Saving to Cosmos DB...');
+    console.log('ðŸ’¾ Document to insert:', company);
     
     try {
       const result = await db.collection('companies_v2').insertOne(company);
-      console.log('✅ Company saved to DB with ID:', result.insertedId);
+      console.log('âœ… Company saved to DB with ID:', result.insertedId);
       res.status(201).json({ ...company, _id: result.insertedId });
     } catch (insertError) {
       // Handle MongoDB duplicate key error specifically
       if (insertError.code === 11000) {
-        console.error('❌ Duplicate key error despite pre-check:', insertError);
+        console.error('âŒ Duplicate key error despite pre-check:', insertError);
         return res.status(409).json({ 
-          error: 'Ett företag med denna information finns redan i databasen',
-          message: 'Detta kan bero på att företaget just skapades av någon annan. Försök uppdatera listan.'
+          error: 'Ett fÃ¶retag med denna information finns redan i databasen',
+          message: 'Detta kan bero pÃ¥ att fÃ¶retaget just skapades av nÃ¥gon annan. FÃ¶rsÃ¶k uppdatera listan.'
         });
       }
       throw insertError; // Re-throw other errors
     }
-    console.log('✅ Company saved to DB with ID:', result.insertedId);
+    console.log('âœ… Company saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...company, _id: result.insertedId });
   } catch (error) {
-    console.error('❌ Error creating company:', error);
-    console.error('❌ Error code:', error.code);
-    console.error('❌ Error message:', error.message);
+    console.error('âŒ Error creating company:', error);
+    console.error('âŒ Error code:', error.code);
+    console.error('âŒ Error message:', error.message);
     
     // Handle duplicate key error specifically
     if (error.code === 11000) {
@@ -186,3 +186,6 @@ router.delete('/:id', async (req, res) => {
 });
 
 module.exports = router;
+
+
+
