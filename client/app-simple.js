@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Simple CRM Application - Navigation and Basic Functionality
  * Simplified version without ES6 modules
  */
@@ -17,10 +17,10 @@ let appInitialized = false;
 
 // Listen to the authentication event - this is the primary trigger
 window.addEventListener('entra-login-success', (event) => {
-  console.log('🔔 entra-login-success event received in app-simple.js', event.detail);
+  console.log('ðŸ”” entra-login-success event received in app-simple.js', event.detail);
   
   if (appInitialized) {
-    console.log('⏭️  App already initialized, skipping...');
+    console.log('â­ï¸  App already initialized, skipping...');
     return;
   }
   
@@ -30,14 +30,14 @@ window.addEventListener('entra-login-success', (event) => {
     const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
     
     if (isVisible) {
-      console.log('🚀 Starting CRM initialization after login...');
+      console.log('ðŸš€ Starting CRM initialization after login...');
       initializeSimpleApp();
       appInitialized = true;
     } else {
-      console.log('⏸️  Main app not yet visible, waiting...');
+      console.log('â¸ï¸  Main app not yet visible, waiting...');
       // If not visible yet, wait a bit more
       setTimeout(() => {
-        console.log('🚀 Starting CRM initialization (delayed)...');
+        console.log('ðŸš€ Starting CRM initialization (delayed)...');
         initializeSimpleApp();
         appInitialized = true;
       }, 500);
@@ -47,7 +47,7 @@ window.addEventListener('entra-login-success', (event) => {
 
 // Fallback: Initialize when DOM is ready AND user is already logged in
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🎯 app-simple.js DOM ready');
+  console.log('ðŸŽ¯ app-simple.js DOM ready');
   
   // Check if user is already authenticated (page refresh case)
   setTimeout(() => {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
     
     if (isVisible && !appInitialized) {
-      console.log('✅ User already authenticated, initializing CRM...');
+      console.log('âœ… User already authenticated, initializing CRM...');
       initializeSimpleApp();
       appInitialized = true;
     }
@@ -167,37 +167,37 @@ function showView(viewName) {
 }
 
 function loadTemplate(viewName, targetElement) {
-  console.log(`\n🔄 ====== loadTemplate START ======`);
-  console.log(`🔄 View: ${viewName}`);
-  console.log(`🔄 Target element:`, targetElement);
+  console.log(`\nðŸ”„ ====== loadTemplate START ======`);
+  console.log(`ðŸ”„ View: ${viewName}`);
+  console.log(`ðŸ”„ Target element:`, targetElement);
   
   const template = document.getElementById(`tpl-${viewName}`);
   
   if (template) {
-    console.log(`✅ Template "tpl-${viewName}" found!`);
+    console.log(`âœ… Template "tpl-${viewName}" found!`);
     const content = template.content.cloneNode(true);
-    console.log(`✅ Template cloned, content:`, content);
+    console.log(`âœ… Template cloned, content:`, content);
     
     targetElement.appendChild(content);
-    console.log(`✅ Template content appended to target`);
-    console.log(`✅ Target element now has ${targetElement.children.length} children`);
+    console.log(`âœ… Template content appended to target`);
+    console.log(`âœ… Target element now has ${targetElement.children.length} children`);
     
     // Set up event handlers for buttons in this view
     // Use a longer delay to ensure DOM is fully updated
     setTimeout(() => {
-      console.log(`\n⏰ Timeout fired after 200ms - setting up handlers`);
-      console.log(`⏰ Target element ID: ${targetElement.id}`);
-      console.log(`⏰ Target element children: ${targetElement.children.length}`);
+      console.log(`\nâ° Timeout fired after 200ms - setting up handlers`);
+      console.log(`â° Target element ID: ${targetElement.id}`);
+      console.log(`â° Target element children: ${targetElement.children.length}`);
       setupViewEventHandlers(viewName, targetElement);
-      console.log(`✅ setupViewEventHandlers completed\n`);
+      console.log(`âœ… setupViewEventHandlers completed\n`);
     }, 200);
   } else {
-    console.warn(`❌ Template "tpl-${viewName}" not found in DOM`);
+    console.warn(`âŒ Template "tpl-${viewName}" not found in DOM`);
     // Add a placeholder message
     targetElement.innerHTML = `
       <div class="p-8">
         <h2 class="text-2xl font-bold mb-4">${formatViewName(viewName)}</h2>
-        <p class="text-base-content/70">Innehåll för denna vy kommer snart...</p>
+        <p class="text-base-content/70">InnehÃ¥ll fÃ¶r denna vy kommer snart...</p>
       </div>
     `;
   }
@@ -206,14 +206,14 @@ function loadTemplate(viewName, targetElement) {
 function formatViewName(viewName) {
   const names = {
     'dashboard': 'Dashboard',
-    'brands': 'Varumärken',
-    'companies': 'Företag',
-    'agents': 'Mäklare',
-    'pipeline': 'Säljtavla',
-    'customer-success': 'Kundvård',
+    'brands': 'VarumÃ¤rken',
+    'companies': 'FÃ¶retag',
+    'agents': 'MÃ¤klare',
+    'pipeline': 'SÃ¤ljtavla',
+    'customer-success': 'KundvÃ¥rd',
     'licenses': 'Licenser',
     'import': 'Import',
-    'settings': 'Inställningar'
+    'settings': 'InstÃ¤llningar'
   };
   return names[viewName] || viewName;
 }
@@ -268,7 +268,7 @@ async function loadCustomers() {
       console.log('Using demo data for customers');
       renderCustomers([
         { id: 1, name: 'Demo Kund AB', email: 'kontakt@demo.se', phone: '070-123456' },
-        { id: 2, name: 'Test Företag HB', email: 'info@test.se', phone: '070-654321' }
+        { id: 2, name: 'Test FÃ¶retag HB', email: 'info@test.se', phone: '070-654321' }
       ]);
     }
   } catch (error) {
@@ -290,13 +290,13 @@ async function loadDeals() {
     } else {
       console.log('Using demo data for deals');
       renderDeals([
-        { id: 1, title: 'Demo Affär 1', value: 50000, status: 'negotiation', customer: 'Demo Kund AB' },
-        { id: 2, title: 'Demo Affär 2', value: 75000, status: 'proposal', customer: 'Test Företag HB' }
+        { id: 1, title: 'Demo AffÃ¤r 1', value: 50000, status: 'negotiation', customer: 'Demo Kund AB' },
+        { id: 2, title: 'Demo AffÃ¤r 2', value: 75000, status: 'proposal', customer: 'Test FÃ¶retag HB' }
       ]);
     }
   } catch (error) {
     console.error('Error loading deals:', error);
-    showDemoMessage('Affärer');
+    showDemoMessage('AffÃ¤rer');
   }
 }
 
@@ -313,8 +313,8 @@ async function loadActivities() {
     } else {
       console.log('Using demo data for activities');
       renderActivities([
-        { id: 1, title: 'Uppföljning Demo Kund', type: 'call', date: new Date().toISOString() },
-        { id: 2, title: 'Möte Test Företag', type: 'meeting', date: new Date().toISOString() }
+        { id: 1, title: 'UppfÃ¶ljning Demo Kund', type: 'call', date: new Date().toISOString() },
+        { id: 2, title: 'MÃ¶te Test FÃ¶retag', type: 'meeting', date: new Date().toISOString() }
       ]);
     }
   } catch (error) {
@@ -329,7 +329,7 @@ function loadDashboard() {
   const welcomeEl = document.querySelector('#view-dashboard .text-3xl');
   if (welcomeEl && window.entraAuth) {
     const user = window.entraAuth.getUser();
-    welcomeEl.textContent = `Välkommen, ${user.name || 'användare'}! 👋`;
+    welcomeEl.textContent = `VÃ¤lkommen, ${user.name || 'anvÃ¤ndare'}! ðŸ‘‹`;
   }
 }
 
@@ -391,7 +391,7 @@ function loadImport() {
       applyImportBtn.addEventListener('click', async () => {
         const file = fileInput?.files[0];
         if (!file) {
-          alert('Välj en fil först');
+          alert('VÃ¤lj en fil fÃ¶rst');
           return;
         }
         
@@ -425,7 +425,7 @@ async function handleExcelImport(file) {
   const applyImportBtn = document.getElementById('applyImport');
   
   if (importResult) {
-    importResult.textContent = 'Läser Excel-fil...';
+    importResult.textContent = 'LÃ¤ser Excel-fil...';
   }
   
   if (applyImportBtn) {
@@ -452,7 +452,7 @@ async function handleExcelImport(file) {
     if (importResult) {
       importResult.innerHTML = `
         <div class="alert alert-success">
-          <span>✓ Läste ${jsonData.length} rader från ${workbook.SheetNames[0]}</span>
+          <span>âœ“ LÃ¤ste ${jsonData.length} rader frÃ¥n ${workbook.SheetNames[0]}</span>
         </div>
         <div class="mt-2">
           <strong>Kolumner:</strong> ${Object.keys(jsonData[0] || {}).join(', ')}
@@ -475,7 +475,7 @@ async function handleExcelImport(file) {
       if (importResult) {
         importResult.innerHTML = `
           <div class="alert alert-success">
-            <span>✓ Import lyckades! ${result.imported || 0} poster importerade.</span>
+            <span>âœ“ Import lyckades! ${result.imported || 0} poster importerade.</span>
           </div>
         `;
       }
@@ -488,7 +488,7 @@ async function handleExcelImport(file) {
     if (importResult) {
       importResult.innerHTML = `
         <div class="alert alert-error">
-          <span>✗ Fel vid import: ${error.message}</span>
+          <span>âœ— Fel vid import: ${error.message}</span>
         </div>
       `;
     }
@@ -518,7 +518,7 @@ async function handleServerImport(type) {
       if (importResult) {
         importResult.innerHTML = `
           <div class="alert alert-success">
-            <span>✓ Serverimport lyckades! ${result.imported || 0} poster importerade.</span>
+            <span>âœ“ Serverimport lyckades! ${result.imported || 0} poster importerade.</span>
           </div>
         `;
       }
@@ -531,7 +531,7 @@ async function handleServerImport(type) {
     if (importResult) {
       importResult.innerHTML = `
         <div class="alert alert-error">
-          <span>✗ Fel vid serverimport: ${error.message}</span>
+          <span>âœ— Fel vid serverimport: ${error.message}</span>
         </div>
       `;
     }
@@ -636,7 +636,7 @@ function showDemoMessage(entityType) {
     messageEl.className = 'alert alert-info mt-4';
     messageEl.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      <span>Kunde inte ladda ${entityType} från API. Visar demo-data.</span>
+      <span>Kunde inte ladda ${entityType} frÃ¥n API. Visar demo-data.</span>
     `;
     currentViewEl.insertBefore(messageEl, currentViewEl.firstChild);
   }
@@ -683,22 +683,22 @@ function setupButtonHandlers() {
 
 // Set up event handlers for a specific view
 function setupViewEventHandlers(viewName, viewElement) {
-  console.log(`📋 ====== setupViewEventHandlers START ======`);
-  console.log(`📋 View: ${viewName}`);
-  console.log(`📋 ViewElement:`, viewElement);
-  console.log(`📋 ViewElement ID:`, viewElement.id);
-  console.log(`📋 ViewElement innerHTML length:`, viewElement.innerHTML.length);
+  console.log(`ðŸ“‹ ====== setupViewEventHandlers START ======`);
+  console.log(`ðŸ“‹ View: ${viewName}`);
+  console.log(`ðŸ“‹ ViewElement:`, viewElement);
+  console.log(`ðŸ“‹ ViewElement ID:`, viewElement.id);
+  console.log(`ðŸ“‹ ViewElement innerHTML length:`, viewElement.innerHTML.length);
   
   // Log all buttons in the view
   const allButtons = viewElement.querySelectorAll('button');
-  console.log(`📋 Found ${allButtons.length} total buttons in view`);
+  console.log(`ðŸ“‹ Found ${allButtons.length} total buttons in view`);
   allButtons.forEach(btn => {
-    console.log(`  📌 Button: id="${btn.id}", class="${btn.className}", text="${btn.textContent.trim().substring(0, 30)}"`);
+    console.log(`  ðŸ“Œ Button: id="${btn.id}", class="${btn.className}", text="${btn.textContent.trim().substring(0, 30)}"`);
   });
   
   // Find all buttons with data-action in this view
   const actionButtons = viewElement.querySelectorAll('[data-action]');
-  console.log(`📋 Found ${actionButtons.length} buttons with data-action`);
+  console.log(`ðŸ“‹ Found ${actionButtons.length} buttons with data-action`);
   actionButtons.forEach(button => {
     const action = button.getAttribute('data-action');
     console.log(`Found button with action: ${action}`);
@@ -711,7 +711,7 @@ function setupViewEventHandlers(viewName, viewElement) {
   
   // Helper function to find and set up a button
   const setupButton = (buttonId, handler, description) => {
-    console.log(`🔍 Looking for button: #${buttonId} (${description})`);
+    console.log(`ðŸ” Looking for button: #${buttonId} (${description})`);
     
     // Try to find in viewElement first
     let button = viewElement.querySelector(`#${buttonId}`);
@@ -725,22 +725,22 @@ function setupViewEventHandlers(viewName, viewElement) {
     }
     
     if (button) {
-      console.log(`✅ FOUND ${description} button (#${buttonId}) - Attaching listener`);
+      console.log(`âœ… FOUND ${description} button (#${buttonId}) - Attaching listener`);
       // Remove any existing listeners by cloning
       const newButton = button.cloneNode(true);
       button.parentNode.replaceChild(newButton, button);
       
       newButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(`🖱️ ${description} button CLICKED!`);
+        console.log(`ðŸ–±ï¸ ${description} button CLICKED!`);
         handler();
       });
     } else {
-      console.error(`❌ Button #${buttonId} NOT FOUND for ${description}`);
+      console.error(`âŒ Button #${buttonId} NOT FOUND for ${description}`);
     }
   };
   
-  console.log(`🔧 Setting up button handlers...`);
+  console.log(`ðŸ”§ Setting up button handlers...`);
   setupButton('addBrand', showAddBrandForm, 'Add Brand');
   setupButton('addCompany', showAddCompanyForm, 'Add Company');
   setupButton('addAgent', showAddAgentForm, 'Add Agent');
@@ -769,7 +769,7 @@ function setupViewEventHandlers(viewName, viewElement) {
     });
   }
   
-  console.log(`✓ Event handlers set up for ${viewName}`);
+  console.log(`âœ“ Event handlers set up for ${viewName}`);
 }
 
 // Handle button actions
@@ -813,27 +813,27 @@ function handleDropdownChange(dropdown, value, viewName) {
 
 // Show forms for creating new entities
 function showAddBrandForm() {
-  console.log('🎯 showAddBrandForm called!');
+  console.log('ðŸŽ¯ showAddBrandForm called!');
   const html = `
     <div class="modal modal-open">
       <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">Lägg till nytt varumärke</h3>
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt varumÃ¤rke</h3>
         <form id="addBrandForm" class="space-y-4">
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text">Varumärkesnamn *</span>
+              <span class="label-text">VarumÃ¤rkesnamn *</span>
             </label>
-            <input type="text" name="name" placeholder="Ange varumärkesnamn" class="input input-bordered w-full" required />
+            <input type="text" name="name" placeholder="Ange varumÃ¤rkesnamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
             <label class="label">
               <span class="label-text">Beskrivning</span>
             </label>
-            <textarea name="description" placeholder="Beskriv varumärket..." class="textarea textarea-bordered w-full" rows="4"></textarea>
+            <textarea name="description" placeholder="Beskriv varumÃ¤rket..." class="textarea textarea-bordered w-full" rows="4"></textarea>
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara varumärke</button>
+            <button type="submit" class="btn btn-primary">Spara varumÃ¤rke</button>
           </div>
         </form>
       </div>
@@ -850,17 +850,17 @@ function showAddBrandForm() {
 }
 
 function showAddCompanyForm() {
-  console.log('🎯 showAddCompanyForm called!');
+  console.log('ðŸŽ¯ showAddCompanyForm called!');
   const html = `
     <div class="modal modal-open">
       <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">Lägg till nytt företag</h3>
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt fÃ¶retag</h3>
         <form id="addCompanyForm" class="space-y-4">
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text">Företagsnamn *</span>
+              <span class="label-text">FÃ¶retagsnamn *</span>
             </label>
-            <input type="text" name="name" placeholder="Ange företagsnamn" class="input input-bordered w-full" required />
+            <input type="text" name="name" placeholder="Ange fÃ¶retagsnamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
             <label class="label">
@@ -882,7 +882,7 @@ function showAddCompanyForm() {
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara företag</button>
+            <button type="submit" class="btn btn-primary">Spara fÃ¶retag</button>
           </div>
         </form>
       </div>
@@ -899,17 +899,17 @@ function showAddCompanyForm() {
 }
 
 function showAddAgentForm() {
-  console.log('🎯 showAddAgentForm called!');
+  console.log('ðŸŽ¯ showAddAgentForm called!');
   const html = `
     <div class="modal modal-open">
       <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">Lägg till ny mäklare</h3>
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till ny mÃ¤klare</h3>
         <form id="addAgentForm" class="space-y-4">
           <div class="form-control w-full">
             <label class="label">
               <span class="label-text">Namn *</span>
             </label>
-            <input type="text" name="name" placeholder="För- och efternamn" class="input input-bordered w-full" required />
+            <input type="text" name="name" placeholder="FÃ¶r- och efternamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
             <label class="label">
@@ -925,13 +925,13 @@ function showAddAgentForm() {
           </div>
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text">Företag</span>
+              <span class="label-text">FÃ¶retag</span>
             </label>
-            <input type="text" name="company" placeholder="Mäklarföretag AB" class="input input-bordered w-full" />
+            <input type="text" name="company" placeholder="MÃ¤klarfÃ¶retag AB" class="input input-bordered w-full" />
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara mäklare</button>
+            <button type="submit" class="btn btn-primary">Spara mÃ¤klare</button>
           </div>
         </form>
       </div>
@@ -951,14 +951,14 @@ function showAddDealForm() {
   const html = `
     <div class="modal modal-open">
       <div class="modal-box">
-        <h3 class="font-bold text-lg mb-4">Skapa ny affär</h3>
+        <h3 class="font-bold text-lg mb-4">Skapa ny affÃ¤r</h3>
         <form id="addDealForm" class="space-y-4">
           <div class="form-control">
             <label class="label"><span class="label-text">Titel *</span></label>
             <input type="text" name="title" class="input input-bordered" required />
           </div>
           <div class="form-control">
-            <label class="label"><span class="label-text">Värde (kr)</span></label>
+            <label class="label"><span class="label-text">VÃ¤rde (kr)</span></label>
             <input type="number" name="value" class="input input-bordered" />
           </div>
           <div class="form-control">
@@ -970,9 +970,9 @@ function showAddDealForm() {
             <select name="status" class="select select-bordered">
               <option value="lead">Lead</option>
               <option value="proposal">Offert</option>
-              <option value="negotiation">Förhandling</option>
+              <option value="negotiation">FÃ¶rhandling</option>
               <option value="won">Vunnen</option>
-              <option value="lost">Förlorad</option>
+              <option value="lost">FÃ¶rlorad</option>
             </select>
           </div>
           <div class="modal-action">
@@ -1110,7 +1110,7 @@ window.editCustomer = function(id) {
 
 window.editDeal = function(id) {
   console.log('Edit deal:', id);
-  alert(`Redigera affär ${id} - funktion kommer snart!`);
+  alert(`Redigera affÃ¤r ${id} - funktion kommer snart!`);
 };
 
 window.editActivity = function(id) {
@@ -1119,3 +1119,6 @@ window.editActivity = function(id) {
 };
 
 console.log('Simple CRM app script loaded');
+
+
+
