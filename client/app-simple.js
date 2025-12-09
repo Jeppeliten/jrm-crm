@@ -420,7 +420,7 @@ function renderBrandsTable(brands) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${brands.map(brand => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showBrandDetails('${brand._id}')">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -461,7 +461,7 @@ function renderAgentsTable(agents) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${agents.map(agent => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showAgentDetails('${agent._id}')">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.role || ''}</td>
