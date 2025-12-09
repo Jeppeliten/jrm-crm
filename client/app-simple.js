@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Simple CRM Application - Navigation and Basic Functionality
  * Simplified version without ES6 modules
  */
@@ -17,10 +17,10 @@ let appInitialized = false;
 
 // Listen to the authentication event - this is the primary trigger
 window.addEventListener('entra-login-success', (event) => {
-  console.log('ðŸ”” entra-login-success event received in app-simple.js', event.detail);
+  console.log('Ã°Å¸â€â€ entra-login-success event received in app-simple.js', event.detail);
   
   if (appInitialized) {
-    console.log('â­ï¸  App already initialized, skipping...');
+    console.log('Ã¢ÂÂ­Ã¯Â¸Â  App already initialized, skipping...');
     return;
   }
   
@@ -30,14 +30,14 @@ window.addEventListener('entra-login-success', (event) => {
     const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
     
     if (isVisible) {
-      console.log('ðŸš€ Starting CRM initialization after login...');
+      console.log('Ã°Å¸Å¡â‚¬ Starting CRM initialization after login...');
       initializeSimpleApp();
       appInitialized = true;
     } else {
-      console.log('â¸ï¸  Main app not yet visible, waiting...');
+      console.log('Ã¢ÂÂ¸Ã¯Â¸Â  Main app not yet visible, waiting...');
       // If not visible yet, wait a bit more
       setTimeout(() => {
-        console.log('ðŸš€ Starting CRM initialization (delayed)...');
+        console.log('Ã°Å¸Å¡â‚¬ Starting CRM initialization (delayed)...');
         initializeSimpleApp();
         appInitialized = true;
       }, 500);
@@ -47,7 +47,7 @@ window.addEventListener('entra-login-success', (event) => {
 
 // Fallback: Initialize when DOM is ready AND user is already logged in
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('ðŸŽ¯ app-simple.js DOM ready');
+  console.log('Ã°Å¸Å½Â¯ app-simple.js DOM ready');
   
   // Check if user is already authenticated (page refresh case)
   setTimeout(() => {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
     
     if (isVisible && !appInitialized) {
-      console.log('âœ… User already authenticated, initializing CRM...');
+      console.log('Ã¢Å“â€¦ User already authenticated, initializing CRM...');
       initializeSimpleApp();
       appInitialized = true;
     }
@@ -167,37 +167,37 @@ function showView(viewName) {
 }
 
 function loadTemplate(viewName, targetElement) {
-  console.log(`\nðŸ”„ ====== loadTemplate START ======`);
-  console.log(`ðŸ”„ View: ${viewName}`);
-  console.log(`ðŸ”„ Target element:`, targetElement);
+  console.log(`\nÃ°Å¸â€â€ž ====== loadTemplate START ======`);
+  console.log(`Ã°Å¸â€â€ž View: ${viewName}`);
+  console.log(`Ã°Å¸â€â€ž Target element:`, targetElement);
   
   const template = document.getElementById(`tpl-${viewName}`);
   
   if (template) {
-    console.log(`âœ… Template "tpl-${viewName}" found!`);
+    console.log(`Ã¢Å“â€¦ Template "tpl-${viewName}" found!`);
     const content = template.content.cloneNode(true);
-    console.log(`âœ… Template cloned, content:`, content);
+    console.log(`Ã¢Å“â€¦ Template cloned, content:`, content);
     
     targetElement.appendChild(content);
-    console.log(`âœ… Template content appended to target`);
-    console.log(`âœ… Target element now has ${targetElement.children.length} children`);
+    console.log(`Ã¢Å“â€¦ Template content appended to target`);
+    console.log(`Ã¢Å“â€¦ Target element now has ${targetElement.children.length} children`);
     
     // Set up event handlers for buttons in this view
     // Use a longer delay to ensure DOM is fully updated
     setTimeout(() => {
-      console.log(`\nâ° Timeout fired after 200ms - setting up handlers`);
-      console.log(`â° Target element ID: ${targetElement.id}`);
-      console.log(`â° Target element children: ${targetElement.children.length}`);
+      console.log(`\nÃ¢ÂÂ° Timeout fired after 200ms - setting up handlers`);
+      console.log(`Ã¢ÂÂ° Target element ID: ${targetElement.id}`);
+      console.log(`Ã¢ÂÂ° Target element children: ${targetElement.children.length}`);
       setupViewEventHandlers(viewName, targetElement);
-      console.log(`âœ… setupViewEventHandlers completed\n`);
+      console.log(`Ã¢Å“â€¦ setupViewEventHandlers completed\n`);
     }, 200);
   } else {
-    console.warn(`âŒ Template "tpl-${viewName}" not found in DOM`);
+    console.warn(`Ã¢ÂÅ’ Template "tpl-${viewName}" not found in DOM`);
     // Add a placeholder message
     targetElement.innerHTML = `
       <div class="p-8">
         <h2 class="text-2xl font-bold mb-4">${formatViewName(viewName)}</h2>
-        <p class="text-base-content/70">InnehÃ¥ll fÃ¶r denna vy kommer snart...</p>
+        <p class="text-base-content/70">InnehÃƒÂ¥ll fÃƒÂ¶r denna vy kommer snart...</p>
       </div>
     `;
   }
@@ -206,14 +206,14 @@ function loadTemplate(viewName, targetElement) {
 function formatViewName(viewName) {
   const names = {
     'dashboard': 'Dashboard',
-    'brands': 'VarumÃ¤rken',
-    'companies': 'FÃ¶retag',
-    'agents': 'MÃ¤klare',
-    'pipeline': 'SÃ¤ljtavla',
-    'customer-success': 'KundvÃ¥rd',
+    'brands': 'VarumÃƒÂ¤rken',
+    'companies': 'FÃƒÂ¶retag',
+    'agents': 'MÃƒÂ¤klare',
+    'pipeline': 'SÃƒÂ¤ljtavla',
+    'customer-success': 'KundvÃƒÂ¥rd',
     'licenses': 'Licenser',
     'import': 'Import',
-    'settings': 'InstÃ¤llningar'
+    'settings': 'InstÃƒÂ¤llningar'
   };
   return names[viewName] || viewName;
 }
@@ -268,7 +268,7 @@ async function loadCustomers() {
       console.log('Using demo data for customers');
       renderCustomers([
         { id: 1, name: 'Demo Kund AB', email: 'kontakt@demo.se', phone: '070-123456' },
-        { id: 2, name: 'Test FÃ¶retag HB', email: 'info@test.se', phone: '070-654321' }
+        { id: 2, name: 'Test FÃƒÂ¶retag HB', email: 'info@test.se', phone: '070-654321' }
       ]);
     }
   } catch (error) {
@@ -290,13 +290,13 @@ async function loadDeals() {
     } else {
       console.log('Using demo data for deals');
       renderDeals([
-        { id: 1, title: 'Demo AffÃ¤r 1', value: 50000, status: 'negotiation', customer: 'Demo Kund AB' },
-        { id: 2, title: 'Demo AffÃ¤r 2', value: 75000, status: 'proposal', customer: 'Test FÃ¶retag HB' }
+        { id: 1, title: 'Demo AffÃƒÂ¤r 1', value: 50000, status: 'negotiation', customer: 'Demo Kund AB' },
+        { id: 2, title: 'Demo AffÃƒÂ¤r 2', value: 75000, status: 'proposal', customer: 'Test FÃƒÂ¶retag HB' }
       ]);
     }
   } catch (error) {
     console.error('Error loading deals:', error);
-    showDemoMessage('AffÃ¤rer');
+    showDemoMessage('AffÃƒÂ¤rer');
   }
 }
 
@@ -313,8 +313,8 @@ async function loadActivities() {
     } else {
       console.log('Using demo data for activities');
       renderActivities([
-        { id: 1, title: 'UppfÃ¶ljning Demo Kund', type: 'call', date: new Date().toISOString() },
-        { id: 2, title: 'MÃ¶te Test FÃ¶retag', type: 'meeting', date: new Date().toISOString() }
+        { id: 1, title: 'UppfÃƒÂ¶ljning Demo Kund', type: 'call', date: new Date().toISOString() },
+        { id: 2, title: 'MÃƒÂ¶te Test FÃƒÂ¶retag', type: 'meeting', date: new Date().toISOString() }
       ]);
     }
   } catch (error) {
@@ -329,7 +329,7 @@ function loadDashboard() {
   const welcomeEl = document.querySelector('#view-dashboard .text-3xl');
   if (welcomeEl && window.entraAuth) {
     const user = window.entraAuth.getUser();
-    welcomeEl.textContent = `VÃ¤lkommen, ${user.name || 'anvÃ¤ndare'}! ðŸ‘‹`;
+    welcomeEl.textContent = `VÃƒÂ¤lkommen, ${user.name || 'anvÃƒÂ¤ndare'}! Ã°Å¸â€˜â€¹`;
   }
 }
 
@@ -369,30 +369,30 @@ function renderCompaniesTable(companies) {
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Företag</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">FÃ¶retag</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">VarumÃ¤rke</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pipeline</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Org.nr</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ã…tgÃ¤rder</th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${companies.map(company => `
           <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
-            <td class="px-6 py-4 whitespace-nowrap">${company.name || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.brand || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.name)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.brand)}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
                 ${company.status || 'prospekt'}
               </span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.pipeline || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.pipeline)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.orgNumber)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.email)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.phone)}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
               <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
               <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
@@ -410,19 +410,19 @@ function renderBrandsTable(brands) {
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">VarumÃ¤rke</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Webbplats</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beskrivning</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ã…tgÃ¤rder</th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${brands.map(brand => `
           <tr class="hover:bg-gray-50 cursor-pointer" onclick="showBrandDetails('${brand._id}')">
-            <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap font-medium">${escapeHtml(brand.name)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(brand.category)}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(brand.status)}">
                 ${brand.status || 'aktiv'}
@@ -431,7 +431,7 @@ function renderBrandsTable(brands) {
             <td class="px-6 py-4 whitespace-nowrap">
               ${brand.website ? `<a href="${brand.website}" target="_blank" class="text-indigo-600 hover:text-indigo-900">${brand.website}</a>` : ''}
             </td>
-            <td class="px-6 py-4">${brand.description || ''}</td>
+            <td class="px-6 py-4">${escapeHtml(brand.description)}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
               <button onclick="editBrand('${brand._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
               <button onclick="deleteBrand('${brand._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
@@ -450,29 +450,29 @@ function renderAgentsTable(agents) {
       <thead class="bg-gray-50">
         <tr>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Namn</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Företag</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">FÃ¶retag</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">VarumÃ¤rke</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ort</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ã…tgÃ¤rder</th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${agents.map(agent => `
           <tr class="hover:bg-gray-50 cursor-pointer" onclick="showAgentDetails('${agent._id}')">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''} ${agent.lastName || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.brand || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.city || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(agent.company)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(agent.brand)}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(agent.city)}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(agent.status)}">
                 ${agent.status || 'aktiv'}
               </span>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">${agent.email || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm">${agent.phone || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">${escapeHtml(agent.email)}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm">${escapeHtml(agent.phone)}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
               <button onclick="editAgent('${agent._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
               <button onclick="deleteAgent('${agent._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
@@ -683,10 +683,10 @@ async function showAgentDetails(id) {
           <div class="flex justify-between items-start mb-6">
             <div>
               <h3 class="font-bold text-3xl text-gray-800">${agent.name || ''} ${agent.lastName || ''}</h3>
-              <p class="text-sm text-gray-500 mt-1">${agent.role || 'Mäklare'} ${agent.company ? 'på ' + agent.company : ''}</p>
+              <p class="text-sm text-gray-500 mt-1">${agent.role || 'MÃ¤klare'} ${agent.company ? 'pÃ¥ ' + agent.company : ''}</p>
               ${agent.brand ? `<p class="text-sm text-gray-400 mt-1">${agent.brand}</p>` : ''}
             </div>
-            <button onclick="closeModal()" class="btn btn-sm btn-circle">✕</button>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle">âœ•</button>
           </div>
 
           <div class="divider my-4"></div>
@@ -728,15 +728,15 @@ async function showAgentDetails(id) {
 
             <!-- Column 2: Company & Contact -->
             <div class="space-y-4">
-              <h4 class="font-semibold text-lg text-gray-700 mb-3">Företag & Kontakt</h4>
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">FÃ¶retag & Kontakt</h4>
 
               <div>
-                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Företag</label>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">FÃ¶retag</label>
                 <p class="text-base mt-1 font-medium">${agent.company || '-'}</p>
               </div>
 
               <div>
-                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Varumärke</label>
+                <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">VarumÃ¤rke</label>
                 <p class="text-base mt-1">${agent.brand || '-'}</p>
               </div>
 
@@ -752,7 +752,7 @@ async function showAgentDetails(id) {
 
               <div>
                 <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Adress</label>
-                <p class="text-base mt-1">${agent.address || ''}</p>
+                <p class="text-base mt-1">${escapeHtml(agent.address)}</p>
                 <p class="text-sm text-gray-600">${agent.postalCode || ''} ${agent.city || ''}</p>
               </div>
 
@@ -764,11 +764,11 @@ async function showAgentDetails(id) {
 
             <!-- Column 3: Broker Package & Products -->
             <div class="space-y-4">
-              <h4 class="font-semibold text-lg text-gray-700 mb-3">Mäklarpaket</h4>
+              <h4 class="font-semibold text-lg text-gray-700 mb-3">MÃ¤klarpaket</h4>
 
               ${agent.brokerPackage ? `
                 <div>
-                  <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">Användare</label>
+                  <label class="text-sm font-medium text-gray-500 uppercase tracking-wide">AnvÃ¤ndare</label>
                   <p class="text-base mt-1">${agent.brokerPackage.userId || '-'}</p>
                 </div>
 
@@ -791,7 +791,7 @@ async function showAgentDetails(id) {
                   <p class="text-base mt-1 font-medium">${agent.brokerPackage.totalCost ? agent.brokerPackage.totalCost + ' kr' : '-'}</p>
                   ${agent.brokerPackage.discount ? `<p class="text-sm text-gray-600">Rabatt: ${agent.brokerPackage.discount} kr</p>` : ''}
                 </div>
-              ` : '<p class="text-gray-500 italic">Ingen mäklarpaket-information</p>'}
+              ` : '<p class="text-gray-500 italic">Ingen mÃ¤klarpaket-information</p>'}
 
               ${agent.products && agent.products.length > 0 ? `
                 <div class="mt-6">
@@ -812,8 +812,8 @@ async function showAgentDetails(id) {
           </div>
 
           <div class="modal-action mt-8 pt-4 border-t">
-            <button onclick="closeModal()" class="btn btn-ghost">Stäng</button>
-            <button onclick="closeModal(); editAgent('${agent._id}')" class="btn btn-primary">Redigera mäklare</button>
+            <button onclick="closeModal()" class="btn btn-ghost">StÃ¤ng</button>
+            <button onclick="closeModal(); editAgent('${agent._id}')" class="btn btn-primary">Redigera mÃ¤klare</button>
           </div>
         </div>
         <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
@@ -823,7 +823,7 @@ async function showAgentDetails(id) {
     showModal(html);
   } catch (error) {
     console.error('Error loading agent details:', error);
-    alert('Kunde inte ladda mäklardetaljer');
+    alert('Kunde inte ladda mÃ¤klardetaljer');
   }
 }
 
@@ -835,6 +835,15 @@ window.closeModal = function() {
 };
 
 // ===== EDIT AND DELETE FUNCTIONS =====
+
+
+// Helper function to safely escape HTML attribute values
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 
 async function editCompany(id) {
   try {
@@ -849,22 +858,22 @@ async function editCompany(id) {
             <div class="grid grid-cols-2 gap-4">
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">F?retagsnamn *</span></label>
-                <input type="text" name="name" value="${company.name || ''}" class="input input-bordered w-full" required />
+                <input type="text" name="name" value="${escapeHtml(company.name)}" class="input input-bordered w-full" required />
               </div>
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">Organisationsnummer</span></label>
-                <input type="text" name="orgNumber" value="${company.orgNumber || ''}" class="input input-bordered w-full" />
+                <input type="text" name="orgNumber" value="${escapeHtml(company.orgNumber)}" class="input input-bordered w-full" />
               </div>
             </div>
             
             <div class="grid grid-cols-2 gap-4">
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">Varum?rke</span></label>
-                <input type="text" name="brand" value="${company.brand || ''}" class="input input-bordered w-full" />
+                <input type="text" name="brand" value="${escapeHtml(company.brand)}" class="input input-bordered w-full" />
               </div>
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">Kategori</span></label>
-                <input type="text" name="category" value="${company.category || ''}" class="input input-bordered w-full" />
+                <input type="text" name="category" value="${escapeHtml(company.category)}" class="input input-bordered w-full" />
               </div>
             </div>
             
@@ -890,22 +899,22 @@ async function editCompany(id) {
             <div class="grid grid-cols-2 gap-4">
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">E-post</span></label>
-                <input type="email" name="email" value="${company.email || ''}" class="input input-bordered w-full" />
+                <input type="email" name="email" value="${escapeHtml(company.email)}" class="input input-bordered w-full" />
               </div>
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">Telefon</span></label>
-                <input type="tel" name="phone" value="${company.phone || ''}" class="input input-bordered w-full" />
+                <input type="tel" name="phone" value="${escapeHtml(company.phone)}" class="input input-bordered w-full" />
               </div>
             </div>
             
             <div class="grid grid-cols-2 gap-4">
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">Ort</span></label>
-                <input type="text" name="city" value="${company.city || ''}" class="input input-bordered w-full" />
+                <input type="text" name="city" value="${escapeHtml(company.city)}" class="input input-bordered w-full" />
               </div>
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">L?n</span></label>
-                <input type="text" name="county" value="${company.county || ''}" class="input input-bordered w-full" />
+                <input type="text" name="county" value="${escapeHtml(company.county)}" class="input input-bordered w-full" />
               </div>
             </div>
             
@@ -916,13 +925,13 @@ async function editCompany(id) {
               </div>
               <div class="form-control w-full">
                 <label class="label"><span class="label-text">Produkt</span></label>
-                <input type="text" name="product" value="${company.product || ''}" class="input input-bordered w-full" />
+                <input type="text" name="product" value="${escapeHtml(company.product)}" class="input input-bordered w-full" />
               </div>
             </div>
             
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Betalningsinformation</span></label>
-              <input type="text" name="paymentInfo" value="${company.paymentInfo || ''}" class="input input-bordered w-full" />
+              <input type="text" name="paymentInfo" value="${escapeHtml(company.paymentInfo)}" class="input input-bordered w-full" />
             </div>
             
             <div class="modal-action">
@@ -957,11 +966,11 @@ async function editBrand(id) {
           <form id="editBrandForm" class="space-y-4">
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Varum?rkesnamn *</span></label>
-              <input type="text" name="name" value="${brand.name || ''}" class="input input-bordered w-full" required />
+              <input type="text" name="name" value="${escapeHtml(brand.name)}" class="input input-bordered w-full" required />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Kategori</span></label>
-              <input type="text" name="category" value="${brand.category || ''}" class="input input-bordered w-full" />
+              <input type="text" name="category" value="${escapeHtml(brand.category)}" class="input input-bordered w-full" />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Status</span></label>
@@ -972,11 +981,11 @@ async function editBrand(id) {
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Webbplats</span></label>
-              <input type="url" name="website" value="${brand.website || ''}" class="input input-bordered w-full" />
+              <input type="url" name="website" value="${escapeHtml(brand.website)}" class="input input-bordered w-full" />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Beskrivning</span></label>
-              <textarea name="description" class="textarea textarea-bordered w-full" rows="4">${brand.description || ''}</textarea>
+              <textarea name="description" class="textarea textarea-bordered w-full" rows="4">${escapeHtml(brand.description)}</textarea>
             </div>
             
             <div class="modal-action">
@@ -1011,15 +1020,15 @@ async function editAgent(id) {
           <form id="editAgentForm" class="space-y-4">
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Namn *</span></label>
-              <input type="text" name="name" value="${agent.name || ''}" class="input input-bordered w-full" required />
+              <input type="text" name="name" value="${escapeHtml(agent.name)}" class="input input-bordered w-full" required />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">F?retag</span></label>
-              <input type="text" name="company" value="${agent.company || ''}" class="input input-bordered w-full" />
+              <input type="text" name="company" value="${escapeHtml(agent.company)}" class="input input-bordered w-full" />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Roll</span></label>
-              <input type="text" name="role" value="${agent.role || ''}" class="input input-bordered w-full" />
+              <input type="text" name="role" value="${escapeHtml(agent.role)}" class="input input-bordered w-full" />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Status</span></label>
@@ -1030,15 +1039,15 @@ async function editAgent(id) {
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">E-post *</span></label>
-              <input type="email" name="email" value="${agent.email || ''}" class="input input-bordered w-full" required />
+              <input type="email" name="email" value="${escapeHtml(agent.email)}" class="input input-bordered w-full" required />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Telefon</span></label>
-              <input type="tel" name="phone" value="${agent.phone || ''}" class="input input-bordered w-full" />
+              <input type="tel" name="phone" value="${escapeHtml(agent.phone)}" class="input input-bordered w-full" />
             </div>
             <div class="form-control w-full">
               <label class="label"><span class="label-text">Licenstyp</span></label>
-              <input type="text" name="licenseType" value="${agent.licenseType || ''}" class="input input-bordered w-full" />
+              <input type="text" name="licenseType" value="${escapeHtml(agent.licenseType)}" class="input input-bordered w-full" />
             </div>
             
             <div class="modal-action">
@@ -1152,7 +1161,7 @@ async function loadBrands() {
     renderBrandsTable(brands);
   } catch (error) {
     console.error('Error loading brands:', error);
-    document.getElementById('brandTable').innerHTML = '<p class="text-red-500">Fel vid laddning av varumärken</p>';
+    document.getElementById('brandTable').innerHTML = '<p class="text-red-500">Fel vid laddning av varumÃ¤rken</p>';
   }
 }
 
@@ -1164,7 +1173,7 @@ async function loadCompanies() {
     renderCompaniesTable(companies);
   } catch (error) {
     console.error('Error loading companies:', error);
-    document.getElementById('companyTable').innerHTML = '<p class="text-red-500">Fel vid laddning av företag</p>';
+    document.getElementById('companyTable').innerHTML = '<p class="text-red-500">Fel vid laddning av fÃ¶retag</p>';
   }
 }
 
@@ -1176,7 +1185,7 @@ async function loadAgents() {
     renderAgentsTable(agents);
   } catch (error) {
     console.error('Error loading agents:', error);
-    document.getElementById('agentTable').innerHTML = '<p class="text-red-500">Fel vid laddning av mäklare</p>';
+    document.getElementById('agentTable').innerHTML = '<p class="text-red-500">Fel vid laddning av mÃ¤klare</p>';
   }
 }
 
@@ -1223,7 +1232,7 @@ function loadImport() {
       applyImportBtn.addEventListener('click', async () => {
         const file = fileInput?.files[0];
         if (!file) {
-          alert('VÃ¤lj en fil fÃ¶rst');
+          alert('VÃƒÂ¤lj en fil fÃƒÂ¶rst');
           return;
         }
         
@@ -1257,7 +1266,7 @@ async function handleExcelImport(file) {
   const applyImportBtn = document.getElementById('applyImport');
   
   if (importResult) {
-    importResult.textContent = 'LÃ¤ser Excel-fil...';
+    importResult.textContent = 'LÃƒÂ¤ser Excel-fil...';
   }
   
   if (applyImportBtn) {
@@ -1284,7 +1293,7 @@ async function handleExcelImport(file) {
     if (importResult) {
       importResult.innerHTML = `
         <div class="alert alert-success">
-          <span>âœ“ LÃ¤ste ${jsonData.length} rader frÃ¥n ${workbook.SheetNames[0]}</span>
+          <span>Ã¢Å“â€œ LÃƒÂ¤ste ${jsonData.length} rader frÃƒÂ¥n ${workbook.SheetNames[0]}</span>
         </div>
         <div class="mt-2">
           <strong>Kolumner:</strong> ${Object.keys(jsonData[0] || {}).join(', ')}
@@ -1307,7 +1316,7 @@ async function handleExcelImport(file) {
       if (importResult) {
         importResult.innerHTML = `
           <div class="alert alert-success">
-            <span>âœ“ Import lyckades! ${result.imported || 0} poster importerade.</span>
+            <span>Ã¢Å“â€œ Import lyckades! ${result.imported || 0} poster importerade.</span>
           </div>
         `;
       }
@@ -1320,7 +1329,7 @@ async function handleExcelImport(file) {
     if (importResult) {
       importResult.innerHTML = `
         <div class="alert alert-error">
-          <span>âœ— Fel vid import: ${error.message}</span>
+          <span>Ã¢Å“â€” Fel vid import: ${error.message}</span>
         </div>
       `;
     }
@@ -1350,7 +1359,7 @@ async function handleServerImport(type) {
       if (importResult) {
         importResult.innerHTML = `
           <div class="alert alert-success">
-            <span>âœ“ Serverimport lyckades! ${result.imported || 0} poster importerade.</span>
+            <span>Ã¢Å“â€œ Serverimport lyckades! ${result.imported || 0} poster importerade.</span>
           </div>
         `;
       }
@@ -1363,7 +1372,7 @@ async function handleServerImport(type) {
     if (importResult) {
       importResult.innerHTML = `
         <div class="alert alert-error">
-          <span>âœ— Fel vid serverimport: ${error.message}</span>
+          <span>Ã¢Å“â€” Fel vid serverimport: ${error.message}</span>
         </div>
       `;
     }
@@ -1442,7 +1451,7 @@ function showDemoMessage(entityType) {
     messageEl.className = 'alert alert-info mt-4';
     messageEl.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      <span>Kunde inte ladda ${entityType} frÃ¥n API. Visar demo-data.</span>
+      <span>Kunde inte ladda ${entityType} frÃƒÂ¥n API. Visar demo-data.</span>
     `;
     currentViewEl.insertBefore(messageEl, currentViewEl.firstChild);
   }
@@ -1489,22 +1498,22 @@ function setupButtonHandlers() {
 
 // Set up event handlers for a specific view
 function setupViewEventHandlers(viewName, viewElement) {
-  console.log(`ðŸ“‹ ====== setupViewEventHandlers START ======`);
-  console.log(`ðŸ“‹ View: ${viewName}`);
-  console.log(`ðŸ“‹ ViewElement:`, viewElement);
-  console.log(`ðŸ“‹ ViewElement ID:`, viewElement.id);
-  console.log(`ðŸ“‹ ViewElement innerHTML length:`, viewElement.innerHTML.length);
+  console.log(`Ã°Å¸â€œâ€¹ ====== setupViewEventHandlers START ======`);
+  console.log(`Ã°Å¸â€œâ€¹ View: ${viewName}`);
+  console.log(`Ã°Å¸â€œâ€¹ ViewElement:`, viewElement);
+  console.log(`Ã°Å¸â€œâ€¹ ViewElement ID:`, viewElement.id);
+  console.log(`Ã°Å¸â€œâ€¹ ViewElement innerHTML length:`, viewElement.innerHTML.length);
   
   // Log all buttons in the view
   const allButtons = viewElement.querySelectorAll('button');
-  console.log(`ðŸ“‹ Found ${allButtons.length} total buttons in view`);
+  console.log(`Ã°Å¸â€œâ€¹ Found ${allButtons.length} total buttons in view`);
   allButtons.forEach(btn => {
-    console.log(`  ðŸ“Œ Button: id="${btn.id}", class="${btn.className}", text="${btn.textContent.trim().substring(0, 30)}"`);
+    console.log(`  Ã°Å¸â€œÅ’ Button: id="${btn.id}", class="${btn.className}", text="${btn.textContent.trim().substring(0, 30)}"`);
   });
   
   // Find all buttons with data-action in this view
   const actionButtons = viewElement.querySelectorAll('[data-action]');
-  console.log(`ðŸ“‹ Found ${actionButtons.length} buttons with data-action`);
+  console.log(`Ã°Å¸â€œâ€¹ Found ${actionButtons.length} buttons with data-action`);
   actionButtons.forEach(button => {
     const action = button.getAttribute('data-action');
     console.log(`Found button with action: ${action}`);
@@ -1517,7 +1526,7 @@ function setupViewEventHandlers(viewName, viewElement) {
   
   // Helper function to find and set up a button
   const setupButton = (buttonId, handler, description) => {
-    console.log(`ðŸ” Looking for button: #${buttonId} (${description})`);
+    console.log(`Ã°Å¸â€Â Looking for button: #${buttonId} (${description})`);
     
     // Try to find in viewElement first
     let button = viewElement.querySelector(`#${buttonId}`);
@@ -1531,22 +1540,22 @@ function setupViewEventHandlers(viewName, viewElement) {
     }
     
     if (button) {
-      console.log(`âœ… FOUND ${description} button (#${buttonId}) - Attaching listener`);
+      console.log(`Ã¢Å“â€¦ FOUND ${description} button (#${buttonId}) - Attaching listener`);
       // Remove any existing listeners by cloning
       const newButton = button.cloneNode(true);
       button.parentNode.replaceChild(newButton, button);
       
       newButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log(`ðŸ–±ï¸ ${description} button CLICKED!`);
+        console.log(`Ã°Å¸â€“Â±Ã¯Â¸Â ${description} button CLICKED!`);
         handler();
       });
     } else {
-      console.error(`âŒ Button #${buttonId} NOT FOUND for ${description}`);
+      console.error(`Ã¢ÂÅ’ Button #${buttonId} NOT FOUND for ${description}`);
     }
   };
   
-  console.log(`ðŸ”§ Setting up button handlers...`);
+  console.log(`Ã°Å¸â€Â§ Setting up button handlers...`);
   setupButton('addBrand', showAddBrandForm, 'Add Brand');
   setupButton('addCompany', showAddCompanyForm, 'Add Company');
   setupButton('addAgent', showAddAgentForm, 'Add Agent');
@@ -1575,7 +1584,7 @@ function setupViewEventHandlers(viewName, viewElement) {
     });
   }
   
-  console.log(`âœ“ Event handlers set up for ${viewName}`);
+  console.log(`Ã¢Å“â€œ Event handlers set up for ${viewName}`);
 }
 
 // Handle button actions
@@ -1619,27 +1628,27 @@ function handleDropdownChange(dropdown, value, viewName) {
 
 // Show forms for creating new entities
 function showAddBrandForm() {
-  console.log('ðŸŽ¯ showAddBrandForm called!');
+  console.log('Ã°Å¸Å½Â¯ showAddBrandForm called!');
   const html = `
     <div class="modal modal-open">
       <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt varumÃ¤rke</h3>
+        <h3 class="font-bold text-lg mb-4">LÃƒÂ¤gg till nytt varumÃƒÂ¤rke</h3>
         <form id="addBrandForm" class="space-y-4">
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text">VarumÃ¤rkesnamn *</span>
+              <span class="label-text">VarumÃƒÂ¤rkesnamn *</span>
             </label>
-            <input type="text" name="name" placeholder="Ange varumÃ¤rkesnamn" class="input input-bordered w-full" required />
+            <input type="text" name="name" placeholder="Ange varumÃƒÂ¤rkesnamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
             <label class="label">
               <span class="label-text">Beskrivning</span>
             </label>
-            <textarea name="description" placeholder="Beskriv varumÃ¤rket..." class="textarea textarea-bordered w-full" rows="4"></textarea>
+            <textarea name="description" placeholder="Beskriv varumÃƒÂ¤rket..." class="textarea textarea-bordered w-full" rows="4"></textarea>
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara varumÃ¤rke</button>
+            <button type="submit" class="btn btn-primary">Spara varumÃƒÂ¤rke</button>
           </div>
         </form>
       </div>
@@ -1656,17 +1665,17 @@ function showAddBrandForm() {
 }
 
 function showAddCompanyForm() {
-  console.log('ðŸŽ¯ showAddCompanyForm called!');
+  console.log('Ã°Å¸Å½Â¯ showAddCompanyForm called!');
   const html = `
     <div class="modal modal-open">
       <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt fÃ¶retag</h3>
+        <h3 class="font-bold text-lg mb-4">LÃƒÂ¤gg till nytt fÃƒÂ¶retag</h3>
         <form id="addCompanyForm" class="space-y-4">
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text">FÃ¶retagsnamn *</span>
+              <span class="label-text">FÃƒÂ¶retagsnamn *</span>
             </label>
-            <input type="text" name="name" placeholder="Ange fÃ¶retagsnamn" class="input input-bordered w-full" required />
+            <input type="text" name="name" placeholder="Ange fÃƒÂ¶retagsnamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
             <label class="label">
@@ -1688,7 +1697,7 @@ function showAddCompanyForm() {
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara fÃ¶retag</button>
+            <button type="submit" class="btn btn-primary">Spara fÃƒÂ¶retag</button>
           </div>
         </form>
       </div>
@@ -1705,17 +1714,17 @@ function showAddCompanyForm() {
 }
 
 function showAddAgentForm() {
-  console.log('ðŸŽ¯ showAddAgentForm called!');
+  console.log('Ã°Å¸Å½Â¯ showAddAgentForm called!');
   const html = `
     <div class="modal modal-open">
       <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">LÃ¤gg till ny mÃ¤klare</h3>
+        <h3 class="font-bold text-lg mb-4">LÃƒÂ¤gg till ny mÃƒÂ¤klare</h3>
         <form id="addAgentForm" class="space-y-4">
           <div class="form-control w-full">
             <label class="label">
               <span class="label-text">Namn *</span>
             </label>
-            <input type="text" name="name" placeholder="FÃ¶r- och efternamn" class="input input-bordered w-full" required />
+            <input type="text" name="name" placeholder="FÃƒÂ¶r- och efternamn" class="input input-bordered w-full" required />
           </div>
           <div class="form-control w-full">
             <label class="label">
@@ -1731,13 +1740,13 @@ function showAddAgentForm() {
           </div>
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text">FÃ¶retag</span>
+              <span class="label-text">FÃƒÂ¶retag</span>
             </label>
-            <input type="text" name="company" placeholder="MÃ¤klarfÃ¶retag AB" class="input input-bordered w-full" />
+            <input type="text" name="company" placeholder="MÃƒÂ¤klarfÃƒÂ¶retag AB" class="input input-bordered w-full" />
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara mÃ¤klare</button>
+            <button type="submit" class="btn btn-primary">Spara mÃƒÂ¤klare</button>
           </div>
         </form>
       </div>
@@ -1757,14 +1766,14 @@ function showAddDealForm() {
   const html = `
     <div class="modal modal-open">
       <div class="modal-box">
-        <h3 class="font-bold text-lg mb-4">Skapa ny affÃ¤r</h3>
+        <h3 class="font-bold text-lg mb-4">Skapa ny affÃƒÂ¤r</h3>
         <form id="addDealForm" class="space-y-4">
           <div class="form-control">
             <label class="label"><span class="label-text">Titel *</span></label>
             <input type="text" name="title" class="input input-bordered" required />
           </div>
           <div class="form-control">
-            <label class="label"><span class="label-text">VÃ¤rde (kr)</span></label>
+            <label class="label"><span class="label-text">VÃƒÂ¤rde (kr)</span></label>
             <input type="number" name="value" class="input input-bordered" />
           </div>
           <div class="form-control">
@@ -1776,9 +1785,9 @@ function showAddDealForm() {
             <select name="status" class="select select-bordered">
               <option value="lead">Lead</option>
               <option value="proposal">Offert</option>
-              <option value="negotiation">FÃ¶rhandling</option>
+              <option value="negotiation">FÃƒÂ¶rhandling</option>
               <option value="won">Vunnen</option>
-              <option value="lost">FÃ¶rlorad</option>
+              <option value="lost">FÃƒÂ¶rlorad</option>
             </select>
           </div>
           <div class="modal-action">
@@ -1916,7 +1925,7 @@ window.editCustomer = function(id) {
 
 window.editDeal = function(id) {
   console.log('Edit deal:', id);
-  alert(`Redigera affÃ¤r ${id} - funktion kommer snart!`);
+  alert(`Redigera affÃƒÂ¤r ${id} - funktion kommer snart!`);
 };
 
 window.editActivity = function(id) {
@@ -1938,6 +1947,9 @@ console.log('Simple CRM app script loaded');
 
 
 // Force deployment: 12/09/2025 17:00:13
+
+
+
 
 
 
