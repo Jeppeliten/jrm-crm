@@ -37,32 +37,67 @@ router.post('/', async (req, res) => {
     const db = req.app.locals.db;
     const { name, email, phone, company } = req.body;
     
-    if (!name) {
+    if (!name || !name.trim()) {
       return res.status(400).json({ error: 'Name is required' });
     }
     
-    const agent = {
-      name,
-      email,
-      phone,
-      company,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    
+    // Use mock storage if no database
     if (!db) {
       console.log('📦 Saving to mock agents storage');
+      const agent = {
+        name: name.trim(),
+        email: email?.trim() || '',
+        phone: phone?.trim() || '',
+        company: company?.trim() || '',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
       const mockAgent = { ...agent, _id: Date.now().toString() };
       mockAgents.push(mockAgent);
       return res.status(201).json(mockAgent);
     }
     
-    const result = await db.collection('agents_v2').insertOne(agent);
-    console.log('✅ Agent saved to DB with ID:', result.insertedId);
-    res.status(201).json({ ...agent, _id: result.insertedId });
+    // Check for existing agent with same email (if email provided)
+    if (email && email.trim()) {
+      const existingAgent = await db.collection('agents_v2').findOne({
+        email: { $regex: new RegExp(`^${email.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') }
+      });
+      
+      if (existingAgent) {
+        console.log('⚠️  Agent with this email already exists:', existingAgent.email);
+        return res.status(409).json({ 
+          error: 'En mäklare med denna e-postadress finns redan',
+          message: `Mäklaren "${existingAgent.name}" (${existingAgent.email}) är redan registrerad.`
+        });
+      }
+    }
+    
+    const agent = {
+      name: name.trim(),
+      email: email?.trim() || '',
+      phone: phone?.trim() || '',
+      company: company?.trim() || '',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    
+    try {
+      const result = await db.collection('agents_v2').insertOne(agent);
+      console.log('✅ Agent saved to DB with ID:', result.insertedId);
+      res.status(201).json({ ...agent, _id: result.insertedId });
+    } catch (insertError) {
+      if (insertError.code === 11000) {
+        console.error('❌ Duplicate key error despite pre-check:', insertError);
+        return res.status(409).json({ 
+          error: 'En mäklare med denna information finns redan',
+          message: 'Detta kan bero på att mäklaren just skapades av någon annan. Försök uppdatera listan.'
+        });
+      }
+      throw insertError;
+    }
   } catch (error) {
     console.error('Error creating agent:', error);
-    res.status(500).json({ error: 'Failed to create agent' });
+    res.status(500).json({ error: 'Failed to create agent', message: error.message });
   }
 });
 

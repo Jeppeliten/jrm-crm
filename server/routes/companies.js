@@ -47,7 +47,7 @@ router.post('/', async (req, res, next) => {
     const db = req.app.locals.db;
     const { name, orgNumber, email, phone, address } = req.body;
     
-    if (!name) {
+    if (!name || !name.trim()) {
       console.log('❌ Validation failed: Name required');
       return res.status(400).json({ error: 'Name is required' });
     }
@@ -70,21 +70,22 @@ router.post('/', async (req, res, next) => {
       return res.status(201).json(mockCompany);
     }
     
-    // Check for existing company with same name (case-insensitive)
+    // Escape special regex characters and check for existing company (case-insensitive)
+    const escapedName = name.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const existingCompany = await db.collection('companies_v2').findOne({
-      name: { $regex: new RegExp(`^${name.trim()}$`, 'i') }
+      name: { $regex: new RegExp(`^${escapedName}$`, 'i') }
     });
     
     if (existingCompany) {
       console.log('⚠️  Company with this name already exists:', existingCompany.name);
       return res.status(409).json({ 
-        error: 'A company with this name already exists',
-        message: 'Please use a different company name',
-        existingCompany: { name: existingCompany.name, _id: existingCompany._id }
+        error: 'Ett företag med detta namn finns redan',
+        message: `Företaget "${existingCompany.name}" är redan registrerat. Vänligen använd ett annat namn.`,
+        suggestion: `Försök med "${name.trim()} AB" eller lägg till ett organisationsnummer för att skilja dem åt.`
       });
     }
     
-    // Clean the incoming data - remove _id if present
+    // Clean the incoming data - ensure no _id field
     const company = {
       name: name.trim(),
       orgNumber: orgNumber?.trim() || '',
@@ -97,7 +98,22 @@ router.post('/', async (req, res, next) => {
     
     console.log('💾 Saving to Cosmos DB...');
     console.log('💾 Document to insert:', company);
-    const result = await db.collection('companies_v2').insertOne(company);
+    
+    try {
+      const result = await db.collection('companies_v2').insertOne(company);
+      console.log('✅ Company saved to DB with ID:', result.insertedId);
+      res.status(201).json({ ...company, _id: result.insertedId });
+    } catch (insertError) {
+      // Handle MongoDB duplicate key error specifically
+      if (insertError.code === 11000) {
+        console.error('❌ Duplicate key error despite pre-check:', insertError);
+        return res.status(409).json({ 
+          error: 'Ett företag med denna information finns redan i databasen',
+          message: 'Detta kan bero på att företaget just skapades av någon annan. Försök uppdatera listan.'
+        });
+      }
+      throw insertError; // Re-throw other errors
+    }
     console.log('✅ Company saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...company, _id: result.insertedId });
   } catch (error) {
