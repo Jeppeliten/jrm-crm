@@ -111,8 +111,13 @@ router.put('/:id', async (req, res) => {
     const updateData = { ...req.body, updatedAt: new Date() };
     delete updateData._id;
     
+    // Handle both string IDs (from mock) and ObjectIds (from MongoDB)
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
     const result = await db.collection('agents_v2').updateOne(
-      { _id: require('mongodb').ObjectId(id) },
+      query,
       { $set: updateData }
     );
     
@@ -135,9 +140,12 @@ router.delete('/:id', async (req, res) => {
     const db = req.app.locals.db;
     const { id } = req.params;
     
-    const result = await db.collection('agents_v2').deleteOne(
-      { _id: require('mongodb').ObjectId(id) }
-    );
+    // Handle both string IDs (from mock) and ObjectIds (from MongoDB)
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('agents_v2').deleteOne(query);
     
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Agent not found' });
