@@ -1,4 +1,8 @@
-﻿/**
+﻿// API Configuration
+const CONFIG = {
+  apiBaseUrl: 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net/api'
+};
+/**
  * Simple CRM Application - Navigation and Basic Functionality
  * Simplified version without ES6 modules
  */
@@ -1284,6 +1288,7 @@ console.log('Simple CRM app script loaded');
 
 
 // Force deployment: 12/09/2025 17:00:13
+
 
 
 
