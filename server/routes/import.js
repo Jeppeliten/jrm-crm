@@ -30,19 +30,27 @@ router.post('/', async (req, res) => {
     let imported = 0;
     const errors = [];
     
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.status(500).json({ 
+        error: 'Database not available',
+        message: 'Database connection not configured' 
+      });
+    }
+    
     // Process based on data type
     if (hasColumn(columns, ['varumärke', 'företag', 'brand', 'company'])) {
       // Brand/Company data
-      imported = await importBrandsAndCompanies(data, req.db);
+      imported = await importBrandsAndCompanies(data, db);
     } else if (hasColumn(columns, ['mäklare', 'agent', 'email'])) {
       // Agent data
-      imported = await importAgents(data, req.db);
+      imported = await importAgents(data, db);
     } else if (hasColumn(columns, ['licens', 'license', 'product'])) {
       // License data
-      imported = await importLicenses(data, req.db);
+      imported = await importLicenses(data, db);
     } else {
       // Generic import - try to match to existing collections
-      imported = await importGeneric(data, req.db);
+      imported = await importGeneric(data, db);
     }
     
     res.json({
@@ -128,14 +136,22 @@ router.post('/server', async (req, res) => {
     
     console.log(`Read ${data.length} rows from ${workbook.SheetNames[0]}`);
     
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.status(500).json({ 
+        error: 'Database not available',
+        message: 'Database connection not configured' 
+      });
+    }
+    
     // Process import based on type
     let imported = 0;
     if (type === 'ortspris') {
-      imported = await importOrtsprisData(data, req.db);
+      imported = await importOrtsprisData(data, db);
     } else if (type === 'maklarpaket') {
-      imported = await importMaklarpaketData(data, req.db);
+      imported = await importMaklarpaketData(data, db);
     } else {
-      imported = await importDefaultData(data, req.db);
+      imported = await importDefaultData(data, db);
     }
     
     res.json({
@@ -173,7 +189,7 @@ async function importBrandsAndCompanies(data, db) {
     
     if (brand) {
       // Upsert brand
-      await db.collection('brands').updateOne(
+      await db.collection('brands_v2').updateOne(
         { name: brand },
         { $set: { name: brand, updatedAt: new Date() } },
         { upsert: true }
@@ -183,7 +199,7 @@ async function importBrandsAndCompanies(data, db) {
     
     if (company) {
       // Upsert company
-      await db.collection('companies').updateOne(
+      await db.collection('companies_v2').updateOne(
         { name: company },
         { 
           $set: { 
@@ -209,7 +225,7 @@ async function importAgents(data, db) {
     const name = row['Namn'] || row['Name'] || row['name'];
     
     if (email) {
-      await db.collection('agents').updateOne(
+      await db.collection('agents_v2').updateOne(
         { email },
         {
           $set: {
@@ -279,7 +295,7 @@ async function importOrtsprisData(data, db) {
     const product = row['Produkt'] || row['Product'];
     
     if (company) {
-      await db.collection('companies').updateOne(
+      await db.collection('companies_v2').updateOne(
         { name: company },
         {
           $set: {
@@ -308,7 +324,7 @@ async function importMaklarpaketData(data, db) {
     const product = row['Produkt'] || row['Product'];
     
     if (email) {
-      await db.collection('agents').updateOne(
+      await db.collection('agents_v2').updateOne(
         { email },
         {
           $set: {
