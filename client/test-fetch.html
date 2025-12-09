@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head><title>Test</title></head>
+<body>
+<div id="companyTable"></div>
+<script>
+const CONFIG = { apiBaseUrl: 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net/api' };
+
+async function testFetch() {
+  try {
+    const response = await fetch(`${CONFIG.apiBaseUrl}/companies`);
+    const data = await response.json();
+    console.log('Companies loaded:', data.length);
+    return data.length > 0 ? 'SUCCESS' : 'EMPTY';
+  } catch (error) {
+    console.error('Error:', error);
+    return 'FAILED';
+  }
+}
+testFetch().then(result => console.log('Result:', result));
+</script>
+</body>
+</html>

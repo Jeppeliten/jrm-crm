@@ -33,7 +33,12 @@
     textarea {
       cursor: text !important;
     }
-  </style>
+  
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(2); }
+    }
+    </style>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,6 +90,10 @@
             <div class="card-body">
               <div class="text-4xl mb-2">📊</div>
               <h3 class="card-title text-lg justify-center">Säljtavla & Kundvård</h3>
+              <div class="flex gap-2 mt-2">
+                <button onclick="showDealsSection()" class="btn btn-sm btn-primary">Säljtavla</button>
+                <button onclick="showCustomerCareSection()" class="btn btn-sm btn-secondary">Kundvård</button>
+              </div>
               <p class="text-sm text-base-content/70">Följ affärsprocessen från lead till kund med strukturerade uppgifter</p>
             </div>
           </div>
