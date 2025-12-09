@@ -760,6 +760,309 @@ window.closeModal = function() {
   }
 };
 
+// ===== EDIT AND DELETE FUNCTIONS =====
+
+async function editCompany(id) {
+  try {
+    const response = await fetchWithAuth(`/api/companies/${id}`);
+    const company = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
+          <h3 class="font-bold text-lg mb-4">Redigera f?retag</h3>
+          <form id="editCompanyForm" class="space-y-3">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">F?retagsnamn *</span></label>
+                <input type="text" name="name" value="${company.name || ''}" class="input input-bordered w-full" required />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Organisationsnummer</span></label>
+                <input type="text" name="orgNumber" value="${company.orgNumber || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Varum?rke</span></label>
+                <input type="text" name="brand" value="${company.brand || ''}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Kategori</span></label>
+                <input type="text" name="category" value="${company.category || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Status</span></label>
+                <select name="status" class="select select-bordered w-full">
+                  <option value="prospekt" ${company.status === 'prospekt' ? 'selected' : ''}>Prospekt</option>
+                  <option value="kund" ${company.status === 'kund' ? 'selected' : ''}>Kund</option>
+                  <option value="inaktiv" ${company.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
+                </select>
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Pipeline</span></label>
+                <select name="pipeline" class="select select-bordered w-full">
+                  <option value="prospect" ${company.pipeline === 'prospect' ? 'selected' : ''}>Prospekt</option>
+                  <option value="active_customer" ${company.pipeline === 'active_customer' ? 'selected' : ''}>Aktiv kund</option>
+                  <option value="churned" ${company.pipeline === 'churned' ? 'selected' : ''}>Avslutad</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">E-post</span></label>
+                <input type="email" name="email" value="${company.email || ''}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Telefon</span></label>
+                <input type="tel" name="phone" value="${company.phone || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Ort</span></label>
+                <input type="text" name="city" value="${company.city || ''}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">L?n</span></label>
+                <input type="text" name="county" value="${company.county || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Antal licenser</span></label>
+                <input type="number" name="licenseCount" value="${company.licenseCount || 0}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Produkt</span></label>
+                <input type="text" name="product" value="${company.product || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Betalningsinformation</span></label>
+              <input type="text" name="paymentInfo" value="${company.paymentInfo || ''}" class="input input-bordered w-full" />
+            </div>
+            
+            <div class="modal-action">
+              <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+              <button type="submit" class="btn btn-primary">Spara ?ndringar</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
+      </div>
+    `;
+    
+    showModal(html, async (formData) => {
+      await updateEntity('companies', id, formData);
+      loadCompanies();
+    });
+  } catch (error) {
+    console.error('Error loading company for edit:', error);
+    alert('Kunde inte ladda f?retag f?r redigering');
+  }
+}
+
+async function editBrand(id) {
+  try {
+    const response = await fetchWithAuth(`/api/brands/${id}`);
+    const brand = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-2xl">
+          <h3 class="font-bold text-lg mb-4">Redigera varum?rke</h3>
+          <form id="editBrandForm" class="space-y-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Varum?rkesnamn *</span></label>
+              <input type="text" name="name" value="${brand.name || ''}" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Kategori</span></label>
+              <input type="text" name="category" value="${brand.category || ''}" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Status</span></label>
+              <select name="status" class="select select-bordered w-full">
+                <option value="aktiv" ${brand.status === 'aktiv' ? 'selected' : ''}>Aktiv</option>
+                <option value="inaktiv" ${brand.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
+              </select>
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Webbplats</span></label>
+              <input type="url" name="website" value="${brand.website || ''}" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Beskrivning</span></label>
+              <textarea name="description" class="textarea textarea-bordered w-full" rows="4">${brand.description || ''}</textarea>
+            </div>
+            
+            <div class="modal-action">
+              <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+              <button type="submit" class="btn btn-primary">Spara ?ndringar</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
+      </div>
+    `;
+    
+    showModal(html, async (formData) => {
+      await updateEntity('brands', id, formData);
+      loadBrands();
+    });
+  } catch (error) {
+    console.error('Error loading brand for edit:', error);
+    alert('Kunde inte ladda varum?rke f?r redigering');
+  }
+}
+
+async function editAgent(id) {
+  try {
+    const response = await fetchWithAuth(`/api/agents/${id}`);
+    const agent = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-2xl">
+          <h3 class="font-bold text-lg mb-4">Redigera m?klare</h3>
+          <form id="editAgentForm" class="space-y-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Namn *</span></label>
+              <input type="text" name="name" value="${agent.name || ''}" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">F?retag</span></label>
+              <input type="text" name="company" value="${agent.company || ''}" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Roll</span></label>
+              <input type="text" name="role" value="${agent.role || ''}" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Status</span></label>
+              <select name="status" class="select select-bordered w-full">
+                <option value="aktiv" ${agent.status === 'aktiv' ? 'selected' : ''}>Aktiv</option>
+                <option value="inaktiv" ${agent.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
+              </select>
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">E-post *</span></label>
+              <input type="email" name="email" value="${agent.email || ''}" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Telefon</span></label>
+              <input type="tel" name="phone" value="${agent.phone || ''}" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Licenstyp</span></label>
+              <input type="text" name="licenseType" value="${agent.licenseType || ''}" class="input input-bordered w-full" />
+            </div>
+            
+            <div class="modal-action">
+              <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+              <button type="submit" class="btn btn-primary">Spara ?ndringar</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-backdrop bg-black bg-opacity-50" onclick="closeModal()"></div>
+      </div>
+    `;
+    
+    showModal(html, async (formData) => {
+      await updateEntity('agents', id, formData);
+      loadAgents();
+    });
+  } catch (error) {
+    console.error('Error loading agent for edit:', error);
+    alert('Kunde inte ladda m?klare f?r redigering');
+  }
+}
+
+async function updateEntity(entityType, id, data) {
+  try {
+    const response = await fetchWithAuth(`/api/${entityType}/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) throw new Error('Update failed');
+    alert('Uppdaterat!');
+    closeModal();
+  } catch (error) {
+    console.error(`Error updating ${entityType}:`, error);
+    alert(`Kunde inte uppdatera ${entityType}`);
+  }
+}
+
+async function deleteCompany(id) {
+  if (!confirm('?r du s?ker p? att du vill ta bort detta f?retag?')) return;
+  
+  try {
+    const response = await fetchWithAuth(`/api/companies/${id}`, {
+      method: 'DELETE'
+    });
+    
+    if (!response.ok) throw new Error('Delete failed');
+    alert('F?retaget har tagits bort');
+    loadCompanies();
+  } catch (error) {
+    console.error('Error deleting company:', error);
+    alert('Kunde inte ta bort f?retaget');
+  }
+}
+
+async function deleteBrand(id) {
+  if (!confirm('?r du s?ker p? att du vill ta bort detta varum?rke?')) return;
+  
+  try {
+    const response = await fetchWithAuth(`/api/brands/${id}`, {
+      method: 'DELETE'
+    });
+    
+    if (!response.ok) throw new Error('Delete failed');
+    alert('Varum?rket har tagits bort');
+    loadBrands();
+  } catch (error) {
+    console.error('Error deleting brand:', error);
+    alert('Kunde inte ta bort varum?rket');
+  }
+}
+
+async function deleteAgent(id) {
+  if (!confirm('?r du s?ker p? att du vill ta bort denna m?klare?')) return;
+  
+  try {
+    const response = await fetchWithAuth(`/api/agents/${id}`, {
+      method: 'DELETE'
+    });
+    
+    if (!response.ok) throw new Error('Delete failed');
+    alert('M?klaren har tagits bort');
+    loadAgents();
+  } catch (error) {
+    console.error('Error deleting agent:', error);
+    alert('Kunde inte ta bort m?klaren');
+  }
+}
+
+// Make edit/delete functions globally available for onclick handlers
+window.editCompany = editCompany;
+window.editBrand = editBrand;
+window.editAgent = editAgent;
+window.deleteCompany = deleteCompany;
+window.deleteBrand = deleteBrand;
+window.deleteAgent = deleteAgent;
+
+
 function getStatusBadgeClass(status) {
   const statusLower = (status || '').toLowerCase();
   if (statusLower === 'aktiv' || statusLower === 'kund') return 'bg-green-100 text-green-800';
