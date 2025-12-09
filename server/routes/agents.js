@@ -27,6 +27,42 @@ router.get('/', async (req, res) => {
 });
 
 /**
+ * GET /api/agents/:id - Get agent by ID
+ */
+router.get('/:id', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { ObjectId } = require('mongodb');
+    
+    if (!db) {
+      const agent = mockAgents.find(a => a._id === req.params.id);
+      if (!agent) {
+        return res.status(404).json({ error: 'Agent not found' });
+      }
+      return res.json(agent);
+    }
+    
+    let query;
+    try {
+      query = { _id: new ObjectId(req.params.id) };
+    } catch (e) {
+      query = { _id: req.params.id };
+    }
+    
+    const agent = await db.collection('agents_v2').findOne(query);
+    
+    if (!agent) {
+      return res.status(404).json({ error: 'Agent not found' });
+    }
+    
+    res.json(agent);
+  } catch (error) {
+    console.error('Error fetching agent:', error);
+    res.status(500).json({ error: 'Failed to fetch agent' });
+  }
+});
+
+/**
  * POST /api/agents - Create new agent
  */
 router.post('/', async (req, res) => {

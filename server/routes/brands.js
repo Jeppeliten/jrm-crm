@@ -27,6 +27,42 @@ router.get('/', async (req, res) => {
 });
 
 /**
+ * GET /api/brands/:id - Get brand by ID
+ */
+router.get('/:id', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { ObjectId } = require('mongodb');
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === req.params.id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      return res.json(brand);
+    }
+    
+    let query;
+    try {
+      query = { _id: new ObjectId(req.params.id) };
+    } catch (e) {
+      query = { _id: req.params.id };
+    }
+    
+    const brand = await db.collection('brands_v2').findOne(query);
+    
+    if (!brand) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.json(brand);
+  } catch (error) {
+    console.error('Error fetching brand:', error);
+    res.status(500).json({ error: 'Failed to fetch brand' });
+  }
+});
+
+/**
  * POST /api/brands - Create new brand
  */
 router.post('/', async (req, res) => {
