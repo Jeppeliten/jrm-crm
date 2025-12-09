@@ -33,11 +33,13 @@ router.post('/', async (req, res) => {
   try {
     console.log('🟣 POST /api/brands called');
     console.log('🟣 Request body:', req.body);
+    console.log('🟣 DB available:', !!req.app.locals.db);
     
     const db = req.app.locals.db;
     const { name, description } = req.body;
     
     if (!name) {
+      console.log('❌ Name is missing');
       return res.status(400).json({ error: 'Name is required' });
     }
     
@@ -52,15 +54,22 @@ router.post('/', async (req, res) => {
       console.log('📦 Saving to mock brands storage');
       const mockBrand = { ...brand, _id: Date.now().toString() };
       mockBrands.push(mockBrand);
+      console.log('✅ Mock brand created:', mockBrand);
       return res.status(201).json(mockBrand);
     }
     
+    console.log('📦 Saving to database...');
     const result = await db.collection('brands_v2').insertOne(brand);
     console.log('✅ Brand saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...brand, _id: result.insertedId });
   } catch (error) {
-    console.error('Error creating brand:', error);
-    res.status(500).json({ error: 'Failed to create brand' });
+    console.error('❌ Error creating brand:', error);
+    console.error('❌ Error stack:', error.stack);
+    res.status(500).json({ 
+      error: 'Failed to create brand',
+      message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 

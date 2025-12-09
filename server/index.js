@@ -263,9 +263,21 @@ app.use('/api/tasks', dbMiddleware, tasksRouter);
 
 app.use((err, req, res, next) => {
   console.error('❌ Error caught by error handler:', err);
+  console.error('❌ Error code:', err.code);
+  console.error('❌ Error stack:', err.stack);
+  
+  // Handle MongoDB duplicate key error
+  if (err.code === 11000) {
+    return res.status(409).json({
+      error: 'E11000 duplicate key error collection: jrm-crm-db.companies. Failed _id or unique index constraint.',
+      message: 'A record with this information already exists. Please use different values.'
+    });
+  }
+  
   res.status(err.status || 500).json({
     error: err.message || 'Internal server error',
-    message: 'Something went wrong'
+    message: 'Something went wrong',
+    details: process.env.NODE_ENV === 'development' ? err.stack : undefined
   });
 });
 

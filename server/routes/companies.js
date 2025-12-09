@@ -52,32 +52,68 @@ router.post('/', async (req, res, next) => {
       return res.status(400).json({ error: 'Name is required' });
     }
     
-    const company = {
-      name,
-      orgNumber,
-      email,
-      phone,
-      address,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    
     // Use mock storage if no database
     if (!db) {
       console.log('📦 Saving to mock companies storage');
+      const company = {
+        name: name.trim(),
+        orgNumber: orgNumber?.trim() || '',
+        email: email?.trim() || '',
+        phone: phone?.trim() || '',
+        address: address?.trim() || '',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
       const mockCompany = { ...company, _id: Date.now().toString() };
       mockCompanies.push(mockCompany);
       console.log('✅ Company saved to mock storage, total companies:', mockCompanies.length);
       return res.status(201).json(mockCompany);
     }
     
+    // Check for existing company with same name (case-insensitive)
+    const existingCompany = await db.collection('companies_v2').findOne({
+      name: { $regex: new RegExp(`^${name.trim()}$`, 'i') }
+    });
+    
+    if (existingCompany) {
+      console.log('⚠️  Company with this name already exists:', existingCompany.name);
+      return res.status(409).json({ 
+        error: 'A company with this name already exists',
+        message: 'Please use a different company name',
+        existingCompany: { name: existingCompany.name, _id: existingCompany._id }
+      });
+    }
+    
+    // Clean the incoming data - remove _id if present
+    const company = {
+      name: name.trim(),
+      orgNumber: orgNumber?.trim() || '',
+      email: email?.trim() || '',
+      phone: phone?.trim() || '',
+      address: address?.trim() || '',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    
     console.log('💾 Saving to Cosmos DB...');
+    console.log('💾 Document to insert:', company);
     const result = await db.collection('companies_v2').insertOne(company);
     console.log('✅ Company saved to DB with ID:', result.insertedId);
     res.status(201).json({ ...company, _id: result.insertedId });
   } catch (error) {
     console.error('❌ Error creating company:', error);
-    next(error); // Pass to error handler
+    console.error('❌ Error code:', error.code);
+    console.error('❌ Error message:', error.message);
+    
+    // Handle duplicate key error specifically
+    if (error.code === 11000) {
+      return res.status(409).json({ 
+        error: 'Database constraint violation',
+        message: 'This entry conflicts with existing data. Please try different values.'
+      });
+    }
+    
+    next(error); // Pass other errors to error handler
   }
 });
 
