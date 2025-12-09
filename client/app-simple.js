@@ -381,7 +381,7 @@ function renderCompaniesTable(companies) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${companies.map(company => `
-          <tr>
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('' + company._id + '')">
             <td class="px-6 py-4 whitespace-nowrap">${company.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${company.brand || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -393,7 +393,7 @@ function renderCompaniesTable(companies) {
             <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
               <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
               <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
             </td>
@@ -420,7 +420,7 @@ function renderBrandsTable(brands) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${brands.map(brand => `
-          <tr>
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('' + company._id + '')">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -432,7 +432,7 @@ function renderBrandsTable(brands) {
               ${brand.website ? `<a href="${brand.website}" target="_blank" class="text-indigo-600 hover:text-indigo-900">${brand.website}</a>` : ''}
             </td>
             <td class="px-6 py-4">${brand.description || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
               <button onclick="editBrand('${brand._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
               <button onclick="deleteBrand('${brand._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
             </td>
@@ -461,7 +461,7 @@ function renderAgentsTable(agents) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${agents.map(agent => `
-          <tr>
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('' + company._id + '')">
             <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.role || ''}</td>
@@ -473,7 +473,7 @@ function renderAgentsTable(agents) {
             <td class="px-6 py-4 whitespace-nowrap">${agent.licenseType || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.email || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${agent.phone || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
               <button onclick="editAgent('${agent._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
               <button onclick="deleteAgent('${agent._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
             </td>
@@ -484,6 +484,169 @@ function renderAgentsTable(agents) {
   `;
   document.getElementById('agentTable').innerHTML = tableHtml;
 }
+
+
+// ===== DETAIL CARD FUNCTIONS =====
+
+async function showCompanyDetails(id) {
+  try {
+    const response = await fetchWithAuth(`/api/companies/${id}`);
+    const company = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-bold text-2xl">${company.name}</h3>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Organisationsnummer</label>
+                <p class="text-base">${company.orgNumber || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Varum?rke</label>
+                <p class="text-base">${company.brand || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Status</label>
+                <p><span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">${company.status || 'prospekt'}</span></p>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-gray-500">E-post</label>
+                <p class="text-base">${company.email || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Telefon</label>
+                <p class="text-base">${company.phone || '-'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-action">
+            <button onclick="closeModal()" class="btn btn-ghost">St?ng</button>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button onclick="closeModal()">close</button>
+        </form>
+      </div>
+    `;
+    
+    showModal(html);
+  } catch (error) {
+    console.error('Error loading company details:', error);
+    alert('Kunde inte ladda f?retagsdetaljer');
+  }
+}
+
+async function showBrandDetails(id) {
+  try {
+    const response = await fetchWithAuth(`/api/brands/${id}`);
+    const brand = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-4xl">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-bold text-2xl">${brand.name}</h3>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+          </div>
+          
+          <div class="space-y-3">
+            <div>
+              <label class="text-sm font-semibold text-gray-500">Beskrivning</label>
+              <p class="text-base">${brand.description || '-'}</p>
+            </div>
+            <div>
+              <label class="text-sm font-semibold text-gray-500">Webbplats</label>
+              <p class="text-base">${brand.website ? `<a href="${brand.website}" target="_blank" class="text-indigo-600">${brand.website}</a>` : '-'}</p>
+            </div>
+          </div>
+          
+          <div class="modal-action">
+            <button onclick="closeModal()" class="btn btn-ghost">St?ng</button>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button onclick="closeModal()">close</button>
+        </form>
+      </div>
+    `;
+    
+    showModal(html);
+  } catch (error) {
+    console.error('Error loading brand details:', error);
+    alert('Kunde inte ladda varum?rkesdetaljer');
+  }
+}
+
+async function showAgentDetails(id) {
+  try {
+    const response = await fetchWithAuth(`/api/agents/${id}`);
+    const agent = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-4xl">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-bold text-2xl">${agent.name}</h3>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-gray-500">F?retag</label>
+                <p class="text-base">${agent.company || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Roll</label>
+                <p class="text-base">${agent.role || '-'}</p>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-gray-500">E-post</label>
+                <p class="text-base">${agent.email || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Telefon</label>
+                <p class="text-base">${agent.phone || '-'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="modal-action">
+            <button onclick="closeModal()" class="btn btn-ghost">St?ng</button>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button onclick="closeModal()">close</button>
+        </form>
+      </div>
+    `;
+    
+    showModal(html);
+  } catch (error) {
+    console.error('Error loading agent details:', error);
+    alert('Kunde inte ladda m?klardetaljer');
+  }
+}
+
+window.closeModal = function() {
+  const modal = document.querySelector('.modal-open');
+  if (modal) {
+    modal.remove();
+  }
+};
 
 function getStatusBadgeClass(status) {
   const statusLower = (status || '').toLowerCase();
