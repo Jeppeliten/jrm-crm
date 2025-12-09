@@ -364,7 +364,7 @@ async function fetchWithAuth(endpoint, options = {}) {
 
 // ===== TABLE RENDERING FUNCTIONS =====
 
-function renderCompaniesTable(companies) {
+﻿function renderCompaniesTable(companies) {
   const tableHtml = `
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
@@ -381,9 +381,29 @@ function renderCompaniesTable(companies) {
       </thead>
       <tbody class="bg-white divide-y divide-gray-200">
         ${companies.map(company => `
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap">${company.name || ''}</td>
+          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
+            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${company.name || ''}</td>
             <td class="px-6 py-4 whitespace-nowrap">${company.brand || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
+                ${company.status || 'prospekt'}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.pipeline || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
+              <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
+              <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  document.getElementById('companyTable').innerHTML = tableHtml;
+}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
                 ${company.status || 'prospekt'}
@@ -966,6 +986,232 @@ function handleDropdownChange(dropdown, value, viewName) {
 }
 
 // Show forms for creating new entities
+﻿// ===== DETAIL CARD FUNCTIONS =====
+
+async function showCompanyDetails(id) {
+  try {
+    const response = await fetchWithAuth(`/api/companies/${id}`);
+    const company = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-bold text-2xl">${company.name}</h3>
+            <button onclick="closeModal()" class="btn btn-sm btn-circle btn-ghost"></button>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Organisationsnummer</label>
+                <p class="text-base">${company.orgNumber || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Varumärke</label>
+                <p class="text-base">${company.brand || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Kategori</label>
+                <p class="text-base">${company.category || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Status</label>
+                <p><span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">${company.status || 'prospekt'}</span></p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Pipeline</label>
+                <p class="text-base">${company.pipeline || '-'}</p>
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <div>
+                <label class="text-sm font-semibold text-gray-500">E-post</label>
+                <p class="text-base">${company.email || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Telefon</label>
+                <p class="text-base">${company.phone || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Ort</label>
+                <p class="text-base">${company.city || '-'}</p>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-gray-500">Län</label>
+                <p class="text-base">${company.county || '-'}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="divider"></div>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <label class="text-sm font-semibold text-gray-500">Antal licenser</label>
+              <p class="text-base">${company.licenseCount || '0'}</p>
+            </div>
+            <div>
+              <label class="text-sm font-semibold text-gray-500">Produkt</label>
+              <p class="text-base">${company.product || '-'}</p>
+            </div>
+          </div>
+          
+          <div class="mt-3">
+            <label class="text-sm font-semibold text-gray-500">Betalningsinformation</label>
+            <p class="text-base">${company.paymentInfo || '-'}</p>
+          </div>
+          
+          <div class="modal-action">
+            <button onclick="editCompany('${company._id}')" class="btn btn-primary">Redigera</button>
+            <button onclick="deleteCompany('${company._id}')" class="btn btn-error">Ta bort</button>
+            <button onclick="closeModal()" class="btn btn-ghost">Stäng</button>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button onclick="closeModal()">close</button>
+        </form>
+      </div>
+    `;
+    
+    showModal(html);
+  } catch (error) {
+    console.error('Error loading company details:', error);
+    alert('Kunde inte ladda företagsdetaljer');
+  }
+}
+
+async function editCompany(id) {
+  try {
+    const response = await fetchWithAuth(`/api/companies/${id}`);
+    const company = await response.json();
+    
+    const html = `
+      <div class="modal modal-open">
+        <div class="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
+          <h3 class="font-bold text-lg mb-4">Redigera företag</h3>
+          <form id="editCompanyForm" class="space-y-3">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Företagsnamn *</span></label>
+                <input type="text" name="name" value="${company.name || ''}" class="input input-bordered w-full" required />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Organisationsnummer</span></label>
+                <input type="text" name="orgNumber" value="${company.orgNumber || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Varumärke</span></label>
+                <input type="text" name="brand" value="${company.brand || ''}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Kategori</span></label>
+                <input type="text" name="category" value="${company.category || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Status</span></label>
+                <select name="status" class="select select-bordered w-full">
+                  <option value="prospekt" ${company.status === 'prospekt' ? 'selected' : ''}>Prospekt</option>
+                  <option value="kund" ${company.status === 'kund' ? 'selected' : ''}>Kund</option>
+                  <option value="inaktiv" ${company.status === 'inaktiv' ? 'selected' : ''}>Inaktiv</option>
+                </select>
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Pipeline</span></label>
+                <select name="pipeline" class="select select-bordered w-full">
+                  <option value="prospect" ${company.pipeline === 'prospect' ? 'selected' : ''}>Prospekt</option>
+                  <option value="active_customer" ${company.pipeline === 'active_customer' ? 'selected' : ''}>Aktiv kund</option>
+                  <option value="churned" ${company.pipeline === 'churned' ? 'selected' : ''}>Avslutad</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Ort</span></label>
+                <input type="text" name="city" value="${company.city || ''}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Län</span></label>
+                <input type="text" name="county" value="${company.county || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">E-post</span></label>
+                <input type="email" name="email" value="${company.email || ''}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Telefon</span></label>
+                <input type="tel" name="phone" value="${company.phone || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Antal licenser</span></label>
+                <input type="number" name="licenseCount" value="${company.licenseCount || 0}" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control w-full">
+                <label class="label"><span class="label-text">Produkt</span></label>
+                <input type="text" name="product" value="${company.product || ''}" class="input input-bordered w-full" />
+              </div>
+            </div>
+            
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Betalningsinformation</span></label>
+              <input type="text" name="paymentInfo" value="${company.paymentInfo || ''}" class="input input-bordered w-full" />
+            </div>
+            
+            <div class="modal-action">
+              <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+              <button type="submit" class="btn btn-primary">Spara ändringar</button>
+            </div>
+          </form>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button onclick="closeModal()">close</button>
+        </form>
+      </div>
+    `;
+    
+    showModal(html, async (formData) => {
+      await updateEntity('companies', id, formData);
+      loadCompanies();
+    });
+  } catch (error) {
+    console.error('Error loading company for edit:', error);
+    alert('Kunde inte ladda företag för redigering');
+  }
+}
+
+async function updateEntity(entityType, id, data) {
+  try {
+    const response = await fetchWithAuth(`/api/${entityType}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) throw new Error('Update failed');
+    alert('Uppdaterat!');
+    closeModal();
+  } catch (error) {
+    console.error(`Error updating ${entityType}:`, error);
+    alert(`Kunde inte uppdatera ${entityType}`);
+  }
+}
+
+
+
 function showAddBrandForm() {
   console.log('ðŸŽ¯ showAddBrandForm called!');
   const html = `
@@ -1003,40 +1249,88 @@ function showAddBrandForm() {
   });
 }
 
-function showAddCompanyForm() {
-  console.log('ðŸŽ¯ showAddCompanyForm called!');
+﻿function showAddCompanyForm() {
+  console.log(' showAddCompanyForm called!');
   const html = `
     <div class="modal modal-open">
-      <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt fÃ¶retag</h3>
-        <form id="addCompanyForm" class="space-y-4">
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">FÃ¶retagsnamn *</span>
-            </label>
-            <input type="text" name="name" placeholder="Ange fÃ¶retagsnamn" class="input input-bordered w-full" required />
+      <div class="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
+        <h3 class="font-bold text-lg mb-4">Lägg till nytt företag</h3>
+        <form id="addCompanyForm" class="space-y-3">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Företagsnamn *</span></label>
+              <input type="text" name="name" placeholder="Ange företagsnamn" class="input input-bordered w-full" required />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Organisationsnummer</span></label>
+              <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Varumärke</span></label>
+              <input type="text" name="brand" placeholder="T.ex. Mäklarhuset" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Kategori</span></label>
+              <input type="text" name="category" placeholder="T.ex. Nyckelkund" class="input input-bordered w-full" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Status</span></label>
+              <select name="status" class="select select-bordered w-full">
+                <option value="prospekt">Prospekt</option>
+                <option value="kund" selected>Kund</option>
+                <option value="inaktiv">Inaktiv</option>
+              </select>
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Pipeline</span></label>
+              <select name="pipeline" class="select select-bordered w-full">
+                <option value="prospect">Prospekt</option>
+                <option value="active_customer" selected>Aktiv kund</option>
+                <option value="churned">Avslutad</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Ort</span></label>
+              <input type="text" name="city" placeholder="Stockholm" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Län</span></label>
+              <input type="text" name="county" placeholder="Stockholms län" class="input input-bordered w-full" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">E-post</span></label>
+              <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Telefon</span></label>
+              <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Antal licenser</span></label>
+              <input type="number" name="licenseCount" placeholder="0" class="input input-bordered w-full" />
+            </div>
+            <div class="form-control w-full">
+              <label class="label"><span class="label-text">Produkt</span></label>
+              <input type="text" name="product" placeholder="T.ex. Booli Pro" class="input input-bordered w-full" />
+            </div>
           </div>
           <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">Organisationsnummer</span>
-            </label>
-            <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
-          </div>
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">E-post</span>
-            </label>
-            <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
-          </div>
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">Telefon</span>
-            </label>
-            <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
+            <label class="label"><span class="label-text">Betalningsinformation</span></label>
+            <input type="text" name="paymentInfo" placeholder="Fakturaadress, avtalsnummer etc." class="input input-bordered w-full" />
           </div>
           <div class="modal-action">
             <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara fÃ¶retag</button>
+            <button type="submit" class="btn btn-primary">Spara företag</button>
           </div>
         </form>
       </div>
@@ -1045,7 +1339,6 @@ function showAddCompanyForm() {
       </form>
     </div>
   `;
-  
   showModal(html, async (formData) => {
     await createEntity('companies', formData);
     loadCompanies();
