@@ -1,12 +1,32 @@
 const express = require('express');
 const router = express.Router();
 
+// 🧪 TEMPORARY: In-memory storage for testing
+let mockDeals = [
+  { 
+    _id: '1', 
+    title: 'Test Affär', 
+    customer: 'Test Kund AB', 
+    value: 100000, 
+    stage: 'Prospecting',
+    expectedCloseDate: new Date('2025-12-31'),
+    createdAt: new Date(), 
+    updatedAt: new Date() 
+  }
+];
+
 /**
  * GET /api/deals - Get all deals
  */
 router.get('/', async (req, res) => {
   try {
     const db = req.app.locals.db;
+    
+    if (!db) {
+      console.log('📦 Using mock deals data');
+      return res.json(mockDeals);
+    }
+    
     const deals = await db.collection('deals').find({}).toArray();
     res.json(deals);
   } catch (error) {
@@ -23,19 +43,26 @@ router.post('/', async (req, res) => {
     const db = req.app.locals.db;
     const { title, customer, value, stage, expectedCloseDate } = req.body;
     
-    if (!title) {
+    if (!title || !title.trim()) {
       return res.status(400).json({ error: 'Title is required' });
     }
     
     const deal = {
-      title,
-      customer,
+      title: title.trim(),
+      customer: customer?.trim() || '',
       value: value || 0,
       stage: stage || 'Prospecting',
       expectedCloseDate,
       createdAt: new Date(),
       updatedAt: new Date()
     };
+    
+    if (!db) {
+      console.log('📦 Saving to mock deals storage');
+      const mockDeal = { ...deal, _id: Date.now().toString() };
+      mockDeals.push(mockDeal);
+      return res.status(201).json(mockDeal);
+    }
     
     const result = await db.collection('deals').insertOne(deal);
     res.status(201).json({ ...deal, _id: result.insertedId });
