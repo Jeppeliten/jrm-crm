@@ -1,0 +1,33 @@
+﻿// Replace loadCompanies() in app-simple.js with:
+async function loadCompanies() {
+  console.log('Loading companies...');
+  try {
+    const response = await fetchWithAuth('/api/companies');
+    if (!response.ok) throw new Error('Failed to load companies');
+    const companies = await response.json();
+    renderCompaniesTable(companies);
+  } catch (error) {
+    console.error('Error loading companies:', error);
+  }
+}
+
+function renderCompaniesTable(companies) {
+  const tbody = document.querySelector('#view-companies tbody');
+  if (!tbody) {
+    console.error('Companies table not found');
+    return;
+  }
+  
+  tbody.innerHTML = companies.map(company => `
+    <tr>
+      <td>${company.name || ''}</td>
+      <td>${company.orgNumber || ''}</td>
+      <td>${company.email || ''}</td>
+      <td>${company.phone || ''}</td>
+      <td>
+        <button class="btn btn-sm btn-ghost" onclick="editCompany('${company._id}')">Redigera</button>
+        <button class="btn btn-sm btn-error" onclick="deleteCompany('${company._id}')">Ta bort</button>
+      </td>
+    </tr>
+  `).join('');
+}

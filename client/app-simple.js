@@ -1,960 +1,1296 @@
-⿾⨀⨀ഀ਀ ⨀ 匀椀洀瀀氀攀 䌀刀䴀 䄀瀀瀀氀椀挀愀琀椀漀渀 ⴀ 一愀瘀椀最愀琀椀漀渀 愀渀搀 䈀愀猀椀挀 䘀甀渀挀琀椀漀渀愀氀椀琀礀ഀ਀ ⨀ 匀椀洀瀀氀椀昀椀攀搀 瘀攀爀猀椀漀渀 眀椀琀栀漀甀琀 䔀匀㘀 洀漀搀甀氀攀猀ഀ਀ ⨀⼀ഀ਀ഀ਀⼀⼀ 䜀氀漀戀愀氀 猀琀愀琀攀ഀ਀挀漀渀猀琀 愀瀀瀀匀琀愀琀攀 㴀 笀ഀ਀  挀甀爀爀攀渀琀嘀椀攀眀㨀 ✀搀愀猀栀戀漀愀爀搀✀Ⰰഀ਀  挀甀猀琀漀洀攀爀猀㨀 嬀崀Ⰰഀ਀  搀攀愀氀猀㨀 嬀崀Ⰰഀ਀  愀挀琀椀瘀椀琀椀攀猀㨀 嬀崀Ⰰഀ਀  甀猀攀爀㨀 渀甀氀氀ഀ਀紀㬀ഀ਀ഀ਀⼀⼀ 䜀氀漀戀愀氀 昀氀愀最 琀漀 瀀爀攀瘀攀渀琀 搀漀甀戀氀攀 椀渀椀琀椀愀氀椀稀愀琀椀漀渀ഀ਀氀攀琀 愀瀀瀀䤀渀椀琀椀愀氀椀稀攀搀 㴀 昀愀氀猀攀㬀ഀ਀ഀ਀⼀⼀ 䰀椀猀琀攀渀 琀漀 琀栀攀 愀甀琀栀攀渀琀椀挀愀琀椀漀渀 攀瘀攀渀琀 ⴀ 琀栀椀猀 椀猀 琀栀攀 瀀爀椀洀愀爀礀 琀爀椀最最攀爀ഀ਀眀椀渀搀漀眀⸀愀搀搀䔀瘀攀渀琀䰀椀猀琀攀渀攀爀⠀✀攀渀琀爀愀ⴀ氀漀最椀渀ⴀ猀甀挀挀攀猀猀✀Ⰰ ⠀攀瘀攀渀琀⤀ 㴀㸀 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀砀ᴁᴠ†攀渀琀爀愀ⴀ氀漀最椀渀ⴀ猀甀挀挀攀猀猀 攀瘀攀渀琀 爀攀挀攀椀瘀攀搀 椀渀 愀瀀瀀ⴀ猀椀洀瀀氀攀⸀樀猀✀Ⰰ 攀瘀攀渀琀⸀搀攀琀愀椀氀⤀㬀ഀ਀  ഀ਀  椀昀 ⠀愀瀀瀀䤀渀椀琀椀愀氀椀稀攀搀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀✀輀관렀輀  䄀瀀瀀 愀氀爀攀愀搀礀 椀渀椀琀椀愀氀椀稀攀搀Ⰰ 猀欀椀瀀瀀椀渀最⸀⸀⸀✀⤀㬀ഀ਀    爀攀琀甀爀渀㬀ഀ਀  紀ഀ਀  ഀ਀  ⼀⼀ 圀愀椀琀 昀漀爀 愀瀀瀀ⴀ椀渀椀琀⸀樀猀 琀漀 猀栀漀眀 洀愀椀渀 挀漀渀琀攀渀琀Ⰰ 琀栀攀渀 椀渀椀琀椀愀氀椀稀攀 䌀刀䴀ഀ਀  猀攀琀吀椀洀攀漀甀琀⠀⠀⤀ 㴀㸀 笀ഀ਀    挀漀渀猀琀 洀愀椀渀䄀瀀瀀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀愀瀀瀀✀⤀㬀ഀ਀    挀漀渀猀琀 椀猀嘀椀猀椀戀氀攀 㴀 洀愀椀渀䄀瀀瀀 ☀☀ 眀椀渀搀漀眀⸀最攀琀䌀漀洀瀀甀琀攀搀匀琀礀氀攀⠀洀愀椀渀䄀瀀瀀⤀⸀瘀椀猀椀戀椀氀椀琀礀 㴀㴀㴀 ✀瘀椀猀椀戀氀攀✀㬀ഀ਀    ഀ਀    椀昀 ⠀椀猀嘀椀猀椀戀氀攀⤀ 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀砀愁각†匀琀愀爀琀椀渀最 䌀刀䴀 椀渀椀琀椀愀氀椀稀愀琀椀漀渀 愀昀琀攀爀 氀漀最椀渀⸀⸀⸀✀⤀㬀ഀ਀      椀渀椀琀椀愀氀椀稀攀匀椀洀瀀氀攀䄀瀀瀀⠀⤀㬀ഀ਀      愀瀀瀀䤀渀椀琀椀愀氀椀稀攀搀 㴀 琀爀甀攀㬀ഀ਀    紀 攀氀猀攀 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀輀렀렀輀  䴀愀椀渀 愀瀀瀀 渀漀琀 礀攀琀 瘀椀猀椀戀氀攀Ⰰ 眀愀椀琀椀渀最⸀⸀⸀✀⤀㬀ഀ਀      ⼀⼀ 䤀昀 渀漀琀 瘀椀猀椀戀氀攀 礀攀琀Ⰰ 眀愀椀琀 愀 戀椀琀 洀漀爀攀ഀ਀      猀攀琀吀椀洀攀漀甀琀⠀⠀⤀ 㴀㸀 笀ഀ਀        挀漀渀猀漀氀攀⸀氀漀最⠀✀砀愁각†匀琀愀爀琀椀渀最 䌀刀䴀 椀渀椀琀椀愀氀椀稀愀琀椀漀渀 ⠀搀攀氀愀礀攀搀⤀⸀⸀⸀✀⤀㬀ഀ਀        椀渀椀琀椀愀氀椀稀攀匀椀洀瀀氀攀䄀瀀瀀⠀⤀㬀ഀ਀        愀瀀瀀䤀渀椀琀椀愀氀椀稀攀搀 㴀 琀爀甀攀㬀ഀ਀      紀Ⰰ 㔀　　⤀㬀ഀ਀    紀ഀ਀  紀Ⰰ ㈀　　⤀㬀ഀ਀紀⤀㬀ഀ਀ഀ਀⼀⼀ 䘀愀氀氀戀愀挀欀㨀 䤀渀椀琀椀愀氀椀稀攀 眀栀攀渀 䐀伀䴀 椀猀 爀攀愀搀礀 䄀一䐀 甀猀攀爀 椀猀 愀氀爀攀愀搀礀 氀漀最最攀搀 椀渀ഀ਀搀漀挀甀洀攀渀琀⸀愀搀搀䔀瘀攀渀琀䰀椀猀琀攀渀攀爀⠀✀䐀伀䴀䌀漀渀琀攀渀琀䰀漀愀搀攀搀✀Ⰰ ⠀⤀ 㴀㸀 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀砀紁꼁 愀瀀瀀ⴀ猀椀洀瀀氀攀⸀樀猀 䐀伀䴀 爀攀愀搀礀✀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 䌀栀攀挀欀 椀昀 甀猀攀爀 椀猀 愀氀爀攀愀搀礀 愀甀琀栀攀渀琀椀挀愀琀攀搀 ⠀瀀愀最攀 爀攀昀爀攀猀栀 挀愀猀攀⤀ഀ਀  猀攀琀吀椀洀攀漀甀琀⠀⠀⤀ 㴀㸀 笀ഀ਀    挀漀渀猀琀 洀愀椀渀䄀瀀瀀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀愀瀀瀀✀⤀㬀ഀ਀    挀漀渀猀琀 椀猀嘀椀猀椀戀氀攀 㴀 洀愀椀渀䄀瀀瀀 ☀☀ 眀椀渀搀漀眀⸀最攀琀䌀漀洀瀀甀琀攀搀匀琀礀氀攀⠀洀愀椀渀䄀瀀瀀⤀⸀瘀椀猀椀戀椀氀椀琀礀 㴀㴀㴀 ✀瘀椀猀椀戀氀攀✀㬀ഀ਀    ഀ਀    椀昀 ⠀椀猀嘀椀猀椀戀氀攀 ☀☀ ℀愀瀀瀀䤀渀椀琀椀愀氀椀稀攀搀⤀ 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀匀☁†唀猀攀爀 愀氀爀攀愀搀礀 愀甀琀栀攀渀琀椀挀愀琀攀搀Ⰰ 椀渀椀琀椀愀氀椀稀椀渀最 䌀刀䴀⸀⸀⸀✀⤀㬀ഀ਀      椀渀椀琀椀愀氀椀稀攀匀椀洀瀀氀攀䄀瀀瀀⠀⤀㬀ഀ਀      愀瀀瀀䤀渀椀琀椀愀氀椀稀攀搀 㴀 琀爀甀攀㬀ഀ਀    紀ഀ਀  紀Ⰰ ㄀㔀　　⤀㬀 ⼀⼀ 圀愀椀琀 昀漀爀 愀瀀瀀ⴀ椀渀椀琀⸀樀猀 琀漀 昀椀渀椀猀栀ഀ਀紀⤀㬀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 椀渀椀琀椀愀氀椀稀攀匀椀洀瀀氀攀䄀瀀瀀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀㴀㴀㴀 匀椀洀瀀氀攀 愀瀀瀀 椀渀椀琀椀愀氀椀稀愀琀椀漀渀 猀琀愀爀琀攀搀 㴀㴀㴀✀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 䌀栀攀挀欀 椀昀 䐀伀䴀 椀猀 爀攀愀搀礀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䐀漀挀甀洀攀渀琀 爀攀愀搀礀 猀琀愀琀攀㨀✀Ⰰ 搀漀挀甀洀攀渀琀⸀爀攀愀搀礀匀琀愀琀攀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 匀攀琀 甀瀀 渀愀瘀椀最愀琀椀漀渀ഀ਀  猀攀琀甀瀀一愀瘀椀最愀琀椀漀渀⠀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 䰀漀愀搀 椀渀椀琀椀愀氀 瘀椀攀眀 ⠀搀愀猀栀戀漀愀爀搀 猀栀漀甀氀搀 愀氀爀攀愀搀礀 戀攀 瘀椀猀椀戀氀攀⤀ഀ਀  挀漀渀猀琀 搀愀猀栀戀漀愀爀搀嘀椀攀眀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀瘀椀攀眀ⴀ搀愀猀栀戀漀愀爀搀✀⤀㬀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䐀愀猀栀戀漀愀爀搀 瘀椀攀眀 昀漀甀渀搀㨀✀Ⰰ ℀℀搀愀猀栀戀漀愀爀搀嘀椀攀眀⤀㬀ഀ਀  ഀ਀  椀昀 ⠀搀愀猀栀戀漀愀爀搀嘀椀攀眀 ☀☀ 搀愀猀栀戀漀愀爀搀嘀椀攀眀⸀挀栀椀氀搀爀攀渀⸀氀攀渀最琀栀 㴀㴀㴀 　⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀✀䰀漀愀搀椀渀最 搀愀猀栀戀漀愀爀搀 琀攀洀瀀氀愀琀攀⸀⸀⸀✀⤀㬀ഀ਀    氀漀愀搀吀攀洀瀀氀愀琀攀⠀✀搀愀猀栀戀漀愀爀搀✀Ⰰ 搀愀猀栀戀漀愀爀搀嘀椀攀眀⤀㬀ഀ਀  紀ഀ਀  ഀ਀  猀栀漀眀嘀椀攀眀⠀✀搀愀猀栀戀漀愀爀搀✀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 匀攀琀 甀瀀 戀甀琀琀漀渀 栀愀渀搀氀攀爀猀ഀ਀  猀攀琀甀瀀䈀甀琀琀漀渀䠀愀渀搀氀攀爀猀⠀⤀㬀ഀ਀  ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀㴀㴀㴀 匀椀洀瀀氀攀 愀瀀瀀 爀攀愀搀礀 㴀㴀㴀✀⤀㬀ഀ਀紀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 猀攀琀甀瀀一愀瘀椀最愀琀椀漀渀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀匀攀琀琀椀渀最 甀瀀 渀愀瘀椀最愀琀椀漀渀⸀⸀⸀✀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 䘀椀渀搀 愀氀氀 渀愀瘀椀最愀琀椀漀渀 戀甀琀琀漀渀猀 ⴀ 琀爀礀 洀甀氀琀椀瀀氀攀 猀攀氀攀挀琀漀爀猀ഀ਀  氀攀琀 渀愀瘀䈀甀琀琀漀渀猀 㴀 搀漀挀甀洀攀渀琀⸀焀甀攀爀礀匀攀氀攀挀琀漀爀䄀氀氀⠀✀嬀搀愀琀愀ⴀ瘀椀攀眀崀✀⤀㬀ഀ਀  ഀ਀  椀昀 ⠀渀愀瘀䈀甀琀琀漀渀猀⸀氀攀渀最琀栀 㴀㴀㴀 　⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀眀愀爀渀⠀✀一漀 渀愀瘀椀最愀琀椀漀渀 戀甀琀琀漀渀猀 昀漀甀渀搀 眀椀琀栀 嬀搀愀琀愀ⴀ瘀椀攀眀崀Ⰰ 琀爀礀椀渀最 ⸀渀愀瘀ⴀ椀琀攀洀✀⤀㬀ഀ਀    渀愀瘀䈀甀琀琀漀渀猀 㴀 搀漀挀甀洀攀渀琀⸀焀甀攀爀礀匀攀氀攀挀琀漀爀䄀氀氀⠀✀⸀渀愀瘀ⴀ椀琀攀洀嬀搀愀琀愀ⴀ瘀椀攀眀崀✀⤀㬀ഀ਀  紀ഀ਀  ഀ਀  椀昀 ⠀渀愀瘀䈀甀琀琀漀渀猀⸀氀攀渀最琀栀 㴀㴀㴀 　⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀匀琀椀氀氀 渀漀 渀愀瘀椀最愀琀椀漀渀 戀甀琀琀漀渀猀 昀漀甀渀搀℀✀⤀㬀ഀ਀    爀攀琀甀爀渀㬀ഀ਀  紀ഀ਀  ഀ਀  渀愀瘀䈀甀琀琀漀渀猀⸀昀漀爀䔀愀挀栀⠀戀甀琀琀漀渀 㴀㸀 笀ഀ਀    挀漀渀猀琀 瘀椀攀眀一愀洀攀 㴀 戀甀琀琀漀渀⸀最攀琀䄀琀琀爀椀戀甀琀攀⠀✀搀愀琀愀ⴀ瘀椀攀眀✀⤀㬀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀✀䘀漀甀渀搀 渀愀瘀椀最愀琀椀漀渀 戀甀琀琀漀渀㨀✀Ⰰ 瘀椀攀眀一愀洀攀⤀㬀ഀ਀    ഀ਀    戀甀琀琀漀渀⸀愀搀搀䔀瘀攀渀琀䰀椀猀琀攀渀攀爀⠀✀挀氀椀挀欀✀Ⰰ ⠀攀⤀ 㴀㸀 笀ഀ਀      攀⸀瀀爀攀瘀攀渀琀䐀攀昀愀甀氀琀⠀⤀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀一愀瘀椀最愀琀椀漀渀 挀氀椀挀欀攀搀㨀✀Ⰰ 瘀椀攀眀一愀洀攀⤀㬀ഀ਀      猀栀漀眀嘀椀攀眀⠀瘀椀攀眀一愀洀攀⤀㬀ഀ਀      ഀ਀      ⼀⼀ 唀瀀搀愀琀攀 愀挀琀椀瘀攀 猀琀愀琀攀ഀ਀      渀愀瘀䈀甀琀琀漀渀猀⸀昀漀爀䔀愀挀栀⠀戀琀渀 㴀㸀 笀ഀ਀        戀琀渀⸀挀氀愀猀猀䰀椀猀琀⸀爀攀洀漀瘀攀⠀✀愀挀琀椀瘀攀✀Ⰰ ✀戀琀渀ⴀ愀挀琀椀瘀攀✀⤀㬀ഀ਀      紀⤀㬀ഀ਀      戀甀琀琀漀渀⸀挀氀愀猀猀䰀椀猀琀⸀愀搀搀⠀✀愀挀琀椀瘀攀✀Ⰰ ✀戀琀渀ⴀ愀挀琀椀瘀攀✀⤀㬀ഀ਀    紀⤀㬀ഀ਀  紀⤀㬀ഀ਀  ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀怀匀攀琀 甀瀀 ␀笀渀愀瘀䈀甀琀琀漀渀猀⸀氀攀渀最琀栀紀 渀愀瘀椀最愀琀椀漀渀 戀甀琀琀漀渀猀怀⤀㬀ഀ਀紀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 猀栀漀眀嘀椀攀眀⠀瘀椀攀眀一愀洀攀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀匀栀漀眀椀渀最 瘀椀攀眀㨀✀Ⰰ 瘀椀攀眀一愀洀攀⤀㬀ഀ਀  愀瀀瀀匀琀愀琀攀⸀挀甀爀爀攀渀琀嘀椀攀眀 㴀 瘀椀攀眀一愀洀攀㬀ഀ਀  ഀ਀  ⼀⼀ 䠀椀搀攀 愀氀氀 瘀椀攀眀猀ഀ਀  挀漀渀猀琀 愀氀氀嘀椀攀眀猀 㴀 搀漀挀甀洀攀渀琀⸀焀甀攀爀礀匀攀氀攀挀琀漀爀䄀氀氀⠀✀嬀椀搀帀㴀∀瘀椀攀眀ⴀ∀崀✀⤀㬀ഀ਀  愀氀氀嘀椀攀眀猀⸀昀漀爀䔀愀挀栀⠀瘀椀攀眀 㴀㸀 笀ഀ਀    瘀椀攀眀⸀猀琀礀氀攀⸀搀椀猀瀀氀愀礀 㴀 ✀渀漀渀攀✀㬀ഀ਀    瘀椀攀眀⸀挀氀愀猀猀䰀椀猀琀⸀爀攀洀漀瘀攀⠀✀瘀椀猀椀戀氀攀✀⤀㬀ഀ਀  紀⤀㬀ഀ਀  ഀ਀  ⼀⼀ 匀栀漀眀 爀攀焀甀攀猀琀攀搀 瘀椀攀眀ഀ਀  挀漀渀猀琀 琀愀爀最攀琀嘀椀攀眀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀怀瘀椀攀眀ⴀ␀笀瘀椀攀眀一愀洀攀紀怀⤀㬀ഀ਀  椀昀 ⠀琀愀爀最攀琀嘀椀攀眀⤀ 笀ഀ਀    琀愀爀最攀琀嘀椀攀眀⸀猀琀礀氀攀⸀搀椀猀瀀氀愀礀 㴀 ✀戀氀漀挀欀✀㬀ഀ਀    琀愀爀最攀琀嘀椀攀眀⸀挀氀愀猀猀䰀椀猀琀⸀愀搀搀⠀✀瘀椀猀椀戀氀攀✀⤀㬀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀怀嘀椀攀眀 ∀␀笀瘀椀攀眀一愀洀攀紀∀ 搀椀猀瀀氀愀礀攀搀怀⤀㬀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀怀嘀椀攀眀 栀愀猀 ␀笀琀愀爀最攀琀嘀椀攀眀⸀挀栀椀氀搀爀攀渀⸀氀攀渀最琀栀紀 挀栀椀氀搀爀攀渀怀⤀㬀ഀ਀    ഀ਀    ⼀⼀ 䰀漀愀搀 琀攀洀瀀氀愀琀攀 挀漀渀琀攀渀琀 椀昀 瘀椀攀眀 椀猀 攀洀瀀琀礀ഀ਀    椀昀 ⠀琀愀爀最攀琀嘀椀攀眀⸀挀栀椀氀搀爀攀渀⸀氀攀渀最琀栀 㴀㴀㴀 　⤀ 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀䰀漀愀搀椀渀最 琀攀洀瀀氀愀琀攀 昀漀爀 ∀␀笀瘀椀攀眀一愀洀攀紀∀⸀⸀⸀怀⤀㬀ഀ਀      氀漀愀搀吀攀洀瀀氀愀琀攀⠀瘀椀攀眀一愀洀攀Ⰰ 琀愀爀最攀琀嘀椀攀眀⤀㬀ഀ਀    紀 攀氀猀攀 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀嘀椀攀眀 ∀␀笀瘀椀攀眀一愀洀攀紀∀ 愀氀爀攀愀搀礀 栀愀猀 挀漀渀琀攀渀琀Ⰰ 猀欀椀瀀瀀椀渀最 琀攀洀瀀氀愀琀攀 氀漀愀搀怀⤀㬀ഀ਀    紀ഀ਀    ഀ਀    ⼀⼀ 䰀漀愀搀 搀愀琀愀 昀漀爀 琀栀椀猀 瘀椀攀眀ഀ਀    氀漀愀搀嘀椀攀眀䐀愀琀愀⠀瘀椀攀眀一愀洀攀⤀㬀ഀ਀  紀 攀氀猀攀 笀ഀ਀    挀漀渀猀漀氀攀⸀眀愀爀渀⠀怀嘀椀攀眀 ∀␀笀瘀椀攀眀一愀洀攀紀∀ 渀漀琀 昀漀甀渀搀Ⰰ 猀栀漀眀椀渀最 搀愀猀栀戀漀愀爀搀怀⤀㬀ഀ਀    挀漀渀猀琀 搀愀猀栀戀漀愀爀搀嘀椀攀眀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀瘀椀攀眀ⴀ搀愀猀栀戀漀愀爀搀✀⤀㬀ഀ਀    椀昀 ⠀搀愀猀栀戀漀愀爀搀嘀椀攀眀⤀ 笀ഀ਀      搀愀猀栀戀漀愀爀搀嘀椀攀眀⸀猀琀礀氀攀⸀搀椀猀瀀氀愀礀 㴀 ✀戀氀漀挀欀✀㬀ഀ਀      搀愀猀栀戀漀愀爀搀嘀椀攀眀⸀挀氀愀猀猀䰀椀猀琀⸀愀搀搀⠀✀瘀椀猀椀戀氀攀✀⤀㬀ഀ਀      椀昀 ⠀搀愀猀栀戀漀愀爀搀嘀椀攀眀⸀挀栀椀氀搀爀攀渀⸀氀攀渀最琀栀 㴀㴀㴀 　⤀ 笀ഀ਀        氀漀愀搀吀攀洀瀀氀愀琀攀⠀✀搀愀猀栀戀漀愀爀搀✀Ⰰ 搀愀猀栀戀漀愀爀搀嘀椀攀眀⤀㬀ഀ਀      紀ഀ਀    紀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 氀漀愀搀吀攀洀瀀氀愀琀攀⠀瘀椀攀眀一愀洀攀Ⰰ 琀愀爀最攀琀䔀氀攀洀攀渀琀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀怀尀渀砀ᴁḠ†㴀㴀㴀㴀㴀㴀 氀漀愀搀吀攀洀瀀氀愀琀攀 匀吀䄀刀吀 㴀㴀㴀㴀㴀㴀怀⤀㬀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀怀砀ᴁḠ†嘀椀攀眀㨀 ␀笀瘀椀攀眀一愀洀攀紀怀⤀㬀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀怀砀ᴁḠ†吀愀爀最攀琀 攀氀攀洀攀渀琀㨀怀Ⰰ 琀愀爀最攀琀䔀氀攀洀攀渀琀⤀㬀ഀ਀  ഀ਀  挀漀渀猀琀 琀攀洀瀀氀愀琀攀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀怀琀瀀氀ⴀ␀笀瘀椀攀眀一愀洀攀紀怀⤀㬀ഀ਀  ഀ਀  椀昀 ⠀琀攀洀瀀氀愀琀攀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀怀匀☁†吀攀洀瀀氀愀琀攀 ∀琀瀀氀ⴀ␀笀瘀椀攀眀一愀洀攀紀∀ 昀漀甀渀搀℀怀⤀㬀ഀ਀    挀漀渀猀琀 挀漀渀琀攀渀琀 㴀 琀攀洀瀀氀愀琀攀⸀挀漀渀琀攀渀琀⸀挀氀漀渀攀一漀搀攀⠀琀爀甀攀⤀㬀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀怀匀☁†吀攀洀瀀氀愀琀攀 挀氀漀渀攀搀Ⰰ 挀漀渀琀攀渀琀㨀怀Ⰰ 挀漀渀琀攀渀琀⤀㬀ഀ਀    ഀ਀    琀愀爀最攀琀䔀氀攀洀攀渀琀⸀愀瀀瀀攀渀搀䌀栀椀氀搀⠀挀漀渀琀攀渀琀⤀㬀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀怀匀☁†吀攀洀瀀氀愀琀攀 挀漀渀琀攀渀琀 愀瀀瀀攀渀搀攀搀 琀漀 琀愀爀最攀琀怀⤀㬀ഀ਀    挀漀渀猀漀氀攀⸀氀漀最⠀怀匀☁†吀愀爀最攀琀 攀氀攀洀攀渀琀 渀漀眀 栀愀猀 ␀笀琀愀爀最攀琀䔀氀攀洀攀渀琀⸀挀栀椀氀搀爀攀渀⸀氀攀渀最琀栀紀 挀栀椀氀搀爀攀渀怀⤀㬀ഀ਀    ഀ਀    ⼀⼀ 匀攀琀 甀瀀 攀瘀攀渀琀 栀愀渀搀氀攀爀猀 昀漀爀 戀甀琀琀漀渀猀 椀渀 琀栀椀猀 瘀椀攀眀ഀ਀    ⼀⼀ 唀猀攀 愀 氀漀渀最攀爀 搀攀氀愀礀 琀漀 攀渀猀甀爀攀 䐀伀䴀 椀猀 昀甀氀氀礀 甀瀀搀愀琀攀搀ഀ਀    猀攀琀吀椀洀攀漀甀琀⠀⠀⤀ 㴀㸀 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀尀渀輀뀀 吀椀洀攀漀甀琀 昀椀爀攀搀 愀昀琀攀爀 ㈀　　洀猀 ⴀ 猀攀琀琀椀渀最 甀瀀 栀愀渀搀氀攀爀猀怀⤀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀輀뀀 吀愀爀最攀琀 攀氀攀洀攀渀琀 䤀䐀㨀 ␀笀琀愀爀最攀琀䔀氀攀洀攀渀琀⸀椀搀紀怀⤀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀輀뀀 吀愀爀最攀琀 攀氀攀洀攀渀琀 挀栀椀氀搀爀攀渀㨀 ␀笀琀愀爀最攀琀䔀氀攀洀攀渀琀⸀挀栀椀氀搀爀攀渀⸀氀攀渀最琀栀紀怀⤀㬀ഀ਀      猀攀琀甀瀀嘀椀攀眀䔀瘀攀渀琀䠀愀渀搀氀攀爀猀⠀瘀椀攀眀一愀洀攀Ⰰ 琀愀爀最攀琀䔀氀攀洀攀渀琀⤀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀匀☁†猀攀琀甀瀀嘀椀攀眀䔀瘀攀渀琀䠀愀渀搀氀攀爀猀 挀漀洀瀀氀攀琀攀搀尀渀怀⤀㬀ഀ਀    紀Ⰰ ㈀　　⤀㬀ഀ਀  紀 攀氀猀攀 笀ഀ਀    挀漀渀猀漀氀攀⸀眀愀爀渀⠀怀鴀刀 吀攀洀瀀氀愀琀攀 ∀琀瀀氀ⴀ␀笀瘀椀攀眀一愀洀攀紀∀ 渀漀琀 昀漀甀渀搀 椀渀 䐀伀䴀怀⤀㬀ഀ਀    ⼀⼀ 䄀搀搀 愀 瀀氀愀挀攀栀漀氀搀攀爀 洀攀猀猀愀最攀ഀ਀    琀愀爀最攀琀䔀氀攀洀攀渀琀⸀椀渀渀攀爀䠀吀䴀䰀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀瀀ⴀ㠀∀㸀ഀ਀        㰀栀㈀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ㈀砀氀 昀漀渀琀ⴀ戀漀氀搀 洀戀ⴀ㐀∀㸀␀笀昀漀爀洀愀琀嘀椀攀眀一愀洀攀⠀瘀椀攀眀一愀洀攀⤀紀㰀⼀栀㈀㸀ഀ਀        㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀ⴀ挀漀渀琀攀渀琀⼀㜀　∀㸀䤀渀渀攀栀쌀ꔀ氀氀 昀쌀똀爀 搀攀渀渀愀 瘀礀 欀漀洀洀攀爀 猀渀愀爀琀⸀⸀⸀㰀⼀瀀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 昀漀爀洀愀琀嘀椀攀眀一愀洀攀⠀瘀椀攀眀一愀洀攀⤀ 笀ഀ਀  挀漀渀猀琀 渀愀洀攀猀 㴀 笀ഀ਀    ✀搀愀猀栀戀漀愀爀搀✀㨀 ✀䐀愀猀栀戀漀愀爀搀✀Ⰰഀ਀    ✀戀爀愀渀搀猀✀㨀 ✀嘀愀爀甀洀쌀ꐀ爀欀攀渀✀Ⰰഀ਀    ✀挀漀洀瀀愀渀椀攀猀✀㨀 ✀䘀쌀똀爀攀琀愀最✀Ⰰഀ਀    ✀愀最攀渀琀猀✀㨀 ✀䴀쌀ꐀ欀氀愀爀攀✀Ⰰഀ਀    ✀瀀椀瀀攀氀椀渀攀✀㨀 ✀匀쌀ꐀ氀樀琀愀瘀氀愀✀Ⰰഀ਀    ✀挀甀猀琀漀洀攀爀ⴀ猀甀挀挀攀猀猀✀㨀 ✀䬀甀渀搀瘀쌀ꔀ爀搀✀Ⰰഀ਀    ✀氀椀挀攀渀猀攀猀✀㨀 ✀䰀椀挀攀渀猀攀爀✀Ⰰഀ਀    ✀椀洀瀀漀爀琀✀㨀 ✀䤀洀瀀漀爀琀✀Ⰰഀ਀    ✀猀攀琀琀椀渀最猀✀㨀 ✀䤀渀猀琀쌀ꐀ氀氀渀椀渀最愀爀✀ഀ਀  紀㬀ഀ਀  爀攀琀甀爀渀 渀愀洀攀猀嬀瘀椀攀眀一愀洀攀崀 簀簀 瘀椀攀眀一愀洀攀㬀ഀ਀紀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 氀漀愀搀嘀椀攀眀䐀愀琀愀⠀瘀椀攀眀一愀洀攀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䰀漀愀搀椀渀最 搀愀琀愀 昀漀爀 瘀椀攀眀㨀✀Ⰰ 瘀椀攀眀一愀洀攀⤀㬀ഀ਀  ഀ਀  猀眀椀琀挀栀⠀瘀椀攀眀一愀洀攀⤀ 笀ഀ਀    挀愀猀攀 ✀搀愀猀栀戀漀愀爀搀✀㨀ഀ਀      氀漀愀搀䐀愀猀栀戀漀愀爀搀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀戀爀愀渀搀猀✀㨀ഀ਀      氀漀愀搀䈀爀愀渀搀猀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀挀漀洀瀀愀渀椀攀猀✀㨀ഀ਀      氀漀愀搀䌀漀洀瀀愀渀椀攀猀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀愀最攀渀琀猀✀㨀ഀ਀      氀漀愀搀䄀最攀渀琀猀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀瀀椀瀀攀氀椀渀攀✀㨀ഀ਀      氀漀愀搀倀椀瀀攀氀椀渀攀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀挀甀猀琀漀洀攀爀ⴀ猀甀挀挀攀猀猀✀㨀ഀ਀      氀漀愀搀䌀甀猀琀漀洀攀爀匀甀挀挀攀猀猀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀氀椀挀攀渀猀攀猀✀㨀ഀ਀      氀漀愀搀䰀椀挀攀渀猀攀猀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀椀洀瀀漀爀琀✀㨀ഀ਀      氀漀愀搀䤀洀瀀漀爀琀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    挀愀猀攀 ✀猀攀琀琀椀渀最猀✀㨀ഀ਀      氀漀愀搀匀攀琀琀椀渀最猀⠀⤀㬀ഀ਀      戀爀攀愀欀㬀ഀ਀    搀攀昀愀甀氀琀㨀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀一漀 搀愀琀愀 氀漀愀搀攀爀 昀漀爀 瘀椀攀眀㨀✀Ⰰ 瘀椀攀眀一愀洀攀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 氀漀愀搀䌀甀猀琀漀洀攀爀猀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䰀漀愀搀椀渀最 挀甀猀琀漀洀攀爀猀⸀⸀⸀✀⤀㬀ഀ਀  ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 爀攀猀瀀漀渀猀攀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀✀⼀愀瀀椀⼀挀甀猀琀漀洀攀爀猀✀⤀㬀ഀ਀    椀昀 ⠀爀攀猀瀀漀渀猀攀⸀漀欀⤀ 笀ഀ਀      挀漀渀猀琀 挀甀猀琀漀洀攀爀猀 㴀 愀眀愀椀琀 爀攀猀瀀漀渀猀攀⸀樀猀漀渀⠀⤀㬀ഀ਀      愀瀀瀀匀琀愀琀攀⸀挀甀猀琀漀洀攀爀猀 㴀 挀甀猀琀漀洀攀爀猀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀䰀漀愀搀攀搀 ␀笀挀甀猀琀漀洀攀爀猀⸀氀攀渀最琀栀紀 挀甀猀琀漀洀攀爀猀怀⤀㬀ഀ਀      爀攀渀搀攀爀䌀甀猀琀漀洀攀爀猀⠀挀甀猀琀漀洀攀爀猀⤀㬀ഀ਀    紀 攀氀猀攀 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀唀猀椀渀最 搀攀洀漀 搀愀琀愀 昀漀爀 挀甀猀琀漀洀攀爀猀✀⤀㬀ഀ਀      爀攀渀搀攀爀䌀甀猀琀漀洀攀爀猀⠀嬀ഀ਀        笀 椀搀㨀 ㄀Ⰰ 渀愀洀攀㨀 ✀䐀攀洀漀 䬀甀渀搀 䄀䈀✀Ⰰ 攀洀愀椀氀㨀 ✀欀漀渀琀愀欀琀䀀搀攀洀漀⸀猀攀✀Ⰰ 瀀栀漀渀攀㨀 ✀　㜀　ⴀ㄀㈀㌀㐀㔀㘀✀ 紀Ⰰഀ਀        笀 椀搀㨀 ㈀Ⰰ 渀愀洀攀㨀 ✀吀攀猀琀 䘀쌀똀爀攀琀愀最 䠀䈀✀Ⰰ 攀洀愀椀氀㨀 ✀椀渀昀漀䀀琀攀猀琀⸀猀攀✀Ⰰ 瀀栀漀渀攀㨀 ✀　㜀　ⴀ㘀㔀㐀㌀㈀㄀✀ 紀ഀ਀      崀⤀㬀ഀ਀    紀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 挀甀猀琀漀洀攀爀猀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    猀栀漀眀䐀攀洀漀䴀攀猀猀愀最攀⠀✀䬀甀渀搀攀爀✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 氀漀愀搀䐀攀愀氀猀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䰀漀愀搀椀渀最 搀攀愀氀猀⸀⸀⸀✀⤀㬀ഀ਀  ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 爀攀猀瀀漀渀猀攀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀✀⼀愀瀀椀⼀搀攀愀氀猀✀⤀㬀ഀ਀    椀昀 ⠀爀攀猀瀀漀渀猀攀⸀漀欀⤀ 笀ഀ਀      挀漀渀猀琀 搀攀愀氀猀 㴀 愀眀愀椀琀 爀攀猀瀀漀渀猀攀⸀樀猀漀渀⠀⤀㬀ഀ਀      愀瀀瀀匀琀愀琀攀⸀搀攀愀氀猀 㴀 搀攀愀氀猀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀䰀漀愀搀攀搀 ␀笀搀攀愀氀猀⸀氀攀渀最琀栀紀 搀攀愀氀猀怀⤀㬀ഀ਀      爀攀渀搀攀爀䐀攀愀氀猀⠀搀攀愀氀猀⤀㬀ഀ਀    紀 攀氀猀攀 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀唀猀椀渀最 搀攀洀漀 搀愀琀愀 昀漀爀 搀攀愀氀猀✀⤀㬀ഀ਀      爀攀渀搀攀爀䐀攀愀氀猀⠀嬀ഀ਀        笀 椀搀㨀 ㄀Ⰰ 琀椀琀氀攀㨀 ✀䐀攀洀漀 䄀昀昀쌀ꐀ爀 ㄀✀Ⰰ 瘀愀氀甀攀㨀 㔀　　　　Ⰰ 猀琀愀琀甀猀㨀 ✀渀攀最漀琀椀愀琀椀漀渀✀Ⰰ 挀甀猀琀漀洀攀爀㨀 ✀䐀攀洀漀 䬀甀渀搀 䄀䈀✀ 紀Ⰰഀ਀        笀 椀搀㨀 ㈀Ⰰ 琀椀琀氀攀㨀 ✀䐀攀洀漀 䄀昀昀쌀ꐀ爀 ㈀✀Ⰰ 瘀愀氀甀攀㨀 㜀㔀　　　Ⰰ 猀琀愀琀甀猀㨀 ✀瀀爀漀瀀漀猀愀氀✀Ⰰ 挀甀猀琀漀洀攀爀㨀 ✀吀攀猀琀 䘀쌀똀爀攀琀愀最 䠀䈀✀ 紀ഀ਀      崀⤀㬀ഀ਀    紀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 搀攀愀氀猀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    猀栀漀眀䐀攀洀漀䴀攀猀猀愀最攀⠀✀䄀昀昀쌀ꐀ爀攀爀✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 氀漀愀搀䄀挀琀椀瘀椀琀椀攀猀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䰀漀愀搀椀渀最 愀挀琀椀瘀椀琀椀攀猀⸀⸀⸀✀⤀㬀ഀ਀  ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 爀攀猀瀀漀渀猀攀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀✀⼀愀瀀椀⼀愀挀琀椀瘀椀琀椀攀猀✀⤀㬀ഀ਀    椀昀 ⠀爀攀猀瀀漀渀猀攀⸀漀欀⤀ 笀ഀ਀      挀漀渀猀琀 愀挀琀椀瘀椀琀椀攀猀 㴀 愀眀愀椀琀 爀攀猀瀀漀渀猀攀⸀樀猀漀渀⠀⤀㬀ഀ਀      愀瀀瀀匀琀愀琀攀⸀愀挀琀椀瘀椀琀椀攀猀 㴀 愀挀琀椀瘀椀琀椀攀猀㬀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀怀䰀漀愀搀攀搀 ␀笀愀挀琀椀瘀椀琀椀攀猀⸀氀攀渀最琀栀紀 愀挀琀椀瘀椀琀椀攀猀怀⤀㬀ഀ਀      爀攀渀搀攀爀䄀挀琀椀瘀椀琀椀攀猀⠀愀挀琀椀瘀椀琀椀攀猀⤀㬀ഀ਀    紀 攀氀猀攀 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀唀猀椀渀最 搀攀洀漀 搀愀琀愀 昀漀爀 愀挀琀椀瘀椀琀椀攀猀✀⤀㬀ഀ਀      爀攀渀搀攀爀䄀挀琀椀瘀椀琀椀攀猀⠀嬀ഀ਀        笀 椀搀㨀 ㄀Ⰰ 琀椀琀氀攀㨀 ✀唀瀀瀀昀쌀똀氀樀渀椀渀最 䐀攀洀漀 䬀甀渀搀✀Ⰰ 琀礀瀀攀㨀 ✀挀愀氀氀✀Ⰰ 搀愀琀攀㨀 渀攀眀 䐀愀琀攀⠀⤀⸀琀漀䤀匀伀匀琀爀椀渀最⠀⤀ 紀Ⰰഀ਀        笀 椀搀㨀 ㈀Ⰰ 琀椀琀氀攀㨀 ✀䴀쌀똀琀攀 吀攀猀琀 䘀쌀똀爀攀琀愀最✀Ⰰ 琀礀瀀攀㨀 ✀洀攀攀琀椀渀最✀Ⰰ 搀愀琀攀㨀 渀攀眀 䐀愀琀攀⠀⤀⸀琀漀䤀匀伀匀琀爀椀渀最⠀⤀ 紀ഀ਀      崀⤀㬀ഀ਀    紀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 愀挀琀椀瘀椀琀椀攀猀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    猀栀漀眀䐀攀洀漀䴀攀猀猀愀最攀⠀✀䄀欀琀椀瘀椀琀攀琀攀爀✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 氀漀愀搀䐀愀猀栀戀漀愀爀搀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀䰀漀愀搀椀渀最 搀愀猀栀戀漀愀爀搀⸀⸀⸀✀⤀㬀ഀ਀  ⼀⼀ 䐀愀猀栀戀漀愀爀搀 氀漀愀搀攀搀Ⰰ 猀栀漀眀 眀攀氀挀漀洀攀 洀攀猀猀愀最攀ഀ਀  挀漀渀猀琀 眀攀氀挀漀洀攀䔀氀 㴀 搀漀挀甀洀攀渀琀⸀焀甀攀爀礀匀攀氀攀挀琀漀爀⠀✀⌀瘀椀攀眀ⴀ搀愀猀栀戀漀愀爀搀 ⸀琀攀砀琀ⴀ㌀砀氀✀⤀㬀ഀ਀  椀昀 ⠀眀攀氀挀漀洀攀䔀氀 ☀☀ 眀椀渀搀漀眀⸀攀渀琀爀愀䄀甀琀栀⤀ 笀ഀ਀    挀漀渀猀琀 甀猀攀爀 㴀 眀椀渀搀漀眀⸀攀渀琀爀愀䄀甀琀栀⸀最攀琀唀猀攀爀⠀⤀㬀ഀ਀    眀攀氀挀漀洀攀䔀氀⸀琀攀砀琀䌀漀渀琀攀渀琀 㴀 怀嘀쌀ꐀ氀欀漀洀洀攀渀Ⰰ ␀笀甀猀攀爀⸀渀愀洀攀 簀簀 ✀愀渀瘀쌀ꐀ渀搀愀爀攀✀紀℀ 砀᠁㤠怠㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀攀渀搀瀀漀椀渀琀Ⰰ 漀瀀琀椀漀渀猀 㴀 笀紀⤀ 笀ഀ਀  挀漀渀猀琀 戀愀猀攀唀爀氀 㴀 眀椀渀搀漀眀⸀䄀倀䤀开䌀伀一䘀䤀䜀㼀⸀戀愀猀攀唀爀氀 簀簀 ✀栀琀琀瀀猀㨀⼀⼀樀爀洀ⴀ挀爀洀ⴀ愀瀀椀ⴀ瀀爀漀搀ⴀ瘀猀搀洀挀㔀欀戀礀搀挀樀挀⸀愀稀甀爀攀眀攀戀猀椀琀攀猀⸀渀攀琀✀㬀ഀ਀  挀漀渀猀琀 甀爀氀 㴀 怀␀笀戀愀猀攀唀爀氀紀␀笀攀渀搀瀀漀椀渀琀紀怀㬀ഀ਀  ഀ਀  氀攀琀 琀漀欀攀渀 㴀 渀甀氀氀㬀ഀ਀  椀昀 ⠀眀椀渀搀漀眀⸀攀渀琀爀愀䄀甀琀栀⤀ 笀ഀ਀    琀爀礀 笀ഀ਀      琀漀欀攀渀 㴀 愀眀愀椀琀 眀椀渀搀漀眀⸀攀渀琀爀愀䄀甀琀栀⸀最攀琀䄀挀挀攀猀猀吀漀欀攀渀⠀⤀㬀ഀ਀    紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀      挀漀渀猀漀氀攀⸀氀漀最⠀✀䌀漀甀氀搀 渀漀琀 最攀琀 愀挀挀攀猀猀 琀漀欀攀渀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    紀ഀ਀  紀ഀ਀  ഀ਀  挀漀渀猀琀 栀攀愀搀攀爀猀 㴀 笀ഀ਀    ✀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀✀㨀 ✀愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀✀Ⰰഀ਀    ⸀⸀⸀漀瀀琀椀漀渀猀⸀栀攀愀搀攀爀猀ഀ਀  紀㬀ഀ਀  ഀ਀  椀昀 ⠀琀漀欀攀渀⤀ 笀ഀ਀    栀攀愀搀攀爀猀嬀✀䄀甀琀栀漀爀椀稀愀琀椀漀渀✀崀 㴀 怀䈀攀愀爀攀爀 ␀笀琀漀欀攀渀紀怀㬀ഀ਀  紀ഀ਀  ഀ਀  爀攀琀甀爀渀 昀攀琀挀栀⠀甀爀氀Ⰰ 笀 ഀ਀    ⸀⸀⸀漀瀀琀椀漀渀猀Ⰰഀ਀    栀攀愀搀攀爀猀 ഀ਀  紀⤀㬀ഀ਀紀ഀ਀ഀ਀⼀⼀ 㴀㴀㴀㴀㴀 吀䄀䈀䰀䔀 刀䔀一䐀䔀刀䤀一䜀 䘀唀一䌀吀䤀伀一匀 㴀㴀㴀㴀㴀ഀ਀ഀ਀︀function renderCompaniesTable(companies) {
-  const tableHtml = `
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Företag</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pipeline</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Org.nr</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        ${companies.map(company => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
-            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">${company.name || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.brand || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
-                ${company.status || 'prospekt'}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.pipeline || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
-              <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
-              <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-  document.getElementById('companyTable').innerHTML = tableHtml;
-}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
-                ${company.status || 'prospekt'}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.pipeline || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
-              <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-  document.getElementById('companyTable').innerHTML = tableHtml;
-}
-
-function renderBrandsTable(brands) {
-  const tableHtml = `
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Webbplats</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beskrivning</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        ${brands.map(brand => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showBrandDetails(${brand._id})">
-            <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(brand.status)}">
-                ${brand.status || 'aktiv'}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              ${brand.website ? `<a href="${brand.website}" target="_blank" class="text-indigo-600 hover:text-indigo-900">${brand.website}</a>` : ''}
-            </td>
-            <td class="px-6 py-4">${brand.description || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button onclick="editBrand('${brand._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
-              <button onclick="deleteBrand('${brand._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-  document.getElementById('brandTable').innerHTML = tableHtml;
-}
-
-function renderAgentsTable(agents) {
-  const tableHtml = `
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Namn</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Företag</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Licens</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        ${agents.map(agent => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showAgentDetails(${agent._id})">
-            <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.role || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(agent.status)}">
-                ${agent.status || 'aktiv'}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.licenseType || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.email || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${agent.phone || ''}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <button onclick="editAgent('${agent._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
-              <button onclick="deleteAgent('${agent._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-  document.getElementById('agentTable').innerHTML = tableHtml;
-}
-
-function getStatusBadgeClass(status) {
-  const statusLower = (status || '').toLowerCase();
-  if (statusLower === 'aktiv' || statusLower === 'kund') return 'bg-green-100 text-green-800';
-  if (statusLower === 'prospekt' || statusLower === 'pending') return 'bg-yellow-100 text-yellow-800';
-  if (statusLower === 'inaktiv' || statusLower === 'archived') return 'bg-red-100 text-red-800';
-  return 'bg-gray-100 text-gray-800';
-}
-async function loadBrands() {
-  console.log('Loading brands data...');
-  try {
-    const response = await fetchWithAuth('/api/brands');
-    const brands = await response.json();
-    renderBrandsTable(brands);
-  } catch (error) {
-    console.error('Error loading brands:', error);
-    document.getElementById('brandTable').innerHTML = '<p class="text-red-500">Fel vid laddning av varumärken</p>';
-  }
-}
-
-async function loadCompanies() {
-  console.log('Loading companies data...');
-  try {
-    const response = await fetchWithAuth('/api/companies');
-    const companies = await response.json();
-    renderCompaniesTable(companies);
-  } catch (error) {
-    console.error('Error loading companies:', error);
-    document.getElementById('companyTable').innerHTML = '<p class="text-red-500">Fel vid laddning av företag</p>';
-  }
-}
-
-async function loadAgents() {
-  console.log('Loading agents data...');
-  try {
-    const response = await fetchWithAuth('/api/agents');
-    const agents = await response.json();
-    renderAgentsTable(agents);
-  } catch (error) {
-    console.error('Error loading agents:', error);
-    document.getElementById('agentTable').innerHTML = '<p class="text-red-500">Fel vid laddning av mäklare</p>';
-  }
-}
-
-function loadPipeline() {
-  console.log('Loading pipeline view...');
-  // Pipeline template is already loaded
-}
-
-function loadCustomerSuccess() {
-  console.log('Loading customer success view...');
-  // Customer success template is already loaded
-}
-
-function loadLicenses() {
-  console.log('Loading licenses view...');
-  // Licenses template is already loaded
-}
-
-function loadImport() {
-  console.log('Loading import view...');
-  
-  // Set up file input handler
-  setTimeout(() => {
-    const fileInput = document.getElementById('fileInput');
-    const applyImportBtn = document.getElementById('applyImport');
-    const importResult = document.getElementById('importResult');
-    
-    if (fileInput) {
-      fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          console.log('File selected:', file.name);
-          if (applyImportBtn) {
-            applyImportBtn.disabled = false;
-          }
-          if (importResult) {
-            importResult.textContent = `Fil vald: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
-          }
-        }
-      });
-    }
-    
-    if (applyImportBtn) {
-      applyImportBtn.addEventListener('click', async () => {
-        const file = fileInput?.files[0];
-        if (!file) {
-          alert('VÃ¤lj en fil fÃ¶rst');
-          return;
-        }
-        
-        await handleExcelImport(file);
-      });
-    }
-    
-    // Server import buttons
-    const serverImportBtn = document.getElementById('applyImportServer');
-    const ortsprisBtn = document.getElementById('applyImportOrtspris');
-    const maklarpaketBtn = document.getElementById('applyImportMaklarpaket');
-    
-    if (serverImportBtn) {
-      serverImportBtn.addEventListener('click', () => handleServerImport('default'));
-    }
-    
-    if (ortsprisBtn) {
-      ortsprisBtn.addEventListener('click', () => handleServerImport('ortspris'));
-    }
-    
-    if (maklarpaketBtn) {
-      maklarpaketBtn.addEventListener('click', () => handleServerImport('maklarpaket'));
-    }
-  }, 100);
-}
-
-async function handleExcelImport(file) {
-  console.log('Starting Excel import:', file.name);
-  
-  const importResult = document.getElementById('importResult');
-  const applyImportBtn = document.getElementById('applyImport');
-  
-  if (importResult) {
-    importResult.textContent = 'LÃ¤ser Excel-fil...';
-  }
-  
-  if (applyImportBtn) {
-    applyImportBtn.disabled = true;
-  }
-  
-  try {
-    // Check if XLSX library is loaded
-    if (typeof XLSX === 'undefined') {
-      throw new Error('XLSX-bibliotek inte laddat');
-    }
-    
-    // Read file
-    const data = await file.arrayBuffer();
-    const workbook = XLSX.read(data, { type: 'array' });
-    
-    console.log('Workbook loaded:', workbook.SheetNames);
-    
-    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-    
-    console.log('Parsed data:', jsonData.length, 'rows');
-    
-    if (importResult) {
-      importResult.innerHTML = `
-        <div class="alert alert-success">
-          <span>âœ“ LÃ¤ste ${jsonData.length} rader frÃ¥n ${workbook.SheetNames[0]}</span>
-        </div>
-        <div class="mt-2">
-          <strong>Kolumner:</strong> ${Object.keys(jsonData[0] || {}).join(', ')}
-        </div>
-      `;
-    }
-    
-    // Send to API
-    const response = await fetchWithAuth('/api/import', {
-      method: 'POST',
-      body: JSON.stringify({
-        type: 'excel',
-        data: jsonData,
-        filename: file.name
-      })
-    });
-    
-    if (response.ok) {
-      const result = await response.json();
-      if (importResult) {
-        importResult.innerHTML = `
-          <div class="alert alert-success">
-            <span>âœ“ Import lyckades! ${result.imported || 0} poster importerade.</span>
-          </div>
-        `;
-      }
-    } else {
-      throw new Error('Import misslyckades');
-    }
-    
-  } catch (error) {
-    console.error('Import error:', error);
-    if (importResult) {
-      importResult.innerHTML = `
-        <div class="alert alert-error">
-          <span>âœ— Fel vid import: ${error.message}</span>
-        </div>
-      `;
-    }
-  } finally {
-    if (applyImportBtn) {
-      applyImportBtn.disabled = false;
-    }
-  }
-}
-
-async function handleServerImport(type) {
-  console.log('Starting server import:', type);
-  
-  const importResult = document.getElementById('importResult');
-  
-  if (importResult) {
-    importResult.textContent = 'Startar serverimport...';
-  }
-  
-  try {
-    const response = await fetchWithAuth(`/api/import/server?type=${type}`, {
-      method: 'POST'
-    });
-    
-    if (response.ok) {
-      const result = await response.json();
-      if (importResult) {
-        importResult.innerHTML = `
-          <div class="alert alert-success">
-            <span>âœ“ Serverimport lyckades! ${result.imported || 0} poster importerade.</span>
-          </div>
-        `;
-      }
-    } else {
-      const error = await response.json();
-      throw new Error(error.message || 'Serverimport misslyckades');
-    }
-  } catch (error) {
-    console.error('Server import error:', error);
-    if (importResult) {
-      importResult.innerHTML = `
-        <div class="alert alert-error">
-          <span>âœ— Fel vid serverimport: ${error.message}</span>
-        </div>
-      `;
-    }
-  }
-}
-
-function loadSettings() {
-  console.log('Loading settings view...');
-  // Settings template is already loaded
-}
-
-
-
-function renderCustomers(customers) {
-  const table = document.querySelector('#customers-view table tbody');
-  if (!table) {
-    console.warn('Customer table not found');
-    return;
-  }
-  
-  table.innerHTML = customers.map(customer => `
-    <tr>
-      <td>${customer.name || 'N/A'}</td>
-      <td>${customer.email || '-'}</td>
-      <td>${customer.phone || '-'}</td>
-      <td>
-        <button class="btn btn-xs btn-primary" onclick="editCustomer(${customer.id})">Redigera</button>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function renderDeals(deals) {
-  const table = document.querySelector('#deals-view table tbody');
-  if (!table) {
-    console.warn('Deals table not found');
-    return;
-  }
-  
-  table.innerHTML = deals.map(deal => `
-    <tr>
-      <td>${deal.title || 'N/A'}</td>
-      <td>${deal.customer || '-'}</td>
-      <td>${deal.value ? deal.value.toLocaleString('sv-SE') + ' kr' : '-'}</td>
-      <td><span class="badge badge-sm">${deal.status || 'unknown'}</span></td>
-      <td>
-        <button class="btn btn-xs btn-primary" onclick="editDeal(${deal.id})">Redigera</button>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function renderActivities(activities) {
-  const table = document.querySelector('#activities-view table tbody');
-  if (!table) {
-    console.warn('Activities table not found');
-    return;
-  }
-  
-  table.innerHTML = activities.map(activity => `
-    <tr>
-      <td>${activity.title || 'N/A'}</td>
-      <td><span class="badge badge-sm">${activity.type || 'unknown'}</span></td>
-      <td>${activity.date ? new Date(activity.date).toLocaleDateString('sv-SE') : '-'}</td>
-      <td>
-        <button class="btn btn-xs btn-primary" onclick="editActivity(${activity.id})">Redigera</button>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function showDemoMessage(entityType) {
-  const currentViewEl = document.getElementById(`${appState.currentView}-view`);
-  if (currentViewEl) {
-    const messageEl = document.createElement('div');
-    messageEl.className = 'alert alert-info mt-4';
-    messageEl.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      <span>Kunde inte ladda ${entityType} frÃ¥n API. Visar demo-data.</span>
-    `;
-    currentViewEl.insertBefore(messageEl, currentViewEl.firstChild);
-  }
-}
-
-function setupButtonHandlers() {
-  console.log('Setting up button handlers...');
-  
-  // Wait for buttons to be in DOM
-  setTimeout(() => {
-    // Add brand button
-    const addBrandBtn = document.getElementById('addBrand');
-    if (addBrandBtn) {
-      addBrandBtn.addEventListener('click', () => showAddBrandForm());
-    }
-    
-    // Add company button  
-    const addCompanyBtn = document.getElementById('addCompany');
-    if (addCompanyBtn) {
-      addCompanyBtn.addEventListener('click', () => showAddCompanyForm());
-    }
-    
-    // Add agent button
-    const addAgentBtn = document.getElementById('addAgent');
-    if (addAgentBtn) {
-      addAgentBtn.addEventListener('click', () => showAddAgentForm());
-    }
-    
-    // Add deal button
-    const addDealBtn = document.getElementById('addDealBtn');
-    if (addDealBtn) {
-      addDealBtn.addEventListener('click', () => showAddDealForm());
-    }
-    
-    // Add task button
-    const addTaskBtn = document.getElementById('addTask');
-    if (addTaskBtn) {
-      addTaskBtn.addEventListener('click', () => showAddTaskForm());
-    }
-    
-    console.log('Button handlers set up');
-  }, 200);
-}
-
-// Set up event handlers for a specific view
-function setupViewEventHandlers(viewName, viewElement) {
-  console.log(`ðŸ“‹ ====== setupViewEventHandlers START ======`);
-  console.log(`ðŸ“‹ View: ${viewName}`);
-  console.log(`ðŸ“‹ ViewElement:`, viewElement);
-  console.log(`ðŸ“‹ ViewElement ID:`, viewElement.id);
-  console.log(`ðŸ“‹ ViewElement innerHTML length:`, viewElement.innerHTML.length);
-  
-  // Log all buttons in the view
-  const allButtons = viewElement.querySelectorAll('button');
-  console.log(`ðŸ“‹ Found ${allButtons.length} total buttons in view`);
-  allButtons.forEach(btn => {
-    console.log(`  ðŸ“Œ Button: id="${btn.id}", class="${btn.className}", text="${btn.textContent.trim().substring(0, 30)}"`);
-  });
-  
-  // Find all buttons with data-action in this view
-  const actionButtons = viewElement.querySelectorAll('[data-action]');
-  console.log(`ðŸ“‹ Found ${actionButtons.length} buttons with data-action`);
-  actionButtons.forEach(button => {
-    const action = button.getAttribute('data-action');
-    console.log(`Found button with action: ${action}`);
-    
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleButtonAction(action, viewName);
-    });
-  });
-  
-  // Helper function to find and set up a button
-  const setupButton = (buttonId, handler, description) => {
-    console.log(`ðŸ” Looking for button: #${buttonId} (${description})`);
-    
-    // Try to find in viewElement first
-    let button = viewElement.querySelector(`#${buttonId}`);
-    console.log(`  viewElement.querySelector('#${buttonId}'):`, button);
-    
-    // If not found, try document (for cases where querySelector doesn't work)
-    if (!button) {
-      console.log(`  Trying document.getElementById...`);
-      button = document.getElementById(buttonId);
-      console.log(`  document.getElementById('${buttonId}'):`, button);
-    }
-    
-    if (button) {
-      console.log(`âœ… FOUND ${description} button (#${buttonId}) - Attaching listener`);
-      // Remove any existing listeners by cloning
-      const newButton = button.cloneNode(true);
-      button.parentNode.replaceChild(newButton, button);
-      
-      newButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log(`ðŸ–±ï¸ ${description} button CLICKED!`);
-        handler();
-      });
-    } else {
-      console.error(`âŒ Button #${buttonId} NOT FOUND for ${description}`);
-    }
-  };
-  
-  console.log(`ðŸ”§ Setting up button handlers...`);
-  setupButton('addBrand', showAddBrandForm, 'Add Brand');
-  setupButton('addCompany', showAddCompanyForm, 'Add Company');
-  setupButton('addAgent', showAddAgentForm, 'Add Agent');
-  setupButton('addDealBtn', showAddDealForm, 'Add Deal');
-  setupButton('addTask', showAddTaskForm, 'Add Task');
-  
-  // Set up dropdown handlers
-  const dropdowns = viewElement.querySelectorAll('select');
-  if (dropdowns.length === 0) {
-    // Try document if not found in viewElement
-    const allDropdowns = document.querySelectorAll(`#view-${viewName} select`);
-    console.log(`Found ${allDropdowns.length} dropdowns in document for ${viewName}`);
-    allDropdowns.forEach(dropdown => {
-      dropdown.addEventListener('change', (e) => {
-        console.log(`Dropdown changed: ${dropdown.id || 'unnamed'} = ${e.target.value}`);
-        handleDropdownChange(dropdown, e.target.value, viewName);
-      });
-    });
-  } else {
-    console.log(`Found ${dropdowns.length} dropdowns in viewElement`);
-    dropdowns.forEach(dropdown => {
-      dropdown.addEventListener('change', (e) => {
-        console.log(`Dropdown changed: ${dropdown.id || 'unnamed'} = ${e.target.value}`);
-        handleDropdownChange(dropdown, e.target.value, viewName);
-      });
-    });
-  }
-  
-  console.log(`âœ“ Event handlers set up for ${viewName}`);
-}
-
-// Handle button actions
-function handleButtonAction(action, viewName) {
-  console.log(`Handling action: ${action} in view: ${viewName}`);
-  
-  switch(action) {
-    case 'add-brand':
-      showAddBrandForm();
-      break;
-    case 'add-company':
-      showAddCompanyForm();
-      break;
-    case 'add-agent':
-      showAddAgentForm();
-      break;
-    case 'add-deal':
-      showAddDealForm();
-      break;
-    case 'add-task':
-      showAddTaskForm();
-      break;
-    default:
-      console.warn(`Unknown action: ${action}`);
-  }
-}
-
-// Handle dropdown changes
-function handleDropdownChange(dropdown, value, viewName) {
-  const dropdownId = dropdown.id;
-  
-  // Handle specific dropdowns based on their ID
-  if (dropdownId === 'segmentFilter') {
-    console.log(`Filtering by segment: ${value}`);
-    // Apply segment filter
-  } else if (dropdownId === 'statusFilter') {
-    console.log(`Filtering by status: ${value}`);
-    // Apply status filter
-  }
-}
-
-// Show forms for creating new entities
-⿾⼀ 㴀㴀㴀㴀㴀 䐀䔀吀䄀䤀䰀 䌀䄀刀䐀 䘀唀一䌀吀䤀伀一匀 㴀㴀㴀㴀㴀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 猀栀漀眀䌀漀洀瀀愀渀礀䐀攀琀愀椀氀猀⠀椀搀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 爀攀猀瀀漀渀猀攀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀挀漀洀瀀愀渀椀攀猀⼀␀笀椀搀紀怀⤀㬀ഀ਀    挀漀渀猀琀 挀漀洀瀀愀渀礀 㴀 愀眀愀椀琀 爀攀猀瀀漀渀猀攀⸀樀猀漀渀⠀⤀㬀ഀ਀    ഀ਀    挀漀渀猀琀 栀琀洀氀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀 洀漀搀愀氀ⴀ漀瀀攀渀∀㸀ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ戀漀砀 洀愀砀ⴀ眀ⴀ㐀砀氀 洀愀砀ⴀ栀ⴀ嬀㤀　瘀栀崀 漀瘀攀爀昀氀漀眀ⴀ礀ⴀ愀甀琀漀∀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ戀攀琀眀攀攀渀 椀琀攀洀猀ⴀ猀琀愀爀琀 洀戀ⴀ㐀∀㸀ഀ਀            㰀栀㌀ 挀氀愀猀猀㴀∀昀漀渀琀ⴀ戀漀氀搀 琀攀砀琀ⴀ㈀砀氀∀㸀␀笀挀漀洀瀀愀渀礀⸀渀愀洀攀紀㰀⼀栀㌀㸀ഀ਀            㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ猀洀 戀琀渀ⴀ挀椀爀挀氀攀 戀琀渀ⴀ最栀漀猀琀∀㸀㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㘀∀㸀ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀猀瀀愀挀攀ⴀ礀ⴀ㌀∀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀伀爀最愀渀椀猀愀琀椀漀渀猀渀甀洀洀攀爀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀漀爀最一甀洀戀攀爀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀嘀愀爀甀洀爀欀攀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀戀爀愀渀搀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀䬀愀琀攀最漀爀椀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀挀愀琀攀最漀爀礀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀匀琀愀琀甀猀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀瀀砀ⴀ㈀ 瀀礀ⴀ㄀ 椀渀氀椀渀攀ⴀ昀氀攀砀 琀攀砀琀ⴀ砀猀 氀攀愀搀椀渀最ⴀ㔀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 爀漀甀渀搀攀搀ⴀ昀甀氀氀 ␀笀最攀琀匀琀愀琀甀猀䈀愀搀最攀䌀氀愀猀猀⠀挀漀洀瀀愀渀礀⸀猀琀愀琀甀猀⤀紀∀㸀␀笀挀漀洀瀀愀渀礀⸀猀琀愀琀甀猀 簀簀 ✀瀀爀漀猀瀀攀欀琀✀紀㰀⼀猀瀀愀渀㸀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀倀椀瀀攀氀椀渀攀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀瀀椀瀀攀氀椀渀攀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀猀瀀愀挀攀ⴀ礀ⴀ㌀∀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀䔀ⴀ瀀漀猀琀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀攀洀愀椀氀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀吀攀氀攀昀漀渀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀瀀栀漀渀攀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀伀爀琀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀挀椀琀礀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀䰀渀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀挀漀甀渀琀礀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀搀椀瘀椀搀攀爀∀㸀㰀⼀搀椀瘀㸀ഀ਀          ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㘀∀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀䄀渀琀愀氀 氀椀挀攀渀猀攀爀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀氀椀挀攀渀猀攀䌀漀甀渀琀 簀簀 ✀　✀紀㰀⼀瀀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀倀爀漀搀甀欀琀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀瀀爀漀搀甀挀琀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀洀琀ⴀ㌀∀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ猀攀洀椀戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㔀　　∀㸀䈀攀琀愀氀渀椀渀最猀椀渀昀漀爀洀愀琀椀漀渀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ戀愀猀攀∀㸀␀笀挀漀洀瀀愀渀礀⸀瀀愀礀洀攀渀琀䤀渀昀漀 簀簀 ✀ⴀ✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ愀挀琀椀漀渀∀㸀ഀ਀            㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀攀搀椀琀䌀漀洀瀀愀渀礀⠀✀␀笀挀漀洀瀀愀渀礀⸀开椀搀紀✀⤀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ瀀爀椀洀愀爀礀∀㸀刀攀搀椀最攀爀愀㰀⼀戀甀琀琀漀渀㸀ഀ਀            㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀搀攀氀攀琀攀䌀漀洀瀀愀渀礀⠀✀␀笀挀漀洀瀀愀渀礀⸀开椀搀紀✀⤀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ攀爀爀漀爀∀㸀吀愀 戀漀爀琀㰀⼀戀甀琀琀漀渀㸀ഀ਀            㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ最栀漀猀琀∀㸀匀琀渀最㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀        㰀昀漀爀洀 洀攀琀栀漀搀㴀∀搀椀愀氀漀最∀ 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ戀愀挀欀搀爀漀瀀∀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀㸀挀氀漀猀攀㰀⼀戀甀琀琀漀渀㸀ഀ਀        㰀⼀昀漀爀洀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀    ഀ਀    猀栀漀眀䴀漀搀愀氀⠀栀琀洀氀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 挀漀洀瀀愀渀礀 搀攀琀愀椀氀猀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀✀䬀甀渀搀攀 椀渀琀攀 氀愀搀搀愀 昀爀攀琀愀最猀搀攀琀愀氀樀攀爀✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 攀搀椀琀䌀漀洀瀀愀渀礀⠀椀搀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 爀攀猀瀀漀渀猀攀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀挀漀洀瀀愀渀椀攀猀⼀␀笀椀搀紀怀⤀㬀ഀ਀    挀漀渀猀琀 挀漀洀瀀愀渀礀 㴀 愀眀愀椀琀 爀攀猀瀀漀渀猀攀⸀樀猀漀渀⠀⤀㬀ഀ਀    ഀ਀    挀漀渀猀琀 栀琀洀氀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀 洀漀搀愀氀ⴀ漀瀀攀渀∀㸀ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ戀漀砀 洀愀砀ⴀ眀ⴀ㌀砀氀 洀愀砀ⴀ栀ⴀ嬀㤀　瘀栀崀 漀瘀攀爀昀氀漀眀ⴀ礀ⴀ愀甀琀漀∀㸀ഀ਀          㰀栀㌀ 挀氀愀猀猀㴀∀昀漀渀琀ⴀ戀漀氀搀 琀攀砀琀ⴀ氀最 洀戀ⴀ㐀∀㸀刀攀搀椀最攀爀愀 昀爀攀琀愀最㰀⼀栀㌀㸀ഀ਀          㰀昀漀爀洀 椀搀㴀∀攀搀椀琀䌀漀洀瀀愀渀礀䘀漀爀洀∀ 挀氀愀猀猀㴀∀猀瀀愀挀攀ⴀ礀ⴀ㌀∀㸀ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䘀爀攀琀愀最猀渀愀洀渀 ⨀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀渀愀洀攀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀渀愀洀攀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ 爀攀焀甀椀爀攀搀 ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀伀爀最愀渀椀猀愀琀椀漀渀猀渀甀洀洀攀爀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀漀爀最一甀洀戀攀爀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀漀爀最一甀洀戀攀爀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀嘀愀爀甀洀爀欀攀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀戀爀愀渀搀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀戀爀愀渀搀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䬀愀琀攀最漀爀椀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀挀愀琀攀最漀爀礀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀挀愀琀攀最漀爀礀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀匀琀愀琀甀猀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀猀攀氀攀挀琀 渀愀洀攀㴀∀猀琀愀琀甀猀∀ 挀氀愀猀猀㴀∀猀攀氀攀挀琀 猀攀氀攀挀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀㸀ഀ਀                  㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀瀀爀漀猀瀀攀欀琀∀ ␀笀挀漀洀瀀愀渀礀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀瀀爀漀猀瀀攀欀琀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀倀爀漀猀瀀攀欀琀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                  㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀欀甀渀搀∀ ␀笀挀漀洀瀀愀渀礀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀欀甀渀搀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䬀甀渀搀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                  㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀椀渀愀欀琀椀瘀∀ ␀笀挀漀洀瀀愀渀礀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀椀渀愀欀琀椀瘀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䤀渀愀欀琀椀瘀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                㰀⼀猀攀氀攀挀琀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀倀椀瀀攀氀椀渀攀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀猀攀氀攀挀琀 渀愀洀攀㴀∀瀀椀瀀攀氀椀渀攀∀ 挀氀愀猀猀㴀∀猀攀氀攀挀琀 猀攀氀攀挀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀㸀ഀ਀                  㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀瀀爀漀猀瀀攀挀琀∀ ␀笀挀漀洀瀀愀渀礀⸀瀀椀瀀攀氀椀渀攀 㴀㴀㴀 ✀瀀爀漀猀瀀攀挀琀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀倀爀漀猀瀀攀欀琀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                  㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀愀挀琀椀瘀攀开挀甀猀琀漀洀攀爀∀ ␀笀挀漀洀瀀愀渀礀⸀瀀椀瀀攀氀椀渀攀 㴀㴀㴀 ✀愀挀琀椀瘀攀开挀甀猀琀漀洀攀爀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䄀欀琀椀瘀 欀甀渀搀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                  㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀挀栀甀爀渀攀搀∀ ␀笀挀漀洀瀀愀渀礀⸀瀀椀瀀攀氀椀渀攀 㴀㴀㴀 ✀挀栀甀爀渀攀搀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䄀瘀猀氀甀琀愀搀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                㰀⼀猀攀氀攀挀琀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀伀爀琀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀挀椀琀礀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀挀椀琀礀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䰀渀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀挀漀甀渀琀礀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀挀漀甀渀琀礀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䔀ⴀ瀀漀猀琀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀攀洀愀椀氀∀ 渀愀洀攀㴀∀攀洀愀椀氀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀攀洀愀椀氀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀吀攀氀攀昀漀渀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀氀∀ 渀愀洀攀㴀∀瀀栀漀渀攀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀瀀栀漀渀攀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䄀渀琀愀氀 氀椀挀攀渀猀攀爀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀渀甀洀戀攀爀∀ 渀愀洀攀㴀∀氀椀挀攀渀猀攀䌀漀甀渀琀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀氀椀挀攀渀猀攀䌀漀甀渀琀 簀簀 　紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀              㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀                㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀倀爀漀搀甀欀琀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀瀀爀漀搀甀挀琀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀瀀爀漀搀甀挀琀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀              㰀⼀搀椀瘀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䈀攀琀愀氀渀椀渀最猀椀渀昀漀爀洀愀琀椀漀渀㰀⼀猀瀀愀渀㸀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀瀀愀礀洀攀渀琀䤀渀昀漀∀ 瘀愀氀甀攀㴀∀␀笀挀漀洀瀀愀渀礀⸀瀀愀礀洀攀渀琀䤀渀昀漀 簀簀 ✀✀紀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ ⼀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ愀挀琀椀漀渀∀㸀ഀ਀              㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀戀甀琀琀漀渀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ最栀漀猀琀∀ 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀㸀䄀瘀戀爀礀琀㰀⼀戀甀琀琀漀渀㸀ഀ਀              㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀猀甀戀洀椀琀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ瀀爀椀洀愀爀礀∀㸀匀瀀愀爀愀 渀搀爀椀渀最愀爀㰀⼀戀甀琀琀漀渀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀          㰀⼀昀漀爀洀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀        㰀昀漀爀洀 洀攀琀栀漀搀㴀∀搀椀愀氀漀最∀ 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ戀愀挀欀搀爀漀瀀∀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀㸀挀氀漀猀攀㰀⼀戀甀琀琀漀渀㸀ഀ਀        㰀⼀昀漀爀洀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀    ഀ਀    猀栀漀眀䴀漀搀愀氀⠀栀琀洀氀Ⰰ 愀猀礀渀挀 ⠀昀漀爀洀䐀愀琀愀⤀ 㴀㸀 笀ഀ਀      愀眀愀椀琀 甀瀀搀愀琀攀䔀渀琀椀琀礀⠀✀挀漀洀瀀愀渀椀攀猀✀Ⰰ 椀搀Ⰰ 昀漀爀洀䐀愀琀愀⤀㬀ഀ਀      氀漀愀搀䌀漀洀瀀愀渀椀攀猀⠀⤀㬀ഀ਀    紀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 挀漀洀瀀愀渀礀 昀漀爀 攀搀椀琀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀✀䬀甀渀搀攀 椀渀琀攀 氀愀搀搀愀 昀爀攀琀愀最 昀爀 爀攀搀椀最攀爀椀渀最✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 甀瀀搀愀琀攀䔀渀琀椀琀礀⠀攀渀琀椀琀礀吀礀瀀攀Ⰰ 椀搀Ⰰ 搀愀琀愀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 爀攀猀瀀漀渀猀攀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀␀笀攀渀琀椀琀礀吀礀瀀攀紀⼀␀笀椀搀紀怀Ⰰ 笀ഀ਀      洀攀琀栀漀搀㨀 ✀倀唀吀✀Ⰰഀ਀      栀攀愀搀攀爀猀㨀 笀 ✀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀✀㨀 ✀愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀✀ 紀Ⰰഀ਀      戀漀搀礀㨀 䨀匀伀一⸀猀琀爀椀渀最椀昀礀⠀搀愀琀愀⤀ഀ਀    紀⤀㬀ഀ਀    ഀ਀    椀昀 ⠀℀爀攀猀瀀漀渀猀攀⸀漀欀⤀ 琀栀爀漀眀 渀攀眀 䔀爀爀漀爀⠀✀唀瀀搀愀琀攀 昀愀椀氀攀搀✀⤀㬀ഀ਀    愀氀攀爀琀⠀✀唀瀀瀀搀愀琀攀爀愀琀℀✀⤀㬀ഀ਀    挀氀漀猀攀䴀漀搀愀氀⠀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀怀䔀爀爀漀爀 甀瀀搀愀琀椀渀最 ␀笀攀渀琀椀琀礀吀礀瀀攀紀㨀怀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀怀䬀甀渀搀攀 椀渀琀攀 甀瀀瀀搀愀琀攀爀愀 ␀笀攀渀琀椀琀礀吀礀瀀攀紀怀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀ഀ਀ഀ਀ഀ਀⼀⼀ 㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀⼀⼀ 䈀刀䄀一䐀 䐀䔀吀䄀䤀䰀 䌀䄀刀䐀匀ഀ਀⼀⼀ 㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 猀栀漀眀䈀爀愀渀搀䐀攀琀愀椀氀猀⠀椀搀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 戀爀愀渀搀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀戀爀愀渀搀猀⼀␀笀椀搀紀怀⤀㬀ഀ਀    ഀ਀    挀漀渀猀琀 洀漀搀愀氀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀洀漀搀愀氀✀⤀㬀ഀ਀    挀漀渀猀琀 猀琀愀琀甀猀䈀愀搀最攀 㴀 最攀琀匀琀愀琀甀猀䈀愀搀最攀䌀氀愀猀猀⠀戀爀愀渀搀⸀猀琀愀琀甀猀 簀簀 ✀愀欀琀椀瘀✀⤀㬀ഀ਀    ഀ਀    洀漀搀愀氀⸀椀渀渀攀爀䠀吀䴀䰀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀戀最ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀ⴀ氀最 瀀ⴀ㘀 洀愀砀ⴀ眀ⴀ㈀砀氀 眀ⴀ昀甀氀氀 洀愀砀ⴀ栀ⴀ嬀㤀　瘀栀崀 漀瘀攀爀昀氀漀眀ⴀ礀ⴀ愀甀琀漀∀㸀ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ戀攀琀眀攀攀渀 椀琀攀洀猀ⴀ猀琀愀爀琀 洀戀ⴀ㘀∀㸀ഀ਀          㰀栀㈀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ㈀砀氀 昀漀渀琀ⴀ戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀嘀愀爀甀洀爀欀攀㨀 ␀笀戀爀愀渀搀⸀渀愀洀攀 簀簀 ✀一⼀䄀✀紀㰀⼀栀㈀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㐀　　 栀漀瘀攀爀㨀琀攀砀琀ⴀ最爀愀礀ⴀ㘀　　∀㸀ഀ਀            㰀猀瘀最 挀氀愀猀猀㴀∀眀ⴀ㘀 栀ⴀ㘀∀ 昀椀氀氀㴀∀渀漀渀攀∀ 猀琀爀漀欀攀㴀∀挀甀爀爀攀渀琀䌀漀氀漀爀∀ 瘀椀攀眀䈀漀砀㴀∀　 　 ㈀㐀 ㈀㐀∀㸀ഀ਀              㰀瀀愀琀栀 猀琀爀漀欀攀ⴀ氀椀渀攀挀愀瀀㴀∀爀漀甀渀搀∀ 猀琀爀漀欀攀ⴀ氀椀渀攀樀漀椀渀㴀∀爀漀甀渀搀∀ 猀琀爀漀欀攀ⴀ眀椀搀琀栀㴀∀㈀∀ 搀㴀∀䴀㘀 ㄀㠀䰀㄀㠀 㘀䴀㘀 㘀氀㄀㈀ ㄀㈀∀㸀㰀⼀瀀愀琀栀㸀ഀ਀            㰀⼀猀瘀最㸀ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀        ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀 洀戀ⴀ㘀∀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀一愀洀渀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀戀爀愀渀搀⸀渀愀洀攀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀匀琀愀琀甀猀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀猀瀀愀渀 挀氀愀猀猀㴀∀␀笀猀琀愀琀甀猀䈀愀搀最攀紀∀㸀␀笀戀爀愀渀搀⸀猀琀愀琀甀猀 簀簀 ✀愀欀琀椀瘀✀紀㰀⼀猀瀀愀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䬀愀琀攀最漀爀椀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀戀爀愀渀搀⸀挀愀琀攀最漀爀礀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀圀攀戀戀瀀氀愀琀猀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀戀爀愀渀搀⸀眀攀戀猀椀琀攀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀刀愀洀愀瘀琀愀氀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀戀爀愀渀搀⸀栀愀猀䌀攀渀琀爀愀氀䄀最爀攀攀洀攀渀琀 㼀 ✀䨀愀✀ 㨀 ✀一攀樀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䄀渀琀愀氀 昀爀攀琀愀最㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀戀爀愀渀搀⸀挀漀洀瀀愀渀礀䌀漀甀渀琀 簀簀 　紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀挀漀氀ⴀ猀瀀愀渀ⴀ㈀∀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䈀攀猀欀爀椀瘀渀椀渀最㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀戀爀愀渀搀⸀搀攀猀挀爀椀瀀琀椀漀渀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀        ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ攀渀搀 最愀瀀ⴀ㈀∀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀搀攀氀攀琀攀䈀爀愀渀搀⠀✀␀笀戀爀愀渀搀⸀开椀搀紀✀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ爀攀搀ⴀ㘀　　 琀攀砀琀ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ爀攀搀ⴀ㜀　　∀㸀ഀ਀            吀愀 戀漀爀琀ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀攀搀椀琀䈀爀愀渀搀⠀✀␀笀戀爀愀渀搀⸀开椀搀紀✀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ戀氀甀攀ⴀ㘀　　 琀攀砀琀ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ戀氀甀攀ⴀ㜀　　∀㸀ഀ਀            刀攀搀椀最攀爀愀ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ最爀愀礀ⴀ㈀　　 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ最爀愀礀ⴀ㌀　　∀㸀ഀ਀            匀琀渀最ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀    ഀ਀    猀栀漀眀䴀漀搀愀氀⠀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 戀爀愀渀搀 搀攀琀愀椀氀猀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀✀䬀甀渀搀攀 椀渀琀攀 氀愀搀搀愀 瘀愀爀甀洀爀欀攀✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 攀搀椀琀䈀爀愀渀搀⠀椀搀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 戀爀愀渀搀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀戀爀愀渀搀猀⼀␀笀椀搀紀怀⤀㬀ഀ਀    ഀ਀    挀漀渀猀琀 洀漀搀愀氀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀洀漀搀愀氀✀⤀㬀ഀ਀    洀漀搀愀氀⸀椀渀渀攀爀䠀吀䴀䰀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀戀最ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀ⴀ氀最 瀀ⴀ㘀 洀愀砀ⴀ眀ⴀ㈀砀氀 眀ⴀ昀甀氀氀 洀愀砀ⴀ栀ⴀ嬀㤀　瘀栀崀 漀瘀攀爀昀氀漀眀ⴀ礀ⴀ愀甀琀漀∀㸀ഀ਀        㰀栀㈀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ㈀砀氀 昀漀渀琀ⴀ戀漀氀搀 洀戀ⴀ㘀∀㸀刀攀搀椀最攀爀愀 瘀愀爀甀洀爀欀攀㰀⼀栀㈀㸀ഀ਀        㰀昀漀爀洀 椀搀㴀∀攀搀椀琀䈀爀愀渀搀䘀漀爀洀∀ 挀氀愀猀猀㴀∀猀瀀愀挀攀ⴀ礀ⴀ㐀∀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀一愀洀渀 ⨀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀渀愀洀攀∀ 瘀愀氀甀攀㴀∀␀笀戀爀愀渀搀⸀渀愀洀攀 簀簀 ✀✀紀∀ 爀攀焀甀椀爀攀搀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀匀琀愀琀甀猀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀猀攀氀攀挀琀 渀愀洀攀㴀∀猀琀愀琀甀猀∀ 挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀                㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀愀欀琀椀瘀∀ ␀笀戀爀愀渀搀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀愀欀琀椀瘀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䄀欀琀椀瘀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀椀渀愀欀琀椀瘀∀ ␀笀戀爀愀渀搀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀椀渀愀欀琀椀瘀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䤀渀愀欀琀椀瘀㰀⼀漀瀀琀椀漀渀㸀ഀ਀              㰀⼀猀攀氀攀挀琀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䬀愀琀攀最漀爀椀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀挀愀琀攀最漀爀礀∀ 瘀愀氀甀攀㴀∀␀笀戀爀愀渀搀⸀挀愀琀攀最漀爀礀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀圀攀戀戀瀀氀愀琀猀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀甀爀氀∀ 渀愀洀攀㴀∀眀攀戀猀椀琀攀∀ 瘀愀氀甀攀㴀∀␀笀戀爀愀渀搀⸀眀攀戀猀椀琀攀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀挀漀氀ⴀ猀瀀愀渀ⴀ㈀∀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䈀攀猀欀爀椀瘀渀椀渀最㰀⼀氀愀戀攀氀㸀ഀ਀              㰀琀攀砀琀愀爀攀愀 渀愀洀攀㴀∀搀攀猀挀爀椀瀀琀椀漀渀∀ 爀漀眀猀㴀∀㌀∀ഀ਀                        挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀␀笀戀爀愀渀搀⸀搀攀猀挀爀椀瀀琀椀漀渀 簀簀 ✀✀紀㰀⼀琀攀砀琀愀爀攀愀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀 挀氀愀猀猀㴀∀挀漀氀ⴀ猀瀀愀渀ⴀ㈀∀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀昀氀攀砀 椀琀攀洀猀ⴀ挀攀渀琀攀爀∀㸀ഀ਀                㰀椀渀瀀甀琀 琀礀瀀攀㴀∀挀栀攀挀欀戀漀砀∀ 渀愀洀攀㴀∀栀愀猀䌀攀渀琀爀愀氀䄀最爀攀攀洀攀渀琀∀ ␀笀戀爀愀渀搀⸀栀愀猀䌀攀渀琀爀愀氀䄀最爀攀攀洀攀渀琀 㼀 ✀挀栀攀挀欀攀搀✀ 㨀 ✀✀紀ഀ਀                       挀氀愀猀猀㴀∀洀爀ⴀ㈀ 栀ⴀ㐀 眀ⴀ㐀 琀攀砀琀ⴀ戀氀甀攀ⴀ㘀　　 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀∀㸀ഀ਀                㰀猀瀀愀渀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　∀㸀䠀愀爀 爀愀洀愀瘀琀愀氀㰀⼀猀瀀愀渀㸀ഀ਀              㰀⼀氀愀戀攀氀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ攀渀搀 最愀瀀ⴀ㈀ 洀琀ⴀ㘀∀㸀ഀ਀            㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀戀甀琀琀漀渀∀ 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ最爀愀礀ⴀ㈀　　 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ最爀愀礀ⴀ㌀　　∀㸀ഀ਀              䄀瘀戀爀礀琀ഀ਀            㰀⼀戀甀琀琀漀渀㸀ഀ਀            㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀猀甀戀洀椀琀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ戀氀甀攀ⴀ㘀　　 琀攀砀琀ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ戀氀甀攀ⴀ㜀　　∀㸀ഀ਀              匀瀀愀爀愀ഀ਀            㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀        㰀⼀昀漀爀洀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀    ഀ਀    搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀攀搀椀琀䈀爀愀渀搀䘀漀爀洀✀⤀⸀愀搀搀䔀瘀攀渀琀䰀椀猀琀攀渀攀爀⠀✀猀甀戀洀椀琀✀Ⰰ 愀猀礀渀挀 ⠀攀⤀ 㴀㸀 笀ഀ਀      攀⸀瀀爀攀瘀攀渀琀䐀攀昀愀甀氀琀⠀⤀㬀ഀ਀      挀漀渀猀琀 昀漀爀洀䐀愀琀愀 㴀 渀攀眀 䘀漀爀洀䐀愀琀愀⠀攀⸀琀愀爀最攀琀⤀㬀ഀ਀      挀漀渀猀琀 搀愀琀愀 㴀 笀ഀ਀        渀愀洀攀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀渀愀洀攀✀⤀Ⰰഀ਀        猀琀愀琀甀猀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀猀琀愀琀甀猀✀⤀Ⰰഀ਀        挀愀琀攀最漀爀礀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀挀愀琀攀最漀爀礀✀⤀Ⰰഀ਀        眀攀戀猀椀琀攀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀眀攀戀猀椀琀攀✀⤀Ⰰഀ਀        搀攀猀挀爀椀瀀琀椀漀渀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀搀攀猀挀爀椀瀀琀椀漀渀✀⤀Ⰰഀ਀        栀愀猀䌀攀渀琀爀愀氀䄀最爀攀攀洀攀渀琀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀栀愀猀䌀攀渀琀爀愀氀䄀最爀攀攀洀攀渀琀✀⤀ 㴀㴀㴀 ✀漀渀✀ഀ਀      紀㬀ഀ਀      ഀ਀      愀眀愀椀琀 甀瀀搀愀琀攀䔀渀琀椀琀礀⠀✀戀爀愀渀搀猀✀Ⰰ 椀搀Ⰰ 搀愀琀愀⤀㬀ഀ਀    紀⤀㬀ഀ਀    ഀ਀    猀栀漀眀䴀漀搀愀氀⠀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 戀爀愀渀搀 昀漀爀 攀搀椀琀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀✀䬀甀渀搀攀 椀渀琀攀 氀愀搀搀愀 瘀愀爀甀洀爀欀攀 昀爀 爀攀搀椀最攀爀椀渀最✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀⼀⼀ 㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀⼀⼀ 䄀䜀䔀一吀 䐀䔀吀䄀䤀䰀 䌀䄀刀䐀匀ഀ਀⼀⼀ 㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 猀栀漀眀䄀最攀渀琀䐀攀琀愀椀氀猀⠀椀搀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 愀最攀渀琀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀愀最攀渀琀猀⼀␀笀椀搀紀怀⤀㬀ഀ਀    ഀ਀    挀漀渀猀琀 洀漀搀愀氀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀洀漀搀愀氀✀⤀㬀ഀ਀    挀漀渀猀琀 猀琀愀琀甀猀䈀愀搀最攀 㴀 最攀琀匀琀愀琀甀猀䈀愀搀最攀䌀氀愀猀猀⠀愀最攀渀琀⸀猀琀愀琀甀猀 簀簀 ✀愀欀琀椀瘀✀⤀㬀ഀ਀    ഀ਀    洀漀搀愀氀⸀椀渀渀攀爀䠀吀䴀䰀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀戀最ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀ⴀ氀最 瀀ⴀ㘀 洀愀砀ⴀ眀ⴀ㈀砀氀 眀ⴀ昀甀氀氀 洀愀砀ⴀ栀ⴀ嬀㤀　瘀栀崀 漀瘀攀爀昀氀漀眀ⴀ礀ⴀ愀甀琀漀∀㸀ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ戀攀琀眀攀攀渀 椀琀攀洀猀ⴀ猀琀愀爀琀 洀戀ⴀ㘀∀㸀ഀ਀          㰀栀㈀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ㈀砀氀 昀漀渀琀ⴀ戀漀氀搀 琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀䴀欀氀愀爀攀㨀 ␀笀愀最攀渀琀⸀渀愀洀攀 簀簀 ✀一⼀䄀✀紀㰀⼀栀㈀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㐀　　 栀漀瘀攀爀㨀琀攀砀琀ⴀ最爀愀礀ⴀ㘀　　∀㸀ഀ਀            㰀猀瘀最 挀氀愀猀猀㴀∀眀ⴀ㘀 栀ⴀ㘀∀ 昀椀氀氀㴀∀渀漀渀攀∀ 猀琀爀漀欀攀㴀∀挀甀爀爀攀渀琀䌀漀氀漀爀∀ 瘀椀攀眀䈀漀砀㴀∀　 　 ㈀㐀 ㈀㐀∀㸀ഀ਀              㰀瀀愀琀栀 猀琀爀漀欀攀ⴀ氀椀渀攀挀愀瀀㴀∀爀漀甀渀搀∀ 猀琀爀漀欀攀ⴀ氀椀渀攀樀漀椀渀㴀∀爀漀甀渀搀∀ 猀琀爀漀欀攀ⴀ眀椀搀琀栀㴀∀㈀∀ 搀㴀∀䴀㘀 ㄀㠀䰀㄀㠀 㘀䴀㘀 㘀氀㄀㈀ ㄀㈀∀㸀㰀⼀瀀愀琀栀㸀ഀ਀            㰀⼀猀瘀最㸀ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀        ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀 洀戀ⴀ㘀∀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀一愀洀渀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀渀愀洀攀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀匀琀愀琀甀猀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀猀瀀愀渀 挀氀愀猀猀㴀∀␀笀猀琀愀琀甀猀䈀愀搀最攀紀∀㸀␀笀愀最攀渀琀⸀猀琀愀琀甀猀 簀簀 ✀愀欀琀椀瘀✀紀㰀⼀猀瀀愀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䔀ⴀ瀀漀猀琀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀攀洀愀椀氀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀吀攀氀攀昀漀渀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀瀀栀漀渀攀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䘀爀攀琀愀最㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀挀漀洀瀀愀渀礀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀嘀愀爀甀洀爀欀攀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀戀爀愀渀搀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀刀漀氀氀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀爀漀氀攀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䰀椀挀攀渀猀琀礀瀀㰀⼀氀愀戀攀氀㸀ഀ਀            㰀瀀 挀氀愀猀猀㴀∀琀攀砀琀ⴀ最爀愀礀ⴀ㤀　　∀㸀␀笀愀最攀渀琀⸀氀椀挀攀渀猀攀吀礀瀀攀 簀簀 ✀一⼀䄀✀紀㰀⼀瀀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀        ഀ਀        㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ攀渀搀 最愀瀀ⴀ㈀∀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀搀攀氀攀琀攀䄀最攀渀琀⠀✀␀笀愀最攀渀琀⸀开椀搀紀✀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ爀攀搀ⴀ㘀　　 琀攀砀琀ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ爀攀搀ⴀ㜀　　∀㸀ഀ਀            吀愀 戀漀爀琀ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀攀搀椀琀䄀最攀渀琀⠀✀␀笀愀最攀渀琀⸀开椀搀紀✀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ戀氀甀攀ⴀ㘀　　 琀攀砀琀ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ戀氀甀攀ⴀ㜀　　∀㸀ഀ਀            刀攀搀椀最攀爀愀ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ最爀愀礀ⴀ㈀　　 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ最爀愀礀ⴀ㌀　　∀㸀ഀ਀            匀琀渀最ഀ਀          㰀⼀戀甀琀琀漀渀㸀ഀ਀        㰀⼀搀椀瘀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀    ഀ਀    猀栀漀眀䴀漀搀愀氀⠀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 愀最攀渀琀 搀攀琀愀椀氀猀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀✀䬀甀渀搀攀 椀渀琀攀 氀愀搀搀愀 洀欀氀愀爀攀✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀愀猀礀渀挀 昀甀渀挀琀椀漀渀 攀搀椀琀䄀最攀渀琀⠀椀搀⤀ 笀ഀ਀  琀爀礀 笀ഀ਀    挀漀渀猀琀 愀最攀渀琀 㴀 愀眀愀椀琀 昀攀琀挀栀圀椀琀栀䄀甀琀栀⠀怀⼀愀瀀椀⼀愀最攀渀琀猀⼀␀笀椀搀紀怀⤀㬀ഀ਀    ഀ਀    挀漀渀猀琀 洀漀搀愀氀 㴀 搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀洀漀搀愀氀✀⤀㬀ഀ਀    洀漀搀愀氀⸀椀渀渀攀爀䠀吀䴀䰀 㴀 怀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀戀最ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀ⴀ氀最 瀀ⴀ㘀 洀愀砀ⴀ眀ⴀ㈀砀氀 眀ⴀ昀甀氀氀 洀愀砀ⴀ栀ⴀ嬀㤀　瘀栀崀 漀瘀攀爀昀氀漀眀ⴀ礀ⴀ愀甀琀漀∀㸀ഀ਀        㰀栀㈀ 挀氀愀猀猀㴀∀琀攀砀琀ⴀ㈀砀氀 昀漀渀琀ⴀ戀漀氀搀 洀戀ⴀ㘀∀㸀刀攀搀椀最攀爀愀 洀欀氀愀爀攀㰀⼀栀㈀㸀ഀ਀        㰀昀漀爀洀 椀搀㴀∀攀搀椀琀䄀最攀渀琀䘀漀爀洀∀ 挀氀愀猀猀㴀∀猀瀀愀挀攀ⴀ礀ⴀ㐀∀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀最爀椀搀 最爀椀搀ⴀ挀漀氀猀ⴀ㈀ 最愀瀀ⴀ㐀∀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀一愀洀渀 ⨀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀渀愀洀攀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀渀愀洀攀 簀簀 ✀✀紀∀ 爀攀焀甀椀爀攀搀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀匀琀愀琀甀猀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀猀攀氀攀挀琀 渀愀洀攀㴀∀猀琀愀琀甀猀∀ 挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀                㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀愀欀琀椀瘀∀ ␀笀愀最攀渀琀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀愀欀琀椀瘀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䄀欀琀椀瘀㰀⼀漀瀀琀椀漀渀㸀ഀ਀                㰀漀瀀琀椀漀渀 瘀愀氀甀攀㴀∀椀渀愀欀琀椀瘀∀ ␀笀愀最攀渀琀⸀猀琀愀琀甀猀 㴀㴀㴀 ✀椀渀愀欀琀椀瘀✀ 㼀 ✀猀攀氀攀挀琀攀搀✀ 㨀 ✀✀紀㸀䤀渀愀欀琀椀瘀㰀⼀漀瀀琀椀漀渀㸀ഀ਀              㰀⼀猀攀氀攀挀琀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䔀ⴀ瀀漀猀琀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀攀洀愀椀氀∀ 渀愀洀攀㴀∀攀洀愀椀氀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀攀洀愀椀氀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀吀攀氀攀昀漀渀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀氀∀ 渀愀洀攀㴀∀瀀栀漀渀攀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀瀀栀漀渀攀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䘀爀攀琀愀最㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀挀漀洀瀀愀渀礀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀挀漀洀瀀愀渀礀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀嘀愀爀甀洀爀欀攀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀戀爀愀渀搀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀戀爀愀渀搀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀刀漀氀氀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀爀漀氀攀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀爀漀氀攀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀            㰀搀椀瘀㸀ഀ਀              㰀氀愀戀攀氀 挀氀愀猀猀㴀∀戀氀漀挀欀 琀攀砀琀ⴀ猀洀 昀漀渀琀ⴀ洀攀搀椀甀洀 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 洀戀ⴀ㄀∀㸀䰀椀挀攀渀猀琀礀瀀㰀⼀氀愀戀攀氀㸀ഀ਀              㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀氀椀挀攀渀猀攀吀礀瀀攀∀ 瘀愀氀甀攀㴀∀␀笀愀最攀渀琀⸀氀椀挀攀渀猀攀吀礀瀀攀 簀簀 ✀✀紀∀ഀ਀                     挀氀愀猀猀㴀∀眀ⴀ昀甀氀氀 瀀砀ⴀ㌀ 瀀礀ⴀ㈀ 戀漀爀搀攀爀 戀漀爀搀攀爀ⴀ最爀愀礀ⴀ㌀　　 爀漀甀渀搀攀搀ⴀ氀最 昀漀挀甀猀㨀爀椀渀最ⴀ㈀ 昀漀挀甀猀㨀爀椀渀最ⴀ戀氀甀攀ⴀ㔀　　∀㸀ഀ਀            㰀⼀搀椀瘀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀昀氀攀砀 樀甀猀琀椀昀礀ⴀ攀渀搀 最愀瀀ⴀ㈀ 洀琀ⴀ㘀∀㸀ഀ਀            㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀戀甀琀琀漀渀∀ 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ最爀愀礀ⴀ㈀　　 琀攀砀琀ⴀ最爀愀礀ⴀ㜀　　 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ最爀愀礀ⴀ㌀　　∀㸀ഀ਀              䄀瘀戀爀礀琀ഀ਀            㰀⼀戀甀琀琀漀渀㸀ഀ਀            㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀猀甀戀洀椀琀∀ 挀氀愀猀猀㴀∀瀀砀ⴀ㐀 瀀礀ⴀ㈀ 戀最ⴀ戀氀甀攀ⴀ㘀　　 琀攀砀琀ⴀ眀栀椀琀攀 爀漀甀渀搀攀搀 栀漀瘀攀爀㨀戀最ⴀ戀氀甀攀ⴀ㜀　　∀㸀ഀ਀              匀瀀愀爀愀ഀ਀            㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀        㰀⼀昀漀爀洀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀    怀㬀ഀ਀    ഀ਀    搀漀挀甀洀攀渀琀⸀最攀琀䔀氀攀洀攀渀琀䈀礀䤀搀⠀✀攀搀椀琀䄀最攀渀琀䘀漀爀洀✀⤀⸀愀搀搀䔀瘀攀渀琀䰀椀猀琀攀渀攀爀⠀✀猀甀戀洀椀琀✀Ⰰ 愀猀礀渀挀 ⠀攀⤀ 㴀㸀 笀ഀ਀      攀⸀瀀爀攀瘀攀渀琀䐀攀昀愀甀氀琀⠀⤀㬀ഀ਀      挀漀渀猀琀 昀漀爀洀䐀愀琀愀 㴀 渀攀眀 䘀漀爀洀䐀愀琀愀⠀攀⸀琀愀爀最攀琀⤀㬀ഀ਀      挀漀渀猀琀 搀愀琀愀 㴀 笀ഀ਀        渀愀洀攀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀渀愀洀攀✀⤀Ⰰഀ਀        猀琀愀琀甀猀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀猀琀愀琀甀猀✀⤀Ⰰഀ਀        攀洀愀椀氀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀攀洀愀椀氀✀⤀Ⰰഀ਀        瀀栀漀渀攀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀瀀栀漀渀攀✀⤀Ⰰഀ਀        挀漀洀瀀愀渀礀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀挀漀洀瀀愀渀礀✀⤀Ⰰഀ਀        戀爀愀渀搀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀戀爀愀渀搀✀⤀Ⰰഀ਀        爀漀氀攀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀爀漀氀攀✀⤀Ⰰഀ਀        氀椀挀攀渀猀攀吀礀瀀攀㨀 昀漀爀洀䐀愀琀愀⸀最攀琀⠀✀氀椀挀攀渀猀攀吀礀瀀攀✀⤀ഀ਀      紀㬀ഀ਀      ഀ਀      愀眀愀椀琀 甀瀀搀愀琀攀䔀渀琀椀琀礀⠀✀愀最攀渀琀猀✀Ⰰ 椀搀Ⰰ 搀愀琀愀⤀㬀ഀ਀    紀⤀㬀ഀ਀    ഀ਀    猀栀漀眀䴀漀搀愀氀⠀⤀㬀ഀ਀  紀 挀愀琀挀栀 ⠀攀爀爀漀爀⤀ 笀ഀ਀    挀漀渀猀漀氀攀⸀攀爀爀漀爀⠀✀䔀爀爀漀爀 氀漀愀搀椀渀最 愀最攀渀琀 昀漀爀 攀搀椀琀㨀✀Ⰰ 攀爀爀漀爀⤀㬀ഀ਀    愀氀攀爀琀⠀✀䬀甀渀搀攀 椀渀琀攀 氀愀搀搀愀 洀欀氀愀爀攀 昀爀 爀攀搀椀最攀爀椀渀最✀⤀㬀ഀ਀  紀ഀ਀紀ഀ਀ഀ਀ഀ਀昀甀渀挀琀椀漀渀 猀栀漀眀䄀搀搀䈀爀愀渀搀䘀漀爀洀⠀⤀ 笀ഀ਀  挀漀渀猀漀氀攀⸀氀漀最⠀✀砀紁꼁 猀栀漀眀䄀搀搀䈀爀愀渀搀䘀漀爀洀 挀愀氀氀攀搀℀✀⤀㬀ഀ਀  挀漀渀猀琀 栀琀洀氀 㴀 怀ഀ਀    㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀 洀漀搀愀氀ⴀ漀瀀攀渀∀㸀ഀ਀      㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ戀漀砀 洀愀砀ⴀ眀ⴀ㈀砀氀∀㸀ഀ਀        㰀栀㌀ 挀氀愀猀猀㴀∀昀漀渀琀ⴀ戀漀氀搀 琀攀砀琀ⴀ氀最 洀戀ⴀ㐀∀㸀䰀쌀ꐀ最最 琀椀氀氀 渀礀琀琀 瘀愀爀甀洀쌀ꐀ爀欀攀㰀⼀栀㌀㸀ഀ਀        㰀昀漀爀洀 椀搀㴀∀愀搀搀䈀爀愀渀搀䘀漀爀洀∀ 挀氀愀猀猀㴀∀猀瀀愀挀攀ⴀ礀ⴀ㐀∀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀ഀ਀              㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀嘀愀爀甀洀쌀ꐀ爀欀攀猀渀愀洀渀 ⨀㰀⼀猀瀀愀渀㸀ഀ਀            㰀⼀氀愀戀攀氀㸀ഀ਀            㰀椀渀瀀甀琀 琀礀瀀攀㴀∀琀攀砀琀∀ 渀愀洀攀㴀∀渀愀洀攀∀ 瀀氀愀挀攀栀漀氀搀攀爀㴀∀䄀渀最攀 瘀愀爀甀洀쌀ꐀ爀欀攀猀渀愀洀渀∀ 挀氀愀猀猀㴀∀椀渀瀀甀琀 椀渀瀀甀琀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ 爀攀焀甀椀爀攀搀 ⼀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀昀漀爀洀ⴀ挀漀渀琀爀漀氀 眀ⴀ昀甀氀氀∀㸀ഀ਀            㰀氀愀戀攀氀 挀氀愀猀猀㴀∀氀愀戀攀氀∀㸀ഀ਀              㰀猀瀀愀渀 挀氀愀猀猀㴀∀氀愀戀攀氀ⴀ琀攀砀琀∀㸀䈀攀猀欀爀椀瘀渀椀渀最㰀⼀猀瀀愀渀㸀ഀ਀            㰀⼀氀愀戀攀氀㸀ഀ਀            㰀琀攀砀琀愀爀攀愀 渀愀洀攀㴀∀搀攀猀挀爀椀瀀琀椀漀渀∀ 瀀氀愀挀攀栀漀氀搀攀爀㴀∀䈀攀猀欀爀椀瘀 瘀愀爀甀洀쌀ꐀ爀欀攀琀⸀⸀⸀∀ 挀氀愀猀猀㴀∀琀攀砀琀愀爀攀愀 琀攀砀琀愀爀攀愀ⴀ戀漀爀搀攀爀攀搀 眀ⴀ昀甀氀氀∀ 爀漀眀猀㴀∀㐀∀㸀㰀⼀琀攀砀琀愀爀攀愀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀          㰀搀椀瘀 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ愀挀琀椀漀渀∀㸀ഀ਀            㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀戀甀琀琀漀渀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ最栀漀猀琀∀ 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀㸀䄀瘀戀爀礀琀㰀⼀戀甀琀琀漀渀㸀ഀ਀            㰀戀甀琀琀漀渀 琀礀瀀攀㴀∀猀甀戀洀椀琀∀ 挀氀愀猀猀㴀∀戀琀渀 戀琀渀ⴀ瀀爀椀洀愀爀礀∀㸀匀瀀愀爀愀 瘀愀爀甀洀쌀ꐀ爀欀攀㰀⼀戀甀琀琀漀渀㸀ഀ਀          㰀⼀搀椀瘀㸀ഀ਀        㰀⼀昀漀爀洀㸀ഀ਀      㰀⼀搀椀瘀㸀ഀ਀      㰀昀漀爀洀 洀攀琀栀漀搀㴀∀搀椀愀氀漀最∀ 挀氀愀猀猀㴀∀洀漀搀愀氀ⴀ戀愀挀欀搀爀漀瀀∀㸀ഀ਀        㰀戀甀琀琀漀渀 漀渀挀氀椀挀欀㴀∀挀氀漀猀攀䴀漀搀愀氀⠀⤀∀㸀挀氀漀猀攀㰀⼀戀甀琀琀漀渀㸀ഀ਀      㰀⼀昀漀爀洀㸀ഀ਀    㰀⼀搀椀瘀㸀ഀ਀  怀㬀ഀ਀  ഀ਀  猀栀漀眀䴀漀搀愀氀⠀栀琀洀氀Ⰰ 愀猀礀渀挀 ⠀昀漀爀洀䐀愀琀愀⤀ 㴀㸀 笀ഀ਀    愀眀愀椀琀 挀爀攀愀琀攀䔀渀琀椀琀礀⠀✀戀爀愀渀搀猀✀Ⰰ 昀漀爀洀䐀愀琀愀⤀㬀ഀ਀    氀漀愀搀䈀爀愀渀搀猀⠀⤀㬀ഀ਀  紀⤀㬀ഀ਀紀ഀ਀ഀ਀︀function showAddCompanyForm() {
-  console.log(' showAddCompanyForm called!');
-  const html = `
-    <div class="modal modal-open">
-      <div class="modal-box max-w-3xl max-h-[90vh] overflow-y-auto">
-        <h3 class="font-bold text-lg mb-4">Lägg till nytt företag</h3>
-        <form id="addCompanyForm" class="space-y-3">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Företagsnamn *</span></label>
-              <input type="text" name="name" placeholder="Ange företagsnamn" class="input input-bordered w-full" required />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Organisationsnummer</span></label>
-              <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Varumärke</span></label>
-              <input type="text" name="brand" placeholder="T.ex. Mäklarhuset" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Kategori</span></label>
-              <input type="text" name="category" placeholder="T.ex. Nyckelkund" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Status</span></label>
-              <select name="status" class="select select-bordered w-full">
-                <option value="prospekt">Prospekt</option>
-                <option value="kund" selected>Kund</option>
-                <option value="inaktiv">Inaktiv</option>
-              </select>
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Pipeline</span></label>
-              <select name="pipeline" class="select select-bordered w-full">
-                <option value="prospect">Prospekt</option>
-                <option value="active_customer" selected>Aktiv kund</option>
-                <option value="churned">Avslutad</option>
-              </select>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Ort</span></label>
-              <input type="text" name="city" placeholder="Stockholm" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Län</span></label>
-              <input type="text" name="county" placeholder="Stockholms län" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">E-post</span></label>
-              <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Telefon</span></label>
-              <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Antal licenser</span></label>
-              <input type="number" name="licenseCount" placeholder="0" class="input input-bordered w-full" />
-            </div>
-            <div class="form-control w-full">
-              <label class="label"><span class="label-text">Produkt</span></label>
-              <input type="text" name="product" placeholder="T.ex. Booli Pro" class="input input-bordered w-full" />
-            </div>
-          </div>
-          <div class="form-control w-full">
-            <label class="label"><span class="label-text">Betalningsinformation</span></label>
-            <input type="text" name="paymentInfo" placeholder="Fakturaadress, avtalsnummer etc." class="input input-bordered w-full" />
-          </div>
-          <div class="modal-action">
-            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara företag</button>
-          </div>
-        </form>
-      </div>
-      <form method="dialog" class="modal-backdrop">
-        <button onclick="closeModal()">close</button>
-      </form>
-    </div>
-  `;
-  showModal(html, async (formData) => {
-    await createEntity('companies', formData);
-    loadCompanies();
-  });
-}
-
-function showAddAgentForm() {
-  console.log('ðŸŽ¯ showAddAgentForm called!');
-  const html = `
-    <div class="modal modal-open">
-      <div class="modal-box max-w-2xl">
-        <h3 class="font-bold text-lg mb-4">LÃ¤gg till ny mÃ¤klare</h3>
-        <form id="addAgentForm" class="space-y-4">
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">Namn *</span>
-            </label>
-            <input type="text" name="name" placeholder="FÃ¶r- och efternamn" class="input input-bordered w-full" required />
-          </div>
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">E-post *</span>
-            </label>
-            <input type="email" name="email" placeholder="namn@maklarforetag.se" class="input input-bordered w-full" required />
-          </div>
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">Telefon</span>
-            </label>
-            <input type="tel" name="phone" placeholder="070-XXX XX XX" class="input input-bordered w-full" />
-          </div>
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text">FÃ¶retag</span>
-            </label>
-            <input type="text" name="company" placeholder="MÃ¤klarfÃ¶retag AB" class="input input-bordered w-full" />
-          </div>
-          <div class="modal-action">
-            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara mÃ¤klare</button>
-          </div>
-        </form>
-      </div>
-      <form method="dialog" class="modal-backdrop">
-        <button onclick="closeModal()">close</button>
-      </form>
-    </div>
-  `;
-  
-  showModal(html, async (formData) => {
-    await createEntity('agents', formData);
-    loadAgents();
-  });
-}
-
-function showAddDealForm() {
-  const html = `
-    <div class="modal modal-open">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg mb-4">Skapa ny affÃ¤r</h3>
-        <form id="addDealForm" class="space-y-4">
-          <div class="form-control">
-            <label class="label"><span class="label-text">Titel *</span></label>
-            <input type="text" name="title" class="input input-bordered" required />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">VÃ¤rde (kr)</span></label>
-            <input type="number" name="value" class="input input-bordered" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Kund</span></label>
-            <input type="text" name="customer" class="input input-bordered" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Status</span></label>
-            <select name="status" class="select select-bordered">
-              <option value="lead">Lead</option>
-              <option value="proposal">Offert</option>
-              <option value="negotiation">FÃ¶rhandling</option>
-              <option value="won">Vunnen</option>
-              <option value="lost">FÃ¶rlorad</option>
-            </select>
-          </div>
-          <div class="modal-action">
-            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  `;
-  
-  showModal(html, async (formData) => {
-    await createEntity('deals', formData);
-    loadPipeline();
-  });
-}
-
-function showAddTaskForm() {
-  const html = `
-    <div class="modal modal-open">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg mb-4">Ny uppgift</h3>
-        <form id="addTaskForm" class="space-y-4">
-          <div class="form-control">
-            <label class="label"><span class="label-text">Titel *</span></label>
-            <input type="text" name="title" class="input input-bordered" required />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Beskrivning</span></label>
-            <textarea name="description" class="textarea textarea-bordered"></textarea>
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Deadline</span></label>
-            <input type="date" name="deadline" class="input input-bordered" />
-          </div>
-          <div class="modal-action">
-            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
-            <button type="submit" class="btn btn-primary">Spara</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  `;
-  
-  showModal(html, async (formData) => {
-    await createEntity('tasks', formData);
-    loadDashboard();
-  });
-}
-
-function showModal(html, onSubmit) {
-  // Remove existing modal if any
-  const existingModal = document.querySelector('.modal-open');
-  if (existingModal) {
-    existingModal.remove();
-  }
-  
-  // Add modal to body
-  document.body.insertAdjacentHTML('beforeend', html);
-  
-  // Set up form submit handler
-  const form = document.querySelector('.modal-open form');
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-      
-      try {
-        await onSubmit(data);
-        closeModal();
-      } catch (error) {
-        alert('Fel vid sparande: ' + error.message);
-      }
-    });
-  }
-}
-
-window.closeModal = function() {
-  const modal = document.querySelector('.modal-open');
-  if (modal) {
-    modal.remove();
-  }
-};
-
-async function createEntity(entityType, data) {
-  console.log('Creating', entityType, data);
-  
-  try {
-    const response = await fetchWithAuth(`/api/${entityType}`, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('API error:', errorText);
-      throw new Error(`Failed to create ${entityType}: ${response.status}`);
-    }
-    
-    const result = await response.json();
-    console.log('Created:', result);
-    
-    // Show success message
-    showNotification(`${entityType} skapad!`, 'success');
-    
-    return result;
-  } catch (error) {
-    console.error('Error creating entity:', error);
-    showNotification(`Fel vid skapande: ${error.message}`, 'error');
-    throw error;
-  }
-}
-
-function showNotification(message, type = 'info') {
-  const alertClass = type === 'success' ? 'alert-success' : type === 'error' ? 'alert-error' : 'alert-info';
-  
-  const notification = document.createElement('div');
-  notification.className = `alert ${alertClass} fixed top-4 right-4 w-96 z-50 shadow-lg`;
-  notification.innerHTML = `<span>${message}</span>`;
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.remove();
-  }, 3000);
-}
-
-// Global functions for inline onclick handlers
-window.editCustomer = function(id) {
-  console.log('Edit customer:', id);
-  alert(`Redigera kund ${id} - funktion kommer snart!`);
-};
-
-window.editDeal = function(id) {
-  console.log('Edit deal:', id);
-  alert(`Redigera affÃ¤r ${id} - funktion kommer snart!`);
-};
-
-window.editActivity = function(id) {
-  console.log('Edit activity:', id);
-  alert(`Redigera aktivitet ${id} - funktion kommer snart!`);
-};
-
-console.log('Simple CRM app script loaded');
-
-
-
-
-
-
-
-
-
-
-
-
-// Force deployment: 12/09/2025 17:00:13
-
-
-
-
-
-
-
-
+/**
+ * Simple CRM Application - Navigation and Basic Functionality
+ * Simplified version without ES6 modules
+ */
+
+// Global state
+const appState = {
+  currentView: 'dashboard',
+  customers: [],
+  deals: [],
+  activities: [],
+  user: null
+};
+
+// Global flag to prevent double initialization
+let appInitialized = false;
+
+// Listen to the authentication event - this is the primary trigger
+window.addEventListener('entra-login-success', (event) => {
+  console.log('ðŸ”” entra-login-success event received in app-simple.js', event.detail);
+  
+  if (appInitialized) {
+    console.log('â­ï¸  App already initialized, skipping...');
+    return;
+  }
+  
+  // Wait for app-init.js to show main content, then initialize CRM
+  setTimeout(() => {
+    const mainApp = document.getElementById('app');
+    const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
+    
+    if (isVisible) {
+      console.log('ðŸš€ Starting CRM initialization after login...');
+      initializeSimpleApp();
+      appInitialized = true;
+    } else {
+      console.log('â¸ï¸  Main app not yet visible, waiting...');
+      // If not visible yet, wait a bit more
+      setTimeout(() => {
+        console.log('ðŸš€ Starting CRM initialization (delayed)...');
+        initializeSimpleApp();
+        appInitialized = true;
+      }, 500);
+    }
+  }, 200);
+});
+
+// Fallback: Initialize when DOM is ready AND user is already logged in
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('ðŸŽ¯ app-simple.js DOM ready');
+  
+  // Check if user is already authenticated (page refresh case)
+  setTimeout(() => {
+    const mainApp = document.getElementById('app');
+    const isVisible = mainApp && window.getComputedStyle(mainApp).visibility === 'visible';
+    
+    if (isVisible && !appInitialized) {
+      console.log('âœ… User already authenticated, initializing CRM...');
+      initializeSimpleApp();
+      appInitialized = true;
+    }
+  }, 1500); // Wait for app-init.js to finish
+});
+
+function initializeSimpleApp() {
+  console.log('=== Simple app initialization started ===');
+  
+  // Check if DOM is ready
+  console.log('Document ready state:', document.readyState);
+  
+  // Set up navigation
+  setupNavigation();
+  
+  // Load initial view (dashboard should already be visible)
+  const dashboardView = document.getElementById('view-dashboard');
+  console.log('Dashboard view found:', !!dashboardView);
+  
+  if (dashboardView && dashboardView.children.length === 0) {
+    console.log('Loading dashboard template...');
+    loadTemplate('dashboard', dashboardView);
+  }
+  
+  showView('dashboard');
+  
+  // Set up button handlers
+  setupButtonHandlers();
+  
+  console.log('=== Simple app ready ===');
+}
+
+function setupNavigation() {
+  console.log('Setting up navigation...');
+  
+  // Find all navigation buttons - try multiple selectors
+  let navButtons = document.querySelectorAll('[data-view]');
+  
+  if (navButtons.length === 0) {
+    console.warn('No navigation buttons found with [data-view], trying .nav-item');
+    navButtons = document.querySelectorAll('.nav-item[data-view]');
+  }
+  
+  if (navButtons.length === 0) {
+    console.error('Still no navigation buttons found!');
+    return;
+  }
+  
+  navButtons.forEach(button => {
+    const viewName = button.getAttribute('data-view');
+    console.log('Found navigation button:', viewName);
+    
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Navigation clicked:', viewName);
+      showView(viewName);
+      
+      // Update active state
+      navButtons.forEach(btn => {
+        btn.classList.remove('active', 'btn-active');
+      });
+      button.classList.add('active', 'btn-active');
+    });
+  });
+  
+  console.log(`Set up ${navButtons.length} navigation buttons`);
+}
+
+function showView(viewName) {
+  console.log('Showing view:', viewName);
+  appState.currentView = viewName;
+  
+  // Hide all views
+  const allViews = document.querySelectorAll('[id^="view-"]');
+  allViews.forEach(view => {
+    view.style.display = 'none';
+    view.classList.remove('visible');
+  });
+  
+  // Show requested view
+  const targetView = document.getElementById(`view-${viewName}`);
+  if (targetView) {
+    targetView.style.display = 'block';
+    targetView.classList.add('visible');
+    console.log(`View "${viewName}" displayed`);
+    console.log(`View has ${targetView.children.length} children`);
+    
+    // Load template content if view is empty
+    if (targetView.children.length === 0) {
+      console.log(`Loading template for "${viewName}"...`);
+      loadTemplate(viewName, targetView);
+    } else {
+      console.log(`View "${viewName}" already has content, skipping template load`);
+    }
+    
+    // Load data for this view
+    loadViewData(viewName);
+  } else {
+    console.warn(`View "${viewName}" not found, showing dashboard`);
+    const dashboardView = document.getElementById('view-dashboard');
+    if (dashboardView) {
+      dashboardView.style.display = 'block';
+      dashboardView.classList.add('visible');
+      if (dashboardView.children.length === 0) {
+        loadTemplate('dashboard', dashboardView);
+      }
+    }
+  }
+}
+
+function loadTemplate(viewName, targetElement) {
+  console.log(`\nðŸ”„ ====== loadTemplate START ======`);
+  console.log(`ðŸ”„ View: ${viewName}`);
+  console.log(`ðŸ”„ Target element:`, targetElement);
+  
+  const template = document.getElementById(`tpl-${viewName}`);
+  
+  if (template) {
+    console.log(`âœ… Template "tpl-${viewName}" found!`);
+    const content = template.content.cloneNode(true);
+    console.log(`âœ… Template cloned, content:`, content);
+    
+    targetElement.appendChild(content);
+    console.log(`âœ… Template content appended to target`);
+    console.log(`âœ… Target element now has ${targetElement.children.length} children`);
+    
+    // Set up event handlers for buttons in this view
+    // Use a longer delay to ensure DOM is fully updated
+    setTimeout(() => {
+      console.log(`\nâ° Timeout fired after 200ms - setting up handlers`);
+      console.log(`â° Target element ID: ${targetElement.id}`);
+      console.log(`â° Target element children: ${targetElement.children.length}`);
+      setupViewEventHandlers(viewName, targetElement);
+      console.log(`âœ… setupViewEventHandlers completed\n`);
+    }, 200);
+  } else {
+    console.warn(`âŒ Template "tpl-${viewName}" not found in DOM`);
+    // Add a placeholder message
+    targetElement.innerHTML = `
+      <div class="p-8">
+        <h2 class="text-2xl font-bold mb-4">${formatViewName(viewName)}</h2>
+        <p class="text-base-content/70">InnehÃ¥ll fÃ¶r denna vy kommer snart...</p>
+      </div>
+    `;
+  }
+}
+
+function formatViewName(viewName) {
+  const names = {
+    'dashboard': 'Dashboard',
+    'brands': 'VarumÃ¤rken',
+    'companies': 'FÃ¶retag',
+    'agents': 'MÃ¤klare',
+    'pipeline': 'SÃ¤ljtavla',
+    'customer-success': 'KundvÃ¥rd',
+    'licenses': 'Licenser',
+    'import': 'Import',
+    'settings': 'InstÃ¤llningar'
+  };
+  return names[viewName] || viewName;
+}
+
+function loadViewData(viewName) {
+  console.log('Loading data for view:', viewName);
+  
+  switch(viewName) {
+    case 'dashboard':
+      loadDashboard();
+      break;
+    case 'brands':
+      loadBrands();
+      break;
+    case 'companies':
+      loadCompanies();
+      break;
+    case 'agents':
+      loadAgents();
+      break;
+    case 'pipeline':
+      loadPipeline();
+      break;
+    case 'customer-success':
+      loadCustomerSuccess();
+      break;
+    case 'licenses':
+      loadLicenses();
+      break;
+    case 'import':
+      loadImport();
+      break;
+    case 'settings':
+      loadSettings();
+      break;
+    default:
+      console.log('No data loader for view:', viewName);
+  }
+}
+
+async function loadCustomers() {
+  console.log('Loading customers...');
+  
+  try {
+    const response = await fetchWithAuth('/api/customers');
+    if (response.ok) {
+      const customers = await response.json();
+      appState.customers = customers;
+      console.log(`Loaded ${customers.length} customers`);
+      renderCustomers(customers);
+    } else {
+      console.log('Using demo data for customers');
+      renderCustomers([
+        { id: 1, name: 'Demo Kund AB', email: 'kontakt@demo.se', phone: '070-123456' },
+        { id: 2, name: 'Test FÃ¶retag HB', email: 'info@test.se', phone: '070-654321' }
+      ]);
+    }
+  } catch (error) {
+    console.error('Error loading customers:', error);
+    showDemoMessage('Kunder');
+  }
+}
+
+async function loadDeals() {
+  console.log('Loading deals...');
+  
+  try {
+    const response = await fetchWithAuth('/api/deals');
+    if (response.ok) {
+      const deals = await response.json();
+      appState.deals = deals;
+      console.log(`Loaded ${deals.length} deals`);
+      renderDeals(deals);
+    } else {
+      console.log('Using demo data for deals');
+      renderDeals([
+        { id: 1, title: 'Demo AffÃ¤r 1', value: 50000, status: 'negotiation', customer: 'Demo Kund AB' },
+        { id: 2, title: 'Demo AffÃ¤r 2', value: 75000, status: 'proposal', customer: 'Test FÃ¶retag HB' }
+      ]);
+    }
+  } catch (error) {
+    console.error('Error loading deals:', error);
+    showDemoMessage('AffÃ¤rer');
+  }
+}
+
+async function loadActivities() {
+  console.log('Loading activities...');
+  
+  try {
+    const response = await fetchWithAuth('/api/activities');
+    if (response.ok) {
+      const activities = await response.json();
+      appState.activities = activities;
+      console.log(`Loaded ${activities.length} activities`);
+      renderActivities(activities);
+    } else {
+      console.log('Using demo data for activities');
+      renderActivities([
+        { id: 1, title: 'UppfÃ¶ljning Demo Kund', type: 'call', date: new Date().toISOString() },
+        { id: 2, title: 'MÃ¶te Test FÃ¶retag', type: 'meeting', date: new Date().toISOString() }
+      ]);
+    }
+  } catch (error) {
+    console.error('Error loading activities:', error);
+    showDemoMessage('Aktiviteter');
+  }
+}
+
+function loadDashboard() {
+  console.log('Loading dashboard...');
+  // Dashboard loaded, show welcome message
+  const welcomeEl = document.querySelector('#view-dashboard .text-3xl');
+  if (welcomeEl && window.entraAuth) {
+    const user = window.entraAuth.getUser();
+    welcomeEl.textContent = `VÃ¤lkommen, ${user.name || 'anvÃ¤ndare'}! ðŸ‘‹`;
+  }
+}
+
+
+async function fetchWithAuth(endpoint, options = {}) {
+  const baseUrl = window.API_CONFIG?.baseUrl || 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net';
+  const url = `${baseUrl}${endpoint}`;
+  
+  let token = null;
+  if (window.entraAuth) {
+    try {
+      token = await window.entraAuth.getAccessToken();
+    } catch (error) {
+      console.log('Could not get access token:', error);
+    }
+  }
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers
+  };
+  
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  return fetch(url, { 
+    ...options,
+    headers 
+  });
+}
+
+// ===== TABLE RENDERING FUNCTIONS =====
+
+function renderCompaniesTable(companies) {
+  const tableHtml = `
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Företag</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pipeline</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Org.nr</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        ${companies.map(company => `
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">${company.name || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.brand || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
+                ${company.status || 'prospekt'}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.pipeline || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.orgNumber || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.email || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${company.phone || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
+              <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  document.getElementById('companyTable').innerHTML = tableHtml;
+}
+
+function renderBrandsTable(brands) {
+  const tableHtml = `
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Varumärke</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Webbplats</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beskrivning</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        ${brands.map(brand => `
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap font-medium">${brand.name || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${brand.category || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(brand.status)}">
+                ${brand.status || 'aktiv'}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              ${brand.website ? `<a href="${brand.website}" target="_blank" class="text-indigo-600 hover:text-indigo-900">${brand.website}</a>` : ''}
+            </td>
+            <td class="px-6 py-4">${brand.description || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button onclick="editBrand('${brand._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
+              <button onclick="deleteBrand('${brand._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  document.getElementById('brandTable').innerHTML = tableHtml;
+}
+
+function renderAgentsTable(agents) {
+  const tableHtml = `
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Namn</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Företag</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Licens</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Åtgärder</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        ${agents.map(agent => `
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap font-medium">${agent.name || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${agent.company || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${agent.role || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(agent.status)}">
+                ${agent.status || 'aktiv'}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">${agent.licenseType || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${agent.email || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${agent.phone || ''}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <button onclick="editAgent('${agent._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
+              <button onclick="deleteAgent('${agent._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  document.getElementById('agentTable').innerHTML = tableHtml;
+}
+
+function getStatusBadgeClass(status) {
+  const statusLower = (status || '').toLowerCase();
+  if (statusLower === 'aktiv' || statusLower === 'kund') return 'bg-green-100 text-green-800';
+  if (statusLower === 'prospekt' || statusLower === 'pending') return 'bg-yellow-100 text-yellow-800';
+  if (statusLower === 'inaktiv' || statusLower === 'archived') return 'bg-red-100 text-red-800';
+  return 'bg-gray-100 text-gray-800';
+}
+async function loadBrands() {
+  console.log('Loading brands data...');
+  try {
+    const response = await fetchWithAuth('/api/brands');
+    const brands = await response.json();
+    renderBrandsTable(brands);
+  } catch (error) {
+    console.error('Error loading brands:', error);
+    document.getElementById('brandTable').innerHTML = '<p class="text-red-500">Fel vid laddning av varumärken</p>';
+  }
+}
+
+async function loadCompanies() {
+  console.log('Loading companies data...');
+  try {
+    const response = await fetchWithAuth('/api/companies');
+    const companies = await response.json();
+    renderCompaniesTable(companies);
+  } catch (error) {
+    console.error('Error loading companies:', error);
+    document.getElementById('companyTable').innerHTML = '<p class="text-red-500">Fel vid laddning av företag</p>';
+  }
+}
+
+async function loadAgents() {
+  console.log('Loading agents data...');
+  try {
+    const response = await fetchWithAuth('/api/agents');
+    const agents = await response.json();
+    renderAgentsTable(agents);
+  } catch (error) {
+    console.error('Error loading agents:', error);
+    document.getElementById('agentTable').innerHTML = '<p class="text-red-500">Fel vid laddning av mäklare</p>';
+  }
+}
+
+function loadPipeline() {
+  console.log('Loading pipeline view...');
+  // Pipeline template is already loaded
+}
+
+function loadCustomerSuccess() {
+  console.log('Loading customer success view...');
+  // Customer success template is already loaded
+}
+
+function loadLicenses() {
+  console.log('Loading licenses view...');
+  // Licenses template is already loaded
+}
+
+function loadImport() {
+  console.log('Loading import view...');
+  
+  // Set up file input handler
+  setTimeout(() => {
+    const fileInput = document.getElementById('fileInput');
+    const applyImportBtn = document.getElementById('applyImport');
+    const importResult = document.getElementById('importResult');
+    
+    if (fileInput) {
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          console.log('File selected:', file.name);
+          if (applyImportBtn) {
+            applyImportBtn.disabled = false;
+          }
+          if (importResult) {
+            importResult.textContent = `Fil vald: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+          }
+        }
+      });
+    }
+    
+    if (applyImportBtn) {
+      applyImportBtn.addEventListener('click', async () => {
+        const file = fileInput?.files[0];
+        if (!file) {
+          alert('VÃ¤lj en fil fÃ¶rst');
+          return;
+        }
+        
+        await handleExcelImport(file);
+      });
+    }
+    
+    // Server import buttons
+    const serverImportBtn = document.getElementById('applyImportServer');
+    const ortsprisBtn = document.getElementById('applyImportOrtspris');
+    const maklarpaketBtn = document.getElementById('applyImportMaklarpaket');
+    
+    if (serverImportBtn) {
+      serverImportBtn.addEventListener('click', () => handleServerImport('default'));
+    }
+    
+    if (ortsprisBtn) {
+      ortsprisBtn.addEventListener('click', () => handleServerImport('ortspris'));
+    }
+    
+    if (maklarpaketBtn) {
+      maklarpaketBtn.addEventListener('click', () => handleServerImport('maklarpaket'));
+    }
+  }, 100);
+}
+
+async function handleExcelImport(file) {
+  console.log('Starting Excel import:', file.name);
+  
+  const importResult = document.getElementById('importResult');
+  const applyImportBtn = document.getElementById('applyImport');
+  
+  if (importResult) {
+    importResult.textContent = 'LÃ¤ser Excel-fil...';
+  }
+  
+  if (applyImportBtn) {
+    applyImportBtn.disabled = true;
+  }
+  
+  try {
+    // Check if XLSX library is loaded
+    if (typeof XLSX === 'undefined') {
+      throw new Error('XLSX-bibliotek inte laddat');
+    }
+    
+    // Read file
+    const data = await file.arrayBuffer();
+    const workbook = XLSX.read(data, { type: 'array' });
+    
+    console.log('Workbook loaded:', workbook.SheetNames);
+    
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
+    
+    console.log('Parsed data:', jsonData.length, 'rows');
+    
+    if (importResult) {
+      importResult.innerHTML = `
+        <div class="alert alert-success">
+          <span>âœ“ LÃ¤ste ${jsonData.length} rader frÃ¥n ${workbook.SheetNames[0]}</span>
+        </div>
+        <div class="mt-2">
+          <strong>Kolumner:</strong> ${Object.keys(jsonData[0] || {}).join(', ')}
+        </div>
+      `;
+    }
+    
+    // Send to API
+    const response = await fetchWithAuth('/api/import', {
+      method: 'POST',
+      body: JSON.stringify({
+        type: 'excel',
+        data: jsonData,
+        filename: file.name
+      })
+    });
+    
+    if (response.ok) {
+      const result = await response.json();
+      if (importResult) {
+        importResult.innerHTML = `
+          <div class="alert alert-success">
+            <span>âœ“ Import lyckades! ${result.imported || 0} poster importerade.</span>
+          </div>
+        `;
+      }
+    } else {
+      throw new Error('Import misslyckades');
+    }
+    
+  } catch (error) {
+    console.error('Import error:', error);
+    if (importResult) {
+      importResult.innerHTML = `
+        <div class="alert alert-error">
+          <span>âœ— Fel vid import: ${error.message}</span>
+        </div>
+      `;
+    }
+  } finally {
+    if (applyImportBtn) {
+      applyImportBtn.disabled = false;
+    }
+  }
+}
+
+async function handleServerImport(type) {
+  console.log('Starting server import:', type);
+  
+  const importResult = document.getElementById('importResult');
+  
+  if (importResult) {
+    importResult.textContent = 'Startar serverimport...';
+  }
+  
+  try {
+    const response = await fetchWithAuth(`/api/import/server?type=${type}`, {
+      method: 'POST'
+    });
+    
+    if (response.ok) {
+      const result = await response.json();
+      if (importResult) {
+        importResult.innerHTML = `
+          <div class="alert alert-success">
+            <span>âœ“ Serverimport lyckades! ${result.imported || 0} poster importerade.</span>
+          </div>
+        `;
+      }
+    } else {
+      const error = await response.json();
+      throw new Error(error.message || 'Serverimport misslyckades');
+    }
+  } catch (error) {
+    console.error('Server import error:', error);
+    if (importResult) {
+      importResult.innerHTML = `
+        <div class="alert alert-error">
+          <span>âœ— Fel vid serverimport: ${error.message}</span>
+        </div>
+      `;
+    }
+  }
+}
+
+function loadSettings() {
+  console.log('Loading settings view...');
+  // Settings template is already loaded
+}
+
+
+
+function renderCustomers(customers) {
+  const table = document.querySelector('#customers-view table tbody');
+  if (!table) {
+    console.warn('Customer table not found');
+    return;
+  }
+  
+  table.innerHTML = customers.map(customer => `
+    <tr>
+      <td>${customer.name || 'N/A'}</td>
+      <td>${customer.email || '-'}</td>
+      <td>${customer.phone || '-'}</td>
+      <td>
+        <button class="btn btn-xs btn-primary" onclick="editCustomer(${customer.id})">Redigera</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderDeals(deals) {
+  const table = document.querySelector('#deals-view table tbody');
+  if (!table) {
+    console.warn('Deals table not found');
+    return;
+  }
+  
+  table.innerHTML = deals.map(deal => `
+    <tr>
+      <td>${deal.title || 'N/A'}</td>
+      <td>${deal.customer || '-'}</td>
+      <td>${deal.value ? deal.value.toLocaleString('sv-SE') + ' kr' : '-'}</td>
+      <td><span class="badge badge-sm">${deal.status || 'unknown'}</span></td>
+      <td>
+        <button class="btn btn-xs btn-primary" onclick="editDeal(${deal.id})">Redigera</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderActivities(activities) {
+  const table = document.querySelector('#activities-view table tbody');
+  if (!table) {
+    console.warn('Activities table not found');
+    return;
+  }
+  
+  table.innerHTML = activities.map(activity => `
+    <tr>
+      <td>${activity.title || 'N/A'}</td>
+      <td><span class="badge badge-sm">${activity.type || 'unknown'}</span></td>
+      <td>${activity.date ? new Date(activity.date).toLocaleDateString('sv-SE') : '-'}</td>
+      <td>
+        <button class="btn btn-xs btn-primary" onclick="editActivity(${activity.id})">Redigera</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function showDemoMessage(entityType) {
+  const currentViewEl = document.getElementById(`${appState.currentView}-view`);
+  if (currentViewEl) {
+    const messageEl = document.createElement('div');
+    messageEl.className = 'alert alert-info mt-4';
+    messageEl.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <span>Kunde inte ladda ${entityType} frÃ¥n API. Visar demo-data.</span>
+    `;
+    currentViewEl.insertBefore(messageEl, currentViewEl.firstChild);
+  }
+}
+
+function setupButtonHandlers() {
+  console.log('Setting up button handlers...');
+  
+  // Wait for buttons to be in DOM
+  setTimeout(() => {
+    // Add brand button
+    const addBrandBtn = document.getElementById('addBrand');
+    if (addBrandBtn) {
+      addBrandBtn.addEventListener('click', () => showAddBrandForm());
+    }
+    
+    // Add company button  
+    const addCompanyBtn = document.getElementById('addCompany');
+    if (addCompanyBtn) {
+      addCompanyBtn.addEventListener('click', () => showAddCompanyForm());
+    }
+    
+    // Add agent button
+    const addAgentBtn = document.getElementById('addAgent');
+    if (addAgentBtn) {
+      addAgentBtn.addEventListener('click', () => showAddAgentForm());
+    }
+    
+    // Add deal button
+    const addDealBtn = document.getElementById('addDealBtn');
+    if (addDealBtn) {
+      addDealBtn.addEventListener('click', () => showAddDealForm());
+    }
+    
+    // Add task button
+    const addTaskBtn = document.getElementById('addTask');
+    if (addTaskBtn) {
+      addTaskBtn.addEventListener('click', () => showAddTaskForm());
+    }
+    
+    console.log('Button handlers set up');
+  }, 200);
+}
+
+// Set up event handlers for a specific view
+function setupViewEventHandlers(viewName, viewElement) {
+  console.log(`ðŸ“‹ ====== setupViewEventHandlers START ======`);
+  console.log(`ðŸ“‹ View: ${viewName}`);
+  console.log(`ðŸ“‹ ViewElement:`, viewElement);
+  console.log(`ðŸ“‹ ViewElement ID:`, viewElement.id);
+  console.log(`ðŸ“‹ ViewElement innerHTML length:`, viewElement.innerHTML.length);
+  
+  // Log all buttons in the view
+  const allButtons = viewElement.querySelectorAll('button');
+  console.log(`ðŸ“‹ Found ${allButtons.length} total buttons in view`);
+  allButtons.forEach(btn => {
+    console.log(`  ðŸ“Œ Button: id="${btn.id}", class="${btn.className}", text="${btn.textContent.trim().substring(0, 30)}"`);
+  });
+  
+  // Find all buttons with data-action in this view
+  const actionButtons = viewElement.querySelectorAll('[data-action]');
+  console.log(`ðŸ“‹ Found ${actionButtons.length} buttons with data-action`);
+  actionButtons.forEach(button => {
+    const action = button.getAttribute('data-action');
+    console.log(`Found button with action: ${action}`);
+    
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleButtonAction(action, viewName);
+    });
+  });
+  
+  // Helper function to find and set up a button
+  const setupButton = (buttonId, handler, description) => {
+    console.log(`ðŸ” Looking for button: #${buttonId} (${description})`);
+    
+    // Try to find in viewElement first
+    let button = viewElement.querySelector(`#${buttonId}`);
+    console.log(`  viewElement.querySelector('#${buttonId}'):`, button);
+    
+    // If not found, try document (for cases where querySelector doesn't work)
+    if (!button) {
+      console.log(`  Trying document.getElementById...`);
+      button = document.getElementById(buttonId);
+      console.log(`  document.getElementById('${buttonId}'):`, button);
+    }
+    
+    if (button) {
+      console.log(`âœ… FOUND ${description} button (#${buttonId}) - Attaching listener`);
+      // Remove any existing listeners by cloning
+      const newButton = button.cloneNode(true);
+      button.parentNode.replaceChild(newButton, button);
+      
+      newButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log(`ðŸ–±ï¸ ${description} button CLICKED!`);
+        handler();
+      });
+    } else {
+      console.error(`âŒ Button #${buttonId} NOT FOUND for ${description}`);
+    }
+  };
+  
+  console.log(`ðŸ”§ Setting up button handlers...`);
+  setupButton('addBrand', showAddBrandForm, 'Add Brand');
+  setupButton('addCompany', showAddCompanyForm, 'Add Company');
+  setupButton('addAgent', showAddAgentForm, 'Add Agent');
+  setupButton('addDealBtn', showAddDealForm, 'Add Deal');
+  setupButton('addTask', showAddTaskForm, 'Add Task');
+  
+  // Set up dropdown handlers
+  const dropdowns = viewElement.querySelectorAll('select');
+  if (dropdowns.length === 0) {
+    // Try document if not found in viewElement
+    const allDropdowns = document.querySelectorAll(`#view-${viewName} select`);
+    console.log(`Found ${allDropdowns.length} dropdowns in document for ${viewName}`);
+    allDropdowns.forEach(dropdown => {
+      dropdown.addEventListener('change', (e) => {
+        console.log(`Dropdown changed: ${dropdown.id || 'unnamed'} = ${e.target.value}`);
+        handleDropdownChange(dropdown, e.target.value, viewName);
+      });
+    });
+  } else {
+    console.log(`Found ${dropdowns.length} dropdowns in viewElement`);
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('change', (e) => {
+        console.log(`Dropdown changed: ${dropdown.id || 'unnamed'} = ${e.target.value}`);
+        handleDropdownChange(dropdown, e.target.value, viewName);
+      });
+    });
+  }
+  
+  console.log(`âœ“ Event handlers set up for ${viewName}`);
+}
+
+// Handle button actions
+function handleButtonAction(action, viewName) {
+  console.log(`Handling action: ${action} in view: ${viewName}`);
+  
+  switch(action) {
+    case 'add-brand':
+      showAddBrandForm();
+      break;
+    case 'add-company':
+      showAddCompanyForm();
+      break;
+    case 'add-agent':
+      showAddAgentForm();
+      break;
+    case 'add-deal':
+      showAddDealForm();
+      break;
+    case 'add-task':
+      showAddTaskForm();
+      break;
+    default:
+      console.warn(`Unknown action: ${action}`);
+  }
+}
+
+// Handle dropdown changes
+function handleDropdownChange(dropdown, value, viewName) {
+  const dropdownId = dropdown.id;
+  
+  // Handle specific dropdowns based on their ID
+  if (dropdownId === 'segmentFilter') {
+    console.log(`Filtering by segment: ${value}`);
+    // Apply segment filter
+  } else if (dropdownId === 'statusFilter') {
+    console.log(`Filtering by status: ${value}`);
+    // Apply status filter
+  }
+}
+
+// Show forms for creating new entities
+function showAddBrandForm() {
+  console.log('ðŸŽ¯ showAddBrandForm called!');
+  const html = `
+    <div class="modal modal-open">
+      <div class="modal-box max-w-2xl">
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt varumÃ¤rke</h3>
+        <form id="addBrandForm" class="space-y-4">
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">VarumÃ¤rkesnamn *</span>
+            </label>
+            <input type="text" name="name" placeholder="Ange varumÃ¤rkesnamn" class="input input-bordered w-full" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Beskrivning</span>
+            </label>
+            <textarea name="description" placeholder="Beskriv varumÃ¤rket..." class="textarea textarea-bordered w-full" rows="4"></textarea>
+          </div>
+          <div class="modal-action">
+            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara varumÃ¤rke</button>
+          </div>
+        </form>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button onclick="closeModal()">close</button>
+      </form>
+    </div>
+  `;
+  
+  showModal(html, async (formData) => {
+    await createEntity('brands', formData);
+    loadBrands();
+  });
+}
+
+function showAddCompanyForm() {
+  console.log('ðŸŽ¯ showAddCompanyForm called!');
+  const html = `
+    <div class="modal modal-open">
+      <div class="modal-box max-w-2xl">
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till nytt fÃ¶retag</h3>
+        <form id="addCompanyForm" class="space-y-4">
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">FÃ¶retagsnamn *</span>
+            </label>
+            <input type="text" name="name" placeholder="Ange fÃ¶retagsnamn" class="input input-bordered w-full" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Organisationsnummer</span>
+            </label>
+            <input type="text" name="orgNumber" placeholder="XXXXXX-XXXX" class="input input-bordered w-full" />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">E-post</span>
+            </label>
+            <input type="email" name="email" placeholder="kontakt@foretag.se" class="input input-bordered w-full" />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Telefon</span>
+            </label>
+            <input type="tel" name="phone" placeholder="08-XXX XX XX" class="input input-bordered w-full" />
+          </div>
+          <div class="modal-action">
+            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara fÃ¶retag</button>
+          </div>
+        </form>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button onclick="closeModal()">close</button>
+      </form>
+    </div>
+  `;
+  
+  showModal(html, async (formData) => {
+    await createEntity('companies', formData);
+    loadCompanies();
+  });
+}
+
+function showAddAgentForm() {
+  console.log('ðŸŽ¯ showAddAgentForm called!');
+  const html = `
+    <div class="modal modal-open">
+      <div class="modal-box max-w-2xl">
+        <h3 class="font-bold text-lg mb-4">LÃ¤gg till ny mÃ¤klare</h3>
+        <form id="addAgentForm" class="space-y-4">
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Namn *</span>
+            </label>
+            <input type="text" name="name" placeholder="FÃ¶r- och efternamn" class="input input-bordered w-full" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">E-post *</span>
+            </label>
+            <input type="email" name="email" placeholder="namn@maklarforetag.se" class="input input-bordered w-full" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">Telefon</span>
+            </label>
+            <input type="tel" name="phone" placeholder="070-XXX XX XX" class="input input-bordered w-full" />
+          </div>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text">FÃ¶retag</span>
+            </label>
+            <input type="text" name="company" placeholder="MÃ¤klarfÃ¶retag AB" class="input input-bordered w-full" />
+          </div>
+          <div class="modal-action">
+            <button type="button" class="btn btn-ghost" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara mÃ¤klare</button>
+          </div>
+        </form>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button onclick="closeModal()">close</button>
+      </form>
+    </div>
+  `;
+  
+  showModal(html, async (formData) => {
+    await createEntity('agents', formData);
+    loadAgents();
+  });
+}
+
+function showAddDealForm() {
+  const html = `
+    <div class="modal modal-open">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg mb-4">Skapa ny affÃ¤r</h3>
+        <form id="addDealForm" class="space-y-4">
+          <div class="form-control">
+            <label class="label"><span class="label-text">Titel *</span></label>
+            <input type="text" name="title" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">VÃ¤rde (kr)</span></label>
+            <input type="number" name="value" class="input input-bordered" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Kund</span></label>
+            <input type="text" name="customer" class="input input-bordered" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Status</span></label>
+            <select name="status" class="select select-bordered">
+              <option value="lead">Lead</option>
+              <option value="proposal">Offert</option>
+              <option value="negotiation">FÃ¶rhandling</option>
+              <option value="won">Vunnen</option>
+              <option value="lost">FÃ¶rlorad</option>
+            </select>
+          </div>
+          <div class="modal-action">
+            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+  
+  showModal(html, async (formData) => {
+    await createEntity('deals', formData);
+    loadPipeline();
+  });
+}
+
+function showAddTaskForm() {
+  const html = `
+    <div class="modal modal-open">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg mb-4">Ny uppgift</h3>
+        <form id="addTaskForm" class="space-y-4">
+          <div class="form-control">
+            <label class="label"><span class="label-text">Titel *</span></label>
+            <input type="text" name="title" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Beskrivning</span></label>
+            <textarea name="description" class="textarea textarea-bordered"></textarea>
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Deadline</span></label>
+            <input type="date" name="deadline" class="input input-bordered" />
+          </div>
+          <div class="modal-action">
+            <button type="button" class="btn" onclick="closeModal()">Avbryt</button>
+            <button type="submit" class="btn btn-primary">Spara</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+  
+  showModal(html, async (formData) => {
+    await createEntity('tasks', formData);
+    loadDashboard();
+  });
+}
+
+function showModal(html, onSubmit) {
+  // Remove existing modal if any
+  const existingModal = document.querySelector('.modal-open');
+  if (existingModal) {
+    existingModal.remove();
+  }
+  
+  // Add modal to body
+  document.body.insertAdjacentHTML('beforeend', html);
+  
+  // Set up form submit handler
+  const form = document.querySelector('.modal-open form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      try {
+        await onSubmit(data);
+        closeModal();
+      } catch (error) {
+        alert('Fel vid sparande: ' + error.message);
+      }
+    });
+  }
+}
+
+window.closeModal = function() {
+  const modal = document.querySelector('.modal-open');
+  if (modal) {
+    modal.remove();
+  }
+};
+
+async function createEntity(entityType, data) {
+  console.log('Creating', entityType, data);
+  
+  try {
+    const response = await fetchWithAuth(`/api/${entityType}`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API error:', errorText);
+      throw new Error(`Failed to create ${entityType}: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    console.log('Created:', result);
+    
+    // Show success message
+    showNotification(`${entityType} skapad!`, 'success');
+    
+    return result;
+  } catch (error) {
+    console.error('Error creating entity:', error);
+    showNotification(`Fel vid skapande: ${error.message}`, 'error');
+    throw error;
+  }
+}
+
+function showNotification(message, type = 'info') {
+  const alertClass = type === 'success' ? 'alert-success' : type === 'error' ? 'alert-error' : 'alert-info';
+  
+  const notification = document.createElement('div');
+  notification.className = `alert ${alertClass} fixed top-4 right-4 w-96 z-50 shadow-lg`;
+  notification.innerHTML = `<span>${message}</span>`;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+
+// Global functions for inline onclick handlers
+window.editCustomer = function(id) {
+  console.log('Edit customer:', id);
+  alert(`Redigera kund ${id} - funktion kommer snart!`);
+};
+
+window.editDeal = function(id) {
+  console.log('Edit deal:', id);
+  alert(`Redigera affÃ¤r ${id} - funktion kommer snart!`);
+};
+
+window.editActivity = function(id) {
+  console.log('Edit activity:', id);
+  alert(`Redigera aktivitet ${id} - funktion kommer snart!`);
+};
+
+console.log('Simple CRM app script loaded');
+
+
+
+
+
+
+
+
+
+
+
+
+// Force deployment: 12/09/2025 17:00:13
+
+
+
+
+
+
+
+
