@@ -82,8 +82,21 @@ router.put('/:id', async (req, res) => {
     const updateData = { ...req.body, updatedAt: new Date() };
     delete updateData._id;
     
+    if (!db) {
+      console.log('📦 Updating mock deal');
+      const index = mockDeals.findIndex(d => d._id === id);
+      if (index === -1) {
+        return res.status(404).json({ error: 'Deal not found' });
+      }
+      mockDeals[index] = { ...mockDeals[index], ...updateData };
+      return res.json({ message: 'Deal updated successfully' });
+    }
+    
+    const { ObjectId } = require('mongodb');
+    const query = ObjectId.isValid(id) ? { _id: new ObjectId(id) } : { _id: id };
+    
     const result = await db.collection('deals').updateOne(
-      { _id: require('mongodb').ObjectId(id) },
+      query,
       { $set: updateData }
     );
     
@@ -106,9 +119,20 @@ router.delete('/:id', async (req, res) => {
     const db = req.app.locals.db;
     const { id } = req.params;
     
-    const result = await db.collection('deals').deleteOne(
-      { _id: require('mongodb').ObjectId(id) }
-    );
+    if (!db) {
+      console.log('📦 Deleting mock deal');
+      const index = mockDeals.findIndex(d => d._id === id);
+      if (index === -1) {
+        return res.status(404).json({ error: 'Deal not found' });
+      }
+      mockDeals.splice(index, 1);
+      return res.json({ message: 'Deal deleted successfully' });
+    }
+    
+    const { ObjectId } = require('mongodb');
+    const query = ObjectId.isValid(id) ? { _id: new ObjectId(id) } : { _id: id };
+    
+    const result = await db.collection('deals').deleteOne(query);
     
     if (result.deletedCount === 0) {
       return res.status(404).json({ error: 'Deal not found' });
