@@ -249,6 +249,7 @@ const companiesRouter = require('./routes/companies');
 const agentsRouter = require('./routes/agents');
 const dealsRouter = require('./routes/deals');
 const tasksRouter = require('./routes/tasks');
+const adminRouter = require('./routes/admin');
 
 app.use('/api/import', dbMiddleware, importRouter);
 app.use('/api/brands', dbMiddleware, brandsRouter);
@@ -256,6 +257,7 @@ app.use('/api/companies', dbMiddleware, companiesRouter);
 app.use('/api/agents', dbMiddleware, agentsRouter);
 app.use('/api/deals', dbMiddleware, dealsRouter);
 app.use('/api/tasks', dbMiddleware, tasksRouter);
+app.use('/api/admin', dbMiddleware, adminRouter);
 
 // ============================================
 // ERROR HANDLING MIDDLEWARE (must be AFTER routes)
