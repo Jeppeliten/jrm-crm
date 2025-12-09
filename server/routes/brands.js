@@ -49,6 +49,9 @@ router.post('/', async (req, res) => {
       const brand = {
         name: name.trim(),
         description: description?.trim() || '',
+        category: req.body.category?.trim() || '',
+        status: req.body.status?.trim() || 'aktiv',
+        website: req.body.website?.trim() || '',
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -75,6 +78,9 @@ router.post('/', async (req, res) => {
     const brand = {
       name: name.trim(),
       description: description?.trim() || '',
+      category: req.body.category?.trim() || '',
+      status: req.body.status?.trim() || 'aktiv',
+      website: req.body.website?.trim() || '',
       createdAt: new Date(),
       updatedAt: new Date()
     };

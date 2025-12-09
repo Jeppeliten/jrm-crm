@@ -49,6 +49,9 @@ router.post('/', async (req, res) => {
         email: email?.trim() || '',
         phone: phone?.trim() || '',
         company: company?.trim() || '',
+        status: req.body.status?.trim() || 'aktiv',
+        role: req.body.role?.trim() || '',
+        licenseType: req.body.licenseType?.trim() || '',
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -77,6 +80,9 @@ router.post('/', async (req, res) => {
       email: email?.trim() || '',
       phone: phone?.trim() || '',
       company: company?.trim() || '',
+      status: req.body.status?.trim() || 'aktiv',
+      role: req.body.role?.trim() || '',
+      licenseType: req.body.licenseType?.trim() || '',
       createdAt: new Date(),
       updatedAt: new Date()
     };
