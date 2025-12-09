@@ -338,6 +338,34 @@ function loadDashboard() {
 }
 
 
+async function fetchWithAuth(endpoint, options = {}) {
+  const baseUrl = window.API_CONFIG?.baseUrl || 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net';
+  const url = `${baseUrl}${endpoint}`;
+  
+  let token = null;
+  if (window.entraAuth) {
+    try {
+      token = await window.entraAuth.getAccessToken();
+    } catch (error) {
+      console.log('Could not get access token:', error);
+    }
+  }
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers
+  };
+  
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  return fetch(url, { 
+    ...options,
+    headers 
+  });
+}
+
 // ===== TABLE RENDERING FUNCTIONS =====
 
 function renderCompaniesTable(companies) {
@@ -699,33 +727,7 @@ function loadSettings() {
   // Settings template is already loaded
 }
 
-async function fetchWithAuth(endpoint, options = {}) {
-  const baseUrl = window.API_CONFIG?.baseUrl || 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net';
-  const url = `${baseUrl}${endpoint}`;
-  
-  let token = null;
-  if (window.entraAuth) {
-    try {
-      token = await window.entraAuth.getAccessToken();
-    } catch (error) {
-      console.log('Could not get access token:', error);
-    }
-  }
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers
-  };
-  
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-  
-  return fetch(url, { 
-    ...options,
-    headers 
-  });
-}
+
 
 function renderCustomers(customers) {
   const table = document.querySelector('#customers-view table tbody');
@@ -1288,6 +1290,7 @@ console.log('Simple CRM app script loaded');
 
 
 // Force deployment: 12/09/2025 17:00:13
+
 
 
 
