@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Show landing page and set up login button
 function showLandingPage() {
+  console.log('Showing landing page...');
   document.getElementById('landingPage').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
   
@@ -39,22 +40,39 @@ function showLandingPage() {
   const loginError = document.getElementById('loginError');
   const loginErrorText = document.getElementById('loginErrorText');
   
-  loginBtn.addEventListener('click', async () => {
-    loginBtn.disabled = true;
-    loginBtn.innerHTML = '<span class="loading loading-spinner"></span> Loggar in...';
+  if (!loginBtn) {
+    console.error('Login button not found!');
+    return;
+  }
+  
+  // Remove any existing event listeners by cloning the button
+  const newLoginBtn = loginBtn.cloneNode(true);
+  loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn);
+  
+  console.log('Login button ready, adding click handler...');
+  newLoginBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Login button clicked!');
+    
+    newLoginBtn.disabled = true;
+    newLoginBtn.innerHTML = '<span class="loading loading-spinner"></span> Loggar in...';
     loginError.style.display = 'none';
     
     try {
+      console.log('Starting login redirect...');
       await entraAuth.loginRedirect();
       // After redirect, page will reload and user will be logged in
     } catch (error) {
       console.error('Login failed:', error);
       loginErrorText.textContent = 'Inloggning misslyckades. Försök igen.';
       loginError.style.display = 'block';
-      loginBtn.disabled = false;
-      loginBtn.innerHTML = 'Logga in med Microsoft';
+      newLoginBtn.disabled = false;
+      newLoginBtn.innerHTML = 'Logga in med Microsoft';
     }
   });
+  
+  console.log('Click handler attached to login button');
 }
 
 // Show main app after successful login
