@@ -27,7 +27,7 @@ async function fetchWithAuth(url, options = {}) {
   };
   
   if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
+    headers['Authorization'] = 'Bearer ' + token;
   }
 
   // Make the request
@@ -42,7 +42,7 @@ async function fetchWithAuth(url, options = {}) {
       console.error('Unauthorized - token may be expired');
       // Could trigger re-login here
     }
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    throw new Error('HTTP ' + response.status + ': ' + response.statusText);
   }
 
   return response.json();
@@ -9756,4 +9756,5 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // Auto-start disabled - now controlled by auth-init.js
 window.initializeApp = init; // Expose for auth-init.js
+
 
