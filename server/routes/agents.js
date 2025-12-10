@@ -4,22 +4,169 @@ const { updateAllAggregations } = require('../services/aggregation-service');
 
 // 🧪 TEMPORARY: In-memory storage for testing
 let mockAgents = [
-  { _id: '1', name: 'Test Mäklare', email: 'test@test.se', phone: '08-123456', company: 'Test Företag', createdAt: new Date(), updatedAt: new Date() }
+  { 
+    _id: '1', 
+    name: 'Anna', 
+    lastName: 'Andersson',
+    email: 'anna.andersson@era.se', 
+    phone: '070-123 45 67',
+    registrationType: 'Fastighetsmäklare',
+    company: 'ERA Sverige Fastighetsförmedling AB',
+    companyId: '1',
+    brand: 'ERA Mäklare',
+    brandId: 'mock1',
+    status: 'aktiv',
+    brokerPackage: { active: true, startDate: new Date('2024-01-15') },
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: '2', 
+    name: 'Erik', 
+    lastName: 'Eriksson',
+    email: 'erik.eriksson@era.se', 
+    phone: '070-234 56 78',
+    registrationType: 'Fastighetsmäklare',
+    company: 'ERA Sverige Fastighetsförmedling AB',
+    companyId: '1',
+    brand: 'ERA Mäklare',
+    brandId: 'mock1',
+    status: 'aktiv',
+    brokerPackage: { active: true, startDate: new Date('2024-02-01') },
+    createdAt: new Date('2024-02-01'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: '3', 
+    name: 'Maria', 
+    lastName: 'Svensson',
+    email: 'maria.svensson@maklarhuset.se', 
+    phone: '070-345 67 89',
+    registrationType: 'Fastighetsmäklare',
+    company: 'Mäklarhuset Stockholm Syd',
+    companyId: '2',
+    brand: 'Mäklarhuset',
+    brandId: 'mock2',
+    status: 'aktiv',
+    brokerPackage: { active: true, startDate: new Date('2023-08-10') },
+    createdAt: new Date('2023-08-10'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: '4', 
+    name: 'Johan', 
+    lastName: 'Johansson',
+    email: 'johan.johansson@svenskfast.se', 
+    phone: '070-456 78 90',
+    registrationType: 'Fastighetsmäklare',
+    company: 'Svensk Fastighetsförmedling Göteborg',
+    companyId: '3',
+    brand: 'Svensk Fastighetsförmedling',
+    brandId: 'mock3',
+    status: 'inaktiv',
+    brokerPackage: { active: false },
+    createdAt: new Date('2025-10-01'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: '5', 
+    name: 'Lisa', 
+    lastName: 'Lindberg',
+    email: 'lisa.lindberg@fastighetsbyran.se', 
+    phone: '070-567 89 01',
+    registrationType: 'Fastighetsmäklare',
+    company: 'Fastighetsbyrån Malmö City',
+    companyId: '4',
+    brand: 'Fastighetsbyrån',
+    brandId: 'mock4',
+    status: 'aktiv',
+    brokerPackage: { active: true, startDate: new Date('2024-06-20') },
+    createdAt: new Date('2024-06-20'),
+    updatedAt: new Date()
+  }
 ];
 
 /**
- * GET /api/agents - Get all agents
+ * GET /api/agents - Get all agents with optional filtering
+ * Query params:
+ *   - status: Filter by status (aktiv, inaktiv)
+ *   - companyId: Filter by company ID
+ *   - brandId: Filter by brand ID
+ *   - search: Search by name or email
+ *   - sort: Sort field (name, company, createdAt)
+ *   - order: Sort order (asc, desc)
  */
 router.get('/', async (req, res) => {
   try {
     const db = req.app.locals.db;
+    const { status, companyId, brandId, search, sort = 'name', order = 'asc' } = req.query;
     
     if (!db) {
       console.log('📦 Using mock agents data');
-      return res.json(mockAgents);
+      let filtered = [...mockAgents];
+      
+      // Apply filters
+      if (status) {
+        filtered = filtered.filter(a => a.status === status);
+      }
+      if (companyId) {
+        filtered = filtered.filter(a => a.companyId === companyId);
+      }
+      if (brandId) {
+        filtered = filtered.filter(a => a.brandId === brandId);
+      }
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filtered = filtered.filter(a => 
+          a.name?.toLowerCase().includes(searchLower) ||
+          a.lastName?.toLowerCase().includes(searchLower) ||
+          a.email?.toLowerCase().includes(searchLower) ||
+          a.company?.toLowerCase().includes(searchLower)
+        );
+      }
+      
+      // Apply sorting
+      filtered.sort((a, b) => {
+        let aVal = a[sort];
+        let bVal = b[sort];
+        
+        if (sort === 'createdAt') {
+          aVal = aVal ? new Date(aVal).getTime() : 0;
+          bVal = bVal ? new Date(bVal).getTime() : 0;
+        } else if (typeof aVal === 'string') {
+          aVal = aVal.toLowerCase();
+          bVal = bVal?.toLowerCase() || '';
+        }
+        
+        const comparison = aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+        return order === 'desc' ? -comparison : comparison;
+      });
+      
+      return res.json(filtered);
     }
     
-    const agents = await db.collection('agents_v2').find({}).toArray();
+    // Build database query
+    const query = {};
+    if (status) query.status = status;
+    if (companyId) query.companyId = companyId;
+    if (brandId) query.brandId = brandId;
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { lastName: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { company: { $regex: search, $options: 'i' } }
+      ];
+    }
+    
+    // Build sort
+    const sortObj = {};
+    sortObj[sort] = order === 'desc' ? -1 : 1;
+    
+    const agents = await db.collection('agents_v2')
+      .find(query)
+      .sort(sortObj)
+      .toArray();
     res.json(agents);
   } catch (error) {
     console.error('Error fetching agents:', error);

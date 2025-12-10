@@ -4,7 +4,69 @@ const { getBrandAggregatedStats } = require('../services/aggregation-service');
 
 // 🧪 TEMPORARY: In-memory storage for testing
 let mockBrands = [
-  { _id: '1', name: 'Test Varumärke', description: 'Test beskrivning', createdAt: new Date(), updatedAt: new Date() }
+  { 
+    _id: 'mock1', 
+    name: 'ERA Mäklare', 
+    description: 'Internationellt fastighetsmäklarnätverk',
+    website: 'https://www.era.se',
+    centralContract: {
+      active: true,
+      mrr: 125000,
+      startDate: new Date('2024-01-01'),
+      contactPerson: 'Anders Svensson',
+      contactEmail: 'anders@era.se'
+    },
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: 'mock2', 
+    name: 'Mäklarhuset', 
+    description: 'Sveriges största mäklarkedja',
+    website: 'https://www.maklarhuset.se',
+    centralContract: {
+      active: false
+    },
+    createdAt: new Date('2023-06-15'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: 'mock3', 
+    name: 'Svensk Fastighetsförmedling', 
+    description: 'Rikstäckande fastighetsmäklare',
+    website: 'https://www.svenskfast.se',
+    centralContract: {
+      active: false
+    },
+    createdAt: new Date('2023-08-20'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: 'mock4', 
+    name: 'Fastighetsbyrån', 
+    description: 'Premiumfastigheter i storstadsregioner',
+    website: 'https://www.fastighetsbyran.se',
+    centralContract: {
+      active: true,
+      mrr: 85000,
+      startDate: new Date('2024-06-01'),
+      contactPerson: 'Maria Karlsson',
+      contactEmail: 'maria@fastighetsbyran.se'
+    },
+    createdAt: new Date('2024-05-10'),
+    updatedAt: new Date()
+  },
+  { 
+    _id: 'mock5', 
+    name: 'Notar', 
+    description: 'Familjeägd mäklarkedja',
+    website: 'https://www.notar.se',
+    centralContract: {
+      active: false
+    },
+    createdAt: new Date('2023-11-05'),
+    updatedAt: new Date()
+  }
 ];
 
 /**

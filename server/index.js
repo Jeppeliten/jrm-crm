@@ -250,6 +250,10 @@ const agentsRouter = require('./routes/agents');
 const dealsRouter = require('./routes/deals');
 const tasksRouter = require('./routes/tasks');
 const adminRouter = require('./routes/admin');
+const statsRouter = require('./routes/stats');
+const searchRouter = require('./routes/search');
+const exportRouter = require('./routes/export');
+const batchRouter = require('./routes/batch');
 
 app.use('/api/import', dbMiddleware, importRouter);
 app.use('/api/brands', dbMiddleware, brandsRouter);
@@ -258,6 +262,10 @@ app.use('/api/agents', dbMiddleware, agentsRouter);
 app.use('/api/deals', dbMiddleware, dealsRouter);
 app.use('/api/tasks', dbMiddleware, tasksRouter);
 app.use('/api/admin', dbMiddleware, adminRouter);
+app.use('/api/stats', dbMiddleware, statsRouter);
+app.use('/api/search', dbMiddleware, searchRouter);
+app.use('/api/export', dbMiddleware, exportRouter);
+app.use('/api/batch', dbMiddleware, batchRouter);
 
 // ============================================
 // ERROR HANDLING MIDDLEWARE (must be AFTER routes)

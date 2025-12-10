@@ -6,11 +6,87 @@ const { getCompanyAggregatedStats } = require('../services/aggregation-service')
 let mockCompanies = [
   {
     _id: '1',
-    name: 'Test FÃ¶retag AB',
+    name: 'ERA Sverige Fastighetsförmedling AB',
     orgNumber: '556123-4567',
-    email: 'info@test.se',
+    email: 'info@era.se',
     phone: '08-123 45 67',
-    createdAt: new Date(),
+    address: 'Storgatan 1, Stockholm',
+    status: 'kund',
+    brandId: 'mock1',
+    brand: 'ERA Mäklare',
+    agentCount: 12,
+    payment: 1649,
+    lastContact: new Date('2025-12-01'),
+    nextAction: 'Uppföljning Q1 2026',
+    createdAt: new Date('2024-01-15'),
+    updatedAt: new Date()
+  },
+  {
+    _id: '2',
+    name: 'Mäklarhuset Stockholm Syd',
+    orgNumber: '556789-0123',
+    email: 'stockholm@maklarhuset.se',
+    phone: '08-555 44 33',
+    address: 'Södermalmsvägen 12, Stockholm',
+    status: 'kund',
+    brandId: 'mock2',
+    brand: 'Mäklarhuset',
+    agentCount: 8,
+    payment: 1249,
+    lastContact: new Date('2025-11-20'),
+    nextAction: 'Kontraktsförnyelse i mars',
+    createdAt: new Date('2023-08-10'),
+    updatedAt: new Date()
+  },
+  {
+    _id: '3',
+    name: 'Svensk Fastighetsförmedling Göteborg',
+    orgNumber: '559988-7766',
+    email: 'goteborg@svenskfast.se',
+    phone: '031-123 45 67',
+    address: 'Avenyn 45, Göteborg',
+    status: 'prospekt',
+    brandId: 'mock3',
+    brand: 'Svensk Fastighetsförmedling',
+    agentCount: 15,
+    payment: 0,
+    lastContact: new Date('2025-11-15'),
+    nextAction: 'Demo-möte bokad 15 dec',
+    createdAt: new Date('2025-10-01'),
+    updatedAt: new Date()
+  },
+  {
+    _id: '4',
+    name: 'Fastighetsbyrån Malmö City',
+    orgNumber: '556234-5678',
+    email: 'malmo@fastighetsbyran.se',
+    phone: '040-789 12 34',
+    address: 'Stortorget 8, Malmö',
+    status: 'kund',
+    brandId: 'mock4',
+    brand: 'Fastighetsbyrån',
+    agentCount: 6,
+    payment: 849,
+    lastContact: new Date('2025-12-05'),
+    nextAction: null,
+    createdAt: new Date('2024-06-20'),
+    updatedAt: new Date()
+  },
+  {
+    _id: '5',
+    name: 'Notar Mäklare Uppsala',
+    orgNumber: '559876-5432',
+    email: 'uppsala@notar.se',
+    phone: '018-456 78 90',
+    address: 'Svartbäcksgatan 23, Uppsala',
+    status: 'prospekt',
+    brandId: 'mock5',
+    brand: 'Notar',
+    agentCount: 10,
+    payment: 0,
+    lastContact: new Date('2025-11-28'),
+    nextAction: 'Skickat offert - väntar på svar',
+    createdAt: new Date('2025-11-10'),
     updatedAt: new Date()
   }
 ];
@@ -121,19 +197,80 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * GET /api/companies - Get all companies
+ * GET /api/companies - Get all companies with optional filtering
+ * Query params:
+ *   - status: Filter by status (kund, prospekt)
+ *   - brandId: Filter by brand ID
+ *   - search: Search by name
+ *   - sort: Sort field (name, agentCount, lastContact)
+ *   - order: Sort order (asc, desc)
  */
 router.get('/', async (req, res) => {
   try {
     const db = req.app.locals.db;
+    const { status, brandId, search, sort = 'name', order = 'asc' } = req.query;
     
     // Use mock data if no database
     if (!db) {
-      console.log('ðŸ“¦ Using mock companies data');
-      return res.json(mockCompanies);
+      console.log('📦 Using mock companies data');
+      let filtered = [...mockCompanies];
+      
+      // Apply filters
+      if (status) {
+        filtered = filtered.filter(c => c.status === status);
+      }
+      if (brandId) {
+        filtered = filtered.filter(c => c.brandId === brandId);
+      }
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filtered = filtered.filter(c => 
+          c.name.toLowerCase().includes(searchLower) ||
+          c.email?.toLowerCase().includes(searchLower) ||
+          c.orgNumber?.includes(search)
+        );
+      }
+      
+      // Apply sorting
+      filtered.sort((a, b) => {
+        let aVal = a[sort];
+        let bVal = b[sort];
+        
+        if (sort === 'lastContact') {
+          aVal = aVal ? new Date(aVal).getTime() : 0;
+          bVal = bVal ? new Date(bVal).getTime() : 0;
+        } else if (typeof aVal === 'string') {
+          aVal = aVal.toLowerCase();
+          bVal = bVal?.toLowerCase() || '';
+        }
+        
+        const comparison = aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
+        return order === 'desc' ? -comparison : comparison;
+      });
+      
+      return res.json(filtered);
     }
     
-    const companies = await db.collection('companies_v2').find({}).toArray();
+    // Build database query
+    const query = {};
+    if (status) query.status = status;
+    if (brandId) query.brandId = brandId;
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { orgNumber: { $regex: search, $options: 'i' } }
+      ];
+    }
+    
+    // Build sort
+    const sortObj = {};
+    sortObj[sort] = order === 'desc' ? -1 : 1;
+    
+    const companies = await db.collection('companies_v2')
+      .find(query)
+      .sort(sortObj)
+      .toArray();
     res.json(companies);
   } catch (error) {
     console.error('Error fetching companies:', error);
