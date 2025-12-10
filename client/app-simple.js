@@ -365,44 +365,53 @@ async function fetchWithAuth(endpoint, options = {}) {
 // ===== TABLE RENDERING FUNCTIONS =====
 
 function renderCompaniesTable(companies) {
-  const tableHtml = `
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="bg-gray-50">
-        <tr>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">FÃ¶retag</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">VarumÃ¤rke</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pipeline</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Org.nr</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-post</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
-          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ã…tgÃ¤rder</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        ${companies.map(company => `
-          <tr class="hover:bg-gray-50 cursor-pointer" onclick="showCompanyDetails('${company._id}')">
-            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.name)}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.brand)}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(company.status)}">
-                ${company.status || 'prospekt'}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.pipeline)}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.orgNumber)}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.email)}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${escapeHtml(company.phone)}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium" onclick="event.stopPropagation()">
-              <button onclick="editCompany('${company._id}')" class="text-indigo-600 hover:text-indigo-900 mr-3">Redigera</button>
-              <button onclick="deleteCompany('${company._id}')" class="text-red-600 hover:text-red-900">Ta bort</button>
-            </td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-  document.getElementById('companyTable').innerHTML = tableHtml;
+  const tableBody = document.getElementById('companyTable');
+  if (!tableBody) {
+    console.error('Company table element not found');
+    return;
+  }
+  
+  if (!companies || companies.length === 0) {
+    tableBody.innerHTML = '<tr><td colspan="5" class="text-center p-8 text-base-content/50">Inga företag att visa</td></tr>';
+    return;
+  }
+
+  tableBody.innerHTML = companies.map(company => {
+    const statusBadge = company.status === 'kund' 
+      ? '<span class="badge badge-success badge-sm gap-1"> Kund</span>'
+      : '<span class="badge badge-warning badge-sm gap-1"> Prospekt</span>';
+    
+    const mrr = company.payment || 0;
+    
+    return `
+      <tr class="hover:bg-base-200 cursor-pointer">
+        <td onclick="openCompanyModal('${company._id}')">
+          <div class="font-medium">${escapeHtml(company.name)}</div>
+          <div class="text-sm opacity-50">${escapeHtml(company.address || '')}</div>
+          <div class="text-xs opacity-40">${escapeHtml(company.orgNumber || '')}</div>
+        </td>
+        <td onclick="openCompanyModal('${company._id}')">${escapeHtml(company.brand || '')}</td>
+        <td onclick="openCompanyModal('${company._id}')">${statusBadge}</td>
+        <td onclick="openCompanyModal('${company._id}')" class="font-mono">${Math.round(mrr).toLocaleString('sv-SE')} kr</td>
+        <td onclick="openCompanyModal('${company._id}')">${escapeHtml(company.pipeline || 'prospekt')}</td>
+        <td>
+          <div class="flex gap-1">
+            <button class="btn btn-xs btn-ghost" onclick="event.stopPropagation(); openCompanyModal('${company._id}')">Öppna</button>
+            <button class="btn btn-xs btn-ghost" onclick="event.stopPropagation(); openCompanyModal('${company._id}')">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </button>
+            <button class="btn btn-xs btn-ghost text-error" onclick="event.stopPropagation(); deleteCompany('${company._id}')">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
 }
 
 function renderBrandsTable(brands) {
@@ -3717,3 +3726,186 @@ document.addEventListener('keydown', (e) => {
 });
 
 console.log(' Undo/Redo system initialized');
+
+
+
+// =============================================================================
+// Company Modal Functions (Spec-Compliant)
+// =============================================================================
+
+function openCompanyModal(companyId) {
+  fetch(`${API_BASE}/companies/${companyId}`, {
+    headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+  })
+  .then(response => response.json())
+  .then(company => {
+    showCompanyModal(company);
+  })
+  .catch(error => {
+    console.error('Error loading company:', error);
+    showToast('Kunde inte ladda företagsdata', 'error');
+  });
+}
+
+function showCompanyModal(company) {
+  // Remove existing modal if present
+  const existingModal = document.getElementById('companyModal');
+  if (existingModal) existingModal.remove();
+  
+  const modal = document.createElement('dialog');
+  modal.id = 'companyModal';
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-box max-w-4xl">
+      <h3 class="font-bold text-2xl mb-4">${escapeHtml(company.name)}</h3>
+      
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- Left Column -->
+        <div class="space-y-3">
+          <div class="form-control">
+            <label class="label"><span class="label-text">Ansvarig säljare</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-seller" value="${escapeHtml(company.seller || '')}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Kedjetillhörighet</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-chain" value="${escapeHtml(company.chain || '')}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Segment/Kategori</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-segment" value="${escapeHtml(company.segment || '')}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Kund?</span></label>
+            <select class="select select-bordered w-full" id="modal-status">
+              <option value="prospekt" ${company.status === 'prospekt' ? 'selected' : ''}>Nej (Prospekt)</option>
+              <option value="kund" ${company.status === 'kund' ? 'selected' : ''}>Ja (Kund)</option>
+            </select>
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Produkt</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-product" value="${escapeHtml(company.product || '')}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Nuvarande betalning (MRR)</span></label>
+            <input type="number" class="input input-bordered w-full" id="modal-payment" value="${company.payment || 0}" />
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="space-y-3">
+          <div class="form-control">
+            <label class="label"><span class="label-text">Status</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-statusText" value="${escapeHtml(company.statusText || '')}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Pipeline</span></label>
+            <select class="select select-bordered w-full" id="modal-pipeline">
+              <option value="prospekt" ${company.pipeline === 'prospekt' ? 'selected' : ''}>Prospekt</option>
+              <option value="kvalificerad" ${company.pipeline === 'kvalificerad' ? 'selected' : ''}>Kvalificerad</option>
+              <option value="offert" ${company.pipeline === 'offert' ? 'selected' : ''}>Offert skickad</option>
+              <option value="förhandling" ${company.pipeline === 'förhandling' ? 'selected' : ''}>Förhandling</option>
+              <option value="vunnit" ${company.pipeline === 'vunnit' ? 'selected' : ''}>Vunnit</option>
+              <option value="förlorat" ${company.pipeline === 'förlorat' ? 'selected' : ''}>Förlorat</option>
+            </select>
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Potential</span></label>
+            <input type="number" class="input input-bordered w-full" id="modal-potential" value="${company.potential || 0}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Adress</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-address" value="${escapeHtml(company.address || '')}" />
+          </div>
+          
+          <div class="form-control">
+            <label class="label"><span class="label-text">Postnummer</span></label>
+            <input type="text" class="input input-bordered w-full" id="modal-zipCode" value="${escapeHtml(company.zipCode || '')}" />
+          </div>
+        </div>
+      </div>
+      
+      <!-- Beslutsfattare Section -->
+      <div class="mb-4">
+        <h4 class="font-semibold mb-2">Beslutsfattare</h4>
+        <div class="flex gap-2">
+          <button class="btn btn-sm btn-outline">Lägg till kontakt</button>
+          <button class="btn btn-sm btn-outline">Ny uppgift</button>
+          <button class="btn btn-sm btn-outline gap-2">
+             Outlook
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mäklare Section -->
+      <div class="mb-6">
+        <h4 class="font-semibold mb-2">Mäklare (${company.agentCount || 0})</h4>
+        <div class="text-sm text-base-content/70">
+          ${company.agentCount || 0} mäklare registrerade
+        </div>
+      </div>
+      
+      <!-- Bottom Actions -->
+      <div class="flex justify-between items-center">
+        <div class="flex gap-2">
+          <button class="btn btn-sm" onclick="document.getElementById('companyModal').close(); showView('companies')">Tillbaka till lista</button>
+          <button class="btn btn-sm btn-outline">Ny mäklare</button>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn btn-sm btn-primary" onclick="saveCompanyChanges('${company._id}')">Spara</button>
+          <button class="btn btn-sm" onclick="document.getElementById('companyModal').close()">Stäng</button>
+          <button class="btn btn-sm btn-outline">Uppgifter</button>
+        </div>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  `;
+  
+  document.body.appendChild(modal);
+  modal.showModal();
+}
+
+function saveCompanyChanges(companyId) {
+  const updatedData = {
+    seller: document.getElementById('modal-seller').value,
+    chain: document.getElementById('modal-chain').value,
+    segment: document.getElementById('modal-segment').value,
+    status: document.getElementById('modal-status').value,
+    product: document.getElementById('modal-product').value,
+    payment: parseInt(document.getElementById('modal-payment').value) || 0,
+    statusText: document.getElementById('modal-statusText').value,
+    pipeline: document.getElementById('modal-pipeline').value,
+    potential: parseInt(document.getElementById('modal-potential').value) || 0,
+    address: document.getElementById('modal-address').value,
+    zipCode: document.getElementById('modal-zipCode').value
+  };
+  
+  fetch(`${API_BASE}/companies/${companyId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getAccessToken()}`
+    },
+    body: JSON.stringify(updatedData)
+  })
+  .then(response => response.json())
+  .then(() => {
+    showToast('Företag uppdaterat', 'success');
+    document.getElementById('companyModal').close();
+    loadCompanies();
+  })
+  .catch(error => {
+    console.error('Error updating company:', error);
+    showToast('Kunde inte uppdatera företag', 'error');
+  });
+}
+
