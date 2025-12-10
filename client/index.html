@@ -1017,6 +1017,214 @@
     </form>
   </dialog>
 
+  <!-- Modal: Brand Details (Enhanced) -->
+  <dialog id="brandDetailsModal" class="modal">
+    <div class="modal-box max-w-6xl h-[90vh] flex flex-col">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeBrandDetailsModal()"></button>
+      </form>
+      
+      <h3 class="font-bold text-2xl mb-4" id="brandDetailsTitle">Varumärke</h3>
+      
+      <!-- Tabs -->
+      <div role="tablist" class="tabs tabs-boxed mb-4">
+        <a role="tab" class="tab tab-active" data-tab="overview">Översikt</a>
+        <a role="tab" class="tab" data-tab="contacts">Kontakter</a>
+        <a role="tab" class="tab" data-tab="tasks">Uppgifter</a>
+        <a role="tab" class="tab" data-tab="notes">Anteckningar</a>
+        <a role="tab" class="tab" data-tab="companies">Företag</a>
+      </div>
+      
+      <!-- Scrollable content area -->
+      <div class="flex-1 overflow-y-auto">
+        
+        <!-- Tab: Overview -->
+        <div id="tab-overview" class="tab-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Central Contract Section -->
+            <div class="card bg-base-200 shadow-xl">
+              <div class="card-body">
+                <h3 class="card-title text-lg">Central avtal</h3>
+                <div id="centralContractForm">
+                  <div class="form-control">
+                    <label class="label cursor-pointer">
+                      <span class="label-text">Aktivt central avtal</span>
+                      <input type="checkbox" id="ccActive" class="checkbox checkbox-primary" />
+                    </label>
+                  </div>
+                  <div id="ccDetails" class="space-y-3 mt-3" style="display: none;">
+                    <div class="form-control">
+                      <label class="label"><span class="label-text">Produkt</span></label>
+                      <input type="text" id="ccProduct" class="input input-bordered input-sm" placeholder="t.ex. JRM Premium" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label"><span class="label-text">MRR (kr/mån)</span></label>
+                      <input type="number" id="ccMrr" class="input input-bordered input-sm" placeholder="0" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label"><span class="label-text">Startdatum</span></label>
+                      <input type="date" id="ccStartDate" class="input input-bordered input-sm" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label"><span class="label-text">Kontaktperson</span></label>
+                      <input type="text" id="ccContactPerson" class="input input-bordered input-sm" placeholder="Namn" />
+                    </div>
+                    <div class="form-control">
+                      <label class="label"><span class="label-text">Kontakt e-post</span></label>
+                      <input type="email" id="ccContactEmail" class="input input-bordered input-sm" placeholder="email@example.com" />
+                    </div>
+                    <button class="btn btn-primary btn-sm w-full" onclick="saveCentralContract()">Spara central avtal</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="card bg-base-200 shadow-xl">
+              <div class="card-body">
+                <h3 class="card-title text-lg">Statistik</h3>
+                <div class="stats stats-vertical shadow">
+                  <div class="stat">
+                    <div class="stat-title">Företag</div>
+                    <div class="stat-value text-2xl" id="brandStatCompanies">0</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-title">Mäklare</div>
+                    <div class="stat-value text-2xl" id="brandStatAgents">0</div>
+                  </div>
+                  <div class="stat">
+                    <div class="stat-title">Total MRR</div>
+                    <div class="stat-value text-2xl" id="brandStatMRR">0 kr</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        
+        <!-- Tab: Contacts -->
+        <div id="tab-contacts" class="tab-content hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold">Kontaktpersoner</h3>
+            <button class="btn btn-primary btn-sm" onclick="addContactForm()">+ Lägg till kontakt</button>
+          </div>
+          
+          <!-- Add Contact Form (hidden by default) -->
+          <div id="addContactFormDiv" class="card bg-base-200 mb-4 hidden">
+            <div class="card-body">
+              <h4 class="font-bold">Ny kontakt</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="form-control">
+                  <label class="label"><span class="label-text">Namn *</span></label>
+                  <input type="text" id="newContactName" class="input input-bordered input-sm" />
+                </div>
+                <div class="form-control">
+                  <label class="label"><span class="label-text">Roll</span></label>
+                  <input type="text" id="newContactRole" class="input input-bordered input-sm" placeholder="t.ex. VD, IT-ansvarig" />
+                </div>
+                <div class="form-control">
+                  <label class="label"><span class="label-text">E-post</span></label>
+                  <input type="email" id="newContactEmail" class="input input-bordered input-sm" />
+                </div>
+                <div class="form-control">
+                  <label class="label"><span class="label-text">Telefon</span></label>
+                  <input type="tel" id="newContactPhone" class="input input-bordered input-sm" />
+                </div>
+              </div>
+              <div class="flex gap-2 mt-3">
+                <button class="btn btn-primary btn-sm" onclick="saveNewContact()">Spara</button>
+                <button class="btn btn-ghost btn-sm" onclick="cancelAddContact()">Avbryt</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Contacts List -->
+          <div id="contactsList" class="space-y-2">
+            <p class="text-base-content/50">Inga kontakter ännu</p>
+          </div>
+        </div>
+        
+        <!-- Tab: Tasks -->
+        <div id="tab-tasks" class="tab-content hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold">Uppgifter</h3>
+            <button class="btn btn-primary btn-sm" onclick="addTaskForm()">+ Lägg till uppgift</button>
+          </div>
+          
+          <!-- Add Task Form -->
+          <div id="addTaskFormDiv" class="card bg-base-200 mb-4 hidden">
+            <div class="card-body">
+              <h4 class="font-bold">Ny uppgift</h4>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Titel *</span></label>
+                <input type="text" id="newTaskTitle" class="input input-bordered input-sm" />
+              </div>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Beskrivning</span></label>
+                <textarea id="newTaskDescription" class="textarea textarea-bordered" rows="3"></textarea>
+              </div>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Förfallodatum</span></label>
+                <input type="datetime-local" id="newTaskDueAt" class="input input-bordered input-sm" />
+              </div>
+              <div class="flex gap-2 mt-3">
+                <button class="btn btn-primary btn-sm" onclick="saveNewTask()">Spara</button>
+                <button class="btn btn-ghost btn-sm" onclick="cancelAddTask()">Avbryt</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Tasks List -->
+          <div id="tasksList" class="space-y-2">
+            <p class="text-base-content/50">Inga uppgifter ännu</p>
+          </div>
+        </div>
+        
+        <!-- Tab: Notes -->
+        <div id="tab-notes" class="tab-content hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold">Anteckningar</h3>
+            <button class="btn btn-primary btn-sm" onclick="addNoteForm()">+ Lägg till anteckning</button>
+          </div>
+          
+          <!-- Add Note Form -->
+          <div id="addNoteFormDiv" class="card bg-base-200 mb-4 hidden">
+            <div class="card-body">
+              <h4 class="font-bold">Ny anteckning</h4>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Text *</span></label>
+                <textarea id="newNoteText" class="textarea textarea-bordered" rows="4" placeholder="Skriv din anteckning här..."></textarea>
+              </div>
+              <div class="flex gap-2 mt-3">
+                <button class="btn btn-primary btn-sm" onclick="saveNewNote()">Spara</button>
+                <button class="btn btn-ghost btn-sm" onclick="cancelAddNote()">Avbryt</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Notes List -->
+          <div id="notesList" class="space-y-3">
+            <p class="text-base-content/50">Inga anteckningar ännu</p>
+          </div>
+        </div>
+        
+        <!-- Tab: Companies -->
+        <div id="tab-companies" class="tab-content hidden">
+          <h3 class="text-xl font-bold mb-4">Företag med detta varumärke</h3>
+          <div id="brandCompaniesList">
+            <p class="text-base-content/50">Laddar företag...</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button onclick="closeBrandDetailsModal()">close</button>
+    </form>
+  </dialog>
+
   <!-- CRITICAL FIX: Force pointer-events and hide unopened dialogs -->
   <script>
     // Function to fix pointer events and dialog visibility

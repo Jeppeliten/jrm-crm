@@ -1959,3 +1959,498 @@ console.log('Simple CRM app script loaded');
 
 
 
+
+// ============================================================================
+// BRAND DETAILS MODAL - FAS 2: Enhanced Brand Details
+// ============================================================================
+
+let currentBrand = null;
+
+// Open brand details modal
+async function openBrandDetailsModal(brand) {
+  currentBrand = brand;
+  
+  // Update title
+  document.getElementById('brandDetailsTitle').textContent = brand.name || 'Varumärke';
+  
+  // Update stats
+  document.getElementById('brandStatCompanies').textContent = (brand.companies?.length || 0).toString();
+  document.getElementById('brandStatAgents').textContent = (brand.agentCount || 0).toString();
+  document.getElementById('brandStatMRR').textContent = `${Math.round(brand.totalMRR || 0).toLocaleString('sv-SE')} kr`;
+  
+  // Load central contract
+  loadCentralContract(brand.centralContract);
+  
+  // Load contacts
+  renderContactsList(brand.contacts || []);
+  
+  // Load tasks
+  renderTasksList(brand.tasks || []);
+  
+  // Load notes
+  renderNotesList(brand.notes || []);
+  
+  // Load companies (with pagination)
+  await loadBrandCompanies(brand.id);
+  
+  // Setup tabs
+  setupBrandModalTabs();
+  
+  // Open modal
+  document.getElementById('brandDetailsModal').showModal();
+}
+
+function closeBrandDetailsModal() {
+  currentBrand = null;
+  document.getElementById('brandDetailsModal').close();
+}
+
+// Tab switching
+function setupBrandModalTabs() {
+  const tabs = document.querySelectorAll('#brandDetailsModal .tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active from all tabs
+      tabs.forEach(t => t.classList.remove('tab-active'));
+      // Add active to clicked tab
+      tab.classList.add('tab-active');
+      
+      // Hide all tab contents
+      document.querySelectorAll('#brandDetailsModal .tab-content').forEach(content => {
+        content.classList.add('hidden');
+      });
+      
+      // Show selected tab content
+      const tabName = tab.dataset.tab;
+      document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+    });
+  });
+}
+
+// ============================================================================
+// CENTRAL CONTRACT
+// ============================================================================
+
+function loadCentralContract(contract) {
+  const activeCheckbox = document.getElementById('ccActive');
+  const detailsDiv = document.getElementById('ccDetails');
+  
+  if (contract && contract.active) {
+    activeCheckbox.checked = true;
+    detailsDiv.style.display = 'block';
+    
+    document.getElementById('ccProduct').value = contract.product || '';
+    document.getElementById('ccMrr').value = contract.mrr || '';
+    document.getElementById('ccStartDate').value = contract.startDate ? contract.startDate.split('T')[0] : '';
+    document.getElementById('ccContactPerson').value = contract.contactPerson || '';
+    document.getElementById('ccContactEmail').value = contract.contactEmail || '';
+  } else {
+    activeCheckbox.checked = false;
+    detailsDiv.style.display = 'none';
+  }
+  
+  // Toggle details on checkbox change
+  activeCheckbox.onchange = () => {
+    detailsDiv.style.display = activeCheckbox.checked ? 'block' : 'none';
+  };
+}
+
+async function saveCentralContract() {
+  if (!currentBrand) return;
+  
+  const active = document.getElementById('ccActive').checked;
+  
+  const contractData = {
+    active,
+    product: document.getElementById('ccProduct').value,
+    mrr: parseFloat(document.getElementById('ccMrr').value) || 0,
+    startDate: document.getElementById('ccStartDate').value,
+    contactPerson: document.getElementById('ccContactPerson').value,
+    contactEmail: document.getElementById('ccContactEmail').value
+  };
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/central-contract`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(contractData)
+    });
+    
+    currentBrand.centralContract = updated.centralContract;
+    showNotification('Central avtal uppdaterat', 'success');
+  } catch (error) {
+    console.error('Error saving central contract:', error);
+    showNotification('Kunde inte spara central avtal', 'error');
+  }
+}
+
+// ============================================================================
+// CONTACTS
+// ============================================================================
+
+function renderContactsList(contacts) {
+  const listEl = document.getElementById('contactsList');
+  
+  if (!contacts || contacts.length === 0) {
+    listEl.innerHTML = '<p class="text-base-content/50">Inga kontakter ännu</p>';
+    return;
+  }
+  
+  listEl.innerHTML = contacts.map(contact => `
+    <div class="card bg-base-200 shadow">
+      <div class="card-body p-4">
+        <div class="flex justify-between items-start">
+          <div>
+            <h4 class="font-bold">${contact.name}</h4>
+            ${contact.role ? `<p class="text-sm text-base-content/70">${contact.role}</p>` : ''}
+            ${contact.email ? `<p class="text-sm"><a href="mailto:${contact.email}" class="link">${contact.email}</a></p>` : ''}
+            ${contact.phone ? `<p class="text-sm">${contact.phone}</p>` : ''}
+            <p class="text-xs text-base-content/50 mt-2">Tillagd ${new Date(contact.createdAt).toLocaleDateString('sv-SE')}</p>
+          </div>
+          <button class="btn btn-ghost btn-sm btn-circle" onclick="deleteContact('${contact.id}')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addContactForm() {
+  document.getElementById('addContactFormDiv').classList.remove('hidden');
+  document.getElementById('newContactName').focus();
+}
+
+function cancelAddContact() {
+  document.getElementById('addContactFormDiv').classList.add('hidden');
+  // Clear form
+  document.getElementById('newContactName').value = '';
+  document.getElementById('newContactRole').value = '';
+  document.getElementById('newContactEmail').value = '';
+  document.getElementById('newContactPhone').value = '';
+}
+
+async function saveNewContact() {
+  if (!currentBrand) return;
+  
+  const name = document.getElementById('newContactName').value.trim();
+  if (!name) {
+    showNotification('Namn är obligatoriskt', 'warning');
+    return;
+  }
+  
+  const contactData = {
+    name,
+    role: document.getElementById('newContactRole').value.trim(),
+    email: document.getElementById('newContactEmail').value.trim(),
+    phone: document.getElementById('newContactPhone').value.trim()
+  };
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/contacts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(contactData)
+    });
+    
+    currentBrand.contacts = updated.contacts;
+    renderContactsList(currentBrand.contacts);
+    cancelAddContact();
+    showNotification('Kontakt tillagd', 'success');
+  } catch (error) {
+    console.error('Error adding contact:', error);
+    showNotification('Kunde inte lägga till kontakt', 'error');
+  }
+}
+
+async function deleteContact(contactId) {
+  if (!currentBrand) return;
+  if (!confirm('Är du säker på att du vill ta bort denna kontakt?')) return;
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/contacts/${contactId}`, {
+      method: 'DELETE'
+    });
+    
+    currentBrand.contacts = updated.contacts;
+    renderContactsList(currentBrand.contacts);
+    showNotification('Kontakt borttagen', 'success');
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    showNotification('Kunde inte ta bort kontakt', 'error');
+  }
+}
+
+// ============================================================================
+// TASKS
+// ============================================================================
+
+function renderTasksList(tasks) {
+  const listEl = document.getElementById('tasksList');
+  
+  if (!tasks || tasks.length === 0) {
+    listEl.innerHTML = '<p class="text-base-content/50">Inga uppgifter ännu</p>';
+    return;
+  }
+  
+  // Sort by due date (upcoming first), then by done status
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (a.done !== b.done) return a.done ? 1 : -1;
+    if (a.dueAt && b.dueAt) return new Date(a.dueAt) - new Date(b.dueAt);
+    return 0;
+  });
+  
+  listEl.innerHTML = sortedTasks.map(task => {
+    const isOverdue = task.dueAt && new Date(task.dueAt) < new Date() && !task.done;
+    
+    return `
+      <div class="card bg-base-200 shadow ${task.done ? 'opacity-60' : ''}">
+        <div class="card-body p-4">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" class="checkbox checkbox-primary" ${task.done ? 'checked' : ''} 
+                   onchange="toggleTaskDone('${task.id}', this.checked)" />
+            <div class="flex-1">
+              <h4 class="font-bold ${task.done ? 'line-through' : ''}">${task.title}</h4>
+              ${task.description ? `<p class="text-sm text-base-content/70 mt-1">${task.description}</p>` : ''}
+              ${task.dueAt ? `
+                <p class="text-xs mt-2 ${isOverdue ? 'text-error font-semibold' : 'text-base-content/50'}">
+                   ${new Date(task.dueAt).toLocaleString('sv-SE')}
+                </p>
+              ` : ''}
+            </div>
+            <button class="btn btn-ghost btn-sm btn-circle" onclick="deleteTask('${task.id}')">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function addTaskForm() {
+  document.getElementById('addTaskFormDiv').classList.remove('hidden');
+  document.getElementById('newTaskTitle').focus();
+}
+
+function cancelAddTask() {
+  document.getElementById('addTaskFormDiv').classList.add('hidden');
+  document.getElementById('newTaskTitle').value = '';
+  document.getElementById('newTaskDescription').value = '';
+  document.getElementById('newTaskDueAt').value = '';
+}
+
+async function saveNewTask() {
+  if (!currentBrand) return;
+  
+  const title = document.getElementById('newTaskTitle').value.trim();
+  if (!title) {
+    showNotification('Titel är obligatoriskt', 'warning');
+    return;
+  }
+  
+  const taskData = {
+    title,
+    description: document.getElementById('newTaskDescription').value.trim(),
+    dueAt: document.getElementById('newTaskDueAt').value || null
+  };
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/tasks`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(taskData)
+    });
+    
+    currentBrand.tasks = updated.tasks;
+    renderTasksList(currentBrand.tasks);
+    cancelAddTask();
+    showNotification('Uppgift tillagd', 'success');
+  } catch (error) {
+    console.error('Error adding task:', error);
+    showNotification('Kunde inte lägga till uppgift', 'error');
+  }
+}
+
+async function toggleTaskDone(taskId, done) {
+  if (!currentBrand) return;
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/tasks/${taskId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ done })
+    });
+    
+    currentBrand.tasks = updated.tasks;
+    renderTasksList(currentBrand.tasks);
+    showNotification(done ? 'Uppgift markerad som klar' : 'Uppgift markerad som ej klar', 'success');
+  } catch (error) {
+    console.error('Error updating task:', error);
+    showNotification('Kunde inte uppdatera uppgift', 'error');
+  }
+}
+
+async function deleteTask(taskId) {
+  if (!currentBrand) return;
+  if (!confirm('Är du säker på att du vill ta bort denna uppgift?')) return;
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/tasks/${taskId}`, {
+      method: 'DELETE'
+    });
+    
+    currentBrand.tasks = updated.tasks;
+    renderTasksList(currentBrand.tasks);
+    showNotification('Uppgift borttagen', 'success');
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    showNotification('Kunde inte ta bort uppgift', 'error');
+  }
+}
+
+// ============================================================================
+// NOTES
+// ============================================================================
+
+function renderNotesList(notes) {
+  const listEl = document.getElementById('notesList');
+  
+  if (!notes || notes.length === 0) {
+    listEl.innerHTML = '<p class="text-base-content/50">Inga anteckningar ännu</p>';
+    return;
+  }
+  
+  // Sort by date (newest first)
+  const sortedNotes = [...notes].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+  listEl.innerHTML = sortedNotes.map(note => `
+    <div class="card bg-base-200 shadow">
+      <div class="card-body p-4">
+        <div class="flex justify-between items-start">
+          <div class="flex-1">
+            <p class="whitespace-pre-wrap">${note.text}</p>
+            <p class="text-xs text-base-content/50 mt-3">
+              ${new Date(note.createdAt).toLocaleString('sv-SE')}
+            </p>
+          </div>
+          <button class="btn btn-ghost btn-sm btn-circle ml-3" onclick="deleteNote('${note.id}')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addNoteForm() {
+  document.getElementById('addNoteFormDiv').classList.remove('hidden');
+  document.getElementById('newNoteText').focus();
+}
+
+function cancelAddNote() {
+  document.getElementById('addNoteFormDiv').classList.add('hidden');
+  document.getElementById('newNoteText').value = '';
+}
+
+async function saveNewNote() {
+  if (!currentBrand) return;
+  
+  const text = document.getElementById('newNoteText').value.trim();
+  if (!text) {
+    showNotification('Text är obligatoriskt', 'warning');
+    return;
+  }
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/notes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text })
+    });
+    
+    currentBrand.notes = updated.notes;
+    renderNotesList(currentBrand.notes);
+    cancelAddNote();
+    showNotification('Anteckning tillagd', 'success');
+  } catch (error) {
+    console.error('Error adding note:', error);
+    showNotification('Kunde inte lägga till anteckning', 'error');
+  }
+}
+
+async function deleteNote(noteId) {
+  if (!currentBrand) return;
+  if (!confirm('Är du säker på att du vill ta bort denna anteckning?')) return;
+  
+  try {
+    const updated = await fetchWithAuth(`/api/brands/${currentBrand.id}/notes/${noteId}`, {
+      method: 'DELETE'
+    });
+    
+    currentBrand.notes = updated.notes;
+    renderNotesList(currentBrand.notes);
+    showNotification('Anteckning borttagen', 'success');
+  } catch (error) {
+    console.error('Error deleting note:', error);
+    showNotification('Kunde inte ta bort anteckning', 'error');
+  }
+}
+
+// ============================================================================
+// BRAND COMPANIES
+// ============================================================================
+
+async function loadBrandCompanies(brandId) {
+  const listEl = document.getElementById('brandCompaniesList');
+  
+  try {
+    // Fetch all companies and filter by brand
+    const allCompanies = await fetchWithAuth('/api/companies');
+    const brandCompanies = allCompanies.filter(c => c.brandId === brandId);
+    
+    if (brandCompanies.length === 0) {
+      listEl.innerHTML = '<p class="text-base-content/50">Inga företag med detta varumärke</p>';
+      return;
+    }
+    
+    listEl.innerHTML = `
+      <div class="overflow-x-auto">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>Företag</th>
+              <th>Status</th>
+              <th>Mäklare</th>
+              <th>MRR</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${brandCompanies.map(company => `
+              <tr class="hover">
+                <td class="font-medium">${company.name}</td>
+                <td>
+                  ${company.status === 'customer' 
+                    ? '<span class="badge badge-success badge-sm">Kund</span>' 
+                    : '<span class="badge badge-ghost badge-sm">Prospekt</span>'}
+                </td>
+                <td>${company.agentCount || 0}</td>
+                <td class="font-mono">${Math.round(company.mrr || 0).toLocaleString('sv-SE')} kr</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  } catch (error) {
+    console.error('Error loading brand companies:', error);
+    listEl.innerHTML = '<p class="text-error">Kunde inte ladda företag</p>';
+  }
+}
+
