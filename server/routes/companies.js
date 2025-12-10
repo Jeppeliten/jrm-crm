@@ -18,6 +18,8 @@ let mockCompanies = [
     payment: 1649,
     lastContact: new Date('2025-12-01'),
     nextAction: 'Uppföljning Q1 2026',
+    pipelineStage: 'vunnit',
+    pipelineValue: 19788,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date()
   },
@@ -35,6 +37,8 @@ let mockCompanies = [
     payment: 1249,
     lastContact: new Date('2025-11-20'),
     nextAction: 'Kontraktsförnyelse i mars',
+    pipelineStage: 'vunnit',
+    pipelineValue: 9992,
     createdAt: new Date('2023-08-10'),
     updatedAt: new Date()
   },
@@ -52,6 +56,8 @@ let mockCompanies = [
     payment: 0,
     lastContact: new Date('2025-11-15'),
     nextAction: 'Demo-möte bokad 15 dec',
+    pipelineStage: 'kvalificerad',
+    pipelineValue: 24735,
     createdAt: new Date('2025-10-01'),
     updatedAt: new Date()
   },
@@ -69,6 +75,8 @@ let mockCompanies = [
     payment: 849,
     lastContact: new Date('2025-12-05'),
     nextAction: null,
+    pipelineStage: 'vunnit',
+    pipelineValue: 5094,
     createdAt: new Date('2024-06-20'),
     updatedAt: new Date()
   },
@@ -86,6 +94,8 @@ let mockCompanies = [
     payment: 0,
     lastContact: new Date('2025-11-28'),
     nextAction: 'Skickat offert - väntar på svar',
+    pipelineStage: 'offert',
+    pipelineValue: 16490,
     createdAt: new Date('2025-11-10'),
     updatedAt: new Date()
   }
@@ -140,6 +150,88 @@ router.get('/:id/stats', async (req, res) => {
   } catch (error) {
     console.error('Error fetching company stats:', error);
     res.status(500).json({ error: 'Failed to fetch company stats' });
+  }
+});
+
+/**
+ * GET /api/companies/pipeline/stats - Get pipeline statistics
+ */
+router.get('/pipeline/stats', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+
+    if (!db) {
+      // Mock mode - calculate from mockCompanies
+      const stages = ['prospekt', 'kvalificerad', 'offert', 'forhandling', 'vunnit', 'forlorat'];
+      const stats = stages.map(stage => {
+        const companies = mockCompanies.filter(c => c.pipelineStage === stage);
+        const totalValue = companies.reduce((sum, c) => sum + (c.pipelineValue || 0), 0);
+        return {
+          stage,
+          count: companies.length,
+          totalValue,
+          companies: companies.map(c => ({
+            _id: c._id,
+            name: c.name,
+            brand: c.brand,
+            agentCount: c.agentCount,
+            pipelineValue: c.pipelineValue || 0,
+            lastContact: c.lastContact,
+            nextAction: c.nextAction
+          }))
+        };
+      });
+
+      return res.json({
+        stages: stats,
+        totalCompanies: mockCompanies.length,
+        totalValue: mockCompanies.reduce((sum, c) => sum + (c.pipelineValue || 0), 0)
+      });
+    }
+
+    // Database mode
+    const pipeline = [
+      {
+        $group: {
+          _id: '$pipelineStage',
+          count: { $sum: 1 },
+          totalValue: { $sum: '$pipelineValue' },
+          companies: {
+            $push: {
+              _id: '$_id',
+              name: '$name',
+              brand: '$brand',
+              agentCount: '$agentCount',
+              pipelineValue: '$pipelineValue',
+              lastContact: '$lastContact',
+              nextAction: '$nextAction'
+            }
+          }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ];
+
+    const results = await db.collection('companies_v2').aggregate(pipeline).toArray();
+    
+    const stages = ['prospekt', 'kvalificerad', 'offert', 'forhandling', 'vunnit', 'forlorat'];
+    const stats = stages.map(stage => {
+      const stageData = results.find(r => r._id === stage);
+      return {
+        stage,
+        count: stageData?.count || 0,
+        totalValue: stageData?.totalValue || 0,
+        companies: stageData?.companies || []
+      };
+    });
+
+    const totalCompanies = results.reduce((sum, r) => sum + r.count, 0);
+    const totalValue = results.reduce((sum, r) => sum + (r.totalValue || 0), 0);
+
+    res.json({ stages: stats, totalCompanies, totalValue });
+  } catch (error) {
+    console.error('Error fetching pipeline stats:', error);
+    res.status(500).json({ error: 'Failed to fetch pipeline stats' });
   }
 });
 
@@ -424,6 +516,83 @@ router.put('/:id', async (req, res) => {
   } catch (error) {
     console.error('Error updating company:', error);
     res.status(500).json({ error: 'Failed to update company' });
+  }
+});
+
+/**
+ * PUT /api/companies/:id/pipeline - Update company pipeline stage
+ * Body: { stage: 'prospekt'|'kvalificerad'|'offert'|'forhandling'|'vunnit'|'forlorat', value: number }
+ */
+router.put('/:id/pipeline', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    const { stage, value } = req.body;
+
+    // Validate stage
+    const validStages = ['prospekt', 'kvalificerad', 'offert', 'forhandling', 'vunnit', 'forlorat'];
+    if (!validStages.includes(stage)) {
+      return res.status(400).json({ error: 'Invalid pipeline stage' });
+    }
+
+    if (!db) {
+      // Mock mode
+      const company = mockCompanies.find(c => c._id === id);
+      if (!company) {
+        return res.status(404).json({ error: 'Company not found' });
+      }
+
+      company.pipelineStage = stage;
+      if (value !== undefined) company.pipelineValue = value;
+      company.updatedAt = new Date();
+
+      // Auto-update status based on stage
+      if (stage === 'vunnit') {
+        company.status = 'kund';
+      } else if (['forlorat'].includes(stage)) {
+        company.status = 'prospekt';
+      }
+
+      return res.json(company);
+    }
+
+    // Database mode
+    const query = id.match(/^[0-9a-fA-F]{24}$/)
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+
+    const update = {
+      $set: {
+        pipelineStage: stage,
+        updatedAt: new Date()
+      }
+    };
+
+    if (value !== undefined) {
+      update.$set.pipelineValue = value;
+    }
+
+    // Auto-update status
+    if (stage === 'vunnit') {
+      update.$set.status = 'kund';
+    } else if (stage === 'forlorat') {
+      update.$set.status = 'prospekt';
+    }
+
+    const result = await db.collection('companies_v2').findOneAndUpdate(
+      query,
+      update,
+      { returnDocument: 'after' }
+    );
+
+    if (!result.value) {
+      return res.status(404).json({ error: 'Company not found' });
+    }
+
+    res.json(result.value);
+  } catch (error) {
+    console.error('Error updating pipeline stage:', error);
+    res.status(500).json({ error: 'Failed to update pipeline stage' });
   }
 });
 
