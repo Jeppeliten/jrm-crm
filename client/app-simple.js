@@ -3457,3 +3457,263 @@ function saveCompanyChanges(companyId) {
   });
 }
 
+
+// =============================================================================
+// Fas 7 Frontend: Undo/Redo Functionality
+// =============================================================================
+
+let actionHistory = [];
+let undoEnabled = true;
+
+/**
+ * Track an action for undo capability
+ */
+async function trackAction(type, entity, entityId, data, previousData = null) {
+  if (!undoEnabled) return;
+  
+  try {
+    const action = {
+      type,
+      entity,
+      entityId,
+      data,
+      previousData,
+      timestamp: new Date()
+    };
+    
+    const response = await fetch(`${API_BASE}/actions/history`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getAccessToken()}`
+      },
+      body: JSON.stringify(action)
+    });
+    
+    if (response.ok) {
+      const savedAction = await response.json();
+      actionHistory.unshift(savedAction);
+      
+      // Keep only last 50 actions in memory
+      if (actionHistory.length > 50) {
+        actionHistory = actionHistory.slice(0, 50);
+      }
+      
+      // Show undo toast
+      showUndoToast(savedAction);
+    }
+  } catch (error) {
+    console.error('Error tracking action:', error);
+  }
+}
+
+/**
+ * Show toast with undo button
+ */
+function showUndoToast(action) {
+  const actionName = getActionName(action);
+  
+  const toast = document.createElement('div');
+  toast.className = 'alert alert-success fixed bottom-4 right-4 w-auto max-w-md shadow-lg z-50';
+  toast.innerHTML = `
+    <div class="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>${actionName}</span>
+      <button class="btn btn-sm btn-ghost" onclick="undoAction('${action._id}')">Ångra</button>
+    </div>
+  `;
+  
+  document.body.appendChild(toast);
+  
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    toast.classList.add('opacity-0', 'transition-opacity');
+    setTimeout(() => toast.remove(), 300);
+  }, 5000);
+}
+
+/**
+ * Get friendly action name
+ */
+function getActionName(action) {
+  const entityNames = {
+    company: 'företag',
+    brand: 'varumärke',
+    agent: 'mäklare',
+    task: 'uppgift',
+    contact: 'kontakt',
+    note: 'anteckning'
+  };
+  
+  const actionNames = {
+    create: 'Skapade',
+    update: 'Uppdaterade',
+    delete: 'Raderade'
+  };
+  
+  return `${actionNames[action.type] || action.type} ${entityNames[action.entity] || action.entity}`;
+}
+
+/**
+ * Undo an action
+ */
+async function undoAction(actionId) {
+  try {
+    const response = await fetch(`${API_BASE}/actions/undo/${actionId}`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to undo action');
+    
+    const result = await response.json();
+    
+    showToast('Åtgärd ångrad', 'success');
+    
+    // Refresh current view
+    const currentView = document.querySelector('.view.visible');
+    if (currentView) {
+      const viewId = currentView.id.replace('view-', '');
+      switch(viewId) {
+        case 'companies':
+          loadCompanies();
+          break;
+        case 'brands':
+          loadBrands();
+          break;
+        case 'agents':
+          loadAgents();
+          break;
+        case 'tasks':
+          loadTasks();
+          break;
+      }
+    }
+    
+    // Remove from history
+    actionHistory = actionHistory.filter(a => a._id !== actionId);
+    
+  } catch (error) {
+    console.error('Error undoing action:', error);
+    showToast('Kunde inte ångra åtgärd', 'error');
+  }
+}
+
+/**
+ * Load action history
+ */
+async function loadActionHistory() {
+  try {
+    const response = await fetch(`${API_BASE}/actions/history?limit=20`, {
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to load history');
+    
+    actionHistory = await response.json();
+    renderActionHistory();
+    
+  } catch (error) {
+    console.error('Error loading action history:', error);
+  }
+}
+
+/**
+ * Render action history panel
+ */
+function renderActionHistory() {
+  const panel = document.getElementById('actionHistoryPanel');
+  if (!panel) return;
+  
+  const html = `
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h3 class="card-title">Senaste åtgärder</h3>
+        <div class="space-y-2">
+          ${actionHistory.map(action => `
+            <div class="flex items-center justify-between p-2 hover:bg-base-200 rounded">
+              <div>
+                <div class="font-medium">${getActionName(action)}</div>
+                <div class="text-xs opacity-60">${formatDate(action.timestamp)}</div>
+              </div>
+              ${!action.undone ? `
+                <button class="btn btn-xs btn-ghost" onclick="undoAction('${action._id}')">Ångra</button>
+              ` : `
+                <span class="badge badge-ghost badge-sm">Ångrad</span>
+              `}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+  
+  panel.innerHTML = html;
+}
+
+/**
+ * Show action history sidebar
+ */
+function showActionHistory() {
+  loadActionHistory();
+  
+  const drawer = document.createElement('div');
+  drawer.className = 'drawer drawer-end z-50';
+  drawer.innerHTML = `
+    <input id="action-drawer" type="checkbox" class="drawer-toggle" checked />
+    <div class="drawer-side">
+      <label for="action-drawer" class="drawer-overlay"></label>
+      <div class="menu p-4 w-80 min-h-full bg-base-200">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-2xl font-bold">Åtgärdshistorik</h2>
+          <button class="btn btn-sm btn-circle btn-ghost" onclick="closeActionHistory()"></button>
+        </div>
+        <div id="actionHistoryPanel"></div>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(drawer);
+  renderActionHistory();
+}
+
+function closeActionHistory() {
+  const drawer = document.querySelector('.drawer');
+  if (drawer) drawer.remove();
+}
+
+// Intercept delete operations to track them
+const originalDeleteCompany = window.deleteCompany;
+if (originalDeleteCompany) {
+  window.deleteCompany = async function(companyId) {
+    // Get company data before deleting
+    try {
+      const response = await fetch(`${API_BASE}/companies/${companyId}`, {
+        headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+      });
+      const company = await response.json();
+      
+      // Track the delete action
+      await trackAction('delete', 'company', companyId, null, company);
+    } catch (error) {
+      console.error('Error tracking delete:', error);
+    }
+    
+    // Call original delete
+    return originalDeleteCompany(companyId);
+  };
+}
+
+// Add keyboard shortcut for undo (Ctrl+Z)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+    e.preventDefault();
+    if (actionHistory.length > 0 && !actionHistory[0].undone) {
+      undoAction(actionHistory[0]._id);
+    }
+  }
+});
+
+console.log(' Undo/Redo system initialized');
