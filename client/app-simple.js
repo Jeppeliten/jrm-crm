@@ -3280,3 +3280,180 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 });
+
+// =================================================================
+// Företagskort Modal (enligt spec)
+// =================================================================
+
+function openCompanyModal(companyId) {
+  console.log('Opening company modal:', companyId);
+  
+  fetch(`${API_BASE}/companies/${companyId}`, {
+    headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+  })
+  .then(res => res.json())
+  .then(company => {
+    showCompanyModal(company);
+  })
+  .catch(error => {
+    console.error('Error loading company:', error);
+    showToast('Kunde inte ladda företag', 'error');
+  });
+}
+
+function showCompanyModal(company) {
+  const modalHTML = `
+    <dialog id="companyModal" class="modal modal-open">
+      <div class="modal-box w-11/12 max-w-3xl">
+        <h3 class="font-bold text-lg mb-4">${escapeHtml(company.name)}</h3>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <div class="form-control">
+              <label class="label"><span class="label-text">Ansvarig säljare</span></label>
+              <select id="companyAdmin" class="select select-bordered select-sm">
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Kedjetillhörighet</span></label>
+              <select id="companyBrand" class="select select-bordered select-sm">
+                <option value="${company.brandId || ''}">${escapeHtml(company.brand || 'Mäklarringen')}</option>
+              </select>
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Segment/Kategori</span></label>
+              <div class="flex items-center gap-2">
+                <span class="badge badge-primary"> Fastighetsmäklare</span>
+              </div>
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Kund?</span></label>
+              <input type="checkbox" id="companyIsCustomer" class="checkbox" ${company.status === 'kund' ? 'checked' : ''} />
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Produkt</span></label>
+              <input type="text" class="input input-bordered input-sm" value="" placeholder="Ingen produkt vald" />
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Nuvarande betalning (SEK)</span></label>
+              <input type="text" id="companyPayment" class="input input-bordered input-sm" value="${company.payment || ''}" />
+            </div>
+          </div>
+          
+          <!-- Right Column -->
+          <div class="space-y-4">
+            <div class="form-control">
+              <label class="label"><span class="label-text">Status</span></label>
+              <select id="companyStatus" class="select select-bordered select-sm">
+                <option value="prospekt" ${company.status === 'prospekt' ? 'selected' : ''}>Prospekt</option>
+                <option value="kund" ${company.status === 'kund' ? 'selected' : ''}>Kund</option>
+              </select>
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Pipeline</span></label>
+              <select id="companyPipeline" class="select select-bordered select-sm">
+                <option value="kvalificerad" ${company.pipelineStage === 'kvalificerad' ? 'selected' : ''}>Kvalificerad</option>
+                <option value="offert" ${company.pipelineStage === 'offert' ? 'selected' : ''}>Offert</option>
+                <option value="forhandling" ${company.pipelineStage === 'forhandling' ? 'selected' : ''}>Förhandling</option>
+                <option value="vunnit" ${company.pipelineStage === 'vunnit' ? 'selected' : ''}>Vunnit</option>
+              </select>
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Potential (SEK)</span></label>
+              <input type="text" id="companyPotential" class="input input-bordered input-sm" value="${company.pipelineValue || ''}" />
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Adress</span></label>
+              <input type="text" id="companyAddress" class="input input-bordered input-sm" value="${escapeHtml(company.address || '')}" />
+            </div>
+            
+            <div class="form-control">
+              <label class="label"><span class="label-text">Postnummer</span></label>
+              <input type="text" id="companyPostcode" class="input input-bordered input-sm" value="" />
+            </div>
+          </div>
+        </div>
+        
+        <!-- Beslutsfattare Section -->
+        <div class="mt-6">
+          <h4 class="font-semibold mb-2">Beslutsfattare</h4>
+          <div class="space-y-2">
+            <div class="flex gap-2">
+              <button class="btn btn-sm btn-ghost">Lägg till kontakt</button>
+              <button class="btn btn-sm btn-ghost">Ny uppgift</button>
+              <button class="btn btn-sm btn-primary"> Outlook</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mäklare Section -->
+        <div class="mt-6">
+          <h4 class="font-semibold mb-2">Mäklare (${company.agentCount || 0})</h4>
+          <div class="text-sm text-base-content/50">Mäklarlista visas här...</div>
+        </div>
+        
+        <!-- Bottom Actions -->
+        <div class="modal-action">
+          <button class="btn btn-sm" onclick="document.getElementById('companyModal').close()">Tillbaka till lista</button>
+          <button class="btn btn-sm btn-ghost">Ny mäklare</button>
+          <button class="btn btn-sm btn-primary" onclick="saveCompanyChanges('${company._id}')">Spara</button>
+          <button class="btn btn-sm" onclick="document.getElementById('companyModal').close()">Stäng</button>
+          <button class="btn btn-sm btn-ghost">Uppgifter</button>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+  `;
+  
+  // Remove existing modal if any
+  const existing = document.getElementById('companyModal');
+  if (existing) existing.remove();
+  
+  // Add modal to body
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  
+  // Show modal
+  document.getElementById('companyModal').showModal();
+}
+
+function saveCompanyChanges(companyId) {
+  const updates = {
+    status: document.getElementById('companyStatus').value,
+    pipelineStage: document.getElementById('companyPipeline').value,
+    pipelineValue: parseFloat(document.getElementById('companyPotential').value) || 0,
+    payment: parseFloat(document.getElementById('companyPayment').value) || 0,
+    address: document.getElementById('companyAddress').value
+  };
+  
+  fetch(`${API_BASE}/companies/${companyId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getAccessToken()}`
+    },
+    body: JSON.stringify(updates)
+  })
+  .then(res => res.json())
+  .then(() => {
+    showToast('Företag uppdaterat', 'success');
+    document.getElementById('companyModal').close();
+    loadCompanies();
+  })
+  .catch(error => {
+    console.error('Error saving company:', error);
+    showToast('Kunde inte spara ändringar', 'error');
+  });
+}
+
