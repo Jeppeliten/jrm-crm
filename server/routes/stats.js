@@ -425,11 +425,214 @@ router.get('/activity', async (req, res) => {
 
   } catch (error) {
     console.error('Error fetching activity:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to fetch activity',
-      message: error.message 
+      message: error.message
     });
   }
 });
+
+/**
+ * GET /api/stats/customer-success - Customer Success Dashboard metrics
+ * Returns churn risk, health scores, adoption tracking, at-risk customers
+ */
+router.get('/customer-success', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+
+    if (!db) {
+      // Mock mode - calculate from mock companies
+      const mockCompanies = require('./companies').mockCompanies || [];
+      
+      // Calculate health scores for each company
+      const companiesWithHealth = mockCompanies
+        .filter(c => c.status === 'kund')
+        .map(company => {
+          const health = calculateHealthScore(company);
+          return {
+            _id: company._id,
+            name: company.name,
+            brand: company.brand,
+            agentCount: company.agentCount,
+            mrr: company.payment * company.agentCount * 12 || 0,
+            lastContact: company.lastContact,
+            healthScore: health.score,
+            healthStatus: health.status,
+            churnRisk: health.churnRisk,
+            riskFactors: health.riskFactors,
+            daysSinceContact: health.daysSinceContact
+          };
+        });
+
+      // Sort by health score (lowest first - most at risk)
+      const atRiskCompanies = companiesWithHealth
+        .filter(c => c.churnRisk === 'high' || c.churnRisk === 'medium')
+        .sort((a, b) => a.healthScore - b.healthScore)
+        .slice(0, 10);
+
+      // Calculate summary metrics
+      const totalCustomers = companiesWithHealth.length;
+      const highRisk = companiesWithHealth.filter(c => c.churnRisk === 'high').length;
+      const mediumRisk = companiesWithHealth.filter(c => c.churnRisk === 'medium').length;
+      const healthy = companiesWithHealth.filter(c => c.churnRisk === 'low').length;
+      
+      const avgHealthScore = Math.round(
+        companiesWithHealth.reduce((sum, c) => sum + c.healthScore, 0) / totalCustomers
+      );
+
+      const totalMRR = companiesWithHealth.reduce((sum, c) => sum + c.mrr, 0);
+      const atRiskMRR = atRiskCompanies.reduce((sum, c) => sum + c.mrr, 0);
+
+      return res.json({
+        summary: {
+          totalCustomers,
+          highRisk,
+          mediumRisk,
+          healthy,
+          avgHealthScore,
+          totalMRR: Math.round(totalMRR),
+          atRiskMRR: Math.round(atRiskMRR)
+        },
+        atRiskCompanies,
+        healthDistribution: [
+          { status: 'healthy', count: healthy, percentage: Math.round((healthy / totalCustomers) * 100) },
+          { status: 'medium', count: mediumRisk, percentage: Math.round((mediumRisk / totalCustomers) * 100) },
+          { status: 'high', count: highRisk, percentage: Math.round((highRisk / totalCustomers) * 100) }
+        ]
+      });
+    }
+
+    // Database mode
+    const customers = await db.collection('companies_v2')
+      .find({ status: 'kund' })
+      .toArray();
+
+    const companiesWithHealth = customers.map(company => {
+      const health = calculateHealthScore(company);
+      return {
+        _id: company._id,
+        name: company.name,
+        brand: company.brand,
+        agentCount: company.agentCount,
+        mrr: company.mrr || 0,
+        lastContact: company.lastContact,
+        healthScore: health.score,
+        healthStatus: health.status,
+        churnRisk: health.churnRisk,
+        riskFactors: health.riskFactors,
+        daysSinceContact: health.daysSinceContact
+      };
+    });
+
+    const atRiskCompanies = companiesWithHealth
+      .filter(c => c.churnRisk === 'high' || c.churnRisk === 'medium')
+      .sort((a, b) => a.healthScore - b.healthScore)
+      .slice(0, 10);
+
+    const totalCustomers = companiesWithHealth.length;
+    const highRisk = companiesWithHealth.filter(c => c.churnRisk === 'high').length;
+    const mediumRisk = companiesWithHealth.filter(c => c.churnRisk === 'medium').length;
+    const healthy = companiesWithHealth.filter(c => c.churnRisk === 'low').length;
+    
+    const avgHealthScore = Math.round(
+      companiesWithHealth.reduce((sum, c) => sum + c.healthScore, 0) / totalCustomers
+    );
+
+    const totalMRR = companiesWithHealth.reduce((sum, c) => sum + c.mrr, 0);
+    const atRiskMRR = atRiskCompanies.reduce((sum, c) => sum + c.mrr, 0);
+
+    res.json({
+      summary: {
+        totalCustomers,
+        highRisk,
+        mediumRisk,
+        healthy,
+        avgHealthScore,
+        totalMRR: Math.round(totalMRR),
+        atRiskMRR: Math.round(atRiskMRR)
+      },
+      atRiskCompanies,
+      healthDistribution: [
+        { status: 'healthy', count: healthy, percentage: Math.round((healthy / totalCustomers) * 100) },
+        { status: 'medium', count: mediumRisk, percentage: Math.round((mediumRisk / totalCustomers) * 100) },
+        { status: 'high', count: highRisk, percentage: Math.round((highRisk / totalCustomers) * 100) }
+      ]
+    });
+
+  } catch (error) {
+    console.error('Error fetching customer success metrics:', error);
+    res.status(500).json({
+      error: 'Failed to fetch customer success metrics',
+      message: error.message
+    });
+  }
+});
+
+/**
+ * Calculate health score for a company
+ * Factors: last contact date, agent count, MRR, next action presence
+ */
+function calculateHealthScore(company) {
+  let score = 100;
+  const riskFactors = [];
+  
+  // Factor 1: Days since last contact
+  const now = new Date();
+  const lastContact = company.lastContact ? new Date(company.lastContact) : null;
+  const daysSinceContact = lastContact 
+    ? Math.floor((now - lastContact) / (1000 * 60 * 60 * 24))
+    : 999;
+  
+  if (daysSinceContact > 90) {
+    score -= 40;
+    riskFactors.push('Ingen kontakt på >90 dagar');
+  } else if (daysSinceContact > 60) {
+    score -= 25;
+    riskFactors.push('Ingen kontakt på >60 dagar');
+  } else if (daysSinceContact > 30) {
+    score -= 10;
+    riskFactors.push('Ingen kontakt på >30 dagar');
+  }
+  
+  // Factor 2: No next action scheduled
+  if (!company.nextAction) {
+    score -= 15;
+    riskFactors.push('Ingen uppföljning planerad');
+  }
+  
+  // Factor 3: Low agent count
+  if (company.agentCount && company.agentCount < 3) {
+    score -= 10;
+    riskFactors.push('Lågt antal mäklare (<3)');
+  }
+  
+  // Factor 4: No MRR data
+  const mrr = company.mrr || (company.payment * company.agentCount * 12) || 0;
+  if (mrr === 0) {
+    score -= 10;
+    riskFactors.push('Ingen MRR-data');
+  }
+  
+  // Determine churn risk and status
+  let churnRisk, status;
+  if (score >= 75) {
+    churnRisk = 'low';
+    status = 'healthy';
+  } else if (score >= 50) {
+    churnRisk = 'medium';
+    status = 'warning';
+  } else {
+    churnRisk = 'high';
+    status = 'critical';
+  }
+  
+  return {
+    score: Math.max(0, score),
+    status,
+    churnRisk,
+    riskFactors,
+    daysSinceContact
+  };
+}
 
 module.exports = router;
