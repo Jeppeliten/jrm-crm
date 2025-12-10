@@ -2802,3 +2802,255 @@ function scheduleFollowUp(companyId, companyName) {
   }
 }
 
+
+// =============================================================================
+// Fas 5: Tasks & Notes System
+// =============================================================================
+
+let currentTaskFilter = 'all';
+let currentEntityTypeFilter = '';
+
+/**
+ * Load and display all tasks
+ */
+async function loadTasks() {
+  try {
+    console.log(' Loading tasks with filter:', currentTaskFilter);
+    
+    const params = new URLSearchParams();
+    if (currentTaskFilter && currentTaskFilter !== 'all') {
+      params.append('filter', currentTaskFilter);
+    }
+    if (currentEntityTypeFilter) {
+      params.append('entityType', currentEntityTypeFilter);
+    }
+    
+    const url = `${API_BASE}/tasks?${params.toString()}`;
+    const response = await fetch(url, {
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to load tasks');
+    
+    const tasks = await response.json();
+    console.log(' Loaded tasks:', tasks);
+    
+    // Also load stats
+    await loadTaskStats();
+    
+    // Render tasks
+    renderTasksList(tasks);
+    
+  } catch (error) {
+    console.error('Error loading tasks:', error);
+    showToast('Kunde inte ladda uppgifter', 'error');
+  }
+}
+
+/**
+ * Load task statistics
+ */
+async function loadTaskStats() {
+  try {
+    const response = await fetch(`${API_BASE}/tasks/stats`, {
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to load task stats');
+    
+    const stats = await response.json();
+    console.log(' Task stats:', stats);
+    
+    // Update stat cards
+    document.getElementById('stat-total-tasks').textContent = stats.total || 0;
+    document.getElementById('stat-completed-tasks').textContent = stats.completed || 0;
+    document.getElementById('stat-overdue-tasks').textContent = stats.overdue || 0;
+    document.getElementById('stat-today-tasks').textContent = stats.today || 0;
+    document.getElementById('stat-week-tasks').textContent = stats.thisWeek || 0;
+    
+  } catch (error) {
+    console.error('Error loading task stats:', error);
+  }
+}
+
+/**
+ * Filter tasks by type
+ */
+function filterTasks(filter) {
+  console.log(' Filtering tasks:', filter);
+  currentTaskFilter = filter || 'all';
+  
+  // Update active tab
+  document.querySelectorAll('.tabs .tab').forEach(tab => {
+    tab.classList.remove('tab-active');
+    if (tab.dataset.filter === currentTaskFilter) {
+      tab.classList.add('tab-active');
+    }
+  });
+  
+  // Get entity type filter
+  const entityTypeSelect = document.getElementById('entityTypeFilter');
+  if (entityTypeSelect) {
+    currentEntityTypeFilter = entityTypeSelect.value;
+  }
+  
+  // Reload tasks
+  loadTasks();
+}
+
+/**
+ * Render tasks list
+ */
+function renderTasksList(tasks) {
+  const container = document.getElementById('tasksList');
+  const emptyState = document.getElementById('tasksEmptyState');
+  
+  if (!tasks || tasks.length === 0) {
+    container.innerHTML = '';
+    emptyState.classList.remove('hidden');
+    return;
+  }
+  
+  emptyState.classList.add('hidden');
+  
+  container.innerHTML = tasks.map(task => {
+    const dueDate = new Date(task.dueDate);
+    const isOverdue = !task.done && dueDate < new Date();
+    const isToday = !task.done && dueDate.toDateString() === new Date().toDateString();
+    
+    let dueDateClass = 'text-base-content/50';
+    let dueDateLabel = formatDate(dueDate);
+    
+    if (isOverdue) {
+      dueDateClass = 'text-error font-semibold';
+      dueDateLabel = ` Försenad - ${dueDateLabel}`;
+    } else if (isToday) {
+      dueDateClass = 'text-warning font-semibold';
+      dueDateLabel = ` Idag - ${dueDateLabel}`;
+    }
+    
+    const entityBadgeClass = task.entityType === 'brand' ? 'badge-primary' : 
+                            task.entityType === 'company' ? 'badge-secondary' : 
+                            'badge-accent';
+    
+    return `
+      <div class="card bg-base-100 shadow-md ${task.done ? 'opacity-50' : ''}">
+        <div class="card-body p-4">
+          <div class="flex items-start gap-4">
+            <!-- Checkbox -->
+            <input type="checkbox" 
+                   class="checkbox checkbox-primary mt-1" 
+                   ${task.done ? 'checked' : ''}
+                   onchange="toggleTaskDone('${task._id}', this.checked, '${task.entityType}', '${task.entityId}')">
+            
+            <!-- Content -->
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg ${task.done ? 'line-through' : ''}">${escapeHtml(task.title)}</h3>
+              
+              ${task.description ? `<p class="text-sm text-base-content/70 mt-1">${escapeHtml(task.description)}</p>` : ''}
+              
+              <div class="flex flex-wrap gap-2 mt-3">
+                <span class="badge ${entityBadgeClass}">${getEntityTypeName(task.entityType)}</span>
+                ${task.entityName ? `<span class="badge badge-outline">${escapeHtml(task.entityName)}</span>` : ''}
+                <span class="text-sm ${dueDateClass}">${dueDateLabel}</span>
+              </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="flex gap-2">
+              <button class="btn btn-ghost btn-sm" 
+                      onclick="viewTaskEntity('${task.entityType}', '${task.entityId}')"
+                      title="Visa ${getEntityTypeName(task.entityType)}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/**
+ * Toggle task done status (via brand/company endpoint)
+ */
+async function toggleTaskDone(taskId, done, entityType, entityId) {
+  try {
+    console.log(' Toggling task:', taskId, 'done:', done);
+    
+    // Update via the entity endpoint (brand or company)
+    const endpoint = entityType === 'brand' ? 
+      `${API_BASE}/brands/${entityId}/tasks/${taskId}` :
+      `${API_BASE}/companies/${entityId}/tasks/${taskId}`;
+    
+    const response = await fetch(endpoint, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getAccessToken()}`
+      },
+      body: JSON.stringify({ done })
+    });
+    
+    if (!response.ok) throw new Error('Failed to update task');
+    
+    showToast(done ? 'Uppgift markerad som slutförd' : 'Uppgift markerad som ej slutförd', 'success');
+    
+    // Reload tasks
+    setTimeout(() => loadTasks(), 300);
+    
+  } catch (error) {
+    console.error('Error toggling task:', error);
+    showToast('Kunde inte uppdatera uppgift', 'error');
+  }
+}
+
+/**
+ * View the entity that owns the task
+ */
+function viewTaskEntity(entityType, entityId) {
+  if (entityType === 'brand') {
+    // Find and open brand details modal
+    openBrandDetailsModal(entityId);
+  } else if (entityType === 'company') {
+    // Switch to companies view and highlight the company
+    showView('companies');
+    setTimeout(() => {
+      const companyRow = document.querySelector(`tr[data-company-id="${entityId}"]`);
+      if (companyRow) {
+        companyRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        companyRow.classList.add('bg-primary/10');
+        setTimeout(() => companyRow.classList.remove('bg-primary/10'), 2000);
+      }
+    }, 100);
+  } else if (entityType === 'agent') {
+    // Switch to agents view
+    showView('agents');
+  }
+}
+
+/**
+ * Get friendly entity type name
+ */
+function getEntityTypeName(entityType) {
+  const names = {
+    'brand': 'Varumärke',
+    'company': 'Företag',
+    'agent': 'Mäklare'
+  };
+  return names[entityType] || entityType;
+}
+
+// Auto-load tasks when view is shown
+document.addEventListener('DOMContentLoaded', () => {
+  const originalShowView = window.showView;
+  window.showView = function(viewName) {
+    originalShowView(viewName);
+    if (viewName === 'tasks') {
+      loadTasks();
+    }
+  };
+});

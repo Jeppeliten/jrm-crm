@@ -387,6 +387,86 @@
     </div>
   </div>
 </section>
+
+<!-- Tasks & Notes View -->
+<section id="view-tasks" class="view">
+  <div class="mb-6">
+    <h2 class="text-3xl font-bold">Uppgifter & Anteckningar</h2>
+    <p class="text-base-content/70 mt-2">Centraliserad översikt över alla uppgifter från varumärken, företag och mäklare</p>
+  </div>
+
+  <!-- Task Stats -->
+  <div id="taskStats" class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Totalt</div>
+        <div class="stat-value text-3xl" id="stat-total-tasks">0</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Slutförda</div>
+        <div class="stat-value text-3xl text-success" id="stat-completed-tasks">0</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Försenade</div>
+        <div class="stat-value text-3xl text-error" id="stat-overdue-tasks">0</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Idag</div>
+        <div class="stat-value text-3xl text-warning" id="stat-today-tasks">0</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Denna vecka</div>
+        <div class="stat-value text-3xl text-info" id="stat-week-tasks">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="tabs tabs-boxed mb-6 bg-base-100 shadow-md p-2">
+    <button class="tab tab-active" data-filter="all" onclick="filterTasks('all')">Alla</button>
+    <button class="tab" data-filter="my" onclick="filterTasks('my')">Mina uppgifter</button>
+    <button class="tab" data-filter="overdue" onclick="filterTasks('overdue')">Försenade</button>
+    <button class="tab" data-filter="today" onclick="filterTasks('today')">Idag</button>
+    <button class="tab" data-filter="week" onclick="filterTasks('week')">Denna vecka</button>
+  </div>
+
+  <!-- Entity Type Filter -->
+  <div class="mb-6 flex gap-4">
+    <select id="entityTypeFilter" class="select select-bordered" onchange="filterTasks()">
+      <option value="">Alla typer</option>
+      <option value="brand">Varumärken</option>
+      <option value="company">Företag</option>
+      <option value="agent">Mäklare</option>
+    </select>
+    <button class="btn btn-ghost" onclick="loadTasks()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+      Uppdatera
+    </button>
+  </div>
+
+  <!-- Tasks List -->
+  <div id="tasksList" class="space-y-4">
+    <!-- Tasks will be rendered here -->
+  </div>
+
+  <!-- Empty State -->
+  <div id="tasksEmptyState" class="text-center py-12 hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    </svg>
+    <p class="text-xl text-base-content/50">Inga uppgifter hittades</p>
+  </div>
+</section>
         <section id="view-licenses" class="view"></section>
         <section id="view-import" class="view"></section>
         <section id="view-settings" class="view"></section>
@@ -437,6 +517,12 @@
             KundvÃ¥rd
           </button></li>
           <li><button data-view="licenses" class="nav-item">
+          <li><button data-view="tasks" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            Uppgifter
+          </button></li>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
             </svg>
