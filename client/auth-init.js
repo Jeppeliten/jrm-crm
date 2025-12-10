@@ -45,18 +45,15 @@ function showLandingPage() {
     return;
   }
   
-  // Remove any existing event listeners by cloning the button
-  const newLoginBtn = loginBtn.cloneNode(true);
-  loginBtn.parentNode.replaceChild(newLoginBtn, loginBtn);
-  
   console.log('Login button ready, adding click handler...');
-  newLoginBtn.addEventListener('click', async (e) => {
+  loginBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Login button clicked!');
     
-    newLoginBtn.disabled = true;
-    newLoginBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loggar in...';
+    loginBtn.disabled = true;
+    const originalHTML = loginBtn.innerHTML;
+    loginBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loggar in...';
     loginError.classList.add('hidden');
     
     try {
@@ -67,16 +64,8 @@ function showLandingPage() {
       console.error('Login failed:', error);
       loginErrorText.textContent = 'Inloggning misslyckades. Försök igen.';
       loginError.classList.remove('hidden');
-      newLoginBtn.disabled = false;
-      newLoginBtn.innerHTML = `
-        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" viewBox="0 0 23 23" fill="none">
-          <path d="M11.5 0h11v11h-11V0z" fill="#f25022"/>
-          <path d="M0 0h11v11H0V0z" fill="#00a4ef"/>
-          <path d="M11.5 11.5h11v11h-11v-11z" fill="#ffb900"/>
-          <path d="M0 11.5h11v11H0v-11z" fill="#7fba00"/>
-        </svg>
-        <span class="text-lg">Logga in med Microsoft</span>
-      `;
+      loginBtn.disabled = false;
+      loginBtn.innerHTML = originalHTML;
     }
   });
   
