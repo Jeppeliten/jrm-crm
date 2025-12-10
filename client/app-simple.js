@@ -334,6 +334,19 @@ function loadDashboard() {
 }
 
 
+
+// Helper function to get access token
+function getAccessToken() {
+  if (window.entraAuth) {
+    try {
+      return window.entraAuth.getAccessToken();
+    } catch (error) {
+      console.log('Could not get access token:', error);
+      return null;
+    }
+  }
+  return null;
+}
 async function fetchWithAuth(endpoint, options = {}) {
   const baseUrl = window.API_CONFIG?.baseUrl || 'https://jrm-crm-api-prod-vsdmc5kbydcjc.azurewebsites.net';
   const url = `${baseUrl}${endpoint}`;
@@ -2852,7 +2865,7 @@ async function loadTasks() {
     
   } catch (error) {
     console.error('Error loading tasks:', error);
-    showToast('Kunde inte ladda uppgifter', 'error');
+    showNotification('Kunde inte ladda uppgifter', 'error');
   }
 }
 
@@ -3006,14 +3019,14 @@ async function toggleTaskDone(taskId, done, entityType, entityId) {
     
     if (!response.ok) throw new Error('Failed to update task');
     
-    showToast(done ? 'Uppgift markerad som slutförd' : 'Uppgift markerad som ej slutförd', 'success');
+    showNotification(done ? 'Uppgift markerad som slutförd' : 'Uppgift markerad som ej slutförd', 'success');
     
     // Reload tasks
     setTimeout(() => loadTasks(), 300);
     
   } catch (error) {
     console.error('Error toggling task:', error);
-    showToast('Kunde inte uppdatera uppgift', 'error');
+    showNotification('Kunde inte uppdatera uppgift', 'error');
   }
 }
 
@@ -3140,7 +3153,7 @@ function applyPreset(presetId) {
     if (brandSelect) brandSelect.value = filters.brandId;
   }
   
-  showToast(`Tillämpade filter: ${preset.name}`, 'success');
+  showNotification(`Tillämpade filter: ${preset.name}`, 'success');
   
   // Apply filters
   applyAdvancedFilters();
@@ -3193,11 +3206,11 @@ async function applyAdvancedFilters() {
     const companies = await response.json();
     renderCompaniesTable(companies);
     
-    showToast(`Visar ${companies.length} företag`, 'success');
+    showNotification(`Visar ${companies.length} företag`, 'success');
     
   } catch (error) {
     console.error('Error applying filters:', error);
-    showToast('Kunde inte tillämpa filter', 'error');
+    showNotification('Kunde inte tillämpa filter', 'error');
   }
 }
 
@@ -3218,7 +3231,7 @@ function clearAdvancedFilters() {
   // Reload companies without filters
   loadCompanies();
   
-  showToast('Filter rensade', 'info');
+  showNotification('Filter rensade', 'info');
 }
 
 /**
@@ -3243,14 +3256,14 @@ async function saveCurrentFilters() {
     
     if (!response.ok) throw new Error('Failed to save preset');
     
-    showToast('Filter sparat!', 'success');
+    showNotification('Filter sparat!', 'success');
     
     // Reload presets
     await loadFilterPresets();
     
   } catch (error) {
     console.error('Error saving filter preset:', error);
-    showToast('Kunde inte spara filter', 'error');
+    showNotification('Kunde inte spara filter', 'error');
   }
 }
 
@@ -3268,12 +3281,12 @@ async function deleteFilterPreset(presetId) {
     
     if (!response.ok) throw new Error('Failed to delete preset');
     
-    showToast('Filter borttaget', 'success');
+    showNotification('Filter borttaget', 'success');
     await loadFilterPresets();
     
   } catch (error) {
     console.error('Error deleting filter preset:', error);
-    showToast('Kunde inte ta bort filter', 'error');
+    showNotification('Kunde inte ta bort filter', 'error');
   }
 }
 
@@ -3306,7 +3319,7 @@ function openCompanyModal(companyId) {
   })
   .catch(error => {
     console.error('Error loading company:', error);
-    showToast('Kunde inte ladda företag', 'error');
+    showNotification('Kunde inte ladda företag', 'error');
   });
 }
 
@@ -3456,13 +3469,13 @@ function saveCompanyChanges(companyId) {
   })
   .then(res => res.json())
   .then(() => {
-    showToast('Företag uppdaterat', 'success');
+    showNotification('Företag uppdaterat', 'success');
     document.getElementById('companyModal').close();
     loadCompanies();
   })
   .catch(error => {
     console.error('Error saving company:', error);
-    showToast('Kunde inte spara ändringar', 'error');
+    showNotification('Kunde inte spara ändringar', 'error');
   });
 }
 
@@ -3579,7 +3592,7 @@ async function undoAction(actionId) {
     
     const result = await response.json();
     
-    showToast('Åtgärd ångrad', 'success');
+    showNotification('Åtgärd ångrad', 'success');
     
     // Refresh current view
     const currentView = document.querySelector('.view.visible');
@@ -3606,7 +3619,7 @@ async function undoAction(actionId) {
     
   } catch (error) {
     console.error('Error undoing action:', error);
-    showToast('Kunde inte ångra åtgärd', 'error');
+    showNotification('Kunde inte ångra åtgärd', 'error');
   }
 }
 
@@ -3733,18 +3746,14 @@ console.log(' Undo/Redo system initialized');
 // Company Modal Functions (Spec-Compliant)
 // =============================================================================
 
-function openCompanyModal(companyId) {
-  fetch(`${API_BASE}/companies/${companyId}`, {
-    headers: { 'Authorization': `Bearer ${getAccessToken()}` }
-  })
-  .then(response => response.json())
-  .then(company => {
+async function openCompanyModal(companyId) {
+  try {
+    const company = await fetchWithAuth(`/api/companies/${companyId}`);
     showCompanyModal(company);
-  })
-  .catch(error => {
+  } catch (error) {
     console.error('Error loading company:', error);
-    showToast('Kunde inte ladda företagsdata', 'error');
-  });
+    showNotification('Kunde inte ladda företagsdata', 'error');
+  }
 }
 
 function showCompanyModal(company) {
@@ -3874,7 +3883,7 @@ function showCompanyModal(company) {
   modal.showModal();
 }
 
-function saveCompanyChanges(companyId) {
+async function saveCompanyChanges(companyId) {
   const updatedData = {
     seller: document.getElementById('modal-seller').value,
     chain: document.getElementById('modal-chain').value,
@@ -3889,23 +3898,22 @@ function saveCompanyChanges(companyId) {
     zipCode: document.getElementById('modal-zipCode').value
   };
   
-  fetch(`${API_BASE}/companies/${companyId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${getAccessToken()}`
-    },
-    body: JSON.stringify(updatedData)
-  })
-  .then(response => response.json())
-  .then(() => {
-    showToast('Företag uppdaterat', 'success');
+  try {
+    await fetchWithAuth(`/api/companies/${companyId}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedData)
+    });
+    
+    showNotification('Företag uppdaterat', 'success');
     document.getElementById('companyModal').close();
     loadCompanies();
-  })
-  .catch(error => {
+  } catch (error) {
     console.error('Error updating company:', error);
-    showToast('Kunde inte uppdatera företag', 'error');
-  });
+    showNotification('Kunde inte uppdatera företag', 'error');
+  }
 }
+
+
+
+
 
