@@ -18,7 +18,7 @@ const domCache = {
 };
 
 const LS_KEY = 'crm_prototype_state_v1';
-const API_BASE = '';
+// API_BASE is defined in config.js
 const DEFAULT_USERS = [
   { id: 'u1', namn: 'Admin', roll: 'admin' },
   { id: 'u2', namn: 'Sara Sälj', roll: 'sales' },
