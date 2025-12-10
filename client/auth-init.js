@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Show landing page and set up login button
 function showLandingPage() {
   console.log('Showing landing page...');
-  document.getElementById('landingPage').style.display = 'flex';
+  document.getElementById('landingPage').style.display = 'block';
   document.getElementById('app').style.display = 'none';
   
   const loginBtn = document.getElementById('loginBtn');
@@ -56,8 +56,8 @@ function showLandingPage() {
     console.log('Login button clicked!');
     
     newLoginBtn.disabled = true;
-    newLoginBtn.innerHTML = '<span class="loading loading-spinner"></span> Loggar in...';
-    loginError.style.display = 'none';
+    newLoginBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loggar in...';
+    loginError.classList.add('hidden');
     
     try {
       console.log('Starting login redirect...');
@@ -66,9 +66,17 @@ function showLandingPage() {
     } catch (error) {
       console.error('Login failed:', error);
       loginErrorText.textContent = 'Inloggning misslyckades. Försök igen.';
-      loginError.style.display = 'block';
+      loginError.classList.remove('hidden');
       newLoginBtn.disabled = false;
-      newLoginBtn.innerHTML = 'Logga in med Microsoft';
+      newLoginBtn.innerHTML = `
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" viewBox="0 0 23 23" fill="none">
+          <path d="M11.5 0h11v11h-11V0z" fill="#f25022"/>
+          <path d="M0 0h11v11H0V0z" fill="#00a4ef"/>
+          <path d="M11.5 11.5h11v11h-11v-11z" fill="#ffb900"/>
+          <path d="M0 11.5h11v11H0v-11z" fill="#7fba00"/>
+        </svg>
+        <span class="text-lg">Logga in med Microsoft</span>
+      `;
     }
   });
   
