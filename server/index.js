@@ -254,6 +254,7 @@ const statsRouter = require('./routes/stats');
 const searchRouter = require('./routes/search');
 const exportRouter = require('./routes/export');
 const batchRouter = require('./routes/batch');
+const actionsRouter = require('./routes/actions');
 
 app.use('/api/import', dbMiddleware, importRouter);
 app.use('/api/brands', dbMiddleware, brandsRouter);
@@ -266,6 +267,7 @@ app.use('/api/stats', dbMiddleware, statsRouter);
 app.use('/api/search', dbMiddleware, searchRouter);
 app.use('/api/export', dbMiddleware, exportRouter);
 app.use('/api/batch', dbMiddleware, batchRouter);
+app.use('/api/actions', dbMiddleware, actionsRouter);
 
 // ============================================
 // ERROR HANDLING MIDDLEWARE (must be AFTER routes)
