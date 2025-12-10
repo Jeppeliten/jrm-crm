@@ -296,11 +296,20 @@ router.get('/:id', async (req, res) => {
  *   - search: Search by name
  *   - sort: Sort field (name, agentCount, lastContact)
  *   - order: Sort order (asc, desc)
+ *   - mrrMin: Minimum MRR (payment field)
+ *   - mrrMax: Maximum MRR
+ *   - dateFrom: Filter lastContact from date (ISO format)
+ *   - dateTo: Filter lastContact to date (ISO format)
+ *   - agentMin: Minimum agent count
+ *   - agentMax: Maximum agent count
  */
 router.get('/', async (req, res) => {
   try {
     const db = req.app.locals.db;
-    const { status, brandId, search, sort = 'name', order = 'asc' } = req.query;
+    const { 
+      status, brandId, search, sort = 'name', order = 'asc',
+      mrrMin, mrrMax, dateFrom, dateTo, agentMin, agentMax
+    } = req.query;
     
     // Use mock data if no database
     if (!db) {
@@ -321,6 +330,36 @@ router.get('/', async (req, res) => {
           c.email?.toLowerCase().includes(searchLower) ||
           c.orgNumber?.includes(search)
         );
+      }
+      
+      // MRR filters
+      if (mrrMin !== undefined) {
+        const min = parseFloat(mrrMin);
+        filtered = filtered.filter(c => (c.payment || 0) >= min);
+      }
+      if (mrrMax !== undefined) {
+        const max = parseFloat(mrrMax);
+        filtered = filtered.filter(c => (c.payment || 0) <= max);
+      }
+      
+      // Date range filters
+      if (dateFrom) {
+        const fromDate = new Date(dateFrom);
+        filtered = filtered.filter(c => c.lastContact && new Date(c.lastContact) >= fromDate);
+      }
+      if (dateTo) {
+        const toDate = new Date(dateTo);
+        filtered = filtered.filter(c => c.lastContact && new Date(c.lastContact) <= toDate);
+      }
+      
+      // Agent count filters
+      if (agentMin !== undefined) {
+        const min = parseInt(agentMin);
+        filtered = filtered.filter(c => (c.agentCount || 0) >= min);
+      }
+      if (agentMax !== undefined) {
+        const max = parseInt(agentMax);
+        filtered = filtered.filter(c => (c.agentCount || 0) <= max);
       }
       
       // Apply sorting
@@ -353,6 +392,27 @@ router.get('/', async (req, res) => {
         { email: { $regex: search, $options: 'i' } },
         { orgNumber: { $regex: search, $options: 'i' } }
       ];
+    }
+    
+    // MRR filters
+    if (mrrMin !== undefined || mrrMax !== undefined) {
+      query.payment = {};
+      if (mrrMin !== undefined) query.payment.$gte = parseFloat(mrrMin);
+      if (mrrMax !== undefined) query.payment.$lte = parseFloat(mrrMax);
+    }
+    
+    // Date range filters
+    if (dateFrom || dateTo) {
+      query.lastContact = {};
+      if (dateFrom) query.lastContact.$gte = new Date(dateFrom);
+      if (dateTo) query.lastContact.$lte = new Date(dateTo);
+    }
+    
+    // Agent count filters
+    if (agentMin !== undefined || agentMax !== undefined) {
+      query.agentCount = {};
+      if (agentMin !== undefined) query.agentCount.$gte = parseInt(agentMin);
+      if (agentMax !== undefined) query.agentCount.$lte = parseInt(agentMax);
     }
     
     // Build sort
@@ -619,6 +679,121 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     console.error('Error deleting company:', error);
     res.status(500).json({ error: 'Failed to delete company' });
+  }
+});
+
+// =============================================================================
+// Filter Presets System
+// =============================================================================
+
+let mockFilterPresets = [
+  {
+    _id: 'preset1',
+    name: 'Stora kunder',
+    filters: {
+      status: 'kund',
+      mrrMin: 1000,
+      agentMin: 10
+    },
+    createdAt: new Date(),
+    userId: 'demo-user'
+  },
+  {
+    _id: 'preset2',
+    name: 'Heta prospekt',
+    filters: {
+      status: 'prospekt',
+      agentMin: 5,
+      dateFrom: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+    },
+    createdAt: new Date(),
+    userId: 'demo-user'
+  }
+];
+
+/**
+ * GET /api/companies/filter-presets - Get all filter presets
+ */
+router.get('/filter-presets', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    
+    if (!db) {
+      return res.json(mockFilterPresets);
+    }
+    
+    const presets = await db.collection('filter_presets')
+      .find({ entity: 'companies' })
+      .toArray();
+    
+    res.json(presets);
+  } catch (error) {
+    console.error('Error fetching filter presets:', error);
+    res.status(500).json({ error: 'Failed to fetch filter presets' });
+  }
+});
+
+/**
+ * POST /api/companies/filter-presets - Save a new filter preset
+ */
+router.post('/filter-presets', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { name, filters } = req.body;
+    
+    if (!name || !filters) {
+      return res.status(400).json({ error: 'Name and filters are required' });
+    }
+    
+    const preset = {
+      _id: Date.now().toString(),
+      name,
+      filters,
+      entity: 'companies',
+      createdAt: new Date(),
+      userId: 'demo-user' // TODO: Get from auth
+    };
+    
+    if (!db) {
+      mockFilterPresets.push(preset);
+      return res.status(201).json(preset);
+    }
+    
+    await db.collection('filter_presets').insertOne(preset);
+    res.status(201).json(preset);
+  } catch (error) {
+    console.error('Error saving filter preset:', error);
+    res.status(500).json({ error: 'Failed to save filter preset' });
+  }
+});
+
+/**
+ * DELETE /api/companies/filter-presets/:id - Delete a filter preset
+ */
+router.delete('/filter-presets/:id', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    
+    if (!db) {
+      const index = mockFilterPresets.findIndex(p => p._id === id);
+      if (index === -1) {
+        return res.status(404).json({ error: 'Preset not found' });
+      }
+      mockFilterPresets.splice(index, 1);
+      return res.json({ message: 'Preset deleted' });
+    }
+    
+    const result = await db.collection('filter_presets').deleteOne({ _id: id });
+    
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'Preset not found' });
+    }
+    
+    res.json({ message: 'Preset deleted' });
+  } catch (error) {
+    console.error('Error deleting filter preset:', error);
+    res.status(500).json({ error: 'Failed to delete filter preset' });
   }
 });
 
