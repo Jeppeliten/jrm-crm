@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Custom styles - MUST be after Tailwind to override -->
-  <link rel="stylesheet" href="styles-modern.css" />
+  <link rel="stylesheet" href="styles.css" />
   
   <!-- CRITICAL: Override Tailwind's button reset -->
   <style>
@@ -33,12 +33,7 @@
     textarea {
       cursor: text !important;
     }
-  
-    @keyframes fadeOut {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(2); }
-    }
-    </style>
+  </style>
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,79 +42,9 @@
   
   <!-- SheetJS for XLSX import -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  
-  <!-- MSAL Library for Entra ID -->
-  <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
-  
-  <!-- Entra ID Configuration -->
-  <script src="entra-config.js"></script>
-  <script src="entra-auth.js"></script>
-  <script src="azure-b2c-config.js"></script>
 </head>
 <body class="bg-base-200">
-  
-  <!-- Landing Page (shown before authentication) -->
-  <div id="landing-page" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-base-200 to-secondary/10">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <!-- Logo/Brand -->
-        <div class="mb-8">
-          <h1 class="text-6xl font-bold text-primary mb-4">CRM</h1>
-          <p class="text-2xl text-base-content/80 font-light">MÃ¤klarbranschens affÃ¤rssystem</p>
-        </div>
-        
-        <!-- Feature Cards -->
-        <div class="grid md:grid-cols-3 gap-6 mb-12">
-          <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-              <div class="text-4xl mb-2">ðŸ¢</div>
-              <h3 class="card-title text-lg justify-center">FÃ¶retagshantering</h3>
-              <p class="text-sm text-base-content/70">Hantera varumÃ¤rken, mÃ¤klarfirmor och licensavtal pÃ¥ ett och samma stÃ¤lle</p>
-            </div>
-          </div>
-          
-          <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-              <div class="text-4xl mb-2">ðŸ‘¥</div>
-              <h3 class="card-title text-lg justify-center">MÃ¤klarÃ¶versikt</h3>
-              <p class="text-sm text-base-content/70">Full kontroll Ã¶ver alla anslutna mÃ¤klare och deras fÃ¶retagstillhÃ¶righet</p>
-            </div>
-          </div>
-          
-          <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-              <div class="text-4xl mb-2">ðŸ“Š</div>
-              <h3 class="card-title text-lg justify-center">SÃ¤ljtavla & KundvÃ¥rd</h3>
-              <div class="flex gap-2 mt-2">
-                <button onclick="showDealsSection()" class="btn btn-sm btn-primary">SÃ¤ljtavla</button>
-                <button onclick="showCustomerCareSection()" class="btn btn-sm btn-secondary">KundvÃ¥rd</button>
-              </div>
-              <p class="text-sm text-base-content/70">FÃ¶lj affÃ¤rsprocessen frÃ¥n lead till kund med strukturerade uppgifter</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Loading State -->
-        <div id="auth-status" class="mb-8">
-          <div class="loading loading-spinner loading-lg text-primary mb-4"></div>
-          <p class="text-lg text-base-content/70">Kontrollerar inloggning...</p>
-        </div>
-        
-        <!-- Login Button (shown if not logged in) -->
-        <button id="landing-login-btn" class="btn btn-primary btn-lg" style="display: none;">
-          ðŸ” Logga in med Azure AD
-        </button>
-        
-        <!-- Footer Info -->
-        <div class="mt-12 text-sm text-base-content/50">
-          <p>SÃ¤ker inloggning via Microsoft Azure Active Directory</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Main App (hidden until authenticated) -->
-  <div id="app" class="drawer lg:drawer-open" style="visibility: hidden; position: absolute;">
+  <div id="app" class="drawer lg:drawer-open">
     <input id="drawer-toggle" type="checkbox" class="drawer-toggle" />
     
     <div class="drawer-content flex flex-col">
@@ -148,23 +73,6 @@
           <select id="segmentFilter" class="select select-bordered select-sm">
             <option value="">Alla segment</option>
           </select>
-          
-          <!-- User menu / Login button -->
-          <div id="userMenu" class="dropdown dropdown-end">
-            <button id="loginBtn" class="btn btn-primary" style="display: none;">
-              ðŸ” Logga in
-            </button>
-            <label tabindex="0" id="userMenuBtn" class="btn btn-ghost btn-circle avatar" style="display: none;">
-              <div class="w-10 rounded-full bg-base-300 flex items-center justify-center">
-                <span id="userInitials" class="text-sm font-bold"></span>
-              </div>
-            </label>
-            <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-              <li class="menu-title"><span id="userName">User</span></li>
-              <li><a id="logoutBtn">ðŸšª Logga ut</a></li>
-            </ul>
-          </div>
-          
           <button id="globalUndoBtn" class="btn btn-ghost" style="display:none;" title="Ã…ngra senaste borttagning">
             â†¶ Ã…ngra
           </button>
@@ -172,398 +80,13 @@
       </header>
 
       <!-- Main Content -->
-      <main id="main-content" class="flex-1 overflow-auto p-4">
+      <main class="flex-1 overflow-auto p-4">
         <section id="view-dashboard" class="view visible"></section>
         <section id="view-brands" class="view"></section>
-          <section id="view-companies" class="view">
-    <!-- Header -->
-    <div class="mb-6">
-      <h2 class="text-3xl font-bold">Företag</h2>
-      <p class="text-base-content/70 mt-2">Hantera alla mäklarföretag och deras information</p>
-    </div>
-
-    <!-- Advanced Filters (collapsible) -->
-    <details class="collapse collapse-arrow bg-base-200 mb-4">
-      <summary class="collapse-title text-lg font-medium">
-        Avancerade filter
-      </summary>
-      <div class="collapse-content">
-        <div class="grid grid-cols-3 gap-4 mt-4">
-          <div class="form-control">
-            <label class="label"><span class="label-text">MRR Min</span></label>
-            <input type="number" class="input input-bordered" id="filterMrrMin" placeholder="0" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">MRR Max</span></label>
-            <input type="number" class="input input-bordered" id="filterMrrMax" placeholder="10000" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Från datum</span></label>
-            <input type="date" class="input input-bordered" id="filterDateFrom" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Till datum</span></label>
-            <input type="date" class="input input-bordered" id="filterDateTo" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Min antal mäklare</span></label>
-            <input type="number" class="input input-bordered" id="filterAgentMin" placeholder="0" />
-          </div>
-          <div class="form-control">
-            <label class="label"><span class="label-text">Max antal mäklare</span></label>
-            <input type="number" class="input input-bordered" id="filterAgentMax" placeholder="100" />
-          </div>
-        </div>
-        <div class="flex gap-2 mt-4">
-          <button class="btn btn-primary" onclick="applyAdvancedFilters()">Applicera filter</button>
-          <button class="btn btn-ghost" onclick="clearAdvancedFilters()">Rensa</button>
-          <div class="divider divider-horizontal"></div>
-          <select id="savedPresets" class="select select-bordered" onchange="loadFilterPreset(this.value)">
-            <option value="">Sparade filter...</option>
-          </select>
-          <button class="btn btn-outline" onclick="saveCurrentFilters()">Spara filter</button>
-        </div>
-      </div>
-    </details>
-
-    <!-- Toolbar -->
-    <div class="flex justify-between items-center mb-4">
-      <div class="flex gap-2">
-        <select class="select select-bordered select-sm">
-          <option>Alla varumärken</option>
-        </select>
-        <select class="select select-bordered select-sm">
-          <option>Alla status</option>
-        </select>
-        <select class="select select-bordered select-sm">
-          <option>Alla steg</option>
-        </select>
-        <select class="select select-bordered select-sm">
-          <option>25</option>
-          <option>50</option>
-          <option>100</option>
-        </select>
-      </div>
-      <div class="flex gap-2">
-        <button class="btn btn-ghost btn-sm">Exportera CSV</button>
-        <button class="btn btn-primary btn-sm">Nytt företag</button>
-      </div>
-    </div>
-
-    <!-- Companies Table -->
-    <div class="card bg-base-100 shadow-xl">
-      <div class="card-body p-0">
-        <div class="overflow-x-auto">
-          <table class="table table-zebra">
-            <thead>
-              <tr>
-                <th>FÖRETAG/ÄTGÄRDER</th>
-                <th>VARUMÄRKE</th>
-                <th>STATUS</th>
-                <th>MRR</th>
-                <th>PIPELINE</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="companyTable">
-              <tr><td colspan="6" class="text-center p-8">Laddar företag...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+        <section id="view-companies" class="view"></section>
         <section id="view-agents" class="view"></section>
-<section id="view-pipeline" class="view">
-  <!-- Kanban Sales Pipeline -->
-  <div class="mb-6">
-    <h2 class="text-3xl font-bold">Försäljningspipeline</h2>
-    <p class="text-base-content/70 mt-2">Drag & drop företag mellan olika säljsteg</p>
-  </div>
-
-  <!-- Pipeline Stats Summary -->
-  <div class="stats shadow mb-6 w-full">
-    <div class="stat">
-      <div class="stat-title">Totalt värde</div>
-      <div class="stat-value text-2xl" id="pipelineTotalValue">0 kr</div>
-      <div class="stat-desc" id="pipelineTotalCompanies">0 företag</div>
-    </div>
-    <div class="stat">
-      <div class="stat-title">Prospekt</div>
-      <div class="stat-value text-xl" id="pipelineProspektValue">0 kr</div>
-      <div class="stat-desc" id="pipelineProspektCount">0 företag</div>
-    </div>
-    <div class="stat">
-      <div class="stat-title">Kvalificerad</div>
-      <div class="stat-value text-xl" id="pipelineKvalificeradValue">0 kr</div>
-      <div class="stat-desc" id="pipelineKvalificeradCount">0 företag</div>
-    </div>
-    <div class="stat">
-      <div class="stat-title">Offert</div>
-      <div class="stat-value text-xl" id="pipelineOffertValue">0 kr</div>
-      <div class="stat-desc" id="pipelineOffertCount">0 företag</div>
-    </div>
-    <div class="stat">
-      <div class="stat-title">Förhandling</div>
-      <div class="stat-value text-xl" id="pipelineForhandlingValue">0 kr</div>
-      <div class="stat-desc" id="pipelineForhandlingCount">0 företag</div>
-    </div>
-    <div class="stat">
-      <div class="stat-title">Vunnit</div>
-      <div class="stat-value text-xl text-success" id="pipelineVunnitValue">0 kr</div>
-      <div class="stat-desc" id="pipelineVunnitCount">0 företag</div>
-    </div>
-  </div>
-
-  <!-- Kanban Board -->
-  <div class="flex gap-4 overflow-x-auto pb-4" id="kanbanBoard">
-    
-    <!-- Column: Prospekt -->
-    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="prospekt">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold text-lg"> Prospekt</h3>
-        <span class="badge badge-ghost" id="count-prospekt">0</span>
-      </div>
-      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-prospekt">
-        <!-- Cards will be inserted here -->
-      </div>
-    </div>
-
-    <!-- Column: Kvalificerad -->
-    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="kvalificerad">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold text-lg"> Kvalificerad</h3>
-        <span class="badge badge-ghost" id="count-kvalificerad">0</span>
-      </div>
-      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-kvalificerad">
-        <!-- Cards will be inserted here -->
-      </div>
-    </div>
-
-    <!-- Column: Offert -->
-    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="offert">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold text-lg"> Offert</h3>
-        <span class="badge badge-ghost" id="count-offert">0</span>
-      </div>
-      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-offert">
-        <!-- Cards will be inserted here -->
-      </div>
-    </div>
-
-    <!-- Column: Förhandling -->
-    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="forhandling">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold text-lg"> Förhandling</h3>
-        <span class="badge badge-ghost" id="count-forhandling">0</span>
-      </div>
-      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-forhandling">
-        <!-- Cards will be inserted here -->
-      </div>
-    </div>
-
-    <!-- Column: Vunnit -->
-    <div class="kanban-column flex-shrink-0 w-72 bg-success/10 rounded-lg p-4" data-stage="vunnit">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold text-lg text-success"> Vunnit</h3>
-        <span class="badge badge-success" id="count-vunnit">0</span>
-      </div>
-      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-vunnit">
-        <!-- Cards will be inserted here -->
-      </div>
-    </div>
-
-    <!-- Column: Förlorat -->
-    <div class="kanban-column flex-shrink-0 w-72 bg-error/10 rounded-lg p-4" data-stage="forlorat">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="font-bold text-lg text-error"> Förlorat</h3>
-        <span class="badge badge-error" id="count-forlorat">0</span>
-      </div>
-      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-forlorat">
-        <!-- Cards will be inserted here -->
-      </div>
-    </div>
-
-  </div>
-</section>
-<section id="view-customer-success" class="view">
-  <!-- Customer Success Dashboard -->
-  <div class="mb-6">
-    <h2 class="text-3xl font-bold">Customer Success</h2>
-    <p class="text-base-content/70 mt-2">Hälsoövervakning och churn-riskhantering</p>
-  </div>
-
-  <!-- Summary Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Totala kunder</div>
-        <div class="stat-value text-2xl" id="csTotalCustomers">0</div>
-        <div class="stat-desc">Aktiva kundföretag</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Genomsnittlig hälsa</div>
-        <div class="stat-value text-2xl" id="csAvgHealth">0</div>
-        <div class="stat-desc">av 100 poäng</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title text-error">Hög risk</div>
-        <div class="stat-value text-2xl text-error" id="csHighRisk">0</div>
-        <div class="stat-desc" id="csHighRiskMRR">0 kr i risk</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title text-warning">Medel risk</div>
-        <div class="stat-value text-2xl text-warning" id="csMediumRisk">0</div>
-        <div class="stat-desc">Kräver uppmärksamhet</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Health Distribution Chart -->
-  <div class="card bg-base-100 shadow-xl mb-6">
-    <div class="card-body">
-      <h3 class="card-title">Hälsodistribution</h3>
-      <div class="flex items-end gap-4 h-48">
-        <div class="flex-1 flex flex-col items-center">
-          <div class="w-full bg-success rounded-t-lg transition-all" id="healthBarHealthy" style="height: 0%"></div>
-          <div class="text-center mt-2">
-            <div class="text-2xl font-bold text-success" id="healthCountHealthy">0</div>
-            <div class="text-xs text-base-content/70">Friska</div>
-          </div>
-        </div>
-        <div class="flex-1 flex flex-col items-center">
-          <div class="w-full bg-warning rounded-t-lg transition-all" id="healthBarMedium" style="height: 0%"></div>
-          <div class="text-center mt-2">
-            <div class="text-2xl font-bold text-warning" id="healthCountMedium">0</div>
-            <div class="text-xs text-base-content/70">Varning</div>
-          </div>
-        </div>
-        <div class="flex-1 flex flex-col items-center">
-          <div class="w-full bg-error rounded-t-lg transition-all" id="healthBarHigh" style="height: 0%"></div>
-          <div class="text-center mt-2">
-            <div class="text-2xl font-bold text-error" id="healthCountHigh">0</div>
-            <div class="text-xs text-base-content/70">Kritisk</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- At-Risk Companies List -->
-  <div class="card bg-base-100 shadow-xl">
-    <div class="card-body">
-      <h3 class="card-title">Företag i riskzonen</h3>
-      <p class="text-sm text-base-content/70 mb-4">Kunder med låg hälsopoäng som behöver omedelbar uppföljning</p>
-      
-      <div class="overflow-x-auto">
-        <table class="table table-zebra">
-          <thead>
-            <tr>
-              <th>Företag</th>
-              <th>Hälsopoäng</th>
-              <th>Risk</th>
-              <th>MRR</th>
-              <th>Senaste kontakt</th>
-              <th>Riskfaktorer</th>
-              <th>Åtgärd</th>
-            </tr>
-          </thead>
-          <tbody id="atRiskCompaniesList">
-            <tr>
-              <td colspan="7" class="text-center text-base-content/50">Laddar data...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Tasks & Notes View -->
-<section id="view-tasks" class="view">
-  <div class="mb-6">
-    <h2 class="text-3xl font-bold">Uppgifter & Anteckningar</h2>
-    <p class="text-base-content/70 mt-2">Centraliserad översikt över alla uppgifter från varumärken, företag och mäklare</p>
-  </div>
-
-  <!-- Task Stats -->
-  <div id="taskStats" class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Totalt</div>
-        <div class="stat-value text-3xl" id="stat-total-tasks">0</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Slutförda</div>
-        <div class="stat-value text-3xl text-success" id="stat-completed-tasks">0</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Försenade</div>
-        <div class="stat-value text-3xl text-error" id="stat-overdue-tasks">0</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Idag</div>
-        <div class="stat-value text-3xl text-warning" id="stat-today-tasks">0</div>
-      </div>
-    </div>
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Denna vecka</div>
-        <div class="stat-value text-3xl text-info" id="stat-week-tasks">0</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Filter Tabs -->
-  <div class="tabs tabs-boxed mb-6 bg-base-100 shadow-md p-2">
-    <button class="tab tab-active" data-filter="all" onclick="filterTasks('all')">Alla</button>
-    <button class="tab" data-filter="my" onclick="filterTasks('my')">Mina uppgifter</button>
-    <button class="tab" data-filter="overdue" onclick="filterTasks('overdue')">Försenade</button>
-    <button class="tab" data-filter="today" onclick="filterTasks('today')">Idag</button>
-    <button class="tab" data-filter="week" onclick="filterTasks('week')">Denna vecka</button>
-  </div>
-
-  <!-- Entity Type Filter -->
-  <div class="mb-6 flex gap-4">
-    <select id="entityTypeFilter" class="select select-bordered" onchange="filterTasks()">
-      <option value="">Alla typer</option>
-      <option value="brand">Varumärken</option>
-      <option value="company">Företag</option>
-      <option value="agent">Mäklare</option>
-    </select>
-    <button class="btn btn-ghost" onclick="loadTasks()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-      Uppdatera
-    </button>
-  </div>
-
-  <!-- Tasks List -->
-  <div id="tasksList" class="space-y-4">
-    <!-- Tasks will be rendered here -->
-  </div>
-
-  <!-- Empty State -->
-  <div id="tasksEmptyState" class="text-center py-12 hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-    </svg>
-    <p class="text-xl text-base-content/50">Inga uppgifter hittades</p>
-  </div>
-</section>
+        <section id="view-pipeline" class="view"></section>
+        <section id="view-customer-success" class="view"></section>
         <section id="view-licenses" class="view"></section>
         <section id="view-import" class="view"></section>
         <section id="view-settings" class="view"></section>
@@ -614,12 +137,6 @@
             KundvÃ¥rd
           </button></li>
           <li><button data-view="licenses" class="nav-item">
-          <li><button data-view="tasks" class="nav-item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-            </svg>
-            Uppgifter
-          </button></li>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
             </svg>
@@ -712,21 +229,12 @@
               </svg>
               ðŸ”§ System Status
             </button>
-            <button onclick="securityDashboard.showSecurityDashboard()" class="btn btn-sm btn-error w-full justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              ðŸ”’ SÃ¤kerhetsdashboard
-            </button>
           </div>
         </div>
 
         <div class="border-t border-base-300 pt-4 mt-4">
           <div class="text-sm text-base-content/70 mb-2" id="currentUser">Inte inloggad</div>
           <button id="loginBtn" class="btn btn-sm btn-outline w-full">Logga in</button>
-          <button id="sidebarLogoutBtn" class="btn btn-sm btn-error btn-outline w-full mt-2" style="display: none;">
-            ðŸšª Logga ut
-          </button>
         </div>
       </aside>
     </div>
@@ -743,114 +251,95 @@
 
   <template id="tpl-dashboard">
     <!-- Metrics Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-      <!-- Coverage Card with Progress -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="text-sm font-medium text-base-content/60">Täckningsgrad</h3>
-          <div class="text-4xl font-bold text-primary" id="metricCoverage"></div>
-          <progress id="coverageProgress" class="progress progress-primary w-full" value="0" max="100"></progress>
-          <p class="text-xs text-base-content/60 mt-2">Andel kunder av totala företag</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title">TÃ¤ckningsgrad</div>
+          <div class="stat-value text-primary" id="metricCoverage">â€“</div>
         </div>
       </div>
-
-      <!-- Brands Card -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="text-sm font-medium text-base-content/60">Varumärken</h3>
-          <div class="text-4xl font-bold text-secondary" id="metricBrands"></div>
-          <p class="text-xs text-base-content/60 mt-2">Totalt antal kedjor</p>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title">VarumÃ¤rken</div>
+          <div class="stat-value text-secondary" id="metricBrands">â€“</div>
         </div>
       </div>
-
-      <!-- Companies Card -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="text-sm font-medium text-base-content/60">Företag</h3>
-          <div class="text-4xl font-bold text-accent" id="metricCompanies"></div>
-          <p class="text-xs text-base-content/60 mt-2">Totalt antal mäklarfirmor</p>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title">FÃ¶retag</div>
+          <div class="stat-value text-accent" id="metricCompanies">â€“</div>
         </div>
       </div>
-
-      <!-- Agents Card -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="text-sm font-medium text-base-content/60">Mäklare</h3>
-          <div class="text-4xl font-bold" id="metricAgents"></div>
-          <p class="text-xs text-base-content/60 mt-2">Totalt antal mäklare</p>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title">MÃ¤klare</div>
+          <div class="stat-value" id="metricAgents">â€“</div>
         </div>
       </div>
-
-      <!-- Active Licenses Card -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="text-sm font-medium text-base-content/60">Aktiva licenser</h3>
-          <div class="text-4xl font-bold text-success" id="metricActiveLicenses"></div>
-          <p class="text-xs text-base-content/60 mt-2">Mäklare med aktiv licens</p>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title">Aktiva licenser</div>
+          <div class="stat-value text-success" id="metricActiveLicenses">â€“</div>
         </div>
       </div>
-
-      <!-- Potential Revenue Card -->
-      <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="text-sm font-medium text-base-content/60">Potential</h3>
-          <div class="text-4xl font-bold text-warning" id="metricPotential"></div>
-          <p class="text-xs text-base-content/60 mt-2">Uppskattad MRR från prospekt</p>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title text-xs">FÃ¶retag: Kunder / Potential</div>
+          <div class="stat-value text-lg" id="metricCompanyCustomerPotential">â€“</div>
+        </div>
+      </div>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title text-xs">MÃ¤klare: Licenser / Potential</div>
+          <div class="stat-value text-lg" id="metricAgentLicensePotential">â€“</div>
+        </div>
+      </div>
+      <div class="stats shadow">
+        <div class="stat">
+          <div class="stat-title">Total MRR</div>
+          <div class="stat-value text-success" id="metricTotalMRR">â€“</div>
         </div>
       </div>
     </div>
 
-    <!-- Total MRR Card (Full Width) -->
-    <div class="card bg-gradient-to-r from-success/20 to-success/10 shadow-xl mb-6">
+    <!-- Tasks Panel -->
+    <div class="card bg-base-100 shadow-xl mb-6">
       <div class="card-body">
-        <div class="flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-base-content/60">Total MRR (Månatlig återkommande intäkt)</h3>
-            <div class="text-5xl font-bold text-success mt-2" id="metricTotalMRR"></div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+          <h2 class="card-title">Att gÃ¶ra & Aktiviteter</h2>
+          <div class="flex flex-wrap gap-2">
+            <select id="todoFilter" class="select select-bordered select-sm">
+              <option value="all">Alla</option>
+              <option value="mine">Mina</option>
+            </select>
+            <button id="addTask" class="btn btn-primary btn-sm">Ny uppgift</button>
+            <button id="exportTasks" class="btn btn-ghost btn-sm">Exportera uppgifter (CSV)</button>
           </div>
-          <div class="text-6xl opacity-20"></div>
         </div>
+        <div class="divider my-0"></div>
+        <h3 class="font-semibold mb-2">Uppgifter</h3>
+        <div id="taskList" class="space-y-2"></div>
       </div>
     </div>
 
-    <!-- Brand Coverage Table -->
+    <!-- Coverage Panel -->
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-          <h2 class="card-title">Kedjetäckning (översikt)</h2>
+          <h2 class="card-title">KedjetÃ¤ckning (Ã¶versikt)</h2>
           <div class="flex flex-wrap gap-2">
             <select id="coverageSort" class="select select-bordered select-sm">
-              <option value="agents">Sortera: Mäklare (fallande)</option>
-              <option value="companies">Sortera: Företag (fallande)</option>
-              <option value="mrr">Sortera: MRR (fallande)</option>
-              <option value="name">Sortera: Namn (A-Ö)</option>
+              <option value="companies">Sortera: FÃ¶retag</option>
+              <option value="agents">Sortera: MÃ¤klare</option>
+              <option value="coverage">Sortera: TÃ¤ckning %</option>
+              <option value="companies_non">Sortera: FÃ¶retag ej kund</option>
+              <option value="agents_non">Sortera: MÃ¤klare utan licens</option>
             </select>
-            <button id="exportCoverage" class="btn btn-ghost btn-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Exportera CSV
-            </button>
+            <button id="exportCoverage" class="btn btn-ghost btn-sm">Exportera CSV</button>
           </div>
         </div>
         <div class="overflow-x-auto">
-          <table class="table table-zebra">
-            <thead>
-              <tr>
-                <th>Varumärke</th>
-                <th>Företag</th>
-                <th>Mäklare</th>
-                <th>MRR</th>
-                <th>Status</th>
-                <th>Central avtal</th>
-              </tr>
-            </thead>
-            <tbody id="brandCoverageTable">
-              <tr>
-                <td colspan="6" class="text-center text-base-content/50">Laddar data...</td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="brandReport" class="table"></div>
         </div>
       </div>
     </div>
@@ -886,57 +375,6 @@
   <template id="tpl-companies">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <!-- Advanced Filter Panel -->
-        <div class="collapse collapse-arrow bg-base-200 mb-4">
-          <input type="checkbox" id="advancedFilterToggle" />
-          <div class="collapse-title text-lg font-medium">
-             Avancerade filter
-          </div>
-          <div class="collapse-content">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-              <!-- MRR Range -->
-              <div class="form-control">
-                <label class="label"><span class="label-text">MRR Min (kr/mån)</span></label>
-                <input type="number" id="filterMrrMin" class="input input-bordered input-sm" placeholder="0" />
-              </div>
-              <div class="form-control">
-                <label class="label"><span class="label-text">MRR Max (kr/mån)</span></label>
-                <input type="number" id="filterMrrMax" class="input input-bordered input-sm" placeholder="10000" />
-              </div>
-              
-              <!-- Agent Count Range -->
-              <div class="form-control">
-                <label class="label"><span class="label-text">Antal mäklare (min)</span></label>
-                <input type="number" id="filterAgentMin" class="input input-bordered input-sm" placeholder="0" />
-              </div>
-              <div class="form-control">
-                <label class="label"><span class="label-text">Antal mäklare (max)</span></label>
-                <input type="number" id="filterAgentMax" class="input input-bordered input-sm" placeholder="100" />
-              </div>
-              
-              <!-- Date Range -->
-              <div class="form-control">
-                <label class="label"><span class="label-text">Senaste kontakt från</span></label>
-                <input type="date" id="filterDateFrom" class="input input-bordered input-sm" />
-              </div>
-              <div class="form-control">
-                <label class="label"><span class="label-text">Senaste kontakt till</span></label>
-                <input type="date" id="filterDateTo" class="input input-bordered input-sm" />
-              </div>
-            </div>
-            
-            <!-- Filter Presets -->
-            <div class="mt-4 flex gap-2 flex-wrap items-center">
-              <span class="text-sm font-medium">Sparade filter:</span>
-              <select id="filterPresets" class="select select-bordered select-sm">
-                <option value="">Välj sparat filter...</option>
-              </select>
-              <button class="btn btn-sm btn-ghost" onclick="applyAdvancedFilters()">Tillämpa filter</button>
-              <button class="btn btn-sm btn-ghost" onclick="clearAdvancedFilters()">Rensa</button>
-              <button class="btn btn-sm btn-info" onclick="saveCurrentFilters()">Spara filter</button>
-            </div>
-          </div>
-        </div>
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
           <h2 class="card-title">FÃ¶retag</h2>
           <div class="flex flex-wrap gap-2">
@@ -1459,214 +897,6 @@
     </form>
   </dialog>
 
-  <!-- Modal: Brand Details (Enhanced) -->
-  <dialog id="brandDetailsModal" class="modal">
-    <div class="modal-box max-w-6xl h-[90vh] flex flex-col">
-      <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeBrandDetailsModal()"></button>
-      </form>
-      
-      <h3 class="font-bold text-2xl mb-4" id="brandDetailsTitle">Varumärke</h3>
-      
-      <!-- Tabs -->
-      <div role="tablist" class="tabs tabs-boxed mb-4">
-        <a role="tab" class="tab tab-active" data-tab="overview">Översikt</a>
-        <a role="tab" class="tab" data-tab="contacts">Kontakter</a>
-        <a role="tab" class="tab" data-tab="tasks">Uppgifter</a>
-        <a role="tab" class="tab" data-tab="notes">Anteckningar</a>
-        <a role="tab" class="tab" data-tab="companies">Företag</a>
-      </div>
-      
-      <!-- Scrollable content area -->
-      <div class="flex-1 overflow-y-auto">
-        
-        <!-- Tab: Overview -->
-        <div id="tab-overview" class="tab-content">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
-            <!-- Central Contract Section -->
-            <div class="card bg-base-200 shadow-xl">
-              <div class="card-body">
-                <h3 class="card-title text-lg">Central avtal</h3>
-                <div id="centralContractForm">
-                  <div class="form-control">
-                    <label class="label cursor-pointer">
-                      <span class="label-text">Aktivt central avtal</span>
-                      <input type="checkbox" id="ccActive" class="checkbox checkbox-primary" />
-                    </label>
-                  </div>
-                  <div id="ccDetails" class="space-y-3 mt-3" style="display: none;">
-                    <div class="form-control">
-                      <label class="label"><span class="label-text">Produkt</span></label>
-                      <input type="text" id="ccProduct" class="input input-bordered input-sm" placeholder="t.ex. JRM Premium" />
-                    </div>
-                    <div class="form-control">
-                      <label class="label"><span class="label-text">MRR (kr/mån)</span></label>
-                      <input type="number" id="ccMrr" class="input input-bordered input-sm" placeholder="0" />
-                    </div>
-                    <div class="form-control">
-                      <label class="label"><span class="label-text">Startdatum</span></label>
-                      <input type="date" id="ccStartDate" class="input input-bordered input-sm" />
-                    </div>
-                    <div class="form-control">
-                      <label class="label"><span class="label-text">Kontaktperson</span></label>
-                      <input type="text" id="ccContactPerson" class="input input-bordered input-sm" placeholder="Namn" />
-                    </div>
-                    <div class="form-control">
-                      <label class="label"><span class="label-text">Kontakt e-post</span></label>
-                      <input type="email" id="ccContactEmail" class="input input-bordered input-sm" placeholder="email@example.com" />
-                    </div>
-                    <button class="btn btn-primary btn-sm w-full" onclick="saveCentralContract()">Spara central avtal</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Quick Stats -->
-            <div class="card bg-base-200 shadow-xl">
-              <div class="card-body">
-                <h3 class="card-title text-lg">Statistik</h3>
-                <div class="stats stats-vertical shadow">
-                  <div class="stat">
-                    <div class="stat-title">Företag</div>
-                    <div class="stat-value text-2xl" id="brandStatCompanies">0</div>
-                  </div>
-                  <div class="stat">
-                    <div class="stat-title">Mäklare</div>
-                    <div class="stat-value text-2xl" id="brandStatAgents">0</div>
-                  </div>
-                  <div class="stat">
-                    <div class="stat-title">Total MRR</div>
-                    <div class="stat-value text-2xl" id="brandStatMRR">0 kr</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        
-        <!-- Tab: Contacts -->
-        <div id="tab-contacts" class="tab-content hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold">Kontaktpersoner</h3>
-            <button class="btn btn-primary btn-sm" onclick="addContactForm()">+ Lägg till kontakt</button>
-          </div>
-          
-          <!-- Add Contact Form (hidden by default) -->
-          <div id="addContactFormDiv" class="card bg-base-200 mb-4 hidden">
-            <div class="card-body">
-              <h4 class="font-bold">Ny kontakt</h4>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div class="form-control">
-                  <label class="label"><span class="label-text">Namn *</span></label>
-                  <input type="text" id="newContactName" class="input input-bordered input-sm" />
-                </div>
-                <div class="form-control">
-                  <label class="label"><span class="label-text">Roll</span></label>
-                  <input type="text" id="newContactRole" class="input input-bordered input-sm" placeholder="t.ex. VD, IT-ansvarig" />
-                </div>
-                <div class="form-control">
-                  <label class="label"><span class="label-text">E-post</span></label>
-                  <input type="email" id="newContactEmail" class="input input-bordered input-sm" />
-                </div>
-                <div class="form-control">
-                  <label class="label"><span class="label-text">Telefon</span></label>
-                  <input type="tel" id="newContactPhone" class="input input-bordered input-sm" />
-                </div>
-              </div>
-              <div class="flex gap-2 mt-3">
-                <button class="btn btn-primary btn-sm" onclick="saveNewContact()">Spara</button>
-                <button class="btn btn-ghost btn-sm" onclick="cancelAddContact()">Avbryt</button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Contacts List -->
-          <div id="contactsList" class="space-y-2">
-            <p class="text-base-content/50">Inga kontakter ännu</p>
-          </div>
-        </div>
-        
-        <!-- Tab: Tasks -->
-        <div id="tab-tasks" class="tab-content hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold">Uppgifter</h3>
-            <button class="btn btn-primary btn-sm" onclick="addTaskForm()">+ Lägg till uppgift</button>
-          </div>
-          
-          <!-- Add Task Form -->
-          <div id="addTaskFormDiv" class="card bg-base-200 mb-4 hidden">
-            <div class="card-body">
-              <h4 class="font-bold">Ny uppgift</h4>
-              <div class="form-control">
-                <label class="label"><span class="label-text">Titel *</span></label>
-                <input type="text" id="newTaskTitle" class="input input-bordered input-sm" />
-              </div>
-              <div class="form-control">
-                <label class="label"><span class="label-text">Beskrivning</span></label>
-                <textarea id="newTaskDescription" class="textarea textarea-bordered" rows="3"></textarea>
-              </div>
-              <div class="form-control">
-                <label class="label"><span class="label-text">Förfallodatum</span></label>
-                <input type="datetime-local" id="newTaskDueAt" class="input input-bordered input-sm" />
-              </div>
-              <div class="flex gap-2 mt-3">
-                <button class="btn btn-primary btn-sm" onclick="saveNewTask()">Spara</button>
-                <button class="btn btn-ghost btn-sm" onclick="cancelAddTask()">Avbryt</button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Tasks List -->
-          <div id="tasksList" class="space-y-2">
-            <p class="text-base-content/50">Inga uppgifter ännu</p>
-          </div>
-        </div>
-        
-        <!-- Tab: Notes -->
-        <div id="tab-notes" class="tab-content hidden">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold">Anteckningar</h3>
-            <button class="btn btn-primary btn-sm" onclick="addNoteForm()">+ Lägg till anteckning</button>
-          </div>
-          
-          <!-- Add Note Form -->
-          <div id="addNoteFormDiv" class="card bg-base-200 mb-4 hidden">
-            <div class="card-body">
-              <h4 class="font-bold">Ny anteckning</h4>
-              <div class="form-control">
-                <label class="label"><span class="label-text">Text *</span></label>
-                <textarea id="newNoteText" class="textarea textarea-bordered" rows="4" placeholder="Skriv din anteckning här..."></textarea>
-              </div>
-              <div class="flex gap-2 mt-3">
-                <button class="btn btn-primary btn-sm" onclick="saveNewNote()">Spara</button>
-                <button class="btn btn-ghost btn-sm" onclick="cancelAddNote()">Avbryt</button>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Notes List -->
-          <div id="notesList" class="space-y-3">
-            <p class="text-base-content/50">Inga anteckningar ännu</p>
-          </div>
-        </div>
-        
-        <!-- Tab: Companies -->
-        <div id="tab-companies" class="tab-content hidden">
-          <h3 class="text-xl font-bold mb-4">Företag med detta varumärke</h3>
-          <div id="brandCompaniesList">
-            <p class="text-base-content/50">Laddar företag...</p>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-    <form method="dialog" class="modal-backdrop">
-      <button onclick="closeBrandDetailsModal()">close</button>
-    </form>
-  </dialog>
-
   <!-- CRITICAL FIX: Force pointer-events and hide unopened dialogs -->
   <script>
     // Function to fix pointer events and dialog visibility
@@ -1715,66 +945,20 @@
     });
   </script>
   
-  <!-- Removed old scripts that don't exist anymore -->
+  <!-- Sales reporting system -->
+  <script src="sales-reports.js"></script>
   
-  <!-- Azure B2C Authentication -->
-  <script src="auth-azure-b2c.js"></script>
+  <!-- Calendar view -->
+  <script src="calendar-view.js"></script>
   
-  <!-- Entra ID Authentication Logic -->
-  <script>
-    // Handle login/logout UI
-    document.addEventListener('DOMContentLoaded', () => {
-      const loginBtn = document.getElementById('loginBtn');
-      const logoutBtn = document.getElementById('logoutBtn');
-      const userMenuBtn = document.getElementById('userMenuBtn');
-      const userName = document.getElementById('userName');
-      const userInitials = document.getElementById('userInitials');
-      
-      // Handle login required
-      window.addEventListener('entra-login-required', () => {
-        console.log('Login required - showing login button');
-        if (loginBtn) {
-          loginBtn.style.display = 'block';
-          loginBtn.onclick = async () => {
-            try {
-              await window.entraAuth.login();
-              location.reload(); // Reload to update UI
-            } catch (error) {
-              console.error('Login error:', error);
-              alert('Login misslyckades: ' + error.message);
-            }
-          };
-        }
-      });
-      
-      // Handle login success
-      window.addEventListener('entra-login-success', (event) => {
-        console.log('Login successful', event.detail);
-        const user = event.detail.user;
-        
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (userMenuBtn) userMenuBtn.style.display = 'flex';
-        if (userName) userName.textContent = user.name || user.username;
-        if (userInitials) {
-          const name = user.name || user.username || 'U';
-          const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-          userInitials.textContent = initials;
-        }
-      });
-      
-      // Logout handler
-      if (logoutBtn) {
-        logoutBtn.onclick = async () => {
-          try {
-            await window.entraAuth.logout();
-            location.reload();
-          } catch (error) {
-            console.error('Logout error:', error);
-          }
-        };
-      }
-    });
-  </script>
+  <!-- Outlook integration -->
+  <script src="outlook-integration.js"></script>
+
+  <!-- System Status Dashboard -->
+  <script src="system-status.js"></script>
+
+  <!-- Predictive Analytics Engine -->
+  <script src="predictive-analytics.js"></script>
 
   <!-- Footer med versionsinformation -->
   <footer class="footer footer-center p-4 bg-base-300 text-base-content mt-8">
@@ -1791,15 +975,8 @@
     </div>
   </footer>
   
-  <!-- Simple app initializer for authenticated users -->
-  <script src="app-init.js"></script>
-
-  <!-- Sortable.js for drag-and-drop -->
-  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-
-  <!-- Simple CRM application logic -->
-  <script src="app-simple.js?v=5"></script>
+  <!-- Main application script (loads last to ensure dependencies are available) -->
+  <script src="config.js"></script>`n  <script src="app.js"></script>
 </body>
 </html>
-
 

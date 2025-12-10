@@ -9,14 +9,64 @@
 // KONFIGURATION
 // ============================================
 
-// Configuration will be loaded dynamically from azure-b2c-config.js
-let msalConfig = null;
-let loginRequest = null;
-let tokenRequest = null;
-let passwordResetAuthority = null;
-let profileEditAuthority = null;
+const msalConfig = {
+  auth: {
+    clientId: '', // Sätt i environment variables: process.env.AZURE_B2C_CLIENT_ID
+    authority: '', // https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}
+    knownAuthorities: [''], // {tenant}.b2clogin.com
+    redirectUri: window.location.origin + '/auth/callback',
+    postLogoutRedirectUri: window.location.origin,
+    navigateToLoginRequestUrl: true
+  },
+  cache: {
+    cacheLocation: 'sessionStorage', // Använd sessionStorage för säkerhet
+    storeAuthStateInCookie: false,
+    secureCookies: true
+  },
+  system: {
+    loggerOptions: {
+      loggerCallback: (level, message, containsPii) => {
+        if (containsPii) return;
+        switch (level) {
+          case 0: console.error(message); break;
+          case 1: console.warn(message); break;
+          case 2: console.info(message); break;
+          case 3: console.debug(message); break;
+        }
+      },
+      logLevel: 3, // Debug i dev, 1 (Warning) i production
+      piiLoggingEnabled: false
+    },
+    windowHashTimeout: 60000,
+    iframeHashTimeout: 6000,
+    loadFrameTimeout: 0,
+    asyncPopups: false
+  }
+};
 
+// Login request configuration
+const loginRequest = {
+  scopes: [
+    'openid',
+    'profile',
+    'email',
+    'api://crm-backend/read',
+    'api://crm-backend/write'
+  ],
+  prompt: 'select_account' // Tvingar användaren att välja konto
+};
 
+// Token request för API-anrop
+const tokenRequest = {
+  scopes: ['api://crm-backend/read', 'api://crm-backend/write'],
+  forceRefresh: false
+};
+
+// Password reset policy
+const passwordResetAuthority = ''; // https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/B2C_1_password_reset
+
+// Profile edit policy  
+const profileEditAuthority = ''; // https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/B2C_1_profile_edit
 
 // ============================================
 // AZURE B2C AUTH CLASS
@@ -36,18 +86,6 @@ class AzureB2CAuth {
    */
   async initialize(config = {}) {
     try {
-      // Load configuration from global scope
-      if (typeof window !== 'undefined' && window.generateMsalConfig) {
-        msalConfig = window.generateMsalConfig();
-        loginRequest = window.generateLoginRequest();
-        tokenRequest = window.generateTokenRequest();
-        passwordResetAuthority = window.generatePasswordResetAuthority();
-        profileEditAuthority = window.generateProfileEditAuthority();
-      } else {
-        console.error('Azure B2C configuration not found. Make sure azure-b2c-config.js is loaded.');
-        return false;
-      }
-
       // Merge custom config med defaults
       const finalConfig = {
         ...msalConfig,
