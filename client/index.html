@@ -789,6 +789,57 @@
   <template id="tpl-companies">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
+        <!-- Advanced Filter Panel -->
+        <div class="collapse collapse-arrow bg-base-200 mb-4">
+          <input type="checkbox" id="advancedFilterToggle" />
+          <div class="collapse-title text-lg font-medium">
+             Avancerade filter
+          </div>
+          <div class="collapse-content">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+              <!-- MRR Range -->
+              <div class="form-control">
+                <label class="label"><span class="label-text">MRR Min (kr/mån)</span></label>
+                <input type="number" id="filterMrrMin" class="input input-bordered input-sm" placeholder="0" />
+              </div>
+              <div class="form-control">
+                <label class="label"><span class="label-text">MRR Max (kr/mån)</span></label>
+                <input type="number" id="filterMrrMax" class="input input-bordered input-sm" placeholder="10000" />
+              </div>
+              
+              <!-- Agent Count Range -->
+              <div class="form-control">
+                <label class="label"><span class="label-text">Antal mäklare (min)</span></label>
+                <input type="number" id="filterAgentMin" class="input input-bordered input-sm" placeholder="0" />
+              </div>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Antal mäklare (max)</span></label>
+                <input type="number" id="filterAgentMax" class="input input-bordered input-sm" placeholder="100" />
+              </div>
+              
+              <!-- Date Range -->
+              <div class="form-control">
+                <label class="label"><span class="label-text">Senaste kontakt från</span></label>
+                <input type="date" id="filterDateFrom" class="input input-bordered input-sm" />
+              </div>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Senaste kontakt till</span></label>
+                <input type="date" id="filterDateTo" class="input input-bordered input-sm" />
+              </div>
+            </div>
+            
+            <!-- Filter Presets -->
+            <div class="mt-4 flex gap-2 flex-wrap items-center">
+              <span class="text-sm font-medium">Sparade filter:</span>
+              <select id="filterPresets" class="select select-bordered select-sm">
+                <option value="">Välj sparat filter...</option>
+              </select>
+              <button class="btn btn-sm btn-ghost" onclick="applyAdvancedFilters()">Tillämpa filter</button>
+              <button class="btn btn-sm btn-ghost" onclick="clearAdvancedFilters()">Rensa</button>
+              <button class="btn btn-sm btn-info" onclick="saveCurrentFilters()">Spara filter</button>
+            </div>
+          </div>
+        </div>
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
           <h2 class="card-title">FÃ¶retag</h2>
           <div class="flex flex-wrap gap-2">

@@ -3054,3 +3054,229 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 });
+
+// =============================================================================
+// Fas 6: Segment Filtering
+// =============================================================================
+
+let currentCompanyFilters = {};
+let filterPresets = [];
+
+/**
+ * Load filter presets from API
+ */
+async function loadFilterPresets() {
+  try {
+    const response = await fetch(`${API_BASE}/companies/filter-presets`, {
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to load presets');
+    
+    filterPresets = await response.json();
+    
+    // Populate dropdown
+    const select = document.getElementById('filterPresets');
+    if (select) {
+      select.innerHTML = '<option value="">Välj sparat filter...</option>' +
+        filterPresets.map(p => `<option value="${p._id}">${escapeHtml(p.name)}</option>`).join('');
+      
+      // Add change listener
+      select.addEventListener('change', (e) => {
+        if (e.target.value) {
+          applyPreset(e.target.value);
+        }
+      });
+    }
+    
+  } catch (error) {
+    console.error('Error loading filter presets:', error);
+  }
+}
+
+/**
+ * Apply a saved preset
+ */
+function applyPreset(presetId) {
+  const preset = filterPresets.find(p => p._id === presetId);
+  if (!preset) return;
+  
+  // Populate filter fields
+  const filters = preset.filters;
+  
+  if (filters.mrrMin !== undefined) {
+    document.getElementById('filterMrrMin').value = filters.mrrMin;
+  }
+  if (filters.mrrMax !== undefined) {
+    document.getElementById('filterMrrMax').value = filters.mrrMax;
+  }
+  if (filters.agentMin !== undefined) {
+    document.getElementById('filterAgentMin').value = filters.agentMin;
+  }
+  if (filters.agentMax !== undefined) {
+    document.getElementById('filterAgentMax').value = filters.agentMax;
+  }
+  if (filters.dateFrom) {
+    document.getElementById('filterDateFrom').value = filters.dateFrom.split('T')[0];
+  }
+  if (filters.dateTo) {
+    document.getElementById('filterDateTo').value = filters.dateTo.split('T')[0];
+  }
+  if (filters.status) {
+    const statusSelect = document.getElementById('companyStatusFilter');
+    if (statusSelect) statusSelect.value = filters.status;
+  }
+  if (filters.brandId) {
+    const brandSelect = document.getElementById('companyBrandFilter');
+    if (brandSelect) brandSelect.value = filters.brandId;
+  }
+  
+  showToast(`Tillämpade filter: ${preset.name}`, 'success');
+  
+  // Apply filters
+  applyAdvancedFilters();
+}
+
+/**
+ * Apply advanced filters to companies list
+ */
+async function applyAdvancedFilters() {
+  try {
+    console.log(' Applying advanced filters');
+    
+    // Build filter object
+    const filters = {};
+    
+    // Get values from filter inputs
+    const mrrMin = document.getElementById('filterMrrMin')?.value;
+    const mrrMax = document.getElementById('filterMrrMax')?.value;
+    const agentMin = document.getElementById('filterAgentMin')?.value;
+    const agentMax = document.getElementById('filterAgentMax')?.value;
+    const dateFrom = document.getElementById('filterDateFrom')?.value;
+    const dateTo = document.getElementById('filterDateTo')?.value;
+    
+    // Get basic filters
+    const status = document.getElementById('companyStatusFilter')?.value;
+    const brandId = document.getElementById('companyBrandFilter')?.value;
+    
+    if (mrrMin) filters.mrrMin = mrrMin;
+    if (mrrMax) filters.mrrMax = mrrMax;
+    if (agentMin) filters.agentMin = agentMin;
+    if (agentMax) filters.agentMax = agentMax;
+    if (dateFrom) filters.dateFrom = dateFrom;
+    if (dateTo) filters.dateTo = dateTo;
+    if (status && status !== 'all') filters.status = status;
+    if (brandId && brandId !== 'all') filters.brandId = brandId;
+    
+    // Store current filters
+    currentCompanyFilters = filters;
+    
+    // Build query string
+    const params = new URLSearchParams(filters);
+    const url = `${API_BASE}/companies?${params.toString()}`;
+    
+    const response = await fetch(url, {
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to load companies');
+    
+    const companies = await response.json();
+    renderCompaniesTable(companies);
+    
+    showToast(`Visar ${companies.length} företag`, 'success');
+    
+  } catch (error) {
+    console.error('Error applying filters:', error);
+    showToast('Kunde inte tillämpa filter', 'error');
+  }
+}
+
+/**
+ * Clear all advanced filters
+ */
+function clearAdvancedFilters() {
+  document.getElementById('filterMrrMin').value = '';
+  document.getElementById('filterMrrMax').value = '';
+  document.getElementById('filterAgentMin').value = '';
+  document.getElementById('filterAgentMax').value = '';
+  document.getElementById('filterDateFrom').value = '';
+  document.getElementById('filterDateTo').value = '';
+  document.getElementById('filterPresets').value = '';
+  
+  currentCompanyFilters = {};
+  
+  // Reload companies without filters
+  loadCompanies();
+  
+  showToast('Filter rensade', 'info');
+}
+
+/**
+ * Save current filters as a preset
+ */
+async function saveCurrentFilters() {
+  try {
+    const name = prompt('Namn på filtret:');
+    if (!name) return;
+    
+    // Get current filter values
+    const filters = { ...currentCompanyFilters };
+    
+    const response = await fetch(`${API_BASE}/companies/filter-presets`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getAccessToken()}`
+      },
+      body: JSON.stringify({ name, filters })
+    });
+    
+    if (!response.ok) throw new Error('Failed to save preset');
+    
+    showToast('Filter sparat!', 'success');
+    
+    // Reload presets
+    await loadFilterPresets();
+    
+  } catch (error) {
+    console.error('Error saving filter preset:', error);
+    showToast('Kunde inte spara filter', 'error');
+  }
+}
+
+/**
+ * Delete a filter preset
+ */
+async function deleteFilterPreset(presetId) {
+  try {
+    if (!confirm('Ta bort detta sparade filter?')) return;
+    
+    const response = await fetch(`${API_BASE}/companies/filter-presets/${presetId}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${getAccessToken()}` }
+    });
+    
+    if (!response.ok) throw new Error('Failed to delete preset');
+    
+    showToast('Filter borttaget', 'success');
+    await loadFilterPresets();
+    
+  } catch (error) {
+    console.error('Error deleting filter preset:', error);
+    showToast('Kunde inte ta bort filter', 'error');
+  }
+}
+
+// Auto-load presets when companies view is shown
+document.addEventListener('DOMContentLoaded', () => {
+  const originalShowView = window.showView;
+  if (originalShowView) {
+    window.showView = function(viewName) {
+      originalShowView(viewName);
+      if (viewName === 'companies') {
+        setTimeout(() => loadFilterPresets(), 100);
+      }
+    };
+  }
+});
