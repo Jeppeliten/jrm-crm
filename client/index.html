@@ -177,7 +177,118 @@
         <section id="view-brands" class="view"></section>
         <section id="view-companies" class="view"></section>
         <section id="view-agents" class="view"></section>
-        <section id="view-pipeline" class="view"></section>
+<section id="view-pipeline" class="view">
+  <!-- Kanban Sales Pipeline -->
+  <div class="mb-6">
+    <h2 class="text-3xl font-bold">Försäljningspipeline</h2>
+    <p class="text-base-content/70 mt-2">Drag & drop företag mellan olika säljsteg</p>
+  </div>
+
+  <!-- Pipeline Stats Summary -->
+  <div class="stats shadow mb-6 w-full">
+    <div class="stat">
+      <div class="stat-title">Totalt värde</div>
+      <div class="stat-value text-2xl" id="pipelineTotalValue">0 kr</div>
+      <div class="stat-desc" id="pipelineTotalCompanies">0 företag</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Prospekt</div>
+      <div class="stat-value text-xl" id="pipelineProspektValue">0 kr</div>
+      <div class="stat-desc" id="pipelineProspektCount">0 företag</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Kvalificerad</div>
+      <div class="stat-value text-xl" id="pipelineKvalificeradValue">0 kr</div>
+      <div class="stat-desc" id="pipelineKvalificeradCount">0 företag</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Offert</div>
+      <div class="stat-value text-xl" id="pipelineOffertValue">0 kr</div>
+      <div class="stat-desc" id="pipelineOffertCount">0 företag</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Förhandling</div>
+      <div class="stat-value text-xl" id="pipelineForhandlingValue">0 kr</div>
+      <div class="stat-desc" id="pipelineForhandlingCount">0 företag</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Vunnit</div>
+      <div class="stat-value text-xl text-success" id="pipelineVunnitValue">0 kr</div>
+      <div class="stat-desc" id="pipelineVunnitCount">0 företag</div>
+    </div>
+  </div>
+
+  <!-- Kanban Board -->
+  <div class="flex gap-4 overflow-x-auto pb-4" id="kanbanBoard">
+    
+    <!-- Column: Prospekt -->
+    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="prospekt">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg"> Prospekt</h3>
+        <span class="badge badge-ghost" id="count-prospekt">0</span>
+      </div>
+      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-prospekt">
+        <!-- Cards will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Column: Kvalificerad -->
+    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="kvalificerad">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg"> Kvalificerad</h3>
+        <span class="badge badge-ghost" id="count-kvalificerad">0</span>
+      </div>
+      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-kvalificerad">
+        <!-- Cards will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Column: Offert -->
+    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="offert">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg"> Offert</h3>
+        <span class="badge badge-ghost" id="count-offert">0</span>
+      </div>
+      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-offert">
+        <!-- Cards will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Column: Förhandling -->
+    <div class="kanban-column flex-shrink-0 w-72 bg-base-200 rounded-lg p-4" data-stage="forhandling">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg"> Förhandling</h3>
+        <span class="badge badge-ghost" id="count-forhandling">0</span>
+      </div>
+      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-forhandling">
+        <!-- Cards will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Column: Vunnit -->
+    <div class="kanban-column flex-shrink-0 w-72 bg-success/10 rounded-lg p-4" data-stage="vunnit">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg text-success"> Vunnit</h3>
+        <span class="badge badge-success" id="count-vunnit">0</span>
+      </div>
+      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-vunnit">
+        <!-- Cards will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Column: Förlorat -->
+    <div class="kanban-column flex-shrink-0 w-72 bg-error/10 rounded-lg p-4" data-stage="forlorat">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-lg text-error"> Förlorat</h3>
+        <span class="badge badge-error" id="count-forlorat">0</span>
+      </div>
+      <div class="kanban-cards space-y-3 min-h-[200px]" id="cards-forlorat">
+        <!-- Cards will be inserted here -->
+      </div>
+    </div>
+
+  </div>
+</section>
         <section id="view-customer-success" class="view"></section>
         <section id="view-licenses" class="view"></section>
         <section id="view-import" class="view"></section>
@@ -1351,7 +1462,10 @@
   
   <!-- Simple app initializer for authenticated users -->
   <script src="app-init.js"></script>
-  
+
+  <!-- Sortable.js for drag-and-drop -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
   <!-- Simple CRM application logic -->
   <script src="app-simple.js?v=5"></script>
 </body>

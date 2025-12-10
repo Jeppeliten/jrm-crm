@@ -2454,3 +2454,184 @@ async function loadBrandCompanies(brandId) {
   }
 }
 
+
+// ============================================================================
+// KANBAN SALES PIPELINE - FAS 3
+// ============================================================================
+
+let pipelineData = null;
+let sortableInstances = [];
+
+// Load pipeline view
+async function loadPipeline() {
+  console.log('Loading pipeline...');
+  
+  try {
+    // Fetch pipeline stats
+    const stats = await fetchWithAuth('/api/companies/pipeline/stats');
+    pipelineData = stats;
+    
+    // Render stats summary
+    renderPipelineStats(stats);
+    
+    // Render Kanban board
+    renderKanbanBoard(stats);
+    
+    // Initialize drag-and-drop
+    initializeDragAndDrop();
+    
+  } catch (error) {
+    console.error('Error loading pipeline:', error);
+    showNotification('Kunde inte ladda pipeline', 'error');
+  }
+}
+
+function renderPipelineStats(stats) {
+  // Total stats
+  document.getElementById('pipelineTotalValue').textContent = 
+    `${Math.round(stats.totalValue / 1000)}k kr`;
+  document.getElementById('pipelineTotalCompanies').textContent = 
+    `${stats.totalCompanies} företag`;
+  
+  // Per-stage stats
+  stats.stages.forEach(stageData => {
+    const stage = stageData.stage;
+    const valueEl = document.getElementById(`pipeline${capitalizeFirst(stage)}Value`);
+    const countEl = document.getElementById(`pipeline${capitalizeFirst(stage)}Count`);
+    
+    if (valueEl) {
+      valueEl.textContent = `${Math.round(stageData.totalValue / 1000)}k kr`;
+    }
+    if (countEl) {
+      countEl.textContent = `${stageData.count} företag`;
+    }
+    
+    // Update column badge counts
+    const badgeEl = document.getElementById(`count-${stage}`);
+    if (badgeEl) {
+      badgeEl.textContent = stageData.count;
+    }
+  });
+}
+
+function capitalizeFirst(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function renderKanbanBoard(stats) {
+  stats.stages.forEach(stageData => {
+    const container = document.getElementById(`cards-${stageData.stage}`);
+    if (!container) return;
+    
+    if (stageData.companies.length === 0) {
+      container.innerHTML = '<p class="text-sm text-base-content/50 text-center py-4">Inga företag</p>';
+      return;
+    }
+    
+    container.innerHTML = stageData.companies.map(company => createCompanyCard(company, stageData.stage)).join('');
+  });
+}
+
+function createCompanyCard(company, stage) {
+  const value = company.pipelineValue || 0;
+  const agents = company.agentCount || 0;
+  
+  // Card color based on stage
+  let cardClass = 'bg-base-100';
+  if (stage === 'vunnit') cardClass = 'bg-success/20';
+  if (stage === 'forlorat') cardClass = 'bg-error/20';
+  
+  return `
+    <div class="kanban-card card ${cardClass} shadow-sm cursor-move hover:shadow-md transition-shadow" 
+         data-company-id="${company._id}" 
+         data-stage="${stage}">
+      <div class="card-body p-3">
+        <h4 class="font-semibold text-sm line-clamp-2">${company.name}</h4>
+        ${company.brand ? `<p class="text-xs text-base-content/60">${company.brand}</p>` : ''}
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-xs font-mono text-primary">${Math.round(value).toLocaleString('sv-SE')} kr</span>
+          <span class="badge badge-sm badge-ghost">${agents} mäklare</span>
+        </div>
+        ${company.nextAction ? `<p class="text-xs text-base-content/50 mt-2 line-clamp-1"> ${company.nextAction}</p>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function initializeDragAndDrop() {
+  // Destroy existing instances
+  sortableInstances.forEach(instance => instance.destroy());
+  sortableInstances = [];
+  
+  const stages = ['prospekt', 'kvalificerad', 'offert', 'forhandling', 'vunnit', 'forlorat'];
+  
+  stages.forEach(stage => {
+    const container = document.getElementById(`cards-${stage}`);
+    if (!container) return;
+    
+    const sortable = new Sortable(container, {
+      group: 'kanban',
+      animation: 150,
+      ghostClass: 'opacity-50',
+      dragClass: 'rotate-2',
+      onEnd: async function (evt) {
+        const companyId = evt.item.dataset.companyId;
+        const newStage = evt.to.closest('.kanban-column').dataset.stage;
+        const oldStage = evt.item.dataset.stage;
+        
+        if (newStage !== oldStage) {
+          await handleStageChange(companyId, newStage, oldStage, evt);
+        }
+      }
+    });
+    
+    sortableInstances.push(sortable);
+  });
+}
+
+async function handleStageChange(companyId, newStage, oldStage, evt) {
+  try {
+    // Get company data to extract value
+    const company = pipelineData.stages
+      .flatMap(s => s.companies)
+      .find(c => c._id === companyId);
+    
+    // Update pipeline stage via API
+    await fetchWithAuth(`/api/companies/${companyId}/pipeline`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        stage: newStage,
+        value: company?.pipelineValue || 0
+      })
+    });
+    
+    // Update card data attribute
+    evt.item.dataset.stage = newStage;
+    
+    // Reload pipeline to update stats
+    await loadPipeline();
+    
+    showNotification(`Företag flyttat till ${getStageDisplayName(newStage)}`, 'success');
+    
+  } catch (error) {
+    console.error('Error updating pipeline stage:', error);
+    showNotification('Kunde inte uppdatera pipeline-steg', 'error');
+    
+    // Revert the card position
+    await loadPipeline();
+  }
+}
+
+function getStageDisplayName(stage) {
+  const names = {
+    'prospekt': 'Prospekt',
+    'kvalificerad': 'Kvalificerad',
+    'offert': 'Offert',
+    'forhandling': 'Förhandling',
+    'vunnit': 'Vunnit',
+    'forlorat': 'Förlorat'
+  };
+  return names[stage] || stage;
+}
+
