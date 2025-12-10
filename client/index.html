@@ -175,7 +175,104 @@
       <main id="main-content" class="flex-1 overflow-auto p-4">
         <section id="view-dashboard" class="view visible"></section>
         <section id="view-brands" class="view"></section>
-        <section id="view-companies" class="view"></section>
+          <section id="view-companies" class="view">
+    <!-- Header -->
+    <div class="mb-6">
+      <h2 class="text-3xl font-bold">Företag</h2>
+      <p class="text-base-content/70 mt-2">Hantera alla mäklarföretag och deras information</p>
+    </div>
+
+    <!-- Advanced Filters (collapsible) -->
+    <details class="collapse collapse-arrow bg-base-200 mb-4">
+      <summary class="collapse-title text-lg font-medium">
+        Avancerade filter
+      </summary>
+      <div class="collapse-content">
+        <div class="grid grid-cols-3 gap-4 mt-4">
+          <div class="form-control">
+            <label class="label"><span class="label-text">MRR Min</span></label>
+            <input type="number" class="input input-bordered" id="filterMrrMin" placeholder="0" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">MRR Max</span></label>
+            <input type="number" class="input input-bordered" id="filterMrrMax" placeholder="10000" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Från datum</span></label>
+            <input type="date" class="input input-bordered" id="filterDateFrom" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Till datum</span></label>
+            <input type="date" class="input input-bordered" id="filterDateTo" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Min antal mäklare</span></label>
+            <input type="number" class="input input-bordered" id="filterAgentMin" placeholder="0" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Max antal mäklare</span></label>
+            <input type="number" class="input input-bordered" id="filterAgentMax" placeholder="100" />
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button class="btn btn-primary" onclick="applyAdvancedFilters()">Applicera filter</button>
+          <button class="btn btn-ghost" onclick="clearAdvancedFilters()">Rensa</button>
+          <div class="divider divider-horizontal"></div>
+          <select id="savedPresets" class="select select-bordered" onchange="loadFilterPreset(this.value)">
+            <option value="">Sparade filter...</option>
+          </select>
+          <button class="btn btn-outline" onclick="saveCurrentFilters()">Spara filter</button>
+        </div>
+      </div>
+    </details>
+
+    <!-- Toolbar -->
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex gap-2">
+        <select class="select select-bordered select-sm">
+          <option>Alla varumärken</option>
+        </select>
+        <select class="select select-bordered select-sm">
+          <option>Alla status</option>
+        </select>
+        <select class="select select-bordered select-sm">
+          <option>Alla steg</option>
+        </select>
+        <select class="select select-bordered select-sm">
+          <option>25</option>
+          <option>50</option>
+          <option>100</option>
+        </select>
+      </div>
+      <div class="flex gap-2">
+        <button class="btn btn-ghost btn-sm">Exportera CSV</button>
+        <button class="btn btn-primary btn-sm">Nytt företag</button>
+      </div>
+    </div>
+
+    <!-- Companies Table -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body p-0">
+        <div class="overflow-x-auto">
+          <table class="table table-zebra">
+            <thead>
+              <tr>
+                <th>FÖRETAG/ÄTGÄRDER</th>
+                <th>VARUMÄRKE</th>
+                <th>STATUS</th>
+                <th>MRR</th>
+                <th>PIPELINE</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="companyTable">
+              <tr><td colspan="6" class="text-center p-8">Laddar företag...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
         <section id="view-agents" class="view"></section>
 <section id="view-pipeline" class="view">
   <!-- Kanban Sales Pipeline -->
@@ -1704,4 +1801,5 @@
   <script src="app-simple.js?v=5"></script>
 </body>
 </html>
+
 
