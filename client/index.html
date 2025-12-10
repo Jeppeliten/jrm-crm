@@ -42,9 +42,33 @@
   
   <!-- SheetJS for XLSX import -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
+  <!-- MSAL.js for Azure AD authentication -->
+  <script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
+  
+  <!-- Entra ID Configuration & Authentication -->
+  <script src="entra-config.js"></script>
+  <script src="entra-auth.js"></script>
 </head>
 <body class="bg-base-200">
-  <div id="app" class="drawer lg:drawer-open">
+  <!-- Landing page (shown before login) -->
+  <div id="landingPage" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100" style="display: none;">
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body items-center text-center">
+        <h1 class="card-title text-3xl mb-4">JRM CRM</h1>
+        <p class="mb-6">Välkommen till mäklarnas CRM-system</p>
+        <button id="loginBtn" class="btn btn-primary btn-wide">
+          Logga in med Microsoft
+        </button>
+        <div id="loginError" class="alert alert-error mt-4" style="display: none;">
+          <span id="loginErrorText"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main app (shown after login) -->
+  <div id="app" class="drawer lg:drawer-open" style="display: none;">
     <input id="drawer-toggle" type="checkbox" class="drawer-toggle" />
     
     <div class="drawer-content flex flex-col">
@@ -75,6 +99,10 @@
           </select>
           <button id="globalUndoBtn" class="btn btn-ghost" style="display:none;" title="Ã…ngra senaste borttagning">
             â†¶ Ã…ngra
+          <div class="flex items-center gap-2 ml-auto">
+            <span id="userDisplayName" class="text-sm font-medium"></span>
+            <button id="logoutBtn" class="btn btn-ghost btn-sm">Logga ut</button>
+          </div>
           </button>
         </div>
       </header>
@@ -976,7 +1004,11 @@
   </footer>
   
   <!-- Main application script (loads last to ensure dependencies are available) -->
-  <script src="config.js"></script>`n  <script src="app.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  
+  <!-- Authentication initialization (MUST load after app.js) -->
+  <script src="auth-init.js"></script>
 </body>
 </html>
 

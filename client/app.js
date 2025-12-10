@@ -9710,5 +9710,6 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { VismaIntegration };
 }
 
-window.addEventListener('DOMContentLoaded', init);
+// Auto-start disabled - now controlled by auth-init.js
+window.initializeApp = init; // Expose for auth-init.js
 

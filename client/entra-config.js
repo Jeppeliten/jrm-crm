@@ -1,5 +1,5 @@
-/**
- * Azure Entra ID Configuration för JRM CRM
+﻿/**
+ * Azure Entra ID Configuration fÃ¶r JRM CRM
  * Production-ready configuration
  */
 
@@ -8,7 +8,7 @@ const ENTRA_CONFIG = {
     clientId: '54121bc9-f692-40da-a114-cd3042ac46b2',
     authority: 'https://login.microsoftonline.com/401d3cf2-f075-4920-b118-ccbb47008d45',
     redirectUri: 'https://lively-grass-0a14e0d03.3.azurestaticapps.net',
-    postLogoutRedirectUri: 'https://lively-grass-0a14e0d03.3.azurestaticapps.net',
+    postLogoutredirectUri: 'https://lively-grass-0a14e0d03.3.azurestaticapps.net',
     navigateToLoginRequestUrl: true,
   },
   cache: {
@@ -78,3 +78,5 @@ if (typeof module !== 'undefined' && module.exports) {
     API_CONFIG,
   };
 }
+
+
