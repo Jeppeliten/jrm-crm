@@ -289,7 +289,104 @@
 
   </div>
 </section>
-        <section id="view-customer-success" class="view"></section>
+<section id="view-customer-success" class="view">
+  <!-- Customer Success Dashboard -->
+  <div class="mb-6">
+    <h2 class="text-3xl font-bold">Customer Success</h2>
+    <p class="text-base-content/70 mt-2">Hälsoövervakning och churn-riskhantering</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Totala kunder</div>
+        <div class="stat-value text-2xl" id="csTotalCustomers">0</div>
+        <div class="stat-desc">Aktiva kundföretag</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Genomsnittlig hälsa</div>
+        <div class="stat-value text-2xl" id="csAvgHealth">0</div>
+        <div class="stat-desc">av 100 poäng</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title text-error">Hög risk</div>
+        <div class="stat-value text-2xl text-error" id="csHighRisk">0</div>
+        <div class="stat-desc" id="csHighRiskMRR">0 kr i risk</div>
+      </div>
+    </div>
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title text-warning">Medel risk</div>
+        <div class="stat-value text-2xl text-warning" id="csMediumRisk">0</div>
+        <div class="stat-desc">Kräver uppmärksamhet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Distribution Chart -->
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h3 class="card-title">Hälsodistribution</h3>
+      <div class="flex items-end gap-4 h-48">
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-success rounded-t-lg transition-all" id="healthBarHealthy" style="height: 0%"></div>
+          <div class="text-center mt-2">
+            <div class="text-2xl font-bold text-success" id="healthCountHealthy">0</div>
+            <div class="text-xs text-base-content/70">Friska</div>
+          </div>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-warning rounded-t-lg transition-all" id="healthBarMedium" style="height: 0%"></div>
+          <div class="text-center mt-2">
+            <div class="text-2xl font-bold text-warning" id="healthCountMedium">0</div>
+            <div class="text-xs text-base-content/70">Varning</div>
+          </div>
+        </div>
+        <div class="flex-1 flex flex-col items-center">
+          <div class="w-full bg-error rounded-t-lg transition-all" id="healthBarHigh" style="height: 0%"></div>
+          <div class="text-center mt-2">
+            <div class="text-2xl font-bold text-error" id="healthCountHigh">0</div>
+            <div class="text-xs text-base-content/70">Kritisk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- At-Risk Companies List -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h3 class="card-title">Företag i riskzonen</h3>
+      <p class="text-sm text-base-content/70 mb-4">Kunder med låg hälsopoäng som behöver omedelbar uppföljning</p>
+      
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr>
+              <th>Företag</th>
+              <th>Hälsopoäng</th>
+              <th>Risk</th>
+              <th>MRR</th>
+              <th>Senaste kontakt</th>
+              <th>Riskfaktorer</th>
+              <th>Åtgärd</th>
+            </tr>
+          </thead>
+          <tbody id="atRiskCompaniesList">
+            <tr>
+              <td colspan="7" class="text-center text-base-content/50">Laddar data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
         <section id="view-licenses" class="view"></section>
         <section id="view-import" class="view"></section>
         <section id="view-settings" class="view"></section>

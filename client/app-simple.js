@@ -2635,3 +2635,170 @@ function getStageDisplayName(stage) {
   return names[stage] || stage;
 }
 
+
+// ============================================================================
+// CUSTOMER SUCCESS DASHBOARD - FAS 4
+// ============================================================================
+
+let customerSuccessData = null;
+
+// Load customer success view
+async function loadCustomerSuccess() {
+  console.log('Loading customer success...');
+  
+  try {
+    // Fetch customer success metrics
+    const data = await fetchWithAuth('/api/stats/customer-success');
+    customerSuccessData = data;
+    
+    // Render summary cards
+    renderCustomerSuccessSummary(data.summary);
+    
+    // Render health distribution chart
+    renderHealthDistribution(data.healthDistribution);
+    
+    // Render at-risk companies table
+    renderAtRiskCompanies(data.atRiskCompanies);
+    
+  } catch (error) {
+    console.error('Error loading customer success:', error);
+    showNotification('Kunde inte ladda customer success-data', 'error');
+  }
+}
+
+function renderCustomerSuccessSummary(summary) {
+  // Total customers
+  document.getElementById('csTotalCustomers').textContent = summary.totalCustomers;
+  
+  // Average health
+  const avgHealthEl = document.getElementById('csAvgHealth');
+  avgHealthEl.textContent = summary.avgHealthScore;
+  
+  // Color based on score
+  if (summary.avgHealthScore >= 75) {
+    avgHealthEl.className = 'stat-value text-2xl text-success';
+  } else if (summary.avgHealthScore >= 50) {
+    avgHealthEl.className = 'stat-value text-2xl text-warning';
+  } else {
+    avgHealthEl.className = 'stat-value text-2xl text-error';
+  }
+  
+  // High risk
+  document.getElementById('csHighRisk').textContent = summary.highRisk;
+  document.getElementById('csHighRiskMRR').textContent = 
+    `${Math.round(summary.atRiskMRR / 1000)}k kr i risk`;
+  
+  // Medium risk
+  document.getElementById('csMediumRisk').textContent = summary.mediumRisk;
+}
+
+function renderHealthDistribution(distribution) {
+  distribution.forEach(item => {
+    let barId, countId;
+    
+    if (item.status === 'healthy') {
+      barId = 'healthBarHealthy';
+      countId = 'healthCountHealthy';
+    } else if (item.status === 'medium') {
+      barId = 'healthBarMedium';
+      countId = 'healthCountMedium';
+    } else if (item.status === 'high') {
+      barId = 'healthBarHigh';
+      countId = 'healthCountHigh';
+    }
+    
+    if (barId && countId) {
+      const barEl = document.getElementById(barId);
+      const countEl = document.getElementById(countId);
+      
+      if (barEl) {
+        // Animate height
+        setTimeout(() => {
+          barEl.style.height = `${item.percentage}%`;
+        }, 100);
+      }
+      
+      if (countEl) {
+        countEl.textContent = item.count;
+      }
+    }
+  });
+}
+
+function renderAtRiskCompanies(companies) {
+  const tbody = document.getElementById('atRiskCompaniesList');
+  
+  if (!companies || companies.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-success"> Inga kunder i riskzonen!</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = companies.map(company => {
+    // Risk badge
+    let riskBadge = '';
+    if (company.churnRisk === 'high') {
+      riskBadge = '<span class="badge badge-error">Hög</span>';
+    } else if (company.churnRisk === 'medium') {
+      riskBadge = '<span class="badge badge-warning">Medel</span>';
+    } else {
+      riskBadge = '<span class="badge badge-success">Låg</span>';
+    }
+    
+    // Health score with color
+    let scoreClass = 'text-success';
+    if (company.healthScore < 50) scoreClass = 'text-error';
+    else if (company.healthScore < 75) scoreClass = 'text-warning';
+    
+    // Last contact
+    const lastContactStr = company.lastContact 
+      ? new Date(company.lastContact).toLocaleDateString('sv-SE')
+      : 'Aldrig';
+    
+    const daysSince = company.daysSinceContact < 999 
+      ? `${company.daysSinceContact} dagar sedan`
+      : 'Ingen data';
+    
+    // Risk factors
+    const riskFactorsHtml = company.riskFactors && company.riskFactors.length > 0
+      ? `<ul class="text-xs list-disc list-inside">${company.riskFactors.map(f => `<li>${f}</li>`).join('')}</ul>`
+      : '<span class="text-xs text-base-content/50">Inga faktorer</span>';
+    
+    return `
+      <tr class="hover">
+        <td>
+          <div class="font-semibold">${company.name}</div>
+          <div class="text-xs text-base-content/60">${company.brand || 'Inget varumärke'}</div>
+        </td>
+        <td>
+          <div class="font-mono text-lg font-bold ${scoreClass}">${company.healthScore}</div>
+          <div class="text-xs text-base-content/60">av 100</div>
+        </td>
+        <td>${riskBadge}</td>
+        <td class="font-mono">${Math.round(company.mrr / 1000)}k kr</td>
+        <td>
+          <div>${lastContactStr}</div>
+          <div class="text-xs text-base-content/60">${daysSince}</div>
+        </td>
+        <td class="max-w-xs">${riskFactorsHtml}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" onclick="scheduleFollowUp('${company._id}', '${company.name}')">
+             Följ upp
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function scheduleFollowUp(companyId, companyName) {
+  // Simple prompt for now - could be enhanced with a modal
+  const action = prompt(`Planera uppföljning för ${companyName}:`, 'Ring och boka möte');
+  
+  if (action) {
+    // In a real implementation, this would update the company's nextAction
+    showNotification(`Uppföljning schemalagd för ${companyName}`, 'success');
+    // Reload the view to update
+    loadCustomerSuccess();
+  }
+}
+
