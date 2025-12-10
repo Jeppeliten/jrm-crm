@@ -11,11 +11,46 @@ let mockBrands = [
     website: 'https://www.era.se',
     centralContract: {
       active: true,
+      product: 'Enterprise Plan',
       mrr: 125000,
       startDate: new Date('2024-01-01'),
       contactPerson: 'Anders Svensson',
       contactEmail: 'anders@era.se'
     },
+    contacts: [
+      {
+        id: 'contact-1',
+        name: 'Anders Svensson',
+        role: 'VD',
+        email: 'anders@era.se',
+        phone: '08-123 45 67'
+      },
+      {
+        id: 'contact-2',
+        name: 'Maria Andersson',
+        role: 'Marknadschef',
+        email: 'maria@era.se',
+        phone: '08-123 45 68'
+      }
+    ],
+    tasks: [
+      {
+        id: 'task-1',
+        title: 'Följ upp avtalsförnyelse',
+        dueAt: new Date('2025-12-15'),
+        done: false,
+        ownerId: 'user-1',
+        createdAt: new Date()
+      }
+    ],
+    notes: [
+      {
+        id: 'note-1',
+        text: 'Nöjda med tjänsten, funderar på att utöka till fler kontor',
+        authorId: 'user-1',
+        createdAt: new Date('2025-12-01')
+      }
+    ],
     createdAt: new Date('2024-01-01'),
     updatedAt: new Date()
   },
@@ -27,6 +62,9 @@ let mockBrands = [
     centralContract: {
       active: false
     },
+    contacts: [],
+    tasks: [],
+    notes: [],
     createdAt: new Date('2023-06-15'),
     updatedAt: new Date()
   },
@@ -38,6 +76,9 @@ let mockBrands = [
     centralContract: {
       active: false
     },
+    contacts: [],
+    tasks: [],
+    notes: [],
     createdAt: new Date('2023-08-20'),
     updatedAt: new Date()
   },
@@ -48,11 +89,23 @@ let mockBrands = [
     website: 'https://www.fastighetsbyran.se',
     centralContract: {
       active: true,
+      product: 'Professional Plan',
       mrr: 85000,
       startDate: new Date('2024-06-01'),
       contactPerson: 'Maria Karlsson',
       contactEmail: 'maria@fastighetsbyran.se'
     },
+    contacts: [
+      {
+        id: 'contact-3',
+        name: 'Maria Karlsson',
+        role: 'Regionchef',
+        email: 'maria@fastighetsbyran.se',
+        phone: '08-234 56 78'
+      }
+    ],
+    tasks: [],
+    notes: [],
     createdAt: new Date('2024-05-10'),
     updatedAt: new Date()
   },
@@ -64,6 +117,9 @@ let mockBrands = [
     centralContract: {
       active: false
     },
+    contacts: [],
+    tasks: [],
+    notes: [],
     createdAt: new Date('2023-11-05'),
     updatedAt: new Date()
   }
@@ -301,6 +357,430 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     console.error('Error deleting brand:', error);
     res.status(500).json({ error: 'Failed to delete brand' });
+  }
+});
+
+/**
+ * POST /api/brands/:id/contacts - Add contact to brand
+ */
+router.post('/:id/contacts', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    const { name, role, email, phone } = req.body;
+    
+    if (!db) {
+      // Mock mode
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      const newContact = {
+        id: `contact-${Date.now()}`,
+        name,
+        role,
+        email,
+        phone,
+        createdAt: new Date()
+      };
+      
+      if (!brand.contacts) brand.contacts = [];
+      brand.contacts.push(newContact);
+      brand.updatedAt = new Date();
+      
+      return res.status(201).json(newContact);
+    }
+    
+    const newContact = {
+      id: `contact-${Date.now()}`,
+      name,
+      role,
+      email,
+      phone,
+      createdAt: new Date()
+    };
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { 
+        $push: { contacts: newContact },
+        $set: { updatedAt: new Date() }
+      }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.status(201).json(newContact);
+  } catch (error) {
+    console.error('Error adding contact:', error);
+    res.status(500).json({ error: 'Failed to add contact' });
+  }
+});
+
+/**
+ * DELETE /api/brands/:id/contacts/:contactId - Remove contact from brand
+ */
+router.delete('/:id/contacts/:contactId', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id, contactId } = req.params;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      brand.contacts = brand.contacts.filter(c => c.id !== contactId);
+      brand.updatedAt = new Date();
+      
+      return res.json({ message: 'Contact deleted successfully' });
+    }
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { 
+        $pull: { contacts: { id: contactId } },
+        $set: { updatedAt: new Date() }
+      }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.json({ message: 'Contact deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    res.status(500).json({ error: 'Failed to delete contact' });
+  }
+});
+
+/**
+ * POST /api/brands/:id/tasks - Add task to brand
+ */
+router.post('/:id/tasks', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    const { title, description, dueAt, ownerId } = req.body;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      const newTask = {
+        id: `task-${Date.now()}`,
+        title,
+        description,
+        dueAt: dueAt ? new Date(dueAt) : null,
+        done: false,
+        ownerId,
+        createdAt: new Date()
+      };
+      
+      if (!brand.tasks) brand.tasks = [];
+      brand.tasks.push(newTask);
+      brand.updatedAt = new Date();
+      
+      return res.status(201).json(newTask);
+    }
+    
+    const newTask = {
+      id: `task-${Date.now()}`,
+      title,
+      description,
+      dueAt: dueAt ? new Date(dueAt) : null,
+      done: false,
+      ownerId,
+      createdAt: new Date()
+    };
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { 
+        $push: { tasks: newTask },
+        $set: { updatedAt: new Date() }
+      }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.status(201).json(newTask);
+  } catch (error) {
+    console.error('Error adding task:', error);
+    res.status(500).json({ error: 'Failed to add task' });
+  }
+});
+
+/**
+ * PUT /api/brands/:id/tasks/:taskId - Update task
+ */
+router.put('/:id/tasks/:taskId', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id, taskId } = req.params;
+    const { title, description, dueAt, done } = req.body;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      const task = brand.tasks.find(t => t.id === taskId);
+      if (!task) {
+        return res.status(404).json({ error: 'Task not found' });
+      }
+      
+      if (title !== undefined) task.title = title;
+      if (description !== undefined) task.description = description;
+      if (dueAt !== undefined) task.dueAt = dueAt ? new Date(dueAt) : null;
+      if (done !== undefined) task.done = done;
+      task.updatedAt = new Date();
+      brand.updatedAt = new Date();
+      
+      return res.json(task);
+    }
+    
+    const updateFields = {};
+    if (title !== undefined) updateFields['tasks.$.title'] = title;
+    if (description !== undefined) updateFields['tasks.$.description'] = description;
+    if (dueAt !== undefined) updateFields['tasks.$.dueAt'] = dueAt ? new Date(dueAt) : null;
+    if (done !== undefined) updateFields['tasks.$.done'] = done;
+    updateFields['tasks.$.updatedAt'] = new Date();
+    updateFields['updatedAt'] = new Date();
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id), 'tasks.id': taskId }
+      : { _id: id, 'tasks.id': taskId };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { $set: updateFields }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand or task not found' });
+    }
+    
+    res.json({ message: 'Task updated successfully' });
+  } catch (error) {
+    console.error('Error updating task:', error);
+    res.status(500).json({ error: 'Failed to update task' });
+  }
+});
+
+/**
+ * DELETE /api/brands/:id/tasks/:taskId - Delete task
+ */
+router.delete('/:id/tasks/:taskId', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id, taskId } = req.params;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      brand.tasks = brand.tasks.filter(t => t.id !== taskId);
+      brand.updatedAt = new Date();
+      
+      return res.json({ message: 'Task deleted successfully' });
+    }
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { 
+        $pull: { tasks: { id: taskId } },
+        $set: { updatedAt: new Date() }
+      }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.json({ message: 'Task deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    res.status(500).json({ error: 'Failed to delete task' });
+  }
+});
+
+/**
+ * POST /api/brands/:id/notes - Add note to brand
+ */
+router.post('/:id/notes', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    const { text, authorId } = req.body;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      const newNote = {
+        id: `note-${Date.now()}`,
+        text,
+        authorId,
+        createdAt: new Date()
+      };
+      
+      if (!brand.notes) brand.notes = [];
+      brand.notes.push(newNote);
+      brand.updatedAt = new Date();
+      
+      return res.status(201).json(newNote);
+    }
+    
+    const newNote = {
+      id: `note-${Date.now()}`,
+      text,
+      authorId,
+      createdAt: new Date()
+    };
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { 
+        $push: { notes: newNote },
+        $set: { updatedAt: new Date() }
+      }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.status(201).json(newNote);
+  } catch (error) {
+    console.error('Error adding note:', error);
+    res.status(500).json({ error: 'Failed to add note' });
+  }
+});
+
+/**
+ * DELETE /api/brands/:id/notes/:noteId - Delete note
+ */
+router.delete('/:id/notes/:noteId', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id, noteId } = req.params;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      brand.notes = brand.notes.filter(n => n.id !== noteId);
+      brand.updatedAt = new Date();
+      
+      return res.json({ message: 'Note deleted successfully' });
+    }
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { 
+        $pull: { notes: { id: noteId } },
+        $set: { updatedAt: new Date() }
+      }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.json({ message: 'Note deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting note:', error);
+    res.status(500).json({ error: 'Failed to delete note' });
+  }
+});
+
+/**
+ * PUT /api/brands/:id/central-contract - Update central contract
+ */
+router.put('/:id/central-contract', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    const { id } = req.params;
+    const { active, product, mrr } = req.body;
+    
+    if (!db) {
+      const brand = mockBrands.find(b => b._id === id);
+      if (!brand) {
+        return res.status(404).json({ error: 'Brand not found' });
+      }
+      
+      if (!brand.centralContract) brand.centralContract = {};
+      if (active !== undefined) brand.centralContract.active = active;
+      if (product !== undefined) brand.centralContract.product = product;
+      if (mrr !== undefined) brand.centralContract.mrr = mrr;
+      brand.updatedAt = new Date();
+      
+      return res.json(brand.centralContract);
+    }
+    
+    const updateFields = { updatedAt: new Date() };
+    if (active !== undefined) updateFields['centralContract.active'] = active;
+    if (product !== undefined) updateFields['centralContract.product'] = product;
+    if (mrr !== undefined) updateFields['centralContract.mrr'] = mrr;
+    
+    const query = id.match(/^[0-9a-fA-F]{24}$/) 
+      ? { _id: require('mongodb').ObjectId(id) }
+      : { _id: id };
+    
+    const result = await db.collection('brands_v2').updateOne(
+      query,
+      { $set: updateFields }
+    );
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Brand not found' });
+    }
+    
+    res.json({ message: 'Central contract updated successfully' });
+  } catch (error) {
+    console.error('Error updating central contract:', error);
+    res.status(500).json({ error: 'Failed to update central contract' });
   }
 });
 
