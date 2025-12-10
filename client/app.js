@@ -1,52 +1,8 @@
-﻿'use strict';
+'use strict';
 
-// CRM Prototyp â€“ enkel SPA utan backend
-// Datamodell i localStorage. Import frÃ¥n Excel via SheetJS.
+// CRM Prototyp – enkel SPA utan backend
+// Datamodell i localStorage. Import från Excel via SheetJS.
 
-// ==================== Authentication Helper ====================
-/**
- * Fetch with automatic authentication token
- * Uses Entra Auth to get access token and adds to Authorization header
- */
-async function fetchWithAuth(url, options = {}) {
-  // Get access token from Entra Auth
-  let token = null;
-  if (window.entraAuth && window.entraAuth.isLoggedIn()) {
-    try {
-      token = await window.entraAuth.getAccessToken();
-    } catch (error) {
-      console.error('Failed to get access token:', error);
-      // Continue without token - API will return 401 if auth is required
-    }
-  }
-
-  // Add token to headers
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
-  
-  if (token) {
-    headers['Authorization'] = 'Bearer ' + token;
-  }
-
-  // Make the request
-  const response = await fetch(API_BASE + url, {
-    ...options,
-    headers,
-  });
-
-  // Handle errors
-  if (!response.ok) {
-    if (response.status === 401) {
-      console.error('Unauthorized - token may be expired');
-      // Could trigger re-login here
-    }
-    throw new Error('HTTP ' + response.status + ': ' + response.statusText);
-  }
-
-  return response.json();
-}
 // DOM Cache for performance
 const domCache = {
   modal: null,
@@ -62,14 +18,14 @@ const domCache = {
 };
 
 const LS_KEY = 'crm_prototype_state_v1';
-// API_BASE is now defined in config.js
+const API_BASE = '';
 const DEFAULT_USERS = [
   { id: 'u1', namn: 'Admin', roll: 'admin' },
-  { id: 'u2', namn: 'Sara SÃ¤lj', roll: 'sales' },
-  { id: 'u3', namn: 'Johan SÃ¤lj', roll: 'sales' },
+  { id: 'u2', namn: 'Sara Sälj', roll: 'sales' },
+  { id: 'u3', namn: 'Johan Sälj', roll: 'sales' },
 ];
 
-// Prislista fÃ¶r butikslicenser baserat pÃ¥ antal medarbetare
+// Prislista för butikslicenser baserat på antal medarbetare
 const PRICING_TIERS = [
   { min: 4, max: 6, price: 849, name: '4-6 medarbetare' },
   { min: 7, max: 9, price: 1099, name: '7-9 medarbetare' },
@@ -79,9 +35,9 @@ const PRICING_TIERS = [
 ];
 
 /**
- * BerÃ¤knar pris baserat pÃ¥ antal medarbetare
- * @param {number} numAgents - Antal medarbetare/mÃ¤klare
- * @returns {number} MÃ¥nadspris i SEK
+ * Beräknar pris baserat på antal medarbetare
+ * @param {number} numAgents - Antal medarbetare/mäklare
+ * @returns {number} Månadspris i SEK
  */
 function calculatePriceForAgents(numAgents) {
   if (numAgents < 4) return 0; // Under minimum
@@ -90,8 +46,8 @@ function calculatePriceForAgents(numAgents) {
 }
 
 /**
- * BerÃ¤knar potential fÃ¶r ett fÃ¶retag
- * @param {object} company - FÃ¶retagsobjekt
+ * Beräknar potential för ett företag
+ * @param {object} company - Företagsobjekt
  * @returns {object} { potential: number, description: string, currentMRR: number, maxMRR: number, upsellMRR: number }
  */
 function calculateCompanyPotential(company) {
@@ -101,15 +57,15 @@ function calculateCompanyPotential(company) {
   const currentMRR = Number(company.payment) || 0;
   const isCustomer = company.status === 'kund' || currentMRR > 0;
   
-  // Kolla om fÃ¶retaget har centralt avtal via sitt varumÃ¤rke
+  // Kolla om företaget har centralt avtal via sitt varumärke
   const brand = AppState.brands.find(b => b.id === company.brandId);
   const hasCentralContract = company.centralContract || (brand && brand.centralContract && brand.centralContract.active);
   
-  // Om fÃ¶retaget tÃ¤cks av centralt avtal, ingen potential
+  // Om företaget täcks av centralt avtal, ingen potential
   if (hasCentralContract) {
     return {
       potential: 0,
-      description: 'TÃ¤cks av centralt avtal',
+      description: 'Täcks av centralt avtal',
       currentMRR,
       maxMRR: 0,
       upsellMRR: 0,
@@ -120,10 +76,10 @@ function calculateCompanyPotential(company) {
     };
   }
   
-  // BerÃ¤kna maximal MRR baserat pÃ¥ totalt antal mÃ¤klare
+  // Beräkna maximal MRR baserat på totalt antal mäklare
   const maxMRR = calculatePriceForAgents(totalAgents);
   
-  // BerÃ¤kna vad de betalar fÃ¶r aktiva licenser
+  // Beräkna vad de betalar för aktiva licenser
   const currentShouldBeMRR = calculatePriceForAgents(activeAgents);
   
   let potential = 0;
@@ -131,19 +87,19 @@ function calculateCompanyPotential(company) {
   let upsellMRR = 0;
   
   if (!isCustomer && totalAgents >= 4) {
-    // Ej kund men har tillrÃ¤ckligt med mÃ¤klare - ny kund potential
+    // Ej kund men har tillräckligt med mäklare - ny kund potential
     potential = maxMRR;
-    description = `Ny kund: ${totalAgents} mÃ¤klare â†’ ${formatSek(maxMRR)}/mÃ¥n`;
+    description = `Ny kund: ${totalAgents} mäklare → ${formatSek(maxMRR)}/mån`;
   } else if (isCustomer && activeAgents < totalAgents && totalAgents >= 4) {
-    // Befintlig kund med fler mÃ¤klare Ã¤n licenser - upsell potential
+    // Befintlig kund med fler mäklare än licenser - upsell potential
     upsellMRR = maxMRR - currentMRR;
     potential = upsellMRR;
-    description = `Upsell: ${totalAgents - activeAgents} mÃ¤klare utan licens â†’ +${formatSek(upsellMRR)}/mÃ¥n`;
+    description = `Upsell: ${totalAgents - activeAgents} mäklare utan licens → +${formatSek(upsellMRR)}/mån`;
   } else if (isCustomer && currentMRR < maxMRR && totalAgents >= 4) {
-    // Betalar mindre Ã¤n de borde fÃ¶r antalet mÃ¤klare
+    // Betalar mindre än de borde för antalet mäklare
     upsellMRR = maxMRR - currentMRR;
     potential = upsellMRR;
-    description = `Prisjustering: Borde betala ${formatSek(maxMRR)} â†’ +${formatSek(upsellMRR)}/mÃ¥n`;
+    description = `Prisjustering: Borde betala ${formatSek(maxMRR)} → +${formatSek(upsellMRR)}/mån`;
   }
   
   return {
@@ -160,7 +116,7 @@ function calculateCompanyPotential(company) {
 }
 
 /**
- * Uppdaterar potentialValue fÃ¶r alla fÃ¶retag automatiskt
+ * Uppdaterar potentialValue för alla företag automatiskt
  */
 function updateAllCompanyPotentials() {
   let updated = 0;
@@ -175,7 +131,7 @@ function updateAllCompanyPotentials() {
 }
 
 const AppState = {
-  users: [], // interna anvÃ¤ndare
+  users: [], // interna användare
   currentUserId: null,
   brands: [],
   companies: [],
@@ -184,12 +140,12 @@ const AppState = {
   tasks: [], // {id, title, dueAt?, ownerId?, done:boolean, entityType?, entityId?}
   contacts: [], // {id, entityType:'brand'|'company', entityId, namn, roll?, email?, telefon?}
   segments: [], // {id, name, icon, color, description, pricingModel, createdAt}
-  activeSegmentId: null, // Vilket segment Ã¤r aktivt filtrerat (null = alla)
-  undoStack: [] // Stack fÃ¶r Ã¥ngra-funktionalitet: [{type, description, snapshot, timestamp}]
+  activeSegmentId: null, // Vilket segment är aktivt filtrerat (null = alla)
+  undoStack: [] // Stack för ångra-funktionalitet: [{type, description, snapshot, timestamp}]
 };
 
 async function loadState() {
-  // 1) FÃ¶rsÃ¶k hÃ¤mta frÃ¥n server
+  // 1) Försök hämta från server
   try {
     let r = await fetch(`${API_BASE}/api/state`, { credentials: 'include' });
     if (r.status === 401) {
@@ -216,7 +172,7 @@ async function loadState() {
       }
     }
   } catch (e) {
-    console.warn('Serverstate kunde inte hÃ¤mtas, anvÃ¤nder cache eller seed.', e);
+    console.warn('Serverstate kunde inte hämtas, använder cache eller seed.', e);
   }
   // 2) Cache i localStorage
   const raw = localStorage.getItem(LS_KEY);
@@ -258,7 +214,7 @@ async function saveState() {
       const secondsLeft = parseInt(sessionWarning);
       if (secondsLeft < 300 && !window.sessionWarningShown) { // 5 minutes
         window.sessionWarningShown = true;
-        showNotification(`Din session gÃ¥r ut om ${Math.floor(secondsLeft / 60)} minuter. Spara ditt arbete!`, 'warning');
+        showNotification(`Din session går ut om ${Math.floor(secondsLeft / 60)} minuter. Spara ditt arbete!`, 'warning');
         setTimeout(() => { window.sessionWarningShown = false; }, 60000); // Reset after 1 minute
       }
     }
@@ -266,7 +222,7 @@ async function saveState() {
     if (r.status === 401) {
       const errorData = await r.json().catch(() => ({}));
       if (errorData.error === 'session_timeout') {
-        showNotification('Din session har gÃ¥tt ut. Logga in igen.', 'danger');
+        showNotification('Din session har gått ut. Logga in igen.', 'danger');
         window.location.reload();
         return;
       }
@@ -276,7 +232,7 @@ async function saveState() {
       }
     }
   } catch (e) {
-    console.warn('Kunde inte spara till server, behÃ¥ller lokalt.', e);
+    console.warn('Kunde inte spara till server, behåller lokalt.', e);
   }
 }
 
@@ -290,9 +246,9 @@ function enforceCompanyStatusFromPayment(company) {
 
 function runMigrations() {
   if (!Array.isArray(AppState.brands)) return;
-  const legacy = AppState.brands.find(b => String(b?.namn || '').trim().toLowerCase() === 'mÃ¤klarkedjan x');
+  const legacy = AppState.brands.find(b => String(b?.namn || '').trim().toLowerCase() === 'mäklarkedjan x');
   if (legacy) {
-    legacy.namn = 'FristÃ¥ende mÃ¤klarfÃ¶retag';
+    legacy.namn = 'Fristående mäklarföretag';
   }
   if (Array.isArray(AppState.companies)) {
     for (const comp of AppState.companies) {
@@ -306,17 +262,17 @@ function runMigrations() {
     AppState.segments = [
       {
         id: 'real-estate',
-        name: 'FastighetsmÃ¤klare',
-        icon: 'ðŸ ',
+        name: 'Fastighetsmäklare',
+        icon: '🏠',
         color: 'blue',
-        description: 'FastighetsmÃ¤klarfÃ¶retag och mÃ¤klarkedjor',
+        description: 'Fastighetsmäklarföretag och mäklarkedjor',
         pricingModel: 'per-agent',
         createdAt: new Date().toISOString()
       },
       {
         id: 'banking',
         name: 'Banker',
-        icon: 'ðŸ¦',
+        icon: '🏦',
         color: 'green',
         description: 'Banker och finansiella institutioner',
         pricingModel: 'enterprise',
@@ -324,29 +280,29 @@ function runMigrations() {
       },
       {
         id: 'other',
-        name: 'Ã–vrigt',
-        icon: 'ðŸ“Š',
+        name: 'Övrigt',
+        icon: '📊',
         color: 'slate',
-        description: 'Ã–vriga branscher och kunder',
+        description: 'Övriga branscher och kunder',
         pricingModel: 'custom',
         createdAt: new Date().toISOString()
       }
     ];
-    console.log('âœ… Skapade standardsegment: FastighetsmÃ¤klare, Banker, Ã–vrigt');
+    console.log('✅ Skapade standardsegment: Fastighetsmäklare, Banker, Övrigt');
   }
   
-  // SÃ¤tt standardsegment pÃ¥ befintliga brands och companies
+  // Sätt standardsegment på befintliga brands och companies
   if (Array.isArray(AppState.brands)) {
     for (const brand of AppState.brands) {
       if (!brand.segmentId) {
-        brand.segmentId = 'real-estate'; // Default till mÃ¤klare fÃ¶r befintlig data
+        brand.segmentId = 'real-estate'; // Default till mäklare för befintlig data
       }
     }
   }
   if (Array.isArray(AppState.companies)) {
     for (const company of AppState.companies) {
       if (!company.segmentId) {
-        // Ã„rv frÃ¥n brand om mÃ¶jligt, annars default till mÃ¤klare
+        // Ärv från brand om möjligt, annars default till mäklare
         const brand = AppState.brands.find(b => b.id === company.brandId);
         company.segmentId = brand?.segmentId || 'real-estate';
       }
@@ -360,10 +316,10 @@ function runMigrations() {
     seedBankingData();
   }
   
-  // Uppdatera alla fÃ¶retags potential automatiskt baserat pÃ¥ prislistan
+  // Uppdatera alla företags potential automatiskt baserat på prislistan
   const updated = updateAllCompanyPotentials();
   if (updated > 0) {
-    console.log(`âœ… Uppdaterade potential fÃ¶r ${updated} fÃ¶retag baserat pÃ¥ prislistan`);
+    console.log(`✅ Uppdaterade potential för ${updated} företag baserat på prislistan`);
   }
 }
 
@@ -378,13 +334,13 @@ async function promptServerLogin() {
     modal.show(`
       <h3>Logga in (server)</h3>
       <div class="grid-2">
-        <div class="field"><label>AnvÃ¤ndarnamn (valfritt)</label><input id="srvUser" /></div>
-        <div class="field"><label>Eller vÃ¤lj app-anvÃ¤ndare</label>
-          <select id="srvUserId"><option value="">â€”</option>${AppState.users.map(u => `<option value="${u.id}">${u.namn}</option>`).join('')}</select>
+        <div class="field"><label>Användarnamn (valfritt)</label><input id="srvUser" /></div>
+        <div class="field"><label>Eller välj app-användare</label>
+          <select id="srvUserId"><option value="">—</option>${AppState.users.map(u => `<option value="${u.id}">${u.namn}</option>`).join('')}</select>
         </div>
-        <div class="field"><label>LÃ¶senord</label><input id="srvPwd" type="password" /></div>
+        <div class="field"><label>Lösenord</label><input id="srvPwd" type="password" /></div>
       </div>
-      <div class="muted" style="margin-top:6px;">Tips: standardlÃ¶senord Ã¤r <code>admin</code> (om det inte har Ã¤ndrats).</div>
+      <div class="muted" style="margin-top:6px;">Tips: standardlösenord är <code>admin</code> (om det inte har ändrats).</div>
       <div style="margin-top:10px; display:flex; gap:8px;">
         <button class="primary" id="doSrvLogin">Logga in</button>
         <button class="secondary" id="cancelSrvLogin">Avbryt</button>
@@ -401,9 +357,9 @@ async function promptServerLogin() {
           if (body.userId) { AppState.currentUserId = body.userId; }
           modal.hide(); resolve(true);
         }
-        else { alert('Fel lÃ¶senord'); }
+        else { alert('Fel lösenord'); }
       } catch {
-        alert('Kunde inte nÃ¥ servern');
+        alert('Kunde inte nå servern');
       }
     };
     document.getElementById('doSrvLogin').addEventListener('click', doLogin);
@@ -412,21 +368,21 @@ async function promptServerLogin() {
 }
 
 function seedExampleData() {
-  // NÃ¥gra varumÃ¤rken
-  const b1 = { id: id(), namn: 'FristÃ¥ende mÃ¤klarfÃ¶retag', segmentId: 'real-estate' };
+  // Några varumärken
+  const b1 = { id: id(), namn: 'Fristående mäklarföretag', segmentId: 'real-estate' };
   const b2 = { id: id(), namn: 'Fastighetsbolaget Y', segmentId: 'real-estate' };
   AppState.brands = [b1, b2];
 
-  // NÃ¥gra fÃ¶retag
-  const c1 = { id: id(), namn: 'X MalmÃ¶', brandId: b1.id, segmentId: 'real-estate', stad: 'MalmÃ¶', status: 'kund', pipelineStage:'vunnit', potentialValue: 120000 };
+  // Några företag
+  const c1 = { id: id(), namn: 'X Malmö', brandId: b1.id, segmentId: 'real-estate', stad: 'Malmö', status: 'kund', pipelineStage:'vunnit', potentialValue: 120000 };
   const c2 = { id: id(), namn: 'X Lund', brandId: b1.id, segmentId: 'real-estate', stad: 'Lund', status: 'prospekt', pipelineStage:'offert', potentialValue: 60000 };
   const c3 = { id: id(), namn: 'Y Stockholm', brandId: b2.id, segmentId: 'real-estate', stad: 'Stockholm', status: 'ej', pipelineStage:'kvalificerad', potentialValue: 30000 };
   AppState.companies = [c1, c2, c3];
 
-  // NÃ¥gra mÃ¤klare
-  const a1 = { id: id(), fÃ¶rnamn: 'Anna', efternamn: 'Andersson', email: 'anna@xmalmo.se', telefon: '070-111111', companyId: c1.id, status: 'kund', licens: { status: 'aktiv' } };
-  const a2 = { id: id(), fÃ¶rnamn: 'BjÃ¶rn', efternamn: 'Berg', email: 'bjorn@xlund.se', telefon: '070-222222', companyId: c2.id, status: 'prospekt', licens: { status: 'ingen' } };
-  const a3 = { id: id(), fÃ¶rnamn: 'Cecilia', efternamn: 'Carlsson', email: 'cecilia@y-sthlm.se', telefon: '070-333333', companyId: c3.id, status: 'ej', licens: { status: 'test' } };
+  // Några mäklare
+  const a1 = { id: id(), förnamn: 'Anna', efternamn: 'Andersson', email: 'anna@xmalmo.se', telefon: '070-111111', companyId: c1.id, status: 'kund', licens: { status: 'aktiv' } };
+  const a2 = { id: id(), förnamn: 'Björn', efternamn: 'Berg', email: 'bjorn@xlund.se', telefon: '070-222222', companyId: c2.id, status: 'prospekt', licens: { status: 'ingen' } };
+  const a3 = { id: id(), förnamn: 'Cecilia', efternamn: 'Carlsson', email: 'cecilia@y-sthlm.se', telefon: '070-333333', companyId: c3.id, status: 'ej', licens: { status: 'test' } };
   AppState.agents = [a1, a2, a3];
 
   // Exempel-kontakter (beslutsfattare)
@@ -439,22 +395,22 @@ function seedExampleData() {
   const today = new Date();
   const tomorrow = new Date(Date.now()+86400000);
   AppState.tasks = [
-    { id: id(), title: 'Ring X MalmÃ¶ om licenser', dueAt: tomorrow.toISOString(), ownerId: AppState.currentUserId, done:false, entityType:'company', entityId: c1.id },
-    { id: id(), title: 'FÃ¶lj upp testperiod', dueAt: today.toISOString(), ownerId: AppState.users[1].id, done:false, entityType:'agent', entityId: a3.id }
+    { id: id(), title: 'Ring X Malmö om licenser', dueAt: tomorrow.toISOString(), ownerId: AppState.currentUserId, done:false, entityType:'company', entityId: c1.id },
+    { id: id(), title: 'Följ upp testperiod', dueAt: today.toISOString(), ownerId: AppState.users[1].id, done:false, entityType:'agent', entityId: a3.id }
   ];
 }
 
 function seedBankingData() {
-  console.log('ðŸ¦ Skapar seed-data fÃ¶r svenska storbanker...');
+  console.log('🏦 Skapar seed-data för svenska storbanker...');
   
-  // Svenska storbanker som varumÃ¤rken
+  // Svenska storbanker som varumärken
   const swedbank = { id: id(), namn: 'Swedbank', segmentId: 'banking', centralContract: { active: false } };
   const handelsbanken = { id: id(), namn: 'Handelsbanken', segmentId: 'banking', centralContract: { active: false } };
   const seb = { id: id(), namn: 'SEB', segmentId: 'banking', centralContract: { active: false } };
   const nordea = { id: id(), namn: 'Nordea', segmentId: 'banking', centralContract: { active: false } };
   const danskeBank = { id: id(), namn: 'Danske Bank', segmentId: 'banking', centralContract: { active: false } };
   const sbab = { id: id(), namn: 'SBAB', segmentId: 'banking', centralContract: { active: false } };
-  const lansforsakringar = { id: id(), namn: 'LÃ¤nsfÃ¶rsÃ¤kringar Bank', segmentId: 'banking', centralContract: { active: false } };
+  const lansforsakringar = { id: id(), namn: 'Länsförsäkringar Bank', segmentId: 'banking', centralContract: { active: false } };
   
   const bankBrands = [swedbank, handelsbanken, seb, nordea, danskeBank, sbab, lansforsakringar];
   AppState.brands.push(...bankBrands);
@@ -466,13 +422,13 @@ function seedBankingData() {
     payment: 0, potentialValue: 25000
   };
   const swedbankGoteborg = { 
-    id: id(), namn: 'Swedbank GÃ¶teborg', brandId: swedbank.id, segmentId: 'banking',
-    stad: 'GÃ¶teborg', status: 'kund', pipelineStage: 'vunnit',
+    id: id(), namn: 'Swedbank Göteborg', brandId: swedbank.id, segmentId: 'banking',
+    stad: 'Göteborg', status: 'kund', pipelineStage: 'vunnit',
     payment: 18000, potentialValue: 0
   };
   const swedbankMalmo = { 
-    id: id(), namn: 'Swedbank MalmÃ¶', brandId: swedbank.id, segmentId: 'banking',
-    stad: 'MalmÃ¶', status: 'prospekt', pipelineStage: 'proposal',
+    id: id(), namn: 'Swedbank Malmö', brandId: swedbank.id, segmentId: 'banking',
+    stad: 'Malmö', status: 'prospekt', pipelineStage: 'proposal',
     payment: 0, potentialValue: 22000
   };
   
@@ -495,8 +451,8 @@ function seedBankingData() {
     payment: 35000, potentialValue: 0
   };
   const sebGoteborg = { 
-    id: id(), namn: 'SEB GÃ¶teborg', brandId: seb.id, segmentId: 'banking',
-    stad: 'GÃ¶teborg', status: 'ej', pipelineStage: 'lead',
+    id: id(), namn: 'SEB Göteborg', brandId: seb.id, segmentId: 'banking',
+    stad: 'Göteborg', status: 'ej', pipelineStage: 'lead',
     payment: 0, potentialValue: 30000
   };
   
@@ -507,8 +463,8 @@ function seedBankingData() {
     payment: 0, potentialValue: 40000
   };
   const nordeaMalmo = { 
-    id: id(), namn: 'Nordea MalmÃ¶', brandId: nordea.id, segmentId: 'banking',
-    stad: 'MalmÃ¶', status: 'kund', pipelineStage: 'vunnit',
+    id: id(), namn: 'Nordea Malmö', brandId: nordea.id, segmentId: 'banking',
+    stad: 'Malmö', status: 'kund', pipelineStage: 'vunnit',
     payment: 20000, potentialValue: 0
   };
   
@@ -526,9 +482,9 @@ function seedBankingData() {
     payment: 0, potentialValue: 18000
   };
   
-  // LÃ¤nsfÃ¶rsÃ¤kringar Bank
+  // Länsförsäkringar Bank
   const lfStockholm = { 
-    id: id(), namn: 'LÃ¤nsfÃ¶rsÃ¤kringar Bank Stockholm', brandId: lansforsakringar.id, segmentId: 'banking',
+    id: id(), namn: 'Länsförsäkringar Bank Stockholm', brandId: lansforsakringar.id, segmentId: 'banking',
     stad: 'Stockholm', status: 'kund', pipelineStage: 'vunnit',
     payment: 22000, potentialValue: 0
   };
@@ -543,28 +499,28 @@ function seedBankingData() {
   
   AppState.companies.push(...bankCompanies);
   
-  // LÃ¤gg till nÃ¥gra bankrÃ¥dgivare (agents anvÃ¤nds fÃ¶r rÃ¥dgivare i bank-segmentet)
+  // Lägg till några bankrådgivare (agents används för rådgivare i bank-segmentet)
   const advisors = [
-    { id: id(), fÃ¶rnamn: 'Erik', efternamn: 'Svensson', email: 'erik.svensson@swedbank.se', 
+    { id: id(), förnamn: 'Erik', efternamn: 'Svensson', email: 'erik.svensson@swedbank.se', 
       telefon: '08-5859000', companyId: swedbankGoteborg.id, status: 'kund', 
       licens: { status: 'aktiv' }, roll: 'Privatekonom' },
-    { id: id(), fÃ¶rnamn: 'Lisa', efternamn: 'Johansson', email: 'lisa.johansson@handelsbanken.se', 
+    { id: id(), förnamn: 'Lisa', efternamn: 'Johansson', email: 'lisa.johansson@handelsbanken.se', 
       telefon: '08-7012000', companyId: handelsbankenStockholm.id, status: 'kund', 
-      licens: { status: 'aktiv' }, roll: 'FÃ¶retagsrÃ¥dgivare' },
-    { id: id(), fÃ¶rnamn: 'Anders', efternamn: 'BergstrÃ¶m', email: 'anders.bergstrom@seb.se', 
+      licens: { status: 'aktiv' }, roll: 'Företagsrådgivare' },
+    { id: id(), förnamn: 'Anders', efternamn: 'Bergström', email: 'anders.bergstrom@seb.se', 
       telefon: '08-7631000', companyId: sebStockholm.id, status: 'kund', 
       licens: { status: 'aktiv' }, roll: 'Privatekonom' },
-    { id: id(), fÃ¶rnamn: 'Maria', efternamn: 'Lindberg', email: 'maria.lindberg@nordea.se', 
+    { id: id(), förnamn: 'Maria', efternamn: 'Lindberg', email: 'maria.lindberg@nordea.se', 
       telefon: '010-1561000', companyId: nordeaMalmo.id, status: 'kund', 
-      licens: { status: 'aktiv' }, roll: 'RÃ¥dgivare' },
-    { id: id(), fÃ¶rnamn: 'Johan', efternamn: 'Karlsson', email: 'johan.karlsson@lf.se', 
+      licens: { status: 'aktiv' }, roll: 'Rådgivare' },
+    { id: id(), förnamn: 'Johan', efternamn: 'Karlsson', email: 'johan.karlsson@lf.se', 
       telefon: '08-5885000', companyId: lfStockholm.id, status: 'kund', 
-      licens: { status: 'aktiv' }, roll: 'Senior rÃ¥dgivare' }
+      licens: { status: 'aktiv' }, roll: 'Senior rådgivare' }
   ];
   
   AppState.agents.push(...advisors);
   
-  // LÃ¤gg till kontakter
+  // Lägg till kontakter
   const bankContacts = [
     { id: id(), entityType: 'company', entityId: swedbankGoteborg.id, 
       namn: 'Per-Olof Persson', roll: 'Kontorschef', 
@@ -579,7 +535,7 @@ function seedBankingData() {
   
   AppState.contacts.push(...bankContacts);
   
-  console.log(`âœ… Skapade ${bankBrands.length} banker, ${bankCompanies.length} kontor, ${advisors.length} rÃ¥dgivare`);
+  console.log(`✅ Skapade ${bankBrands.length} banker, ${bankCompanies.length} kontor, ${advisors.length} rådgivare`);
 }
 
 /**
@@ -756,7 +712,7 @@ function renderDashboard() {
   document.getElementById('metricCompanies').textContent = filteredCompanies.length;
   
   // Segment-specific label for agents/advisors
-  const agentsLabel = isBanking ? 'RÃ¥dgivare' : 'MÃ¤klare';
+  const agentsLabel = isBanking ? 'Rådgivare' : 'Mäklare';
   const agentsMetric = document.getElementById('metricAgents');
   agentsMetric.textContent = totalAgents;
   const agentsTitle = agentsMetric.closest('.stat').querySelector('.stat-title');
@@ -787,7 +743,7 @@ function renderDashboard() {
   agentPotentialMetric.textContent = `${fmt(agentsWithLicense)} / ${fmt(agentsPotential)}`;
   const agentPotentialTitle = agentPotentialMetric.closest('.stat').querySelector('.stat-title');
   if (agentPotentialTitle) {
-    agentPotentialTitle.textContent = isBanking ? 'RÃ¥dgivare: Licenser / Potential' : 'MÃ¤klare: Licenser / Potential';
+    agentPotentialTitle.textContent = isBanking ? 'Rådgivare: Licenser / Potential' : 'Mäklare: Licenser / Potential';
   }
   
   document.getElementById('metricTotalMRR').textContent = fmtSek(totalMRR);
@@ -804,7 +760,7 @@ function renderDashboard() {
       <div class="list-item">
         <div>
           <div class="title">${t.title}</div>
-          <div class="small">${t.dueAt?('<span class="'+(isOverdue(t)?'overdue':'')+'">FÃ¶rfallo: '+new Date(t.dueAt).toLocaleDateString('sv-SE')+'</span>'):'Ingen fÃ¶rfallodag'} Â· Ã„gare: ${userName(t.ownerId)} ${t.entityType?('Â· ' + entityLabel(t.entityType, t.entityId)) : ''}</div>
+          <div class="small">${t.dueAt?('<span class="'+(isOverdue(t)?'overdue':'')+'">Förfallo: '+new Date(t.dueAt).toLocaleDateString('sv-SE')+'</span>'):'Ingen förfallodag'} · Ägare: ${userName(t.ownerId)} ${t.entityType?('· ' + entityLabel(t.entityType, t.entityId)) : ''}</div>
         </div>
         <div class="actions">
           ${t.done?'<span class="tag kund">Klar</span>':`<button class="primary" data-done="${t.id}">Markera klar</button>`}
@@ -839,7 +795,7 @@ function renderDashboard() {
     else if (t.entityType==='agent' && t.entityId) openAgent(t.entityId);
   });
 
-  // Brand coverage report (group brandless and '(tom)' under 'FristÃ¥ende mÃ¤klarfÃ¶retag')
+  // Brand coverage report (group brandless and '(tom)' under 'Fristående mäklarföretag')
   const br = document.getElementById('brandReport');
   const placeholder = AppState.brands.find(x => (x.namn||'').trim().toLowerCase() === '(tom)');
   const placeholderId = placeholder?.id || null;
@@ -898,7 +854,7 @@ function renderDashboard() {
     
     // Segment-specific label for unaffiliated
     const isBanking = segmentId === 'banking';
-    const unaffName = isBanking ? 'FristÃ¥ende banker' : 'FristÃ¥ende mÃ¤klarfÃ¶retag';
+    const unaffName = isBanking ? 'Fristående banker' : 'Fristående mäklarföretag';
     
     return { b: { id:'unaffiliated', namn: unaffName }, compCount, compCustomers, compNonCustomers, agentCount, agentLicensed, agentWithoutLicense, coveragePct };
   })();
@@ -939,13 +895,13 @@ function renderDashboard() {
     
     // Segment-specific labels
     const isBanking = segmentId === 'banking';
-    const agentLabel = isBanking ? 'RÃ¥dgivare' : 'MÃ¤klare';
-    const agentLicenseLabel = isBanking ? 'RÃ¥dgivare utan licens' : 'MÃ¤klare utan licens';
+    const agentLabel = isBanking ? 'Rådgivare' : 'Mäklare';
+    const agentLicenseLabel = isBanking ? 'Rådgivare utan licens' : 'Mäklare utan licens';
     
     // Header
     const header = document.createElement('div');
     header.className = 'row header';
-    header.innerHTML = `<div>VarumÃ¤rke</div><div>FÃ¶retag</div><div>FÃ¶retag ej kund</div><div>${agentLabel}</div><div>${agentLicenseLabel}</div><div>TÃ¤ckning</div>`;
+    header.innerHTML = `<div>Varumärke</div><div>Företag</div><div>Företag ej kund</div><div>${agentLabel}</div><div>${agentLicenseLabel}</div><div>Täckning</div>`;
     fragment.appendChild(header);
     // Totals row
     const totalsRow = document.createElement('div');
@@ -1008,7 +964,7 @@ function renderDashboard() {
       }))
       .sort((a,b)=> b.compCount - a.compCount);
     const csv = [
-      ['VarumÃ¤rke','FÃ¶retag','FÃ¶retag ej kund','MÃ¤klare','MÃ¤klare utan licens','TÃ¤ckning %'].join(',')
+      ['Varumärke','Företag','Företag ej kund','Mäklare','Mäklare utan licens','Täckning %'].join(',')
     ].concat(rows.map(r => [r.b.namn, r.compCount, r.compNonCustomers, r.agentCount, r.agentWithoutLicense, r.coveragePct]
       .map(v => `"${String(v).replaceAll('"','""')}"`).join(','))).join('\n');
     downloadCsv(csv, `kedjetackning_${Date.now()}.csv`);
@@ -1020,7 +976,7 @@ function isOverdue(t) {
   return new Date(t.dueAt).setHours(23,59,59,999) < Date.now();
 }
 
-function userName(uid) { return AppState.users.find(u => u.id === uid)?.namn || 'OkÃ¤nd'; }
+function userName(uid) { return AppState.users.find(u => u.id === uid)?.namn || 'Okänd'; }
 
 function renderBrands() {
   const root = document.getElementById('view-brands');
@@ -1138,8 +1094,8 @@ function renderBrands() {
     // Header with sort indicators
     const header = document.createElement('div');
     header.className = 'row header';
-    const sortIcon = (key) => sortKey === key ? (sortAsc ? ' â–²' : ' â–¼') : '';
-    header.innerHTML = '<div data-sort="name" style="flex: 2; font-weight: 600;">VarumÃ¤rke' + sortIcon('name') + '</div><div data-sort="companies" style="flex: 1; text-align: center;">FÃ¶retag' + sortIcon('companies') + '</div><div data-sort="agents" style="flex: 1; text-align: center;">MÃ¤klare' + sortIcon('agents') + '</div><div data-sort="mrr" style="flex: 1; text-align: right;">MRR' + sortIcon('mrr') + '</div><div data-sort="status" style="flex: 1;">Status' + sortIcon('status') + '</div><div style="flex: 1; text-align: right;">Ã…tgÃ¤rder</div>';
+    const sortIcon = (key) => sortKey === key ? (sortAsc ? ' ▲' : ' ▼') : '';
+    header.innerHTML = '<div data-sort="name" style="flex: 2; font-weight: 600;">Varumärke' + sortIcon('name') + '</div><div data-sort="companies" style="flex: 1; text-align: center;">Företag' + sortIcon('companies') + '</div><div data-sort="agents" style="flex: 1; text-align: center;">Mäklare' + sortIcon('agents') + '</div><div data-sort="mrr" style="flex: 1; text-align: right;">MRR' + sortIcon('mrr') + '</div><div data-sort="status" style="flex: 1;">Status' + sortIcon('status') + '</div><div style="flex: 1; text-align: right;">Åtgärder</div>';
     fragment.appendChild(header);
     
     // Data rows
@@ -1171,7 +1127,7 @@ function renderBrands() {
         if (b.centralContract.mrr) parts.push(formatSek(Number(b.centralContract.mrr)));
         if (parts.length > 0) {
           const text = document.createElement('span');
-          text.textContent = parts.join(' Â· ');
+          text.textContent = parts.join(' · ');
           centralInfo.appendChild(text);
         }
         nameCol.appendChild(centralInfo);
@@ -1193,7 +1149,7 @@ function renderBrands() {
       // MRR
       const mrrCol = document.createElement('div');
       mrrCol.style.cssText = 'flex: 1; text-align: right; font-weight: 600; font-size: 15px; color: #059669;';
-      mrrCol.textContent = metrics.mrr ? formatSek(metrics.mrr) : 'â€“';
+      mrrCol.textContent = metrics.mrr ? formatSek(metrics.mrr) : '–';
       row.appendChild(mrrCol);
       
       // Status with colored badge
@@ -1201,9 +1157,9 @@ function renderBrands() {
       statusCol.style.cssText = 'flex: 1;';
       const statusBadge = document.createElement('span');
       const statusColors = {
-        kund: { bg: '#d1fae5', text: '#065f46', icon: 'âœ“' },
-        prospekt: { bg: '#fef3c7', text: '#92400e', icon: 'â³' },
-        ej: { bg: '#f3f4f6', text: '#6b7280', icon: 'â—‹' }
+        kund: { bg: '#d1fae5', text: '#065f46', icon: '✓' },
+        prospekt: { bg: '#fef3c7', text: '#92400e', icon: '⏳' },
+        ej: { bg: '#f3f4f6', text: '#6b7280', icon: '○' }
       };
       const statusColor = statusColors[metrics.statusAgg] || statusColors.ej;
       statusBadge.style.cssText = 'display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; background: ' + statusColor.bg + '; color: ' + statusColor.text + '; border-radius: 9999px; font-size: 13px; font-weight: 600;';
@@ -1215,8 +1171,8 @@ function renderBrands() {
       const actionsCol = document.createElement('div');
       actionsCol.className = 'actions';
       actionsCol.style.cssText = 'flex: 1; display: flex; gap: 6px; justify-content: flex-end;';
-      const editButton = '<button class="secondary" data-action="edit-name" data-id="' + b.id + '" style="padding: 6px 12px; font-size: 13px;" title="Redigera varumÃ¤rkesnamn">âœï¸</button>';
-      actionsCol.innerHTML = '<button class="secondary" data-action="open" data-id="' + b.id + '" style="padding: 6px 12px; font-size: 13px;">Ã–ppna</button>' + editButton + '<button class="secondary" data-action="note" data-id="' + b.id + '" style="padding: 6px 12px; font-size: 13px;">ðŸ“</button>';
+      const editButton = '<button class="secondary" data-action="edit-name" data-id="' + b.id + '" style="padding: 6px 12px; font-size: 13px;" title="Redigera varumärkesnamn">✏️</button>';
+      actionsCol.innerHTML = '<button class="secondary" data-action="open" data-id="' + b.id + '" style="padding: 6px 12px; font-size: 13px;">Öppna</button>' + editButton + '<button class="secondary" data-action="note" data-id="' + b.id + '" style="padding: 6px 12px; font-size: 13px;">📝</button>';
       row.appendChild(actionsCol);
       
       fragment.appendChild(row);
@@ -1225,7 +1181,7 @@ function renderBrands() {
     table.innerHTML = '';
     table.appendChild(fragment);
     
-    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} Â· ${total} varumÃ¤rken` : 'Inga varumÃ¤rken';
+    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} · ${total} varumärken` : 'Inga varumärken';
     prevBtn.disabled = (page<=1);
     nextBtn.disabled = (page>=maxPage);
 
@@ -1295,8 +1251,8 @@ function openBrand(id, options = {}) {
   const centralMrrDisplay = (b.centralContract?.active && hasCentralMrr) ? formatSek(Number(b.centralContract.mrr)||0) : '';
   modal.show(`
     <h3>${b.namn}</h3>
-  <div class="modal-toolbar"><button class="secondary toolbar-back" id="brandBackLink" type="button">â€¹ Tillbaka till lista</button></div>
-    <div class="muted">FÃ¶retag: ${compsAll.length} Â· MÃ¤klare: ${agentsAll.length}</div>
+  <div class="modal-toolbar"><button class="secondary toolbar-back" id="brandBackLink" type="button">‹ Tillbaka till lista</button></div>
+    <div class="muted">Företag: ${compsAll.length} · Mäklare: ${agentsAll.length}</div>
     ${centralMrrDisplay ? `<div class="muted">Central MRR: ${centralMrrDisplay}</div>` : ''}
     <h4 style="margin-top:12px;">Centralt avtal</h4>
     <div class="grid-2">
@@ -1309,7 +1265,7 @@ function openBrand(id, options = {}) {
         <input id="brandCentralProduct" value="${b.centralContract?.product||''}" />
       </div>
       <div class="field">
-        <label>MRR (centralt, SEK/mÃ¥n)</label>
+        <label>MRR (centralt, SEK/mån)</label>
         <input id="brandCentralMrr" inputmode="decimal" value="${b.centralContract?.mrr ?? ''}" placeholder="t.ex. 25000" />
       </div>
     </div>
@@ -1318,19 +1274,19 @@ function openBrand(id, options = {}) {
       ${AppState.contacts.filter(c => c.entityType==='brand' && c.entityId===b.id).map(c => contactRow(c)).join('')}
     </div>
     <div style="margin:8px 0;">
-      <button class="secondary" id="addBrandContact">LÃ¤gg till kontakt</button>
+      <button class="secondary" id="addBrandContact">Lägg till kontakt</button>
       <button class="secondary" id="addBrandTask">Ny uppgift</button>
     </div>
     <div class="list" style="margin-top:10px;" id="brandCompanies"></div>
     <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end; margin-top:6px;">
       <span class="muted" id="brandCompaniesInfo"></span>
-      <button class="secondary" id="brandCompaniesPrev">FÃ¶regÃ¥ende</button>
-      <button class="secondary" id="brandCompaniesNext">NÃ¤sta</button>
+      <button class="secondary" id="brandCompaniesPrev">Föregående</button>
+      <button class="secondary" id="brandCompaniesNext">Nästa</button>
     </div>
     <div style="margin-top:10px; display:flex; gap:8px; justify-content:flex-end;">
       <button class="primary" id="saveBrandCentral">Spara</button>
       <button class="secondary" id="brandBackToList">Tillbaka till lista</button>
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   // Paginate brand companies list
@@ -1357,14 +1313,14 @@ function openBrand(id, options = {}) {
     listEl.innerHTML = rows.map(c => `<div class="list-item" data-company-row="${c.id}">
       <div>
         <div class="title">${c.namn}</div>
-        <div class="subtitle">${c.stad||''} Â· ${tagStatus(c.status)}${c.centralContract?' Â· centralt':''}</div>
+        <div class="subtitle">${c.stad||''} · ${tagStatus(c.status)}${c.centralContract?' · centralt':''}</div>
       </div>
       <div class="actions">
-        <button class="secondary" data-open-company="${c.id}">Ã–ppna</button>
+        <button class="secondary" data-open-company="${c.id}">Öppna</button>
         <button class="secondary" data-add-task-company="${c.id}">Uppgift</button>
       </div>
     </div>`).join('');
-    infoEl.textContent = total ? `Sida ${page} av ${maxPage} Â· ${total} fÃ¶retag` : 'Inga fÃ¶retag';
+    infoEl.textContent = total ? `Sida ${page} av ${maxPage} · ${total} företag` : 'Inga företag';
     prevBtn.disabled = (page<=1); nextBtn.disabled = (page>=maxPage);
     if (pendingHighlightId && !childHighlightApplied) {
       const rowEl = listEl.querySelector(`.list-item[data-company-row="${pendingHighlightId}"]`);
@@ -1460,7 +1416,7 @@ function openBrand(id, options = {}) {
   const brandTasksWrap = document.createElement('div');
   brandTasksWrap.className = 'subpanel';
   brandTasksWrap.innerHTML = `
-    <div class="subpanel-header"><h3>Uppgifter (varumÃ¤rke)</h3></div>
+    <div class="subpanel-header"><h3>Uppgifter (varumärke)</h3></div>
     <div class="list" id="brandTasks"></div>
     <div style="margin:8px 0;"><button class="secondary" id="addBrandTask2">Ny uppgift</button></div>
   `;
@@ -1504,12 +1460,12 @@ function openBrandModal() {
   ).join('');
   
   modal.show(`
-    <h3>Nytt varumÃ¤rke</h3>
+    <h3>Nytt varumärke</h3>
     <div class="field"><label>Namn</label><input id="brandName" /></div>
     <div class="field">
       <label>Segment</label>
       <select id="brandSegment">
-        <option value="">VÃ¤lj segment...</option>
+        <option value="">Välj segment...</option>
         ${segmentOptions}
       </select>
     </div>
@@ -1530,25 +1486,25 @@ function openBrandModal() {
 async function openEditBrandNameModal(brandId) {
   const brand = AppState.brands.find(b => b.id === brandId);
   if (!brand) {
-    alert('VarumÃ¤rke hittades inte');
+    alert('Varumärke hittades inte');
     return;
   }
 
   modal.show(`
-    <h3>Redigera varumÃ¤rkesnamn</h3>
+    <h3>Redigera varumärkesnamn</h3>
     <div class="field">
       <label>Nuvarande namn: <strong>${escapeHTML(brand.namn)}</strong></label>
       <label>Nytt namn</label>
       <input id="editBrandName" value="${escapeHTML(brand.namn)}" maxlength="200" />
-      <div class="field-help">Maximal lÃ¤ngd: 200 tecken</div>
+      <div class="field-help">Maximal längd: 200 tecken</div>
     </div>
     <div id="editBrandError" class="error-message" style="display: none;"></div>
     <div id="editBrandSpinner" class="spinner" style="display: none;">
-      <div class="spinner-icon">â³</div>
+      <div class="spinner-icon">⏳</div>
       <span>Uppdaterar...</span>
     </div>
     <div style="margin-top:15px; display:flex; gap:8px;">
-      <button class="primary" id="saveEditBrand">Spara Ã¤ndringar</button>
+      <button class="primary" id="saveEditBrand">Spara ändringar</button>
       <button class="secondary" onclick="modal.hide()">Avbryt</button>
     </div>
   `);
@@ -1567,7 +1523,7 @@ async function openEditBrandNameModal(brandId) {
     if (newName.length === 0) {
       showFieldError(errorDiv, 'Namn kan inte vara tomt');
     } else if (newName.length > 200) {
-      showFieldError(errorDiv, 'Namnet Ã¤r fÃ¶r lÃ¥ngt (max 200 tecken)');
+      showFieldError(errorDiv, 'Namnet är för långt (max 200 tecken)');
     } else if (newName.toLowerCase() === brand.namn.toLowerCase()) {
       hideFieldError(errorDiv);
     } else {
@@ -1577,7 +1533,7 @@ async function openEditBrandNameModal(brandId) {
         b.namn.toLowerCase() === newName.toLowerCase()
       );
       if (duplicate) {
-        showFieldError(errorDiv, 'Ett varumÃ¤rke med detta namn finns redan');
+        showFieldError(errorDiv, 'Ett varumärke med detta namn finns redan');
       } else {
         hideFieldError(errorDiv);
       }
@@ -1594,7 +1550,7 @@ async function openEditBrandNameModal(brandId) {
     }
     
     if (newName.length > 200) {
-      showFieldError(errorDiv, 'Namnet Ã¤r fÃ¶r lÃ¥ngt (max 200 tecken)');
+      showFieldError(errorDiv, 'Namnet är för långt (max 200 tecken)');
       nameInput.focus();
       return;
     }
@@ -1611,7 +1567,7 @@ async function openEditBrandNameModal(brandId) {
     );
     
     if (duplicate) {
-      showFieldError(errorDiv, 'Ett varumÃ¤rke med detta namn finns redan');
+      showFieldError(errorDiv, 'Ett varumärke med detta namn finns redan');
       nameInput.focus();
       return;
     }
@@ -1635,7 +1591,7 @@ async function openEditBrandNameModal(brandId) {
         brand.namn = newName;
         
         // Show success and close modal
-        showSuccessMessage(result.message || 'VarumÃ¤rkesnamn uppdaterat');
+        showSuccessMessage(result.message || 'Varumärkesnamn uppdaterat');
         modal.hide();
         
         // Refresh views
@@ -1647,13 +1603,13 @@ async function openEditBrandNameModal(brandId) {
         let errorMsg = 'Ett fel uppstod vid uppdatering';
         
         if (result.error === 'duplicate_name') {
-          errorMsg = result.message || 'Ett varumÃ¤rke med detta namn finns redan';
+          errorMsg = result.message || 'Ett varumärke med detta namn finns redan';
         } else if (result.error === 'invalid_name') {
           errorMsg = 'Ogiltigt namn';
         } else if (result.error === 'name_too_long') {
-          errorMsg = 'Namnet Ã¤r fÃ¶r lÃ¥ngt';
+          errorMsg = 'Namnet är för långt';
         } else if (result.error === 'brand_not_found') {
-          errorMsg = 'VarumÃ¤rket hittades inte';
+          errorMsg = 'Varumärket hittades inte';
         }
         
         showFieldError(errorDiv, errorMsg);
@@ -1661,7 +1617,7 @@ async function openEditBrandNameModal(brandId) {
       
     } catch (error) {
       console.error('Edit brand name failed:', error);
-      showFieldError(errorDiv, 'NÃ¤tverksfel - fÃ¶rsÃ¶k igen');
+      showFieldError(errorDiv, 'Nätverksfel - försök igen');
     } finally {
       spinner.style.display = 'none';
       nameInput.disabled = false;
@@ -1681,30 +1637,30 @@ async function openEditBrandNameModal(brandId) {
 async function openEditCompanyNameModal(companyId) {
   const company = AppState.companies.find(c => c.id === companyId);
   if (!company) {
-    alert('FÃ¶retag hittades inte');
+    alert('Företag hittades inte');
     return;
   }
 
   // Get brand name for context
   const brand = AppState.brands.find(b => b.id === company.brandId);
-  const brandContext = brand ? brand.namn : 'FristÃ¥ende';
+  const brandContext = brand ? brand.namn : 'Fristående';
 
   modal.show(`
-    <h3>Redigera fÃ¶retagsnamn</h3>
+    <h3>Redigera företagsnamn</h3>
     <div class="field">
-      <label>VarumÃ¤rke: <strong>${escapeHTML(brandContext)}</strong></label>
+      <label>Varumärke: <strong>${escapeHTML(brandContext)}</strong></label>
       <label>Nuvarande namn: <strong>${escapeHTML(company.namn)}</strong></label>
       <label>Nytt namn</label>
       <input id="editCompanyName" value="${escapeHTML(company.namn)}" maxlength="200" />
-      <div class="field-help">Maximal lÃ¤ngd: 200 tecken</div>
+      <div class="field-help">Maximal längd: 200 tecken</div>
     </div>
     <div id="editCompanyError" class="error-message" style="display: none;"></div>
     <div id="editCompanySpinner" class="spinner" style="display: none;">
-      <div class="spinner-icon">â³</div>
+      <div class="spinner-icon">⏳</div>
       <span>Uppdaterar...</span>
     </div>
     <div style="margin-top:15px; display:flex; gap:8px;">
-      <button class="primary" id="saveEditCompany">Spara Ã¤ndringar</button>
+      <button class="primary" id="saveEditCompany">Spara ändringar</button>
       <button class="secondary" onclick="modal.hide()">Avbryt</button>
     </div>
   `);
@@ -1723,7 +1679,7 @@ async function openEditCompanyNameModal(companyId) {
     if (newName.length === 0) {
       showFieldError(errorDiv, 'Namn kan inte vara tomt');
     } else if (newName.length > 200) {
-      showFieldError(errorDiv, 'Namnet Ã¤r fÃ¶r lÃ¥ngt (max 200 tecken)');
+      showFieldError(errorDiv, 'Namnet är för långt (max 200 tecken)');
     } else if (newName.toLowerCase() === company.namn.toLowerCase()) {
       hideFieldError(errorDiv);
     } else {
@@ -1734,7 +1690,7 @@ async function openEditCompanyNameModal(companyId) {
         c.namn.toLowerCase() === newName.toLowerCase()
       );
       if (duplicate) {
-        showFieldError(errorDiv, 'Ett fÃ¶retag med detta namn finns redan inom samma varumÃ¤rke');
+        showFieldError(errorDiv, 'Ett företag med detta namn finns redan inom samma varumärke');
       } else {
         hideFieldError(errorDiv);
       }
@@ -1751,7 +1707,7 @@ async function openEditCompanyNameModal(companyId) {
     }
     
     if (newName.length > 200) {
-      showFieldError(errorDiv, 'Namnet Ã¤r fÃ¶r lÃ¥ngt (max 200 tecken)');
+      showFieldError(errorDiv, 'Namnet är för långt (max 200 tecken)');
       nameInput.focus();
       return;
     }
@@ -1769,7 +1725,7 @@ async function openEditCompanyNameModal(companyId) {
     );
     
     if (duplicate) {
-      showFieldError(errorDiv, 'Ett fÃ¶retag med detta namn finns redan inom samma varumÃ¤rke');
+      showFieldError(errorDiv, 'Ett företag med detta namn finns redan inom samma varumärke');
       nameInput.focus();
       return;
     }
@@ -1793,7 +1749,7 @@ async function openEditCompanyNameModal(companyId) {
         company.namn = newName;
         
         // Show success and close modal
-        showSuccessMessage(result.message || 'FÃ¶retagsnamn uppdaterat');
+        showSuccessMessage(result.message || 'Företagsnamn uppdaterat');
         modal.hide();
         
         // Refresh views
@@ -1805,13 +1761,13 @@ async function openEditCompanyNameModal(companyId) {
         let errorMsg = 'Ett fel uppstod vid uppdatering';
         
         if (result.error === 'duplicate_name') {
-          errorMsg = result.message || 'Ett fÃ¶retag med detta namn finns redan inom samma varumÃ¤rke';
+          errorMsg = result.message || 'Ett företag med detta namn finns redan inom samma varumärke';
         } else if (result.error === 'invalid_name') {
           errorMsg = 'Ogiltigt namn';
         } else if (result.error === 'name_too_long') {
-          errorMsg = 'Namnet Ã¤r fÃ¶r lÃ¥ngt';
+          errorMsg = 'Namnet är för långt';
         } else if (result.error === 'company_not_found') {
-          errorMsg = 'FÃ¶retaget hittades inte';
+          errorMsg = 'Företaget hittades inte';
         }
         
         showFieldError(errorDiv, errorMsg);
@@ -1819,7 +1775,7 @@ async function openEditCompanyNameModal(companyId) {
       
     } catch (error) {
       console.error('Edit company name failed:', error);
-      showFieldError(errorDiv, 'NÃ¤tverksfel - fÃ¶rsÃ¶k igen');
+      showFieldError(errorDiv, 'Nätverksfel - försök igen');
     } finally {
       spinner.style.display = 'none';
       nameInput.disabled = false;
@@ -1840,7 +1796,7 @@ function renderCompanies() {
   const root = document.getElementById('view-companies');
   renderTemplate('tpl-companies', root);
   const brandSelect = document.getElementById('companyBrandFilter');
-  brandSelect.innerHTML = `<option value="all">Alla varumÃ¤rken</option><option value="unaffiliated">FristÃ¥ende (utan kedja)</option>` + AppState.brands.map(b => `<option value="${b.id}">${b.namn}</option>`).join('');
+  brandSelect.innerHTML = `<option value="all">Alla varumärken</option><option value="unaffiliated">Fristående (utan kedja)</option>` + AppState.brands.map(b => `<option value="${b.id}">${b.namn}</option>`).join('');
 
   const table = document.getElementById('companyTable');
   const isAdmin = (currentUser()?.roll === 'admin');
@@ -1943,14 +1899,14 @@ function renderCompanies() {
     // Header with sort indicators
     const header = document.createElement('div');
     header.className = 'row header';
-    const sortIcon = (key) => sortKey === key ? (sortAsc ? ' â–²' : ' â–¼') : '';
+    const sortIcon = (key) => sortKey === key ? (sortAsc ? ' ▲' : ' ▼') : '';
     header.innerHTML = `
-      <div data-sort="name" style="flex: 2; font-weight: 600;">FÃ¶retag${sortIcon('name')}</div>
-      <div data-sort="brand" style="flex: 1.5;">VarumÃ¤rke${sortIcon('brand')}</div>
+      <div data-sort="name" style="flex: 2; font-weight: 600;">Företag${sortIcon('name')}</div>
+      <div data-sort="brand" style="flex: 1.5;">Varumärke${sortIcon('brand')}</div>
       <div data-sort="status" style="flex: 1;">Status${sortIcon('status')}</div>
       <div data-sort="mrr" style="flex: 1; text-align: right;">MRR${sortIcon('mrr')}</div>
       <div data-sort="pipeline" style="flex: 1.5;">Pipeline${sortIcon('pipeline')}</div>
-      <div style="flex: 1; text-align: right;">Ã…tgÃ¤rder</div>
+      <div style="flex: 1; text-align: right;">Åtgärder</div>
     `;
     fragment.appendChild(header);
     
@@ -1972,10 +1928,10 @@ function renderCompanies() {
       const companyMeta = document.createElement('div');
       companyMeta.style.cssText = 'font-size: 13px; color: #6b7280; display: flex; gap: 12px; align-items: center;';
       const metaParts = [];
-      if (c.stad) metaParts.push('ðŸ“ ' + c.stad);
+      if (c.stad) metaParts.push('📍 ' + c.stad);
       if (c.email) metaParts.push('<a href="mailto:' + c.email + '" style="color: #2563eb; text-decoration: none;">' + c.email + '</a>');
       if (c.customerNumber) metaParts.push('#' + c.customerNumber);
-      companyMeta.innerHTML = metaParts.join(' Â· ');
+      companyMeta.innerHTML = metaParts.join(' · ');
       companyCol.appendChild(companyMeta);
       row.appendChild(companyCol);
       
@@ -1983,7 +1939,7 @@ function renderCompanies() {
       const brandCol = document.createElement('div');
       brandCol.style.cssText = 'flex: 1.5; font-size: 14px; color: #374151;';
       const brand = brandName(c.brandId);
-      brandCol.innerHTML = brand === 'â€“' ? '<span style="color: #9ca3af;">FristÃ¥ende</span>' : brand;
+      brandCol.innerHTML = brand === '–' ? '<span style="color: #9ca3af;">Fristående</span>' : brand;
       if (c.centralContract) {
         const badge = document.createElement('span');
         badge.style.cssText = 'display: inline-block; margin-left: 6px; padding: 2px 8px; background: #dbeafe; color: #1e40af; border-radius: 9999px; font-size: 11px; font-weight: 600;';
@@ -1997,9 +1953,9 @@ function renderCompanies() {
       statusCol.style.cssText = 'flex: 1;';
       const statusBadge = document.createElement('span');
       const statusColors = {
-        kund: { bg: '#d1fae5', text: '#065f46', icon: 'âœ“' },
-        prospekt: { bg: '#fef3c7', text: '#92400e', icon: 'â³' },
-        ej: { bg: '#f3f4f6', text: '#6b7280', icon: 'â—‹' }
+        kund: { bg: '#d1fae5', text: '#065f46', icon: '✓' },
+        prospekt: { bg: '#fef3c7', text: '#92400e', icon: '⏳' },
+        ej: { bg: '#f3f4f6', text: '#6b7280', icon: '○' }
       };
       const statusColor = statusColors[c.status] || statusColors.ej;
       statusBadge.style.cssText = 'display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; background: ' + statusColor.bg + '; color: ' + statusColor.text + '; border-radius: 9999px; font-size: 13px; font-weight: 600;';
@@ -2010,7 +1966,7 @@ function renderCompanies() {
       // MRR column
       const mrrCol = document.createElement('div');
       mrrCol.style.cssText = 'flex: 1; text-align: right; font-weight: 600; font-size: 15px; color: #059669;';
-      mrrCol.textContent = c.payment ? formatSek(c.payment) : 'â€“';
+      mrrCol.textContent = c.payment ? formatSek(c.payment) : '–';
       row.appendChild(mrrCol);
       
       // Pipeline column
@@ -2028,7 +1984,7 @@ function renderCompanies() {
           pipelineCol.appendChild(potential);
         }
       } else {
-        pipelineCol.innerHTML = '<span style="color: #9ca3af;">â€“</span>';
+        pipelineCol.innerHTML = '<span style="color: #9ca3af;">–</span>';
       }
       row.appendChild(pipelineCol);
       
@@ -2036,8 +1992,8 @@ function renderCompanies() {
       const actionsCol = document.createElement('div');
       actionsCol.className = 'actions';
       actionsCol.style.cssText = 'flex: 1; display: flex; gap: 6px; justify-content: flex-end;';
-      const editButton = '<button class="secondary" data-action="edit-company-name" data-id="' + c.id + '" style="padding: 6px 12px; font-size: 13px;" title="Redigera fÃ¶retagsnamn">âœï¸</button>';
-      actionsCol.innerHTML = '<button class="secondary" data-open="' + c.id + '" style="padding: 6px 12px; font-size: 13px;">Ã–ppna</button>' + editButton + '<button class="secondary" data-note="' + c.id + '" style="padding: 6px 12px; font-size: 13px;">ðŸ“</button>';
+      const editButton = '<button class="secondary" data-action="edit-company-name" data-id="' + c.id + '" style="padding: 6px 12px; font-size: 13px;" title="Redigera företagsnamn">✏️</button>';
+      actionsCol.innerHTML = '<button class="secondary" data-open="' + c.id + '" style="padding: 6px 12px; font-size: 13px;">Öppna</button>' + editButton + '<button class="secondary" data-note="' + c.id + '" style="padding: 6px 12px; font-size: 13px;">📝</button>';
       row.appendChild(actionsCol);
       
       fragment.appendChild(row);
@@ -2045,7 +2001,7 @@ function renderCompanies() {
     
     table.innerHTML = '';
     table.appendChild(fragment);
-    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} Â· ${total} resultat` : 'Inga resultat';
+    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} · ${total} resultat` : 'Inga resultat';
     prevBtn.disabled = (page<=1);
     nextBtn.disabled = (page>=maxPage);
 
@@ -2101,13 +2057,13 @@ function renderCompanies() {
   document.getElementById('addCompany').addEventListener('click', () => openCompanyModal());
 }
 
-function brandName(id) { return AppState.brands.find(b => b.id===id)?.namn || 'â€“'; }
-function companyName(id) { return AppState.companies.find(c => c.id===id)?.namn || 'â€“'; }
-function agentName(id) { const a = AppState.agents.find(x => x.id===id); return a?`${a.fÃ¶rnamn} ${a.efternamn}`:'â€“'; }
+function brandName(id) { return AppState.brands.find(b => b.id===id)?.namn || '–'; }
+function companyName(id) { return AppState.companies.find(c => c.id===id)?.namn || '–'; }
+function agentName(id) { const a = AppState.agents.find(x => x.id===id); return a?`${a.förnamn} ${a.efternamn}`:'–'; }
 function entityLabel(type, id) {
-  if (type==='brand') return `VarumÃ¤rke: ${brandName(id)}`;
-  if (type==='company') return `FÃ¶retag: ${companyName(id)}`;
-  if (type==='agent') return `MÃ¤klare: ${agentName(id)}`;
+  if (type==='brand') return `Varumärke: ${brandName(id)}`;
+  if (type==='company') return `Företag: ${companyName(id)}`;
+  if (type==='agent') return `Mäklare: ${agentName(id)}`;
   return '';
 }
 
@@ -2180,7 +2136,7 @@ function performUndo() {
   updateUndoButton();
   
   // Show notification
-  showNotification(`Ã…terstÃ¤llde: ${undoItem.description}`, 'success');
+  showNotification(`Återställde: ${undoItem.description}`, 'success');
   
   // Refresh current view
   const currentView = document.querySelector('.view.active')?.id?.replace('view-', '') || 'dashboard';
@@ -2197,7 +2153,7 @@ function updateUndoButton() {
   
   if (hasUndo) {
     const lastAction = AppState.undoStack[AppState.undoStack.length - 1];
-    undoBtn.title = `Ã…ngra: ${lastAction.description}`;
+    undoBtn.title = `Ångra: ${lastAction.description}`;
   }
 }
 
@@ -2241,7 +2197,7 @@ function deleteBrandCascadeWithUndo(brandId) {
     notes: [...AppState.notes]
   };
   
-  saveUndoSnapshot('brand', `VarumÃ¤rke: ${brand.namn}`, snapshot);
+  saveUndoSnapshot('brand', `Varumärke: ${brand.namn}`, snapshot);
   deleteBrandCascade(brandId);
 }
 
@@ -2258,7 +2214,7 @@ function deleteCompanyCascadeWithUndo(companyId) {
     notes: [...AppState.notes]
   };
   
-  saveUndoSnapshot('company', `FÃ¶retag: ${company.namn}`, snapshot);
+  saveUndoSnapshot('company', `Företag: ${company.namn}`, snapshot);
   deleteCompanyCascade(companyId);
 }
 
@@ -2273,7 +2229,7 @@ function deleteAgentWithUndo(agentId) {
     notes: [...AppState.notes]
   };
   
-  saveUndoSnapshot('agent', `MÃ¤klare: ${agent.fÃ¶rnamn} ${agent.efternamn}`, snapshot);
+  saveUndoSnapshot('agent', `Mäklare: ${agent.förnamn} ${agent.efternamn}`, snapshot);
   deleteAgent(agentId);
 }
 
@@ -2281,11 +2237,11 @@ function deleteAgentWithUndo(agentId) {
 function contactRow(c) {
   return `<div class="list-item">
     <div>
-      <div class="title">${c.namn} ${c.roll?('Â· '+c.roll):''}</div>
-      <div class="subtitle">${c.email||''} ${c.telefon?('Â· '+c.telefon):''}</div>
+      <div class="title">${c.namn} ${c.roll?('· '+c.roll):''}</div>
+      <div class="subtitle">${c.email||''} ${c.telefon?('· '+c.telefon):''}</div>
     </div>
     <div class="actions">
-      <button class="secondary" data-edit-contact="${c.id}">Ã„ndra</button>
+      <button class="secondary" data-edit-contact="${c.id}">Ändra</button>
       <button class="danger" data-del-contact="${c.id}">Ta bort</button>
     </div>
   </div>`;
@@ -2295,10 +2251,10 @@ function taskRow(t) {
   return `<div class="list-item">
     <div>
       <div class="title">${t.title}</div>
-      <div class="small">${t.dueAt?('FÃ¶rfallo: '+new Date(t.dueAt).toLocaleDateString('sv-SE')):'Ingen fÃ¶rfallodag'} Â· Ã„gare: ${userName(t.ownerId)}</div>
+      <div class="small">${t.dueAt?('Förfallo: '+new Date(t.dueAt).toLocaleDateString('sv-SE')):'Ingen förfallodag'} · Ägare: ${userName(t.ownerId)}</div>
     </div>
     <div class="actions">
-      <button class="secondary" data-edit-task="${t.id}">Ã„ndra</button>
+      <button class="secondary" data-edit-task="${t.id}">Ändra</button>
       ${t.done?'<span class="tag kund">Klar</span>':`<button class="primary" data-done="${t.id}">Markera klar</button>`}
       <button class="danger" data-del-task="${t.id}">Ta bort</button>
     </div>
@@ -2309,10 +2265,10 @@ function noteRow(n) {
   return `<div class="list-item">
     <div>
       <div class="title">${n.text}</div>
-      <div class="small">${new Date(n.createdAt).toLocaleString('sv-SE')} Â· ${userName(n.authorId)}</div>
+      <div class="small">${new Date(n.createdAt).toLocaleString('sv-SE')} · ${userName(n.authorId)}</div>
     </div>
     <div class="actions">
-      <button class="secondary" data-edit-note="${n.id}">Ã„ndra</button>
+      <button class="secondary" data-edit-note="${n.id}">Ändra</button>
       <button class="danger" data-del-note="${n.id}">Ta bort</button>
     </div>
   </div>`;
@@ -2321,7 +2277,7 @@ function noteRow(n) {
 function openContactModal(entityType, entityId, contactId) {
   const existing = contactId ? AppState.contacts.find(c => c.id===contactId) : null;
   modal.show(`
-    <h3>${existing?'Ã„ndra':'Ny'} kontakt</h3>
+    <h3>${existing?'Ändra':'Ny'} kontakt</h3>
     <div class="grid-2">
       <div class="field"><label>Namn</label><input id="kName" value="${existing?.namn||''}"/></div>
       <div class="field"><label>Roll</label><input id="kRole" value="${existing?.roll||''}"/></div>
@@ -2359,19 +2315,19 @@ function openContactModal(entityType, entityId, contactId) {
 function openTaskModal(preset={}) {
   const editing = preset.taskId ? AppState.tasks.find(t => t.id===preset.taskId) : null;
   modal.show(`
-    <h3>${editing?'Ã„ndra':'Ny'} uppgift</h3>
+    <h3>${editing?'Ändra':'Ny'} uppgift</h3>
     <div class="grid-2">
       <div class="field"><label>Titel</label><input id="tTitle" value="${editing?editing.title:''}" /></div>
-      <div class="field"><label>FÃ¶rfallodatum</label><input id="tDue" type="date" value="${editing && editing.dueAt ? new Date(editing.dueAt).toISOString().slice(0,10):''}" /></div>
-      <div class="field"><label>Ã„gare</label>
+      <div class="field"><label>Förfallodatum</label><input id="tDue" type="date" value="${editing && editing.dueAt ? new Date(editing.dueAt).toISOString().slice(0,10):''}" /></div>
+      <div class="field"><label>Ägare</label>
         <select id="tOwner">${AppState.users.map(u => `<option value="${u.id}" ${(editing?editing.ownerId:AppState.currentUserId)===u.id?'selected':''}>${u.namn}</option>`).join('')}</select>
       </div>
       <div class="field"><label>Koppla till</label>
         <select id="tEntityType">
           <option value="">(Ingen)</option>
-          <option value="brand" ${(editing?.entityType||preset.entityType)==='brand'?'selected':''}>VarumÃ¤rke</option>
-          <option value="company" ${(editing?.entityType||preset.entityType)==='company'?'selected':''}>FÃ¶retag</option>
-          <option value="agent" ${(editing?.entityType||preset.entityType)==='agent'?'selected':''}>MÃ¤klare</option>
+          <option value="brand" ${(editing?.entityType||preset.entityType)==='brand'?'selected':''}>Varumärke</option>
+          <option value="company" ${(editing?.entityType||preset.entityType)==='company'?'selected':''}>Företag</option>
+          <option value="agent" ${(editing?.entityType||preset.entityType)==='agent'?'selected':''}>Mäklare</option>
         </select>
       </div>
       <div class="field" id="tEntityPicker"></div>
@@ -2388,9 +2344,9 @@ function openTaskModal(preset={}) {
     let options = '';
     let label = '';
     let value = editing?.entityId || preset.entityId || '';
-    if (t==='brand') { label='VarumÃ¤rke'; options = AppState.brands.map(b => `<option value="${b.id}" ${b.id===value?'selected':''}>${b.namn}</option>`).join(''); }
-    else if (t==='company') { label='FÃ¶retag'; options = AppState.companies.map(c => `<option value="${c.id}" ${c.id===value?'selected':''}>${c.namn}</option>`).join(''); }
-    else if (t==='agent') { label='MÃ¤klare'; options = AppState.agents.map(a => `<option value="${a.id}" ${a.id===value?'selected':''}>${a.fÃ¶rnamn} ${a.efternamn}</option>`).join(''); }
+    if (t==='brand') { label='Varumärke'; options = AppState.brands.map(b => `<option value="${b.id}" ${b.id===value?'selected':''}>${b.namn}</option>`).join(''); }
+    else if (t==='company') { label='Företag'; options = AppState.companies.map(c => `<option value="${c.id}" ${c.id===value?'selected':''}>${c.namn}</option>`).join(''); }
+    else if (t==='agent') { label='Mäklare'; options = AppState.agents.map(a => `<option value="${a.id}" ${a.id===value?'selected':''}>${a.förnamn} ${a.efternamn}</option>`).join(''); }
     picker.innerHTML = t ? `<label>${label}</label><select id="tEntity">${options}</select>` : '';
   }
   typeSel.addEventListener('change', drawPicker);
@@ -2459,17 +2415,17 @@ function openCompany(id, options = {}) {
   }
   modal.show(`
     <h3>${c.namn}</h3>
-  <div class="modal-toolbar"><button class="secondary toolbar-back" id="companyBackLink" type="button">â€¹ Tillbaka till lista</button></div>
-    <div class="muted"><span id="companyBrandLabel">${brandName(c.brandId)}</span>${c.stad?(' Â· '+c.stad):''} Â· ${tagStatus(c.status)}${c.centralContract?' Â· centralt':''} ${c.customerNumber?('Â· Kundnr: '+c.customerNumber):''} ${c.payment?('Â· MRR: '+formatSek(c.payment)) : ''} ${c.product?('Â· Produkt: '+c.product):''}</div>
+  <div class="modal-toolbar"><button class="secondary toolbar-back" id="companyBackLink" type="button">‹ Tillbaka till lista</button></div>
+    <div class="muted"><span id="companyBrandLabel">${brandName(c.brandId)}</span>${c.stad?(' · '+c.stad):''} · ${tagStatus(c.status)}${c.centralContract?' · centralt':''} ${c.customerNumber?('· Kundnr: '+c.customerNumber):''} ${c.payment?('· MRR: '+formatSek(c.payment)) : ''} ${c.product?('· Produkt: '+c.product):''}</div>
     ${(() => {
       const addressParts = [c.address, [c.postalCode, c.postCity].filter(Boolean).join(' ')].filter(Boolean);
       if (!addressParts.length) return '';
-      return `<div class="muted">Adress: ${addressParts.join(' Â· ')}</div>`;
+      return `<div class="muted">Adress: ${addressParts.join(' · ')}</div>`;
     })()}
     <div class="grid-2" style="margin-top: 10px;">
       <div class="field">
-        <label>Ansvarig sÃ¤ljare</label>
-        <select id="ownerSelect">${AppState.users.map(u => `<option value="${u.id}" ${u.id===c.ansvarigSÃ¤ljareId?'selected':''}>${u.namn}</option>`).join('')}</select>
+        <label>Ansvarig säljare</label>
+        <select id="ownerSelect">${AppState.users.map(u => `<option value="${u.id}" ${u.id===c.ansvarigSäljareId?'selected':''}>${u.namn}</option>`).join('')}</select>
       </div>
       <div class="field">
         <label>Status</label>
@@ -2480,16 +2436,16 @@ function openCompany(id, options = {}) {
         </select>
       </div>
       <div class="field">
-        <label>KedjetillhÃ¶righet</label>
+        <label>Kedjetillhörighet</label>
         <select id="companyBrandSelect">
-          <option value="" ${c.brandId ? '' : 'selected'}>â€” Ingen kedja â€”</option>
+          <option value="" ${c.brandId ? '' : 'selected'}>— Ingen kedja —</option>
           ${AppState.brands.map(b => `<option value="${b.id}" ${b.id===c.brandId?'selected':''}>${b.namn}</option>`).join('')}
         </select>
       </div>
       <div class="field">
         <label>Segment/Kategori</label>
         <select id="companySegmentSelect">
-          <option value="" ${!c.segmentId && c.brandId ? 'selected' : ''}>â€” Ã„rv frÃ¥n varumÃ¤rke â€”</option>
+          <option value="" ${!c.segmentId && c.brandId ? 'selected' : ''}>— Ärv från varumärke —</option>
           ${AppState.segments.map(s => `<option value="${s.id}" ${s.id===c.segmentId?'selected':''}>${s.icon} ${s.name}</option>`).join('')}
         </select>
       </div>
@@ -2514,9 +2470,9 @@ function openCompany(id, options = {}) {
         <select id="pipelineSelect">
           <option value="kvalificerad" ${(c.pipelineStage||'')==='kvalificerad'?'selected':''}>Kvalificerad</option>
           <option value="offert" ${(c.pipelineStage||'')==='offert'?'selected':''}>Offert</option>
-          <option value="fÃ¶rhandling" ${(c.pipelineStage||'')==='fÃ¶rhandling'?'selected':''}>FÃ¶rhandling</option>
+          <option value="förhandling" ${(c.pipelineStage||'')==='förhandling'?'selected':''}>Förhandling</option>
           <option value="vunnit" ${(c.pipelineStage||'')==='vunnit'?'selected':''}>Vunnit</option>
-          <option value="fÃ¶rlorat" ${(c.pipelineStage||'')==='fÃ¶rlorat'?'selected':''}>FÃ¶rlorat</option>
+          <option value="förlorat" ${(c.pipelineStage||'')==='förlorat'?'selected':''}>Förlorat</option>
         </select>
       </div>
       <div class="field">
@@ -2542,24 +2498,24 @@ function openCompany(id, options = {}) {
       ${AppState.contacts.filter(k => k.entityType==='company' && k.entityId===c.id).map(k => contactRow(k)).join('')}
     </div>
     <div style="margin:8px 0; display:flex; gap:8px;">
-      <button class="secondary" id="addCompanyContact">LÃ¤gg till kontakt</button>
+      <button class="secondary" id="addCompanyContact">Lägg till kontakt</button>
       <button class="secondary" id="addCompanyTask">Ny uppgift</button>
-      <button class="secondary" id="openOutlook" style="background: #0078d4; color: white;">ðŸ“§ Outlook</button>
+      <button class="secondary" id="openOutlook" style="background: #0078d4; color: white;">📧 Outlook</button>
     </div>
 
-    <h4 style="margin-top:16px;">MÃ¤klare (${agentsAll.length})</h4>
+    <h4 style="margin-top:16px;">Mäklare (${agentsAll.length})</h4>
     <div class="list" id="companyAgents"></div>
     <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end; margin-top:6px;">
       <span class="muted" id="companyAgentsInfo"></span>
-      <button class="secondary" id="companyAgentsPrev">FÃ¶regÃ¥ende</button>
-      <button class="secondary" id="companyAgentsNext">NÃ¤sta</button>
+      <button class="secondary" id="companyAgentsPrev">Föregående</button>
+      <button class="secondary" id="companyAgentsNext">Nästa</button>
     </div>
 
     <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="primary" id="saveCompany">Spara</button>
       <button class="secondary" id="companyBackToList">Tillbaka till lista</button>
-      <button class="secondary" id="addAgentInCompany">Ny mÃ¤klare</button>
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" id="addAgentInCompany">Ny mäklare</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   // Add AI Report button if enabled
@@ -2568,7 +2524,7 @@ function openCompany(id, options = {}) {
     if (toolbar) {
       const btn = document.createElement('button');
       btn.className = 'btn btn-secondary btn-sm';
-      btn.textContent = 'ðŸ¤– AI Market Report';
+      btn.textContent = '🤖 AI Market Report';
       btn.addEventListener('click', () => generateAIMarketReport(c));
       toolbar.appendChild(btn);
     }
@@ -2596,19 +2552,19 @@ function openCompany(id, options = {}) {
     agList.innerHTML = rows.map(a => {
       const others = otherCompaniesForAgent(a);
       const multi = others.length>0;
-      const tip = multi?`Arbetar Ã¤ven pÃ¥: ${others.map(c=>c.namn).join(', ')}`:'';
+      const tip = multi?`Arbetar även på: ${others.map(c=>c.namn).join(', ')}`:'';
       return `<div class="list-item" data-agent-row="${a.id}">
       <div>
-        <div class="title">${a.fÃ¶rnamn} ${a.efternamn}${multi?` <span class=\"multi-office\" title=\"${tip}\">â€¢</span>`:''}</div>
-        <div class="subtitle">${a.email||''} Â· ${a.telefon||''} Â· ${tagStatus(a.status)} Â· licens: ${tagStatus(a.licens?.status||'ingen')}${a.licens?.typ?(' Â· typ: '+a.licens.typ):''}</div>
+        <div class="title">${a.förnamn} ${a.efternamn}${multi?` <span class=\"multi-office\" title=\"${tip}\">•</span>`:''}</div>
+        <div class="subtitle">${a.email||''} · ${a.telefon||''} · ${tagStatus(a.status)} · licens: ${tagStatus(a.licens?.status||'ingen')}${a.licens?.typ?(' · typ: '+a.licens.typ):''}</div>
       </div>
       <div class="actions">
-        <button class="secondary" data-open-agent="${a.id}">Ã–ppna</button>
+        <button class="secondary" data-open-agent="${a.id}">Öppna</button>
         <button class="secondary" data-add-task-agent="${a.id}">Uppgift</button>
       </div>
     </div>`;
     }).join('');
-    agInfo.textContent = total ? `Sida ${agPage} av ${maxPage} Â· ${total} mÃ¤klare` : 'Inga mÃ¤klare';
+    agInfo.textContent = total ? `Sida ${agPage} av ${maxPage} · ${total} mäklare` : 'Inga mäklare';
     agPrev.disabled = (agPage<=1); agNext.disabled = (agPage>=maxPage);
     if (pendingAgentHighlightId && !agentHighlightApplied) {
       const rowEl = agList.querySelector(`.list-item[data-agent-row="${pendingAgentHighlightId}"]`);
@@ -2639,8 +2595,8 @@ function openCompany(id, options = {}) {
     if (btn.id==='openOutlook') {
       console.log('Outlook-knapp klickad', c);
       if (typeof outlookIntegration === 'undefined') {
-        console.error('outlookIntegration Ã¤r inte definierat!');
-        showNotification('Outlook-integration laddas. FÃ¶rsÃ¶k igen om en sekund.', 'info');
+        console.error('outlookIntegration är inte definierat!');
+        showNotification('Outlook-integration laddas. Försök igen om en sekund.', 'info');
         setTimeout(() => {
           if (typeof outlookIntegration !== 'undefined') {
             outlookIntegration.showOutlookDashboard(c);
@@ -2666,7 +2622,7 @@ function openCompany(id, options = {}) {
     updateBrandLabel();
   }
 
-  // Sync Kund?-checkbox med status-vÃ¤ljaren
+  // Sync Kund?-checkbox med status-väljaren
   const statusSelEl = $('#statusSelect');
   const custChk = $('#isCustomer');
   if (custChk && statusSelEl) {
@@ -2680,7 +2636,7 @@ function openCompany(id, options = {}) {
   }
 
   $('#saveCompany').addEventListener('click', () => {
-    c.ansvarigSÃ¤ljareId = $('#ownerSelect').value;
+    c.ansvarigSäljareId = $('#ownerSelect').value;
     c.status = $('#statusSelect').value;
     if (brandSelectEl) {
       const nextBrandId = brandSelectEl.value || null;
@@ -2768,7 +2724,7 @@ function generateAIMarketReport(company) {
   if (!company) return;
   
   modal.show(`
-    <h3>ðŸ¤– AI Market Report: ${company.namn}</h3>
+    <h3>🤖 AI Market Report: ${company.namn}</h3>
     <div class="muted" style="margin-bottom: 16px;">Genererar marknadsrapport med Claude Sonnet 4...</div>
     
     <div id="aiReportContent" style="margin: 16px 0;">
@@ -2779,7 +2735,7 @@ function generateAIMarketReport(company) {
     </div>
     
     <div style="margin-top:10px; display:flex; gap:8px; justify-content:flex-end;">
-      <button class="btn btn-secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="btn btn-secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   
@@ -2800,12 +2756,12 @@ function generateAIMarketReport(company) {
     
     reportContent.innerHTML = `
       <div style="background: #f9fafb; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-        <h4 style="margin: 0 0 12px 0; color: #1f2937;">ðŸ“Š FÃ¶retagsÃ¶versikt</h4>
+        <h4 style="margin: 0 0 12px 0; color: #1f2937;">📊 Företagsöversikt</h4>
         <div style="display: grid; gap: 8px;">
-          <div><strong>FÃ¶retag:</strong> ${company.namn}</div>
-          <div><strong>Kedja:</strong> ${brand?.namn || 'FristÃ¥ende'}</div>
+          <div><strong>Företag:</strong> ${company.namn}</div>
+          <div><strong>Kedja:</strong> ${brand?.namn || 'Fristående'}</div>
           <div><strong>Ort:</strong> ${company.stad || 'Ej angivet'}</div>
-          <div><strong>Antal mÃ¤klare:</strong> ${agents.length}</div>
+          <div><strong>Antal mäklare:</strong> ${agents.length}</div>
           <div><strong>Aktiva licenser:</strong> ${activeAgents} av ${agents.length}</div>
           <div><strong>Status:</strong> ${company.status}</div>
           ${company.payment ? `<div><strong>MRR:</strong> ${formatSek(company.payment)}</div>` : ''}
@@ -2813,28 +2769,28 @@ function generateAIMarketReport(company) {
       </div>
       
       <div style="background: #f0f9ff; padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #3b82f6;">
-        <h4 style="margin: 0 0 12px 0; color: #1e40af;">ðŸ’¡ AI-Insikter</h4>
+        <h4 style="margin: 0 0 12px 0; color: #1e40af;">💡 AI-Insikter</h4>
         <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
-          ${activeAgents < agents.length ? `<li><strong>Licenspotential:</strong> ${agents.length - activeAgents} mÃ¤klare saknar aktiva licenser. Potential fÃ¶r merfÃ¶rsÃ¤ljning.</li>` : ''}
-          ${company.status !== 'kund' ? '<li><strong>KonverteringsmÃ¶jlighet:</strong> FÃ¶retaget Ã¤r inte kund Ã¤nnu. Rekommenderar uppfÃ¶ljning med beslutsfattare.</li>' : ''}
-          ${!company.payment || company.payment === 0 ? '<li><strong>PrisfÃ¶rhandling:</strong> Ingen nuvarande betalning registrerad. FÃ¶reslÃ¥ produktpaket baserat pÃ¥ antalet mÃ¤klare.</li>' : ''}
-          ${agents.length > 10 ? '<li><strong>Stor organisation:</strong> Med ' + agents.length + ' mÃ¤klare finns potential fÃ¶r volymrabatt och lÃ¥ngsiktigt partnerskap.</li>' : ''}
-          <li><strong>NÃ¤sta steg:</strong> ${company.status === 'kund' ? 'Boka in kvartalsgenomgÃ¥ng fÃ¶r att sÃ¤kerstÃ¤lla kundnÃ¶jdhet och identifiera up-sell mÃ¶jligheter.' : 'SchemalÃ¤gg demo och presentera ROI-kalkyl baserad pÃ¥ organisationens storlek.'}</li>
+          ${activeAgents < agents.length ? `<li><strong>Licenspotential:</strong> ${agents.length - activeAgents} mäklare saknar aktiva licenser. Potential för merförsäljning.</li>` : ''}
+          ${company.status !== 'kund' ? '<li><strong>Konverteringsmöjlighet:</strong> Företaget är inte kund ännu. Rekommenderar uppföljning med beslutsfattare.</li>' : ''}
+          ${!company.payment || company.payment === 0 ? '<li><strong>Prisförhandling:</strong> Ingen nuvarande betalning registrerad. Föreslå produktpaket baserat på antalet mäklare.</li>' : ''}
+          ${agents.length > 10 ? '<li><strong>Stor organisation:</strong> Med ' + agents.length + ' mäklare finns potential för volymrabatt och långsiktigt partnerskap.</li>' : ''}
+          <li><strong>Nästa steg:</strong> ${company.status === 'kund' ? 'Boka in kvartalsgenomgång för att säkerställa kundnöjdhet och identifiera up-sell möjligheter.' : 'Schemalägg demo och presentera ROI-kalkyl baserad på organisationens storlek.'}</li>
         </ul>
       </div>
       
       <div style="background: #f0fdf4; padding: 16px; border-radius: 8px; border-left: 4px solid #10b981;">
-        <h4 style="margin: 0 0 12px 0; color: #065f46;">ðŸŽ¯ Rekommenderade Ã¥tgÃ¤rder</h4>
+        <h4 style="margin: 0 0 12px 0; color: #065f46;">🎯 Rekommenderade åtgärder</h4>
         <ol style="margin: 0; padding-left: 20px; line-height: 1.6;">
-          <li>Boka mÃ¶te med ansvarig beslutsfattare inom 14 dagar</li>
-          <li>FÃ¶rbered anpassad offert baserad pÃ¥ ${agents.length} mÃ¤klare</li>
-          <li>Skicka case studies frÃ¥n liknande ${brand?.namn ? 'kedjor' : 'fÃ¶retag'}</li>
-          <li>UppfÃ¶ljning: SchemalÃ¤gg Ã¥terkoppling om 7 dagar</li>
+          <li>Boka möte med ansvarig beslutsfattare inom 14 dagar</li>
+          <li>Förbered anpassad offert baserad på ${agents.length} mäklare</li>
+          <li>Skicka case studies från liknande ${brand?.namn ? 'kedjor' : 'företag'}</li>
+          <li>Uppföljning: Schemalägg återkoppling om 7 dagar</li>
         </ol>
       </div>
       
       <div style="margin-top: 16px; padding: 12px; background: #fef3c7; border-radius: 6px; font-size: 12px; color: #92400e;">
-        <strong>ðŸ”’ AI-genererad rapport:</strong> Denna rapport Ã¤r genererad baserat pÃ¥ CRM-data och Ã¤r avsedd som beslutsstÃ¶d. Komplettera alltid med personlig bedÃ¶mning och kunddialog.
+        <strong>🔒 AI-genererad rapport:</strong> Denna rapport är genererad baserat på CRM-data och är avsedd som beslutsstöd. Komplettera alltid med personlig bedömning och kunddialog.
       </div>
     `;
   }, 1500); // Simulate API delay
@@ -2846,14 +2802,14 @@ function openCompanyModal() {
   ).join('');
   
   modal.show(`
-    <h3>Nytt fÃ¶retag</h3>
+    <h3>Nytt företag</h3>
     <div class="grid-2">
       <div class="field"><label>Namn</label><input id="cName" /></div>
-      <div class="field"><label>VarumÃ¤rke</label><select id="cBrand">${AppState.brands.map(b => `<option value="${b.id}">${b.namn}</option>`).join('')}</select></div>
+      <div class="field"><label>Varumärke</label><select id="cBrand">${AppState.brands.map(b => `<option value="${b.id}">${b.namn}</option>`).join('')}</select></div>
       <div class="field"><label>Stad</label><input id="cCity" /></div>
       <div class="field"><label>Segment</label>
         <select id="cSegment">
-          <option value="">Ã„rv frÃ¥n varumÃ¤rke</option>
+          <option value="">Ärv från varumärke</option>
           ${segmentOptions}
         </select>
       </div>
@@ -2911,7 +2867,7 @@ function renderAgents() {
     ? AppState.companies.filter(c => c.segmentId === activeSegmentId)
     : AppState.companies;
   
-  companySelect.innerHTML = `<option value="all">Alla fÃ¶retag</option>` + 
+  companySelect.innerHTML = `<option value="all">Alla företag</option>` + 
     filteredCompanies.map(c => `<option value="${c.id}">${c.namn}</option>`).join('');
 
   const table = document.getElementById('agentTable');
@@ -2960,8 +2916,8 @@ function renderAgents() {
     const statusRank = { ej:0, prospekt:1, kund:2 };
     const licRank = { ingen:0, test:1, aktiv:2 };
     const sorter = (a,b) => {
-      const nameA = `${a.fÃ¶rnamn} ${a.efternamn}`.trim();
-      const nameB = `${b.fÃ¶rnamn} ${b.efternamn}`.trim();
+      const nameA = `${a.förnamn} ${a.efternamn}`.trim();
+      const nameB = `${b.förnamn} ${b.efternamn}`.trim();
       const emailA = String(a.email||''); const emailB = String(b.email||'');
       const compA = companyName(a.companyId), compB = companyName(b.companyId);
       const map = {
@@ -2993,8 +2949,8 @@ function renderAgents() {
     // Header with sort indicators
     const header = document.createElement('div');
     header.className = 'row header';
-    const sortIcon = (key) => sortKey === key ? (sortAsc ? ' â–²' : ' â–¼') : '';
-    header.innerHTML = '<div data-sort="name" style="flex: 2; font-weight: 600;">MÃ¤klare' + sortIcon('name') + '</div><div data-sort="company" style="flex: 1.5;">FÃ¶retag' + sortIcon('company') + '</div><div data-sort="status" style="flex: 1.2;">Status' + sortIcon('status') + '</div><div style="flex: 1; text-align: right;">Ã…tgÃ¤rder</div>';
+    const sortIcon = (key) => sortKey === key ? (sortAsc ? ' ▲' : ' ▼') : '';
+    header.innerHTML = '<div data-sort="name" style="flex: 2; font-weight: 600;">Mäklare' + sortIcon('name') + '</div><div data-sort="company" style="flex: 1.5;">Företag' + sortIcon('company') + '</div><div data-sort="status" style="flex: 1.2;">Status' + sortIcon('status') + '</div><div style="flex: 1; text-align: right;">Åtgärder</div>';
     fragment.appendChild(header);
     
     // Data rows
@@ -3010,16 +2966,16 @@ function renderAgents() {
       
       const agentName = document.createElement('div');
       agentName.style.cssText = 'font-weight: 600; font-size: 15px; color: #111827; display: flex; align-items: center; gap: 6px;';
-      agentName.textContent = a.fÃ¶rnamn + ' ' + a.efternamn;
+      agentName.textContent = a.förnamn + ' ' + a.efternamn;
       
       // Multi-office indicator
       const others = otherCompaniesForAgent(a);
       if (others.length > 0) {
         const multiSpan = document.createElement('span');
         multiSpan.className = 'multi-office';
-        multiSpan.title = 'Arbetar Ã¤ven pÃ¥: ' + others.map(c => c.namn).join(', ');
+        multiSpan.title = 'Arbetar även på: ' + others.map(c => c.namn).join(', ');
         multiSpan.style.cssText = 'color: #f59e0b; font-weight: 700;';
-        multiSpan.textContent = 'â€¢';
+        multiSpan.textContent = '•';
         agentName.appendChild(multiSpan);
       }
       nameCol.appendChild(agentName);
@@ -3028,9 +2984,9 @@ function renderAgents() {
       const contactMeta = document.createElement('div');
       contactMeta.style.cssText = 'font-size: 13px; color: #6b7280; display: flex; gap: 12px; align-items: center;';
       const contactParts = [];
-      if (a.email) contactParts.push('<a href="mailto:' + a.email + '" style="color: #2563eb; text-decoration: none;">ðŸ“§ ' + a.email + '</a>');
-      if (a.telefon) contactParts.push('<a href="tel:' + a.telefon + '" style="color: #2563eb; text-decoration: none;">ðŸ“ž ' + a.telefon + '</a>');
-      contactMeta.innerHTML = contactParts.join(' Â· ');
+      if (a.email) contactParts.push('<a href="mailto:' + a.email + '" style="color: #2563eb; text-decoration: none;">📧 ' + a.email + '</a>');
+      if (a.telefon) contactParts.push('<a href="tel:' + a.telefon + '" style="color: #2563eb; text-decoration: none;">📞 ' + a.telefon + '</a>');
+      contactMeta.innerHTML = contactParts.join(' · ');
       nameCol.appendChild(contactMeta);
       row.appendChild(nameCol);
       
@@ -3056,9 +3012,9 @@ function renderAgents() {
       // Customer status badge
       const statusBadge = document.createElement('span');
       const statusColors = {
-        kund: { bg: '#d1fae5', text: '#065f46', icon: 'âœ“' },
-        prospekt: { bg: '#fef3c7', text: '#92400e', icon: 'â³' },
-        ej: { bg: '#f3f4f6', text: '#6b7280', icon: 'â—‹' }
+        kund: { bg: '#d1fae5', text: '#065f46', icon: '✓' },
+        prospekt: { bg: '#fef3c7', text: '#92400e', icon: '⏳' },
+        ej: { bg: '#f3f4f6', text: '#6b7280', icon: '○' }
       };
       const statusColor = statusColors[a.status] || statusColors.ej;
       statusBadge.style.cssText = 'display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; background: ' + statusColor.bg + '; color: ' + statusColor.text + '; border-radius: 9999px; font-size: 12px; font-weight: 600; width: fit-content;';
@@ -3093,7 +3049,7 @@ function renderAgents() {
       const actionsCol = document.createElement('div');
       actionsCol.className = 'actions';
       actionsCol.style.cssText = 'flex: 1; display: flex; gap: 6px; justify-content: flex-end;';
-      actionsCol.innerHTML = '<button class="secondary" data-open-agent="' + a.id + '" style="padding: 6px 12px; font-size: 13px;">Ã–ppna</button><button class="secondary" data-note-agent="' + a.id + '" style="padding: 6px 12px; font-size: 13px;">ðŸ“</button>';
+      actionsCol.innerHTML = '<button class="secondary" data-open-agent="' + a.id + '" style="padding: 6px 12px; font-size: 13px;">Öppna</button><button class="secondary" data-note-agent="' + a.id + '" style="padding: 6px 12px; font-size: 13px;">📝</button>';
       row.appendChild(actionsCol);
       
       fragment.appendChild(row);
@@ -3101,7 +3057,7 @@ function renderAgents() {
     
     table.innerHTML = '';
     table.appendChild(fragment);
-    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} Â· ${total} resultat` : 'Inga resultat';
+    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} · ${total} resultat` : 'Inga resultat';
     prevBtn.disabled = (page<=1);
     nextBtn.disabled = (page>=maxPage);
 
@@ -3162,8 +3118,8 @@ function exportAgentsToCsv() {
   const status = document.getElementById('agentStatusFilter').value;
   const rows = AppState.agents.filter(a => (companyId==='all'||a.companyId===companyId) && (status==='all'||a.status===status));
   const csv = [
-    ['FÃ¶rnamn','Efternamn','FÃ¶retag','E-post','Telefon','Status','Licens','Produkt'].join(',')
-  ].concat(rows.map(a => [a.fÃ¶rnamn, a.efternamn, companyName(a.companyId), a.email||'', a.telefon||'', a.status, a.licens?.status||'ingen', a.licens?.typ||'']
+    ['Förnamn','Efternamn','Företag','E-post','Telefon','Status','Licens','Produkt'].join(',')
+  ].concat(rows.map(a => [a.förnamn, a.efternamn, companyName(a.companyId), a.email||'', a.telefon||'', a.status, a.licens?.status||'ingen', a.licens?.typ||'']
     .map(v => `"${String(v).replaceAll('"','""')}"`).join(','))).join('\n');
   downloadCsv(csv, `maklare_export_${Date.now()}.csv`);
 }
@@ -3187,7 +3143,7 @@ function exportTasksToCsv() {
     ];
   });
   const csv = [
-    ['Titel','FÃ¶rfallodatum','Ã„gare','Klar?','Kopplingstyp','Kopplingsnamn'].join(',')
+    ['Titel','Förfallodatum','Ägare','Klar?','Kopplingstyp','Kopplingsnamn'].join(',')
   ].concat(rows.map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(','))).join('\n');
   downloadCsv(csv, `uppgifter_export_${Date.now()}.csv`);
 }
@@ -3206,7 +3162,7 @@ function exportCompaniesToCsv() {
   const pipeline = document.getElementById('companyPipelineFilter').value;
   const rows = AppState.companies.filter(c => (brandId==='all'||c.brandId===brandId) && (status==='all'||c.status===status) && (pipeline==='all'||(c.pipelineStage||'')===pipeline));
   const csv = [
-    ['FÃ¶retag','VarumÃ¤rke','Stad','Status','Centralt avtal','Produkt','Kundnr','Orgnummer','Pipeline','Potential (SEK)','MRR (SEK)'].join(',')
+    ['Företag','Varumärke','Stad','Status','Centralt avtal','Produkt','Kundnr','Orgnummer','Pipeline','Potential (SEK)','MRR (SEK)'].join(',')
   ].concat(rows.map(c => {
     const brand = AppState.brands.find(b => b.id===c.brandId);
     const product = c.product || (c.centralContract ? (brand?.centralContract?.product || '') : '');
@@ -3250,7 +3206,7 @@ function isCompanyCustomer(c) {
 function personKey(agent) {
   const email = String(agent?.email||'').trim().toLowerCase();
   if (email) return `em:${email}`;
-  const first = String(agent?.fÃ¶rnamn||'').trim().toLowerCase();
+  const first = String(agent?.förnamn||'').trim().toLowerCase();
   const last = String(agent?.efternamn||'').trim().toLowerCase();
   if (first || last) return `nm:${first} ${last}`.trim();
   const phone = String(agent?.telefon||'').replace(/\s+/g,'');
@@ -3278,10 +3234,10 @@ function openAgent(id, options = {}) {
   const mp = a.maklarpaket || {};
   const op = a.otherProducts || {};
   modal.show(`
-    <h3>${a.fÃ¶rnamn} ${a.efternamn}</h3>
-  <div class="modal-toolbar"><button class="secondary toolbar-back" id="agentBackLink" type="button">â€¹ Tillbaka till lista</button></div>
-    <div class="muted"><span id="agentCompanyLabel">${companyName(a.companyId)}</span> Â· ${tagStatus(a.status)} Â· licens: ${tagStatus(a.licens?.status||'ingen')}${a.licens?.typ?(' Â· produkt: '+a.licens.typ):''}</div>
-    ${(() => { const others = otherCompaniesForAgent(a); if (!others.length) return ''; return `<div class=\"muted\" style=\"margin-top:6px;\">Arbetar Ã¤ven pÃ¥: ${others.map(c => `<a href=\"#\" data-open-company=\"${c.id}\">${c.namn}</a>`).join(', ')}</div>`; })()}
+    <h3>${a.förnamn} ${a.efternamn}</h3>
+  <div class="modal-toolbar"><button class="secondary toolbar-back" id="agentBackLink" type="button">‹ Tillbaka till lista</button></div>
+    <div class="muted"><span id="agentCompanyLabel">${companyName(a.companyId)}</span> · ${tagStatus(a.status)} · licens: ${tagStatus(a.licens?.status||'ingen')}${a.licens?.typ?(' · produkt: '+a.licens.typ):''}</div>
+    ${(() => { const others = otherCompaniesForAgent(a); if (!others.length) return ''; return `<div class=\"muted\" style=\"margin-top:6px;\">Arbetar även på: ${others.map(c => `<a href=\"#\" data-open-company=\"${c.id}\">${c.namn}</a>`).join(', ')}</div>`; })()}
     <div class="grid-2" style="margin-top:10px;">
       <div class="field"><label>E-post</label><input id="aEmail" value="${a.email||''}"/></div>
       <div class="field"><label>Telefon</label><input id="aPhone" value="${a.telefon||''}"/></div>
@@ -3292,11 +3248,11 @@ function openAgent(id, options = {}) {
           <option value="ej" ${a.status==='ej'?'selected':''}>Ej kontakt</option>
         </select>
       </div>
-      <div class="field"><label>MÃ¤klarfÃ¶retag</label>
+      <div class="field"><label>Mäklarföretag</label>
         <select id="aCompany">
           ${AppState.companies.map(co => {
             const brand = brandName(co.brandId);
-            const extra = brand && brand !== 'â€“' ? ` Â· ${brand}` : '';
+            const extra = brand && brand !== '–' ? ` · ${brand}` : '';
             return `<option value="${co.id}" ${co.id===a.companyId?'selected':''}>${co.namn}${extra}</option>`;
           }).join('')}
         </select>
@@ -3314,9 +3270,9 @@ function openAgent(id, options = {}) {
     </div>
     <div class="field" style="margin-top:10px;"><label>Produkter (importerad text)</label><textarea id="aProducts" rows="2">${a.productsImported||''}</textarea></div>
     <div class="field" style="margin-top:10px;"><label>Matchtyp</label><input id="aMatchType" value="${a.matchType||''}"/></div>
-    <h4 style="margin-top:12px;">MÃ¤klarpaket</h4>
+    <h4 style="margin-top:12px;">Mäklarpaket</h4>
     <div class="grid-2">
-      <div class="field"><label>AnvÃ¤ndarID</label><input id="aMpUserId" value="${mp.userId||''}"/></div>
+      <div class="field"><label>AnvändarID</label><input id="aMpUserId" value="${mp.userId||''}"/></div>
       <div class="field"><label>MS Namn</label><input id="aMpMsName" value="${mp.msName||''}"/></div>
       <div class="field"><label>UID</label><input id="aMpUid" value="${mp.uid||''}"/></div>
       <div class="field"><label>E-post</label><input id="aMpEmail" value="${mp.email||''}"/></div>
@@ -3328,15 +3284,15 @@ function openAgent(id, options = {}) {
       <div class="field"><label>Rabatt</label><input id="aMpDiscount" type="number" step="1" value="${mp.discount!==undefined && mp.discount!==null ? mp.discount : ''}"/></div>
       <div class="field"><label>Aktiv</label>
         <select id="aMpActive">
-          <option value="" ${(mp.active===undefined||mp.active===null)?'selected':''}>(okÃ¤nt)</option>
+          <option value="" ${(mp.active===undefined||mp.active===null)?'selected':''}>(okänt)</option>
           <option value="true" ${mp.active===true?'selected':''}>Ja</option>
           <option value="false" ${mp.active===false?'selected':''}>Nej</option>
         </select>
       </div>
     </div>
-    <h4 style="margin-top:12px;">Ã–vriga mÃ¤klarprodukter</h4>
+    <h4 style="margin-top:12px;">Övriga mäklarprodukter</h4>
     <div class="grid-2">
-      <div class="field"><label>AnvÃ¤ndarID</label><input id="aOtherUserId" value="${op.userId||''}"/></div>
+      <div class="field"><label>AnvändarID</label><input id="aOtherUserId" value="${op.userId||''}"/></div>
       <div class="field"><label>UID</label><input id="aOtherUid" value="${op.uid||''}"/></div>
       <div class="field"><label>E-post</label><input id="aOtherEmail" value="${op.email||''}"/></div>
       <div class="field"><label>Kundnummer</label><input id="aOtherCustomerNumber" value="${op.customerNumber||''}"/></div>
@@ -3356,7 +3312,7 @@ function openAgent(id, options = {}) {
     <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="primary" id="saveAgent">Spara</button>
       <button class="secondary" id="agentBackToList">Tillbaka till lista</button>
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   const agentCompanySelect = $('#aCompany');
@@ -3475,11 +3431,11 @@ function openAgent(id, options = {}) {
 
 function openAgentModal(preset={}) {
   modal.show(`
-    <h3>Ny mÃ¤klare</h3>
+    <h3>Ny mäklare</h3>
     <div class="grid-2">
-      <div class="field"><label>FÃ¶rnamn</label><input id="nFirst" /></div>
+      <div class="field"><label>Förnamn</label><input id="nFirst" /></div>
       <div class="field"><label>Efternamn</label><input id="nLast" /></div>
-      <div class="field"><label>FÃ¶retag</label><select id="nCompany">${AppState.companies.map(c => `<option value="${c.id}" ${preset.companyId===c.id?'selected':''}>${c.namn}</option>`).join('')}</select></div>
+      <div class="field"><label>Företag</label><select id="nCompany">${AppState.companies.map(c => `<option value="${c.id}" ${preset.companyId===c.id?'selected':''}>${c.namn}</option>`).join('')}</select></div>
       <div class="field"><label>Status</label>
         <select id="nStatus">
           <option value="kund">Kund</option>
@@ -3497,11 +3453,11 @@ function openAgentModal(preset={}) {
   `);
   $('#saveNewAgent').addEventListener('click', () => {
     const rec = {
-      id: id(), fÃ¶rnamn: $('#nFirst').value.trim(), efternamn: $('#nLast').value.trim(),
+      id: id(), förnamn: $('#nFirst').value.trim(), efternamn: $('#nLast').value.trim(),
       companyId: $('#nCompany').value, status: $('#nStatus').value,
       email: $('#nEmail').value.trim(), telefon: $('#nPhone').value.trim(), licens: { status: 'ingen' }
     };
-    if (!rec.fÃ¶rnamn || !rec.efternamn) return;
+    if (!rec.förnamn || !rec.efternamn) return;
     AppState.agents.push(rec); saveState(); modal.hide(); renderAgents(); renderDashboard();
   });
 }
@@ -3514,27 +3470,27 @@ function renderPipeline() {
   
   // Pipeline stages with probabilities
   const stages = [
-    { id: 'lead', name: 'Lead', probability: 0.1, color: 'bg-slate-100', icon: 'ðŸŽ¯' },
-    { id: 'qualified', name: 'Kvalificerad', probability: 0.2, color: 'bg-blue-100', icon: 'âœ“' },
-    { id: 'demo', name: 'Demo/MÃ¶te', probability: 0.4, color: 'bg-indigo-100', icon: 'ðŸ‘¥' },
-    { id: 'proposal', name: 'Offert', probability: 0.6, color: 'bg-purple-100', icon: 'ðŸ“„' },
-    { id: 'negotiation', name: 'FÃ¶rhandling', probability: 0.8, color: 'bg-amber-100', icon: 'ðŸ¤' },
-    { id: 'won', name: 'Vunnen', probability: 1.0, color: 'bg-green-100', icon: 'ðŸŽ‰' },
-    { id: 'lost', name: 'FÃ¶rlorad', probability: 0, color: 'bg-red-100', icon: 'âŒ' }
+    { id: 'lead', name: 'Lead', probability: 0.1, color: 'bg-slate-100', icon: '🎯' },
+    { id: 'qualified', name: 'Kvalificerad', probability: 0.2, color: 'bg-blue-100', icon: '✓' },
+    { id: 'demo', name: 'Demo/Möte', probability: 0.4, color: 'bg-indigo-100', icon: '👥' },
+    { id: 'proposal', name: 'Offert', probability: 0.6, color: 'bg-purple-100', icon: '📄' },
+    { id: 'negotiation', name: 'Förhandling', probability: 0.8, color: 'bg-amber-100', icon: '🤝' },
+    { id: 'won', name: 'Vunnen', probability: 1.0, color: 'bg-green-100', icon: '🎉' },
+    { id: 'lost', name: 'Förlorad', probability: 0, color: 'bg-red-100', icon: '❌' }
   ];
   
   // Map old pipeline stages to new ones
   const stageMapping = {
     'kvalificerad': 'qualified',
     'offert': 'proposal',
-    'fÃ¶rhandling': 'negotiation',
+    'förhandling': 'negotiation',
     'vunnit': 'won',
-    'fÃ¶rlorat': 'lost'
+    'förlorat': 'lost'
   };
   
   // User filter
   const userFilter = document.getElementById('pipelineUserFilter');
-  userFilter.innerHTML = '<option value="all">Alla sÃ¤ljare</option>' + 
+  userFilter.innerHTML = '<option value="all">Alla säljare</option>' + 
     AppState.users.map(u => `<option value="${u.id}">${u.namn}</option>`).join('');
   
   // Stats toggle
@@ -3554,7 +3510,7 @@ function renderPipeline() {
     
     // Get companies and categorize by stage
     let companies = AppState.companies.filter(c => {
-      if (userId !== 'all' && c.ansvarigSÃ¤ljareId !== userId) return false;
+      if (userId !== 'all' && c.ansvarigSäljareId !== userId) return false;
       if (activeSegmentId && c.segmentId !== activeSegmentId) return false;
       return true;
     });
@@ -3593,7 +3549,7 @@ function renderPipeline() {
         });
       }
       
-      // Sort by value descending (highest first) - samma som kundvÃ¥rdstavlan!
+      // Sort by value descending (highest first) - samma som kundvårdstavlan!
       stageCompanies.sort((a, b) => {
         const valueA = Number(a.potentialValue) || Number(a.payment) || 0;
         const valueB = Number(b.potentialValue) || Number(b.payment) || 0;
@@ -3618,7 +3574,7 @@ function renderPipeline() {
               <div class="badge badge-lg">${stageCompanies.length}</div>
             </div>
             <div class="text-xs text-base-content/70">
-              <div class="font-semibold">VÃ¤rde: ${formatSek(stageValue)}</div>
+              <div class="font-semibold">Värde: ${formatSek(stageValue)}</div>
               ${stage.probability > 0 && stage.probability < 1 ? `<div class="mt-1">Viktat: ${formatSek(weightedValue)} (${Math.round(stage.probability * 100)}%)</div>` : ''}
             </div>
           </div>
@@ -3677,9 +3633,9 @@ function renderPipeline() {
     const brand = AppState.brands.find(b => b.id === company.brandId);
     const agents = AppState.agents.filter(a => a.companyId === company.id);
     const activeAgents = agents.filter(a => a.licens?.status === 'aktiv').length;
-    const owner = AppState.users.find(u => u.id === company.ansvarigSÃ¤ljareId);
+    const owner = AppState.users.find(u => u.id === company.ansvarigSäljareId);
     
-    // AnvÃ¤nd automatisk potentialberÃ¤kning
+    // Använd automatisk potentialberäkning
     const potentialCalc = calculateCompanyPotential(company);
     const value = potentialCalc.potential || Number(company.payment) || 0;
     
@@ -3698,25 +3654,25 @@ function renderPipeline() {
         <div class="card-body p-4">
           <div class="flex justify-between items-start mb-2">
             <h4 class="font-semibold text-sm">${company.namn}</h4>
-            ${isHighValue ? '<span class="badge badge-warning badge-sm">HÃ¶g</span>' : ''}
+            ${isHighValue ? '<span class="badge badge-warning badge-sm">Hög</span>' : ''}
             ${hasOpportunity ? '<span class="badge badge-info badge-sm">Potential</span>' : ''}
           </div>
           
           <div class="text-xs text-base-content/70 space-y-1">
-            ${brand ? `<div>ðŸ¢ ${brand.namn}</div>` : ''}
-            ${company.stad ? `<div>ðŸ“ ${company.stad}</div>` : ''}
-            <div>ðŸ‘¥ ${agents.length} mÃ¤klare (${activeAgents} med licens)</div>
-            ${potentialAgents > 0 ? `<div class="text-info">ðŸ’¡ ${potentialAgents} utan licens â†’ ${formatSek(potentialCalc.maxMRR)}/mÃ¥n mÃ¶jligt</div>` : ''}
-            ${value > 0 ? `<div class="font-bold text-lg text-success">ðŸ’° ${formatSek(value)}</div>` : '<div class="font-bold text-sm text-base-content/50">ðŸ’° Inget vÃ¤rde</div>'}
-            ${potentialCalc.tier && agents.length >= 4 ? `<div class="text-xs text-base-content/60">ðŸ“Š ${potentialCalc.tier}</div>` : ''}
-            ${owner ? `<div>ðŸ‘¤ SÃ¤ljare: ${owner.namn}</div>` : ''}
-            ${company.product ? `<div>ðŸ“¦ ${company.product}</div>` : ''}
-            <div class="text-base-content/50">â±ï¸ ${daysInStage} dagar i steg</div>
+            ${brand ? `<div>🏢 ${brand.namn}</div>` : ''}
+            ${company.stad ? `<div>📍 ${company.stad}</div>` : ''}
+            <div>👥 ${agents.length} mäklare (${activeAgents} med licens)</div>
+            ${potentialAgents > 0 ? `<div class="text-info">💡 ${potentialAgents} utan licens → ${formatSek(potentialCalc.maxMRR)}/mån möjligt</div>` : ''}
+            ${value > 0 ? `<div class="font-bold text-lg text-success">💰 ${formatSek(value)}</div>` : '<div class="font-bold text-sm text-base-content/50">💰 Inget värde</div>'}
+            ${potentialCalc.tier && agents.length >= 4 ? `<div class="text-xs text-base-content/60">📊 ${potentialCalc.tier}</div>` : ''}
+            ${owner ? `<div>👤 Säljare: ${owner.namn}</div>` : ''}
+            ${company.product ? `<div>📦 ${company.product}</div>` : ''}
+            <div class="text-base-content/50">⏱️ ${daysInStage} dagar i steg</div>
           </div>
           
           <div class="card-actions justify-end mt-3">
             <button class="btn btn-primary btn-xs deal-open-btn" data-company-id="${company.id}">
-              Ã–ppna â†’
+              Öppna →
             </button>
           </div>
         </div>
@@ -3776,9 +3732,9 @@ function renderPipeline() {
       'qualified': 'kvalificerad',
       'demo': 'demo',
       'proposal': 'offert',
-      'negotiation': 'fÃ¶rhandling',
+      'negotiation': 'förhandling',
       'won': 'vunnit',
-      'lost': 'fÃ¶rlorat',
+      'lost': 'förlorat',
       'customer_care': 'vunnit'
     };
     
@@ -3820,16 +3776,16 @@ function renderPipeline() {
     
     // Conversion rate
     const won = companies.filter(c => c.pipelineStage === 'vunnit' || c.status === 'kund').length;
-    const lost = companies.filter(c => c.pipelineStage === 'fÃ¶rlorat').length;
+    const lost = companies.filter(c => c.pipelineStage === 'förlorat').length;
     const total = won + lost || 1;
     const conversionRate = Math.round((won / total) * 100);
     
     // Update DOM
     document.getElementById('statTotalValue').textContent = formatSek(totalValue);
-    document.getElementById('statTotalDeals').textContent = `${totalDeals} aktiva affÃ¤rer`;
+    document.getElementById('statTotalDeals').textContent = `${totalDeals} aktiva affärer`;
     document.getElementById('statExpectedValue').textContent = formatSek(expectedValue);
     document.getElementById('statConversionRate').textContent = `${conversionRate}%`;
-    document.getElementById('statWonLost').textContent = `${won} vunna / ${lost} fÃ¶rlorade`;
+    document.getElementById('statWonLost').textContent = `${won} vunna / ${lost} förlorade`;
     document.getElementById('statAvgDealTime').textContent = '45 dagar'; // Mock
   }
   
@@ -3845,11 +3801,11 @@ function renderCustomerSuccess() {
   
   // Customer Success segments based on MRR
   const segments = [
-    { id: 'enterprise', name: 'Enterprise', min: 10000, max: Infinity, color: 'bg-purple-100', icon: 'ðŸ‘‘', priority: 1 },
-    { id: 'growth', name: 'Growth', min: 5000, max: 9999, color: 'bg-blue-100', icon: 'ðŸ“ˆ', priority: 2 },
-    { id: 'standard', name: 'Standard', min: 1000, max: 4999, color: 'bg-green-100', icon: 'âœ“', priority: 3 },
-    { id: 'starter', name: 'Starter', min: 1, max: 999, color: 'bg-yellow-100', icon: 'ðŸŒ±', priority: 4 },
-    { id: 'at_risk', name: 'Churn Risk', min: 0, max: 0, color: 'bg-red-100', icon: 'âš ï¸', priority: 5 }
+    { id: 'enterprise', name: 'Enterprise', min: 10000, max: Infinity, color: 'bg-purple-100', icon: '👑', priority: 1 },
+    { id: 'growth', name: 'Growth', min: 5000, max: 9999, color: 'bg-blue-100', icon: '📈', priority: 2 },
+    { id: 'standard', name: 'Standard', min: 1000, max: 4999, color: 'bg-green-100', icon: '✓', priority: 3 },
+    { id: 'starter', name: 'Starter', min: 1, max: 999, color: 'bg-yellow-100', icon: '🌱', priority: 4 },
+    { id: 'at_risk', name: 'Churn Risk', min: 0, max: 0, color: 'bg-red-100', icon: '⚠️', priority: 5 }
   ];
   
   // User filter
@@ -3875,7 +3831,7 @@ function renderCustomerSuccess() {
     
     // Get all customers (companies with status 'kund' OR payment > 0)
     let customers = AppState.companies.filter(c => {
-      if (userId !== 'all' && c.ansvarigSÃ¤ljareId !== userId) return false;
+      if (userId !== 'all' && c.ansvarigSäljareId !== userId) return false;
       if (activeSegmentId && c.segmentId !== activeSegmentId) return false;
       const hasMRR = Number(c.payment) > 0;
       const isCustomer = c.status === 'kund';
@@ -3953,8 +3909,8 @@ function renderCustomerSuccess() {
               <div class="badge badge-lg">${segmentCustomers.length}</div>
             </div>
             ${segment.min > 0 && segment.max !== Infinity ? `<p class="text-xs text-base-content/70 mb-2">${formatSek(segment.min)} - ${formatSek(segment.max)}</p>` : ''}
-            ${segment.max === Infinity && segment.min > 0 ? `<p class="text-xs text-base-content/70 mb-2">Ã–ver ${formatSek(segment.min)}/mÃ¥n</p>` : ''}
-            ${segment.id === 'at_risk' ? `<p class="text-xs text-base-content/70 mb-2">KrÃ¤ver omedelbar Ã¥tgÃ¤rd</p>` : ''}
+            ${segment.max === Infinity && segment.min > 0 ? `<p class="text-xs text-base-content/70 mb-2">Över ${formatSek(segment.min)}/mån</p>` : ''}
+            ${segment.id === 'at_risk' ? `<p class="text-xs text-base-content/70 mb-2">Kräver omedelbar åtgärd</p>` : ''}
           </div>
         </div>
         <div class="space-y-3 mt-3 cs-drop-zone" data-segment="${segment.id}">
@@ -3973,10 +3929,10 @@ function renderCustomerSuccess() {
     const brand = AppState.brands.find(b => b.id === company.brandId);
     const agents = AppState.agents.filter(a => a.companyId === company.id);
     const activeAgents = agents.filter(a => a.licens?.status === 'aktiv').length;
-    const owner = AppState.users.find(u => u.id === company.ansvarigSÃ¤ljareId);
+    const owner = AppState.users.find(u => u.id === company.ansvarigSäljareId);
     const mrr = Number(company.payment) || 0;
     
-    // AnvÃ¤nd automatisk potentialberÃ¤kning
+    // Använd automatisk potentialberäkning
     const potentialCalc = calculateCompanyPotential(company);
     
     // Calculate upsell potential
@@ -3998,21 +3954,21 @@ function renderCustomerSuccess() {
           </div>
           
           <div class="text-xs text-base-content/70 space-y-1">
-            ${brand ? `<div>ðŸ¢ ${brand.namn}</div>` : ''}
-            ${company.stad ? `<div>ðŸ“ ${company.stad}</div>` : ''}
-            <div>ðŸ‘¥ ${agents.length} mÃ¤klare (${activeAgents} med licens)</div>
-            ${potentialAgents > 0 ? `<div class="text-success">ðŸ’¡ ${potentialAgents} utan licens â†’ Max ${formatSek(potentialCalc.maxMRR)}/mÃ¥n</div>` : ''}
+            ${brand ? `<div>🏢 ${brand.namn}</div>` : ''}
+            ${company.stad ? `<div>📍 ${company.stad}</div>` : ''}
+            <div>👥 ${agents.length} mäklare (${activeAgents} med licens)</div>
+            ${potentialAgents > 0 ? `<div class="text-success">💡 ${potentialAgents} utan licens → Max ${formatSek(potentialCalc.maxMRR)}/mån</div>` : ''}
             <div class="font-bold text-lg ${mrr > 0 ? 'text-success' : 'text-error'}">
-              ðŸ’° ${formatSek(mrr)}/mÃ¥n
+              💰 ${formatSek(mrr)}/mån
             </div>
-            ${potentialCalc.tier && agents.length >= 4 ? `<div class="text-xs text-base-content/60">ðŸ“Š ${potentialCalc.tier}</div>` : ''}
-            ${owner ? `<div>ðŸ‘¤ CSM: ${owner.namn}</div>` : ''}
-            ${company.product ? `<div>ðŸ“¦ ${company.product}</div>` : ''}
+            ${potentialCalc.tier && agents.length >= 4 ? `<div class="text-xs text-base-content/60">📊 ${potentialCalc.tier}</div>` : ''}
+            ${owner ? `<div>👤 CSM: ${owner.namn}</div>` : ''}
+            ${company.product ? `<div>📦 ${company.product}</div>` : ''}
           </div>
           
           <div class="card-actions justify-end mt-3">
             <button class="btn btn-primary btn-xs customer-open-btn" data-company-id="${company.id}">
-              Ã–ppna â†’
+              Öppna →
             </button>
           </div>
         </div>
@@ -4070,8 +4026,8 @@ function renderLicenses() {
     const start = (page-1)*size;
     const licRank = { ingen:0, test:1, aktiv:2 };
     const sorter = (a,b) => {
-      const nameA = `${a.fÃ¶rnamn} ${a.efternamn}`.trim();
-      const nameB = `${b.fÃ¶rnamn} ${b.efternamn}`.trim();
+      const nameA = `${a.förnamn} ${a.efternamn}`.trim();
+      const nameB = `${b.förnamn} ${b.efternamn}`.trim();
       const compA = companyName(a.companyId), compB = companyName(b.companyId);
       const emailA = String(a.email||''); const emailB = String(b.email||'');
       const licA = (a.licens?.status)||'ingen'; const licB = (b.licens?.status)||'ingen';
@@ -4088,17 +4044,17 @@ function renderLicenses() {
     };
     const rows = [...rowsAll].sort(sorter).slice(start, start+size);
     table.innerHTML = `
-      <div class="row header"><div data-sort="name">MÃ¤klare</div><div data-sort="company">FÃ¶retag (betalare)</div><div data-sort="contact">Kontakt</div><div data-sort="license">Licens (personlig)</div><div data-sort="product">Produkt</div><div></div></div>
+      <div class="row header"><div data-sort="name">Mäklare</div><div data-sort="company">Företag (betalare)</div><div data-sort="contact">Kontakt</div><div data-sort="license">Licens (personlig)</div><div data-sort="product">Produkt</div><div></div></div>
       ${rows.map(a => `<div class="row">
-        <div>${a.fÃ¶rnamn} ${a.efternamn}</div>
+        <div>${a.förnamn} ${a.efternamn}</div>
         <div>${companyName(a.companyId)}</div>
         <div>${a.email||''}<br/>${a.telefon||''}</div>
         <div>${tagStatus(a.licens?.status||'ingen')}</div>
         <div>${a.licens?.typ||''}</div>
-        <div class="actions"><button class="secondary" data-open="${a.id}">Ã–ppna</button></div>
+        <div class="actions"><button class="secondary" data-open="${a.id}">Öppna</button></div>
       </div>`).join('')}
     `;
-    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} Â· ${total} mÃ¤klare` : 'Inga poster';
+    pageInfo.textContent = total ? `Sida ${page} av ${maxPage} · ${total} mäklare` : 'Inga poster';
     prevBtn.disabled = (page<=1); nextBtn.disabled = (page>=maxPage);
   }
   draw();
@@ -4136,12 +4092,12 @@ function renderImport() {
     const cols = Object.keys(json[0]||{});
 
     const fields = [
-      { key:'brand', label:'VarumÃ¤rke (kedja)' },
-      { key:'company', label:'FÃ¶retag' },
+      { key:'brand', label:'Varumärke (kedja)' },
+      { key:'company', label:'Företag' },
       { key:'orgNumber', label:'Orgnummer' },
       { key:'customerNumber', label:'Kundnummer' },
-      { key:'fullName', label:'MÃ¤klare Namn (fullstÃ¤ndigt)' },
-      { key:'first', label:'FÃ¶rnamn' },
+      { key:'fullName', label:'Mäklare Namn (fullständigt)' },
+      { key:'first', label:'Förnamn' },
       { key:'last', label:'Efternamn' },
       { key:'email', label:'E-post' },
       { key:'phone', label:'Telefon' },
@@ -4149,39 +4105,39 @@ function renderImport() {
       { key:'status', label:'Status (kund/prospekt/ej)' },
       { key:'license', label:'Licensstatus (aktiv/test/ingen)' },
       { key:'licenseType', label:'Licenstyp (Produkter)' },
-      { key:'payment', label:'MRR / mÃ¥nadsbelopp (SEK)' },
+      { key:'payment', label:'MRR / månadsbelopp (SEK)' },
       { key:'registrationType', label:'Registreringstyp' },
-      { key:'companyAddress', label:'FÃ¶retag adress' },
-      { key:'companyPostalCode', label:'FÃ¶retag postnummer' },
-      { key:'companyPostCity', label:'FÃ¶retag postort' },
-      { key:'agentOffice', label:'Kontor dÃ¤r mÃ¤klaren Ã¤r verksam' },
-      { key:'maklarpaketUserId', label:'MÃ¤klarpaket AnvÃ¤ndarID' },
-      { key:'maklarpaketMsName', label:'MÃ¤klarpaket MS Namn' },
-      { key:'maklarpaketUid', label:'MÃ¤klarpaket UID' },
-      { key:'maklarpaketEmail', label:'MÃ¤klarpaket E-post' },
-      { key:'maklarpaketActive', label:'MÃ¤klarpaket Aktiv' },
-      { key:'maklarpaketCustomerNumber', label:'MÃ¤klarpaket Kundnummer' },
-      { key:'maklarpaketOffice', label:'MÃ¤klarpaket Kontor' },
-      { key:'maklarpaketBrand', label:'MÃ¤klarpaket Kedja' },
-      { key:'maklarpaketProductName', label:'MÃ¤klarpaket Produktnamn' },
-      { key:'maklarpaketTotalCost', label:'MÃ¤klarpaket Totalkostnad' },
-      { key:'maklarpaketDiscount', label:'MÃ¤klarpaket Rabatt' },
-      { key:'otherProductsUserId', label:'Ã–vriga produkter AnvÃ¤ndarID' },
-      { key:'otherProductsUid', label:'Ã–vriga produkter UID' },
-      { key:'otherProductsEmail', label:'Ã–vriga produkter E-post' },
-      { key:'otherProductsCustomerNumber', label:'Ã–vriga produkter Kundnummer' },
+      { key:'companyAddress', label:'Företag adress' },
+      { key:'companyPostalCode', label:'Företag postnummer' },
+      { key:'companyPostCity', label:'Företag postort' },
+      { key:'agentOffice', label:'Kontor där mäklaren är verksam' },
+      { key:'maklarpaketUserId', label:'Mäklarpaket AnvändarID' },
+      { key:'maklarpaketMsName', label:'Mäklarpaket MS Namn' },
+      { key:'maklarpaketUid', label:'Mäklarpaket UID' },
+      { key:'maklarpaketEmail', label:'Mäklarpaket E-post' },
+      { key:'maklarpaketActive', label:'Mäklarpaket Aktiv' },
+      { key:'maklarpaketCustomerNumber', label:'Mäklarpaket Kundnummer' },
+      { key:'maklarpaketOffice', label:'Mäklarpaket Kontor' },
+      { key:'maklarpaketBrand', label:'Mäklarpaket Kedja' },
+      { key:'maklarpaketProductName', label:'Mäklarpaket Produktnamn' },
+      { key:'maklarpaketTotalCost', label:'Mäklarpaket Totalkostnad' },
+      { key:'maklarpaketDiscount', label:'Mäklarpaket Rabatt' },
+      { key:'otherProductsUserId', label:'Övriga produkter AnvändarID' },
+      { key:'otherProductsUid', label:'Övriga produkter UID' },
+      { key:'otherProductsEmail', label:'Övriga produkter E-post' },
+      { key:'otherProductsCustomerNumber', label:'Övriga produkter Kundnummer' },
       { key:'products', label:'Produkter (lista)' },
       { key:'matchType', label:'Matchtyp' },
     ];
 
-    // FÃ¶rsÃ¶k mappa svenska kolumnnamn och variationer
+    // Försök mappa svenska kolumnnamn och variationer
     const synonyms = {
-      brand: ['varumÃ¤rke','varumarke','brand','franchise','kedja','mÃ¤rke','marke','kedja- varumÃ¤rke','kedja-varumÃ¤rke','kedja varumÃ¤rke'],
-      company: ['fÃ¶retag','foretag','byrÃ¥','byra','kontor','office','company','agentur','mÃ¤klarfÃ¶retag','maklarforetag'],
+      brand: ['varumärke','varumarke','brand','franchise','kedja','märke','marke','kedja- varumärke','kedja-varumärke','kedja varumärke'],
+      company: ['företag','foretag','byrå','byra','kontor','office','company','agentur','mäklarföretag','maklarforetag'],
       orgNumber: ['organisationsnummer','organisationsnr','orgnummer','org nr','org-nr','orgnr','org.nr','org-nr.','org'],
       customerNumber: ['kundnummer','kundnr','kund-nr','kund nr','kund id','kund-id','kundid','kundnummer (kund)','kundnummer (8)'],
-      fullName: ['mÃ¤klare namn','maklare namn','namn','fullstÃ¤ndigt namn','fullstandigt namn'],
-      first: ['fÃ¶rnamn','fornamn','first','given'],
+      fullName: ['mäklare namn','maklare namn','namn','fullständigt namn','fullstandigt namn'],
+      first: ['förnamn','fornamn','first','given'],
       last: ['efternamn','last','surname','family'],
       email: ['e-post','epost','email','mail','mejl'],
       phone: ['telefon','tel','mobil','phone','cell'],
@@ -4189,27 +4145,27 @@ function renderImport() {
       status: ['status','kundstatus','kategori'],
       license: ['licens','licensstatus','license','abo','abonnemang'],
       licenseType: ['produkt','produkter','licenstyp','license type'],
-      payment: ['mrr','mÃ¥nadspris','manadspris','mÃ¥nadsavgift','manadsavgift','pris','avgift','belopp'],
-      registrationType: ['registreringstyp','registrering','registrering typ','registreringstyp (mÃ¤klare)','registreringstyp (maklare)'],
-      companyAddress: ['adress','address','street','gata','fÃ¶retag - adress','foretag - adress','kontor adress','fÃ¶retag adress'],
-      companyPostalCode: ['postnummer','post nr','post-nr','zip','zipcode','postkod','fÃ¶retag - postnummer','foretag - postnummer'],
-      companyPostCity: ['postort','post ort','poststad','post stad','postort (stad)','fÃ¶retag - postort','foretag - postort'],
-      agentOffice: ['kontor','kontor dÃ¤r mÃ¤klaren Ã¤r verksam','kontor maklare','office','arbetsstÃ¤lle','arbetsstalle','arbetsplats'],
-      maklarpaketUserId: ['mÃ¤klarpaket.anvÃ¤ndarid','maklarpaket anvandarid','mÃ¤klarpaket anvÃ¤ndar id','maklarpaket user id'],
-      maklarpaketMsName: ['mÃ¤klarpaket.msnamn','maklarpaket ms namn','mÃ¤klarpaket namn','msnamn'],
-      maklarpaketUid: ['mÃ¤klarpaket.uid','maklarpaket uid'],
-      maklarpaketEmail: ['mÃ¤klarpaket.epost','maklarpaket epost','mÃ¤klarpaket email','maklarpaket e-mail'],
-      maklarpaketActive: ['mÃ¤klarpaket.aktiv','maklarpaket aktiv'],
-      maklarpaketCustomerNumber: ['mÃ¤klarpaket.kundnr','mÃ¤klarpaket kundnr','mÃ¤klarpaket kundnummer'],
-      maklarpaketOffice: ['mÃ¤klarpaket.kontor','mÃ¤klarpaket kontor'],
-      maklarpaketBrand: ['mÃ¤klarpaket.kedja','mÃ¤klarpaket kedja','mÃ¤klarpaket varumÃ¤rke'],
-      maklarpaketProductName: ['mÃ¤klarpaket.produktnamn','mÃ¤klarpaket produktnamn'],
-      maklarpaketTotalCost: ['mÃ¤klarpaket.totalkostnad','mÃ¤klarpaket totalkostnad','mÃ¤klarpaket total kostnad'],
-      maklarpaketDiscount: ['mÃ¤klarpaket.rabatt','mÃ¤klarpaket rabatt'],
-      otherProductsUserId: ['Ã¶vriga mÃ¤klarprodukter.anvÃ¤ndarid','ovriga maklarprodukter anvandarid','Ã¶vriga produkter anvÃ¤ndarid'],
-      otherProductsUid: ['Ã¶vriga mÃ¤klarprodukter.uid','ovriga maklarprodukter uid'],
-      otherProductsEmail: ['Ã¶vriga mÃ¤klarprodukter.epost','ovriga maklarprodukter epost','Ã¶vriga produkter epost'],
-      otherProductsCustomerNumber: ['Ã¶vriga mÃ¤klarprodukter.kundnr','ovriga maklarprodukter kundnr','Ã¶vriga produkter kundnummer'],
+      payment: ['mrr','månadspris','manadspris','månadsavgift','manadsavgift','pris','avgift','belopp'],
+      registrationType: ['registreringstyp','registrering','registrering typ','registreringstyp (mäklare)','registreringstyp (maklare)'],
+      companyAddress: ['adress','address','street','gata','företag - adress','foretag - adress','kontor adress','företag adress'],
+      companyPostalCode: ['postnummer','post nr','post-nr','zip','zipcode','postkod','företag - postnummer','foretag - postnummer'],
+      companyPostCity: ['postort','post ort','poststad','post stad','postort (stad)','företag - postort','foretag - postort'],
+      agentOffice: ['kontor','kontor där mäklaren är verksam','kontor maklare','office','arbetsställe','arbetsstalle','arbetsplats'],
+      maklarpaketUserId: ['mäklarpaket.användarid','maklarpaket anvandarid','mäklarpaket användar id','maklarpaket user id'],
+      maklarpaketMsName: ['mäklarpaket.msnamn','maklarpaket ms namn','mäklarpaket namn','msnamn'],
+      maklarpaketUid: ['mäklarpaket.uid','maklarpaket uid'],
+      maklarpaketEmail: ['mäklarpaket.epost','maklarpaket epost','mäklarpaket email','maklarpaket e-mail'],
+      maklarpaketActive: ['mäklarpaket.aktiv','maklarpaket aktiv'],
+      maklarpaketCustomerNumber: ['mäklarpaket.kundnr','mäklarpaket kundnr','mäklarpaket kundnummer'],
+      maklarpaketOffice: ['mäklarpaket.kontor','mäklarpaket kontor'],
+      maklarpaketBrand: ['mäklarpaket.kedja','mäklarpaket kedja','mäklarpaket varumärke'],
+      maklarpaketProductName: ['mäklarpaket.produktnamn','mäklarpaket produktnamn'],
+      maklarpaketTotalCost: ['mäklarpaket.totalkostnad','mäklarpaket totalkostnad','mäklarpaket total kostnad'],
+      maklarpaketDiscount: ['mäklarpaket.rabatt','mäklarpaket rabatt'],
+      otherProductsUserId: ['övriga mäklarprodukter.användarid','ovriga maklarprodukter anvandarid','övriga produkter användarid'],
+      otherProductsUid: ['övriga mäklarprodukter.uid','ovriga maklarprodukter uid'],
+      otherProductsEmail: ['övriga mäklarprodukter.epost','ovriga maklarprodukter epost','övriga produkter epost'],
+      otherProductsCustomerNumber: ['övriga mäklarprodukter.kundnr','ovriga maklarprodukter kundnr','övriga produkter kundnummer'],
       products: ['produkter','produktlista','produkt lista','produktlist'],
       matchType: ['matchtyp','match typ','matchningstyp']
     };
@@ -4231,13 +4187,13 @@ function renderImport() {
           <div class="field">
             <label>${f.label}</label>
             <select data-map="${f.key}">
-              <option value="">â€”</option>
+              <option value="">—</option>
               ${cols.map(c => `<option value="${c}" ${mapping[f.key]===c?'selected':''}>${c}</option>`).join('')}
             </select>
           </div>
         `).join('')}
       </div>
-      <div class="muted" style="margin-top:8px;">VÃ¤lj rÃ¤tt kolumner. Minst FÃ¶retag och (MÃ¤klare Namn eller FÃ¶rnamn/Efternamn) krÃ¤vs.</div>
+      <div class="muted" style="margin-top:8px;">Välj rätt kolumner. Minst Företag och (Mäklare Namn eller Förnamn/Efternamn) krävs.</div>
     `;
 
     mappingArea.addEventListener('change', (e) => {
@@ -4266,7 +4222,7 @@ function renderImport() {
     const parseBooleanish = (v) => {
       const s = String(v ?? '').trim().toLowerCase();
       if (!s) return null;
-      if (['ja','yes','y','true','1','pÃ¥','on','aktiv'].includes(s)) return true;
+      if (['ja','yes','y','true','1','på','on','aktiv'].includes(s)) return true;
       if (['nej','no','n','false','0','av','off','inaktiv'].includes(s)) return false;
       return null;
     };
@@ -4391,7 +4347,7 @@ function renderImport() {
 
       let agent = null;
       if (email) agent = AppState.agents.find(a => (a.email||'').toLowerCase() === email);
-      if (!agent) agent = AppState.agents.find(a => a.fÃ¶rnamn.toLowerCase()===first.toLowerCase() && a.efternamn.toLowerCase()===last.toLowerCase() && a.companyId===compId);
+      if (!agent) agent = AppState.agents.find(a => a.förnamn.toLowerCase()===first.toLowerCase() && a.efternamn.toLowerCase()===last.toLowerCase() && a.companyId===compId);
 
       if (agent) {
         // update
@@ -4407,7 +4363,7 @@ function renderImport() {
         if (hasOtherProductsData) agent.otherProducts = { ...(agent.otherProducts||{}), ...otherProductsData };
         updatedAgents++;
       } else {
-        const newAgent = { id: id(), fÃ¶rnamn: first||'-', efternamn: last||'-', email, telefon: phone, companyId: compId, status, licens: { status: lic, typ: licenseTypeVal } };
+        const newAgent = { id: id(), förnamn: first||'-', efternamn: last||'-', email, telefon: phone, companyId: compId, status, licens: { status: lic, typ: licenseTypeVal } };
         if (registrationTypeVal) newAgent.registrationType = registrationTypeVal;
         if (agentOfficeVal) newAgent.officeName = agentOfficeVal;
         if (productsVal) newAgent.productsImported = productsVal;
@@ -4420,13 +4376,13 @@ function renderImport() {
     }
 
     saveState();
-    importResult.textContent = `Klart: +${addedBrands} varumÃ¤rken, +${addedCompanies} fÃ¶retag, +${addedAgents}/${updatedAgents} mÃ¤klare (nya/uppdaterade).`;
+    importResult.textContent = `Klart: +${addedBrands} varumärken, +${addedCompanies} företag, +${addedAgents}/${updatedAgents} mäklare (nya/uppdaterade).`;
     renderDashboard();
   });
 
   // Server import (default root file)
   applyServerBtn.addEventListener('click', async () => {
-    importResult.textContent = 'Importerar pÃ¥ servern...';
+    importResult.textContent = 'Importerar på servern...';
     try {
       // If user selected a file, upload to server; else, trigger default-file import
       const f = fileInput.files?.[0];
@@ -4442,25 +4398,25 @@ function renderImport() {
         let msg = '';
         try { const err = await resp.json(); msg = err?.error || ''; } catch {}
         if (resp.status === 404) {
-          importResult.textContent = 'Fel vid serverimport: 404. Kontrollera att servern kÃ¶r den senaste versionen och starta om den.';
+          importResult.textContent = 'Fel vid serverimport: 404. Kontrollera att servern kör den senaste versionen och starta om den.';
         } else {
           importResult.textContent = 'Fel vid serverimport: ' + (msg || resp.status);
         }
         return;
       }
       const summary = await resp.json();
-      importResult.textContent = `Serverimport klar: +${summary.addedBrands} varumÃ¤rken, +${summary.addedCompanies} fÃ¶retag, +${summary.addedAgents}/${summary.updatedAgents} mÃ¤klare (nya/uppdaterade).`;
-      // Ladda om state frÃ¥n server fÃ¶r att se resultat
+      importResult.textContent = `Serverimport klar: +${summary.addedBrands} varumärken, +${summary.addedCompanies} företag, +${summary.addedAgents}/${summary.updatedAgents} mäklare (nya/uppdaterade).`;
+      // Ladda om state från server för att se resultat
       await loadState();
       renderDashboard();
     } catch (e) {
-      importResult.textContent = 'Kunde inte nÃ¥ servern fÃ¶r import.';
+      importResult.textContent = 'Kunde inte nå servern för import.';
     }
   });
 
   // Server Ortpris import (payments/products only)
   applyOrtsprisBtn?.addEventListener('click', async () => {
-    importResult.textContent = 'Importerar Ortpris pÃ¥ servern...';
+    importResult.textContent = 'Importerar Ortpris på servern...';
     try {
       const resp = await fetch(`${API_BASE}/api/import/ortspris`, { method:'POST', credentials:'include' });
       if (!resp.ok) {
@@ -4470,32 +4426,32 @@ function renderImport() {
         return;
       }
       const summary = await resp.json();
-      importResult.textContent = `Ortpris klar: +${summary.addedBrands||0} varumÃ¤rken, +${summary.addedCompanies||0} fÃ¶retag, uppdaterade: ${summary.updatedCompanies||0}.`;
+      importResult.textContent = `Ortpris klar: +${summary.addedBrands||0} varumärken, +${summary.addedCompanies||0} företag, uppdaterade: ${summary.updatedCompanies||0}.`;
       await loadState();
       renderDashboard();
       // Optional: jump to brands to see MRR
     } catch (e) {
-      importResult.textContent = 'Kunde inte nÃ¥ servern fÃ¶r Ortpris-import.';
+      importResult.textContent = 'Kunde inte nå servern för Ortpris-import.';
     }
   });
 
-  // Server MÃ¤klarpaket import (agent licenses + product)
+  // Server Mäklarpaket import (agent licenses + product)
   applyMaklarpaketBtn?.addEventListener('click', async () => {
-    importResult.textContent = 'Importerar AnvÃ¤ndare mÃ¤klarpaket pÃ¥ servern...';
+    importResult.textContent = 'Importerar Användare mäklarpaket på servern...';
     try {
       const resp = await fetch(`${API_BASE}/api/import/maklarpaket`, { method:'POST', credentials:'include' });
       if (!resp.ok) {
         if (resp.status===401) { const ok = await promptServerLogin(); if (ok) return applyMaklarpaketBtn.click(); }
         let msg=''; try { const err=await resp.json(); msg = err?.error||''; } catch {}
-        importResult.textContent = 'Fel vid MÃ¤klarpaket-import: ' + (msg || resp.status);
+        importResult.textContent = 'Fel vid Mäklarpaket-import: ' + (msg || resp.status);
         return;
       }
   const summary = await resp.json();
-  importResult.textContent = `MÃ¤klarpaket klar: +${summary.addedBrands||0} varumÃ¤rken, +${summary.addedCompanies||0} fÃ¶retag, +${summary.addedAgents||0}/${summary.updatedAgents||0} mÃ¤klare.`;
+  importResult.textContent = `Mäklarpaket klar: +${summary.addedBrands||0} varumärken, +${summary.addedCompanies||0} företag, +${summary.addedAgents||0}/${summary.updatedAgents||0} mäklare.`;
       await loadState();
       renderDashboard();
     } catch (e) {
-      importResult.textContent = 'Kunde inte nÃ¥ servern fÃ¶r MÃ¤klarpaket-import.';
+      importResult.textContent = 'Kunde inte nå servern för Mäklarpaket-import.';
     }
   });
 }
@@ -4515,7 +4471,7 @@ function openNoteModal(entityType, entityId, noteId) {
   ensureLoggedIn();
   const editing = noteId ? AppState.notes.find(n => n.id===noteId) : null;
   modal.show(`
-    <h3>${editing?'Ã„ndra':'Ny'} anteckning</h3>
+    <h3>${editing?'Ändra':'Ny'} anteckning</h3>
     <div class="field"><label>Text</label><textarea id="noteText" rows="4">${editing?editing.text:''}</textarea></div>
     <div style="margin-top:10px; display:flex; gap:8px;">
       <button class="primary" id="saveNote">Spara</button>
@@ -4557,8 +4513,8 @@ function renderSettings() {
   segmentsItem.innerHTML = `
     <div class="flex justify-between items-center">
       <div>
-        <div class="font-semibold">MÃ¥lgruppssegment</div>
-        <div class="text-sm text-base-content/70">Hantera branschsegment (MÃ¤klare, Banker, m.m.)</div>
+        <div class="font-semibold">Målgruppssegment</div>
+        <div class="text-sm text-base-content/70">Hantera branschsegment (Mäklare, Banker, m.m.)</div>
       </div>
       <button id="manageSegments" class="btn btn-ghost btn-sm">Hantera</button>
     </div>
@@ -4572,8 +4528,8 @@ function renderSettings() {
   logoutItem.innerHTML = `
     <div class="flex justify-between items-center">
       <div>
-        <div class="font-semibold">Logga ut frÃ¥n server</div>
-        <div class="text-sm text-base-content/70">Logga ut frÃ¥n server-sessionen</div>
+        <div class="font-semibold">Logga ut från server</div>
+        <div class="text-sm text-base-content/70">Logga ut från server-sessionen</div>
       </div>
       <button id="serverLogout" class="btn btn-ghost btn-sm">Logga ut</button>
     </div>
@@ -4583,9 +4539,9 @@ function renderSettings() {
   document.getElementById('serverLogout').addEventListener('click', async () => {
     try { 
       await fetch(`${API_BASE}/api/logout`, { method:'POST', credentials:'include' }); 
-      alert('Utloggad frÃ¥n server'); 
+      alert('Utloggad från server'); 
     } catch {
-      alert('Kunde inte logga ut frÃ¥n server');
+      alert('Kunde inte logga ut från server');
     }
   });
 
@@ -4598,8 +4554,8 @@ function renderSettings() {
         pwdItem.innerHTML = `
           <div class="flex justify-between items-center">
             <div>
-              <div class="font-semibold">Byt server-lÃ¶senord</div>
-              <div class="text-sm text-base-content/70">GÃ¤ller delat admin-lÃ¶senord (inte env-varianten)</div>
+              <div class="font-semibold">Byt server-lösenord</div>
+              <div class="text-sm text-base-content/70">Gäller delat admin-lösenord (inte env-varianten)</div>
             </div>
             <button id="changeSrvPwd" class="btn btn-ghost btn-sm">Byt</button>
           </div>
@@ -4614,7 +4570,7 @@ function renderSettings() {
         <div class="flex justify-between items-center">
           <div>
             <div class="font-semibold">Audit logg</div>
-            <div class="text-sm text-base-content/70">Visa senaste hÃ¤ndelser (inloggning, Ã¤ndringar, raderingar)</div>
+            <div class="text-sm text-base-content/70">Visa senaste händelser (inloggning, ändringar, raderingar)</div>
           </div>
           <button id="viewAudit" class="btn btn-ghost btn-sm">Visa</button>
         </div>
@@ -4649,8 +4605,8 @@ function renderSettings() {
   const clearBtn = document.getElementById('clearAllData');
   if (clearBtn) {
     clearBtn.addEventListener('click', async () => {
-      if (!confirm('Ã„r du sÃ¤ker att du vill rensa ALL CRM-data?')) return;
-      if (!confirm('Detta gÃ¥r INTE att Ã¥ngra. BekrÃ¤fta igen.')) return;
+      if (!confirm('Är du säker att du vill rensa ALL CRM-data?')) return;
+      if (!confirm('Detta går INTE att ångra. Bekräfta igen.')) return;
       try {
         const r = await fetch(`${API_BASE}/api/admin/clear`, { method:'POST', credentials:'include' });
         if (r.status===401 || r.status===403) {
@@ -4658,11 +4614,11 @@ function renderSettings() {
           if (ok) return clearBtn.click();
         }
         if (!r.ok) {
-          // Fallback: fÃ¶rsÃ¶k rensa via /api/state (krÃ¤ver bara inloggning)
+          // Fallback: försök rensa via /api/state (kräver bara inloggning)
           let msg = '';
           try { const err = await r.json(); msg = err?.error || ''; } catch {}
           try {
-            // HÃ¤mta nuvarande state
+            // Hämta nuvarande state
             let gs = await fetch(`${API_BASE}/api/state`, { credentials:'include' });
             if (gs.status===401) {
               const ok2 = await promptServerLogin();
@@ -4709,7 +4665,7 @@ function openAuditViewer() {
     <h3>Audit logg</h3>
     <div id="auditList" class="list"></div>
     <div style="margin-top:10px; display:flex; gap:8px;">
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   fetch(`${API_BASE}/api/audit?limit=200`, { credentials:'include' })
@@ -4720,19 +4676,19 @@ function openAuditViewer() {
         <div class="list-item">
           <div>
             <div class="title">${ev.type}</div>
-            <div class="subtitle">${new Date(ev.ts).toLocaleString('sv-SE')} Â· ${ev.username||ev.userId||ev.mode||''}</div>
+            <div class="subtitle">${new Date(ev.ts).toLocaleString('sv-SE')} · ${ev.username||ev.userId||ev.mode||''}</div>
           </div>
         </div>
       `).join('');
     }).catch(() => {
-      document.getElementById('auditList').innerHTML = '<div class="muted">Kunde inte lÃ¤sa audit</div>';
+      document.getElementById('auditList').innerHTML = '<div class="muted">Kunde inte läsa audit</div>';
     });
 }
 
 function openChangeServerPassword() {
   modal.show(`
-    <h3>Byt server-lÃ¶senord</h3>
-    <div class="field"><label>Nytt lÃ¶senord</label><input id="newSrvPwd" type="password" /></div>
+    <h3>Byt server-lösenord</h3>
+    <div class="field"><label>Nytt lösenord</label><input id="newSrvPwd" type="password" /></div>
     <div style="margin-top:10px; display:flex; gap:8px;">
       <button class="primary" id="saveSrvPwd">Spara</button>
       <button class="secondary" onclick="modal.hide()">Avbryt</button>
@@ -4743,7 +4699,7 @@ function openChangeServerPassword() {
     if (!newPassword || newPassword.length < 6) { alert('Minst 6 tecken'); return; }
     try {
       const r = await fetch(`${API_BASE}/api/auth/change-password`, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ newPassword }) });
-      if (r.ok) { alert('LÃ¶senord uppdaterat'); modal.hide(); }
+      if (r.ok) { alert('Lösenord uppdaterat'); modal.hide(); }
       else { alert('Misslyckades att uppdatera'); }
     } catch { alert('Serverfel'); }
   });
@@ -4751,7 +4707,7 @@ function openChangeServerPassword() {
 
 function openUsersModal() {
   modal.show(`
-    <h3>AnvÃ¤ndare / SÃ¤ljare</h3>
+    <h3>Användare / Säljare</h3>
     <div class="list" id="userList">${AppState.users.map(u => `
       <div class="list-item">
         <div><div class="title">${u.namn}</div><div class="subtitle">${u.roll||''}</div></div>
@@ -4763,8 +4719,8 @@ function openUsersModal() {
       </div>
     `).join('')}</div>
     <div style="margin-top:10px; display:flex; gap:8px;">
-      <button class="primary" id="addUser">Ny anvÃ¤ndare</button>
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="primary" id="addUser">Ny användare</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   const list = document.getElementById('userList');
@@ -4776,7 +4732,7 @@ function openUsersModal() {
       const namn = prompt('Nytt namn', u.namn); if (!namn) return;
       u.namn = namn; saveState(); openUsersModal();
     } else if (btn.dataset.del) {
-      if (!confirm('Ta bort anvÃ¤ndare?')) return;
+      if (!confirm('Ta bort användare?')) return;
       AppState.users = AppState.users.filter(x => x.id!==id);
     } else if (btn.dataset.creds) {
       openSetUserCredentials(id);
@@ -4785,7 +4741,7 @@ function openUsersModal() {
     }
   });
   document.getElementById('addUser').addEventListener('click', () => {
-    const namn = prompt('AnvÃ¤ndarnamn'); if (!namn) return;
+    const namn = prompt('Användarnamn'); if (!namn) return;
     AppState.users.push({ id: id(), namn, roll: 'sales' }); saveState(); openUsersModal();
   });
 }
@@ -4794,13 +4750,13 @@ function openManageSegmentsModal() {
   const segments = AppState.segments || [];
   
   modal.show(`
-    <h3>Hantera mÃ¥lgruppssegment</h3>
-    <p class="muted" style="margin-bottom:12px;">Segment lÃ¥ter dig kategorisera kunder efter bransch med olika prismodeller.</p>
+    <h3>Hantera målgruppssegment</h3>
+    <p class="muted" style="margin-bottom:12px;">Segment låter dig kategorisera kunder efter bransch med olika prismodeller.</p>
     <div class="list" id="segmentList">${segments.map(s => `
       <div class="list-item">
         <div>
           <div class="title">${s.icon} ${s.name}</div>
-          <div class="subtitle">${s.description || ''} â€¢ ${s.pricingModel}</div>
+          <div class="subtitle">${s.description || ''} • ${s.pricingModel}</div>
         </div>
         <div class="actions">
           <button class="secondary" data-edit="${s.id}">Redigera</button>
@@ -4810,7 +4766,7 @@ function openManageSegmentsModal() {
     `).join('')}</div>
     <div style="margin-top:10px; display:flex; gap:8px;">
       <button class="primary" id="addSegment">Nytt segment</button>
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   
@@ -4823,12 +4779,12 @@ function openManageSegmentsModal() {
     if (btn.dataset.edit) {
       openEditSegmentModal(id);
     } else if (btn.dataset.del) {
-      // Kontrollera om segment anvÃ¤nds
+      // Kontrollera om segment används
       const usedByBrands = AppState.brands.filter(b => b.segmentId === id).length;
       const usedByCompanies = AppState.companies.filter(c => c.segmentId === id).length;
       
       if (usedByBrands > 0 || usedByCompanies > 0) {
-        alert(`Kan inte ta bort segment som anvÃ¤nds av ${usedByBrands} varumÃ¤rken och ${usedByCompanies} fÃ¶retag.`);
+        alert(`Kan inte ta bort segment som används av ${usedByBrands} varumärken och ${usedByCompanies} företag.`);
         return;
       }
       
@@ -4857,24 +4813,24 @@ function openEditSegmentModal(segmentId) {
       </div>
       <div class="field">
         <label>Icon (emoji)</label>
-        <input id="segIcon" value="${segment?.icon || 'ðŸ“Š'}" placeholder="ðŸ¦" maxlength="2" />
+        <input id="segIcon" value="${segment?.icon || '📊'}" placeholder="🏦" maxlength="2" />
       </div>
       <div class="field">
-        <label>FÃ¤rg</label>
+        <label>Färg</label>
         <select id="segColor">
-          <option value="blue" ${segment?.color === 'blue' ? 'selected' : ''}>BlÃ¥</option>
-          <option value="green" ${segment?.color === 'green' ? 'selected' : ''}>GrÃ¶n</option>
+          <option value="blue" ${segment?.color === 'blue' ? 'selected' : ''}>Blå</option>
+          <option value="green" ${segment?.color === 'green' ? 'selected' : ''}>Grön</option>
           <option value="purple" ${segment?.color === 'purple' ? 'selected' : ''}>Lila</option>
-          <option value="red" ${segment?.color === 'red' ? 'selected' : ''}>RÃ¶d</option>
+          <option value="red" ${segment?.color === 'red' ? 'selected' : ''}>Röd</option>
           <option value="yellow" ${segment?.color === 'yellow' ? 'selected' : ''}>Gul</option>
-          <option value="slate" ${segment?.color === 'slate' ? 'selected' : ''}>GrÃ¥</option>
+          <option value="slate" ${segment?.color === 'slate' ? 'selected' : ''}>Grå</option>
           <option value="orange" ${segment?.color === 'orange' ? 'selected' : ''}>Orange</option>
         </select>
       </div>
       <div class="field">
         <label>Prismodell</label>
         <select id="segPricing">
-          <option value="per-agent" ${segment?.pricingModel === 'per-agent' ? 'selected' : ''}>Per agent/anvÃ¤ndare</option>
+          <option value="per-agent" ${segment?.pricingModel === 'per-agent' ? 'selected' : ''}>Per agent/användare</option>
           <option value="enterprise" ${segment?.pricingModel === 'enterprise' ? 'selected' : ''}>Enterprise (fast pris)</option>
           <option value="custom" ${segment?.pricingModel === 'custom' ? 'selected' : ''}>Anpassad</option>
         </select>
@@ -4898,16 +4854,16 @@ function openEditSegmentModal(segmentId) {
     const description = document.getElementById('segDesc').value.trim();
     
     if (!name) {
-      alert('Namn krÃ¤vs');
+      alert('Namn krävs');
       return;
     }
     
     if (isNew) {
       // Skapa nytt segment
       const newSegment = {
-        id: name.toLowerCase().replace(/\s+/g, '-').replace(/Ã¥/g, 'a').replace(/Ã¤/g, 'a').replace(/Ã¶/g, 'o'),
+        id: name.toLowerCase().replace(/\s+/g, '-').replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o'),
         name,
-        icon: icon || 'ðŸ“Š',
+        icon: icon || '📊',
         color,
         description,
         pricingModel,
@@ -4941,10 +4897,10 @@ function openEditSegmentModal(segmentId) {
 function openSetUserCredentials(userId) {
   const u = AppState.users.find(x => x.id===userId);
   modal.show(`
-    <h3>Inloggning fÃ¶r ${u?.namn||userId}</h3>
+    <h3>Inloggning för ${u?.namn||userId}</h3>
     <div class="grid-2">
-      <div class="field"><label>AnvÃ¤ndarnamn</label><input id="credUsername" /></div>
-      <div class="field"><label>LÃ¶senord</label><input id="credPassword" type="password" /></div>
+      <div class="field"><label>Användarnamn</label><input id="credUsername" /></div>
+      <div class="field"><label>Lösenord</label><input id="credPassword" type="password" /></div>
     </div>
     <div style="margin-top:10px; display:flex; gap:8px;">
       <button class="primary" id="saveCreds">Spara</button>
@@ -4954,13 +4910,13 @@ function openSetUserCredentials(userId) {
   document.getElementById('saveCreds').addEventListener('click', async () => {
     const username = document.getElementById('credUsername').value.trim();
     const password = document.getElementById('credPassword').value;
-    if (!username || !password) { alert('Fyll i bÃ¥da'); return; }
+    if (!username || !password) { alert('Fyll i båda'); return; }
     if (password.length < 6) { alert('Minst 6 tecken'); return; }
     try {
       const r = await fetch(`${API_BASE}/api/users/${encodeURIComponent(userId)}/credentials`, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ username, password }) });
       if (r.ok) { alert('Sparat'); modal.hide(); }
-      else if (r.status===409) { alert('AnvÃ¤ndarnamn upptaget'); }
-      else if (r.status===403) { alert('KrÃ¤ver admin (delad inloggning)'); }
+      else if (r.status===409) { alert('Användarnamn upptaget'); }
+      else if (r.status===403) { alert('Kräver admin (delad inloggning)'); }
       else { alert('Misslyckades'); }
     } catch { alert('Serverfel'); }
   });
@@ -4969,7 +4925,7 @@ function openSetUserCredentials(userId) {
 function openLogin() {
   modal.show(`
     <h3>Logga in</h3>
-    <div class="field"><label>VÃ¤lj anvÃ¤ndare</label>
+    <div class="field"><label>Välj användare</label>
       <select id="loginUser">${AppState.users.map(u => `<option value="${u.id}">${u.namn}</option>`).join('')}</select>
     </div>
     <div style="margin-top:10px; display:flex; gap:8px;">
@@ -5054,7 +5010,7 @@ function setupGlobalSearch() {
         const parts = [brandName(c.brandId)];
         if (c.customerNumber) parts.push(`Kundnr: ${c.customerNumber}`);
         if (c.orgNumber) parts.push(`Orgnr: ${formatOrg(c.orgNumber)}`);
-        push(`FÃ¶retag Â· ${name}`, parts.filter(Boolean).join(' Â· '), () => openCompany(c.id));
+        push(`Företag · ${name}`, parts.filter(Boolean).join(' · '), () => openCompany(c.id));
       }
       if (out.length>=8) break;
     }
@@ -5062,11 +5018,11 @@ function setupGlobalSearch() {
     // Agents: name, email, phone
     if (out.length < 8) {
       for (const a of AppState.agents) {
-        const full = `${a.fÃ¶rnamn} ${a.efternamn}`.trim().toLowerCase();
+        const full = `${a.förnamn} ${a.efternamn}`.trim().toLowerCase();
         const email = String(a.email||'').toLowerCase();
         const phone = String(a.telefon||'').toLowerCase();
         if (full.includes(query) || (email && email.includes(query)) || (phone && phone.includes(query))) {
-          push(`MÃ¤klare Â· ${a.fÃ¶rnamn} ${a.efternamn}`, companyName(a.companyId), () => openAgent(a.id));
+          push(`Mäklare · ${a.förnamn} ${a.efternamn}`, companyName(a.companyId), () => openAgent(a.id));
         }
         if (out.length>=8) break;
       }
@@ -5076,7 +5032,7 @@ function setupGlobalSearch() {
     if (out.length < 8) {
       for (const b of AppState.brands) {
         const name = String(b.namn||'');
-        if (name.toLowerCase().includes(query)) push(`VarumÃ¤rke Â· ${name}`, '', () => openBrand(b.id));
+        if (name.toLowerCase().includes(query)) push(`Varumärke · ${name}`, '', () => openBrand(b.id));
         if (out.length>=8) break;
       }
     }
@@ -5138,12 +5094,12 @@ function setupSegmentFilter() {
   // Initial render
   updateSegmentFilter();
   
-  // Hantera Ã¤ndringar
+  // Hantera ändringar
   select.addEventListener('change', () => {
     AppState.activeSegmentId = select.value || null;
     saveState();
     
-    // Re-rendera aktiv vy fÃ¶r att tillÃ¤mpa filtret
+    // Re-rendera aktiv vy för att tillämpa filtret
     const activeView = document.querySelector('.view.visible');
     if (activeView) {
       const viewName = activeView.id.replace('view-', '');
@@ -5151,7 +5107,7 @@ function setupSegmentFilter() {
     }
   });
   
-  // GÃ¶r funktionen tillgÃ¤nglig globalt sÃ¥ att den kan kallas efter segment-Ã¤ndringar
+  // Gör funktionen tillgänglig globalt så att den kan kallas efter segment-ändringar
   window.updateSegmentFilter = updateSegmentFilter;
 }
 
@@ -5286,7 +5242,7 @@ function handleGlobalClick(e) {
     } else if (action === 'note') {
       openNoteModal('brand', id);
     } else if (action === 'del') {
-      if (confirm('Ta bort varumÃ¤rket och alla tillhÃ¶rande fÃ¶retag, mÃ¤klare och uppgifter?')) {
+      if (confirm('Ta bort varumärket och alla tillhörande företag, mäklare och uppgifter?')) {
         deleteBrandCascadeWithUndo(id);
         renderBrands();
         renderCompanies();
@@ -5315,7 +5271,7 @@ function handleGlobalClick(e) {
   const delAgentBtn = target.closest('button[data-del-agent]');
   if (delAgentBtn) {
     e.preventDefault();
-    if (confirm('Ta bort mÃ¤klare och tillhÃ¶rande uppgifter?')) {
+    if (confirm('Ta bort mäklare och tillhörande uppgifter?')) {
       deleteAgentWithUndo(delAgentBtn.dataset.delAgent);
       renderAgents();
       renderDashboard();
@@ -5341,7 +5297,7 @@ function handleGlobalClick(e) {
   const delCompanyBtn = target.closest('button[data-del]');
   if (delCompanyBtn) {
     e.preventDefault();
-    if (confirm('Ta bort fÃ¶retaget och tillhÃ¶rande mÃ¤klare/uppgifter?')) {
+    if (confirm('Ta bort företaget och tillhörande mäklare/uppgifter?')) {
       deleteCompanyCascadeWithUndo(delCompanyBtn.dataset.del);
       renderCompanies();
       renderAgents();
@@ -5453,31 +5409,31 @@ function openCommunicationModal(initialRecipients = []) {
   
   modal.show(`
     <h3>Skicka meddelande</h3>
-    <div class="muted" style="margin-bottom:12px;">VÃ¤lj mottagare och kommunikationskanal</div>
+    <div class="muted" style="margin-bottom:12px;">Välj mottagare och kommunikationskanal</div>
     
     <div class="tabs" style="display:flex; gap:8px; border-bottom:1px solid var(--border); margin-bottom:12px;">
-      <button class="tab-btn active" data-tab="email">ðŸ“§ E-post (${emailRecipients.length})</button>
-      <button class="tab-btn" data-tab="sms">ðŸ“± SMS (${smsRecipients.length})</button>
-      <button class="tab-btn" data-tab="recipients">ðŸ‘¥ Mottagare (${recipients.length})</button>
+      <button class="tab-btn active" data-tab="email">📧 E-post (${emailRecipients.length})</button>
+      <button class="tab-btn" data-tab="sms">📱 SMS (${smsRecipients.length})</button>
+      <button class="tab-btn" data-tab="recipients">👥 Mottagare (${recipients.length})</button>
     </div>
     
     <div class="tab-content active" id="tab-email">
       <div class="field">
-        <label>Ã„mne</label>
-        <input id="emailSubject" placeholder="Ange Ã¤mnesrad" />
+        <label>Ämne</label>
+        <input id="emailSubject" placeholder="Ange ämnesrad" />
       </div>
       <div class="field">
         <label>Meddelande</label>
-        <textarea id="emailBody" rows="8" placeholder="Skriv ditt meddelande hÃ¤r..."></textarea>
+        <textarea id="emailBody" rows="8" placeholder="Skriv ditt meddelande här..."></textarea>
       </div>
       <div class="field">
         <label>Meddelande-mall</label>
         <select id="emailTemplate">
-          <option value="">-- VÃ¤lj mall --</option>
-          <option value="welcome">VÃ¤lkomstmail</option>
-          <option value="followup">UppfÃ¶ljning</option>
+          <option value="">-- Välj mall --</option>
+          <option value="welcome">Välkomstmail</option>
+          <option value="followup">Uppföljning</option>
           <option value="offer">Erbjudande</option>
-          <option value="reminder">PÃ¥minnelse</option>
+          <option value="reminder">Påminnelse</option>
         </select>
       </div>
       <div class="muted" style="margin-top:8px;">
@@ -5485,7 +5441,7 @@ function openCommunicationModal(initialRecipients = []) {
       </div>
       <div style="margin-top:12px; display:flex; gap:8px;">
         <button class="primary" id="sendEmail" ${emailRecipients.length === 0 ? 'disabled' : ''}>Skicka e-post</button>
-        <button class="secondary" id="previewEmail">FÃ¶rhandsgranska</button>
+        <button class="secondary" id="previewEmail">Förhandsgranska</button>
       </div>
     </div>
     
@@ -5498,10 +5454,10 @@ function openCommunicationModal(initialRecipients = []) {
       <div class="field">
         <label>SMS-mall</label>
         <select id="smsTemplate">
-          <option value="">-- VÃ¤lj mall --</option>
-          <option value="appointment">MÃ¶tesbokningsbekrÃ¤ftelse</option>
-          <option value="reminder">PÃ¥minnelse</option>
-          <option value="thankyou">Tack fÃ¶r mÃ¶tet</option>
+          <option value="">-- Välj mall --</option>
+          <option value="appointment">Mötesbokningsbekräftelse</option>
+          <option value="reminder">Påminnelse</option>
+          <option value="thankyou">Tack för mötet</option>
         </select>
       </div>
       <div class="muted" style="margin-top:8px;">
@@ -5509,21 +5465,21 @@ function openCommunicationModal(initialRecipients = []) {
       </div>
       <div style="margin-top:12px; display:flex; gap:8px;">
         <button class="primary" id="sendSMS" ${smsRecipients.length === 0 ? 'disabled' : ''}>Skicka SMS</button>
-        <button class="secondary" id="previewSMS">FÃ¶rhandsgranska</button>
+        <button class="secondary" id="previewSMS">Förhandsgranska</button>
       </div>
     </div>
     
     <div class="tab-content" id="tab-recipients">
       <div class="list" style="max-height:300px; overflow:auto;">
-        ${recipients.length === 0 ? '<div class="muted">Inga mottagare valda. LÃ¤gg till mottagare frÃ¥n fÃ¶retags- eller mÃ¤klarlistan.</div>' : ''}
+        ${recipients.length === 0 ? '<div class="muted">Inga mottagare valda. Lägg till mottagare från företags- eller mäklarlistan.</div>' : ''}
         ${recipients.map(r => `
           <div class="list-item">
             <div>
               <div class="title">${r.name}</div>
               <div class="subtitle">
-                ${r.email ? `ðŸ“§ ${r.email}` : ''}
-                ${r.email && r.phone ? ' Â· ' : ''}
-                ${r.phone ? `ðŸ“± ${r.phone}` : ''}
+                ${r.email ? `📧 ${r.email}` : ''}
+                ${r.email && r.phone ? ' · ' : ''}
+                ${r.phone ? `📱 ${r.phone}` : ''}
                 ${!r.email && !r.phone ? 'Ingen kontaktinformation' : ''}
               </div>
             </div>
@@ -5532,13 +5488,13 @@ function openCommunicationModal(initialRecipients = []) {
         `).join('')}
       </div>
       <div style="margin-top:12px;">
-        <button class="secondary" id="addRecipientsFromCompanies">LÃ¤gg till frÃ¥n fÃ¶retag</button>
-        <button class="secondary" id="addRecipientsFromAgents">LÃ¤gg till frÃ¥n mÃ¤klare</button>
+        <button class="secondary" id="addRecipientsFromCompanies">Lägg till från företag</button>
+        <button class="secondary" id="addRecipientsFromAgents">Lägg till från mäklare</button>
       </div>
     </div>
     
     <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end; border-top:1px solid var(--border); padding-top:12px;">
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   
@@ -5564,27 +5520,27 @@ function openCommunicationModal(initialRecipients = []) {
   // Email templates
   const emailTemplates = {
     welcome: {
-      subject: 'VÃ¤lkommen till vÃ¥rt mÃ¤klarnÃ¤tverk!',
-      body: 'Hej!\n\nVi vill hÃ¤lsa dig varmt vÃ¤lkommen till vÃ¥rt nÃ¤tverk. Vi ser fram emot ett gott samarbete.\n\nMed vÃ¤nliga hÃ¤lsningar,\n[Ditt namn]'
+      subject: 'Välkommen till vårt mäklarnätverk!',
+      body: 'Hej!\n\nVi vill hälsa dig varmt välkommen till vårt nätverk. Vi ser fram emot ett gott samarbete.\n\nMed vänliga hälsningar,\n[Ditt namn]'
     },
     followup: {
-      subject: 'UppfÃ¶ljning frÃ¥n vÃ¥rt senaste mÃ¶te',
-      body: 'Hej!\n\nTack fÃ¶r ett trevligt mÃ¶te. Jag hoppas ni har haft tid att fundera pÃ¥ vÃ¥rt fÃ¶rslag.\n\nHÃ¶r gÃ¤rna av er om ni har nÃ¥gra frÃ¥gor.\n\nMed vÃ¤nliga hÃ¤lsningar,\n[Ditt namn]'
+      subject: 'Uppföljning från vårt senaste möte',
+      body: 'Hej!\n\nTack för ett trevligt möte. Jag hoppas ni har haft tid att fundera på vårt förslag.\n\nHör gärna av er om ni har några frågor.\n\nMed vänliga hälsningar,\n[Ditt namn]'
     },
     offer: {
-      subject: 'Exklusivt erbjudande fÃ¶r er',
-      body: 'Hej!\n\nVi har ett specialerbjudande som vi tror kan vara intressant fÃ¶r er verksamhet.\n\nKontakta oss fÃ¶r mer information.\n\nMed vÃ¤nliga hÃ¤lsningar,\n[Ditt namn]'
+      subject: 'Exklusivt erbjudande för er',
+      body: 'Hej!\n\nVi har ett specialerbjudande som vi tror kan vara intressant för er verksamhet.\n\nKontakta oss för mer information.\n\nMed vänliga hälsningar,\n[Ditt namn]'
     },
     reminder: {
-      subject: 'PÃ¥minnelse',
-      body: 'Hej!\n\nDetta Ã¤r en vÃ¤nlig pÃ¥minnelse om vÃ¥rt kommande mÃ¶te.\n\nMed vÃ¤nliga hÃ¤lsningar,\n[Ditt namn]'
+      subject: 'Påminnelse',
+      body: 'Hej!\n\nDetta är en vänlig påminnelse om vårt kommande möte.\n\nMed vänliga hälsningar,\n[Ditt namn]'
     }
   };
   
   const smsTemplates = {
-    appointment: 'BekrÃ¤ftelse: MÃ¶te bokad [DATUM] kl [TID]. VÃ¤lkommen!',
-    reminder: 'PÃ¥minnelse: MÃ¶te imorgon kl [TID]. Vi ses!',
-    thankyou: 'Tack fÃ¶r ett trevligt mÃ¶te idag! HÃ¶r av dig om du har frÃ¥gor.'
+    appointment: 'Bekräftelse: Möte bokad [DATUM] kl [TID]. Välkommen!',
+    reminder: 'Påminnelse: Möte imorgon kl [TID]. Vi ses!',
+    thankyou: 'Tack för ett trevligt möte idag! Hör av dig om du har frågor.'
   };
   
   // Template selection
@@ -5610,7 +5566,7 @@ function openCommunicationModal(initialRecipients = []) {
     const body = document.getElementById('emailBody').value.trim();
     
     if (!subject || !body) {
-      alert('VÃ¤nligen fyll i bÃ¥de Ã¤mne och meddelande.');
+      alert('Vänligen fyll i både ämne och meddelande.');
       return;
     }
     
@@ -5618,7 +5574,7 @@ function openCommunicationModal(initialRecipients = []) {
     const mailtoLink = `mailto:${emails}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
     window.location.href = mailtoLink;
-    showNotification(`E-post Ã¶ppnad i din e-postklient (${emailRecipients.length} mottagare)`, 'success');
+    showNotification(`E-post öppnad i din e-postklient (${emailRecipients.length} mottagare)`, 'success');
     modal.hide();
   });
   
@@ -5627,14 +5583,14 @@ function openCommunicationModal(initialRecipients = []) {
     const body = document.getElementById('smsBody').value.trim();
     
     if (!body) {
-      alert('VÃ¤nligen skriv ett meddelande.');
+      alert('Vänligen skriv ett meddelande.');
       return;
     }
     
     // For SMS, we'll show a dialog with instructions since SMS requires a gateway
     modal.show(`
       <h3>SMS-meddelande klart att skickas</h3>
-      <div class="muted" style="margin-bottom:12px;">Meddelandet Ã¤r fÃ¶rberett. VÃ¤lj hur du vill skicka:</div>
+      <div class="muted" style="margin-bottom:12px;">Meddelandet är förberett. Välj hur du vill skicka:</div>
       
       <div class="field">
         <label>Meddelande</label>
@@ -5649,13 +5605,13 @@ function openCommunicationModal(initialRecipients = []) {
       </div>
       
       <div style="background:#fef3c7; border:1px solid #fbbf24; border-radius:8px; padding:12px; margin:12px 0;">
-        <strong>OBS:</strong> FÃ¶r att skicka SMS behÃ¶ver du integrera en SMS-gateway som Twilio, 46elks eller liknande.
-        Kontakta utvecklaren fÃ¶r att konfigurera SMS-integration.
+        <strong>OBS:</strong> För att skicka SMS behöver du integrera en SMS-gateway som Twilio, 46elks eller liknande.
+        Kontakta utvecklaren för att konfigurera SMS-integration.
       </div>
       
       <div style="margin-top:16px; display:flex; gap:8px;">
         <button class="primary" id="copySMSData">Kopiera data</button>
-        <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+        <button class="secondary" onclick="modal.hide()">Stäng</button>
       </div>
     `);
     
@@ -5673,12 +5629,12 @@ function openCommunicationModal(initialRecipients = []) {
   document.getElementById('previewEmail')?.addEventListener('click', () => {
     const subject = document.getElementById('emailSubject').value.trim();
     const body = document.getElementById('emailBody').value.trim();
-    alert(`FÃ–RHANDSVISNING\n\nÃ„mne: ${subject}\n\n${body}`);
+    alert(`FÖRHANDSVISNING\n\nÄmne: ${subject}\n\n${body}`);
   });
   
   document.getElementById('previewSMS')?.addEventListener('click', () => {
     const body = document.getElementById('smsBody').value.trim();
-    alert(`SMS FÃ–RHANDSVISNING\n\n${body}\n\nLÃ¤ngd: ${body.length} tecken`);
+    alert(`SMS FÖRHANDSVISNING\n\n${body}\n\nLängd: ${body.length} tecken`);
   });
   
   // Remove recipient
@@ -5706,14 +5662,14 @@ function openRecipientSelectorModal(type) {
   const items = type === 'companies' ? AppState.companies : AppState.agents;
   
   modal.show(`
-    <h3>VÃ¤lj ${type === 'companies' ? 'fÃ¶retag' : 'mÃ¤klare'}</h3>
+    <h3>Välj ${type === 'companies' ? 'företag' : 'mäklare'}</h3>
     <div style="margin-bottom:12px;">
-      <input type="search" id="recipientSearch" placeholder="SÃ¶k..." style="width:100%;" />
+      <input type="search" id="recipientSearch" placeholder="Sök..." style="width:100%;" />
     </div>
     <div class="list" style="max-height:400px; overflow:auto;" id="recipientList">
       ${items.map(item => {
         const isCompany = type === 'companies';
-        const name = isCompany ? item.namn : `${item.fÃ¶rnamn} ${item.efternamn}`;
+        const name = isCompany ? item.namn : `${item.förnamn} ${item.efternamn}`;
         const email = isCompany ? '' : item.email;
         const phone = isCompany ? '' : item.telefon;
         const id = item.id;
@@ -5736,9 +5692,9 @@ function openRecipientSelectorModal(type) {
           <div>
             <div class="title">${name}</div>
             <div class="subtitle">
-              ${finalEmail ? `ðŸ“§ ${finalEmail}` : ''}
-              ${finalEmail && finalPhone ? ' Â· ' : ''}
-              ${finalPhone ? `ðŸ“± ${finalPhone}` : ''}
+              ${finalEmail ? `📧 ${finalEmail}` : ''}
+              ${finalEmail && finalPhone ? ' · ' : ''}
+              ${finalPhone ? `📱 ${finalPhone}` : ''}
               ${!finalEmail && !finalPhone ? 'Ingen kontaktinformation' : ''}
             </div>
           </div>
@@ -5747,9 +5703,9 @@ function openRecipientSelectorModal(type) {
       }).join('')}
     </div>
     <div style="margin-top:16px; display:flex; gap:8px; justify-content:space-between;">
-      <button class="secondary" id="selectAllRecipients">VÃ¤lj alla</button>
+      <button class="secondary" id="selectAllRecipients">Välj alla</button>
       <div style="display:flex; gap:8px;">
-        <button class="primary" id="addSelectedRecipients">LÃ¤gg till valda</button>
+        <button class="primary" id="addSelectedRecipients">Lägg till valda</button>
         <button class="secondary" onclick="modal.hide()">Avbryt</button>
       </div>
     </div>
@@ -5803,7 +5759,7 @@ function updateCommunicationUI() {
     const commBtn = document.createElement('button');
     commBtn.id = 'globalCommBtn';
     commBtn.className = 'secondary';
-    commBtn.innerHTML = 'âœ‰ï¸ Skicka meddelande';
+    commBtn.innerHTML = '✉️ Skicka meddelande';
     commBtn.style.marginLeft = '12px';
     commBtn.addEventListener('click', () => openCommunicationModal());
     undoBtn.parentElement.appendChild(commBtn);
@@ -5814,7 +5770,7 @@ function updateCommunicationUI() {
     const enrichBtn = document.createElement('button');
     enrichBtn.id = 'globalEnrichBtn';
     enrichBtn.className = 'secondary';
-    enrichBtn.innerHTML = 'ðŸ”„ Uppdatera kontaktuppgifter';
+    enrichBtn.innerHTML = '🔄 Uppdatera kontaktuppgifter';
     enrichBtn.style.marginLeft = '12px';
     enrichBtn.addEventListener('click', () => openDataEnrichmentModal());
     undoBtn.parentElement.appendChild(enrichBtn);
@@ -5825,7 +5781,7 @@ function updateCommunicationUI() {
     const gdprBtn = document.createElement('button');
     gdprBtn.id = 'globalGDPRBtn';
     gdprBtn.className = 'secondary';
-    gdprBtn.innerHTML = 'ðŸ”’ GDPR & SÃ¤kerhet';
+    gdprBtn.innerHTML = '🔒 GDPR & Säkerhet';
     gdprBtn.style.marginLeft = '12px';
     gdprBtn.addEventListener('click', () => openGDPRMenu());
     undoBtn.parentElement.appendChild(gdprBtn);
@@ -5840,9 +5796,9 @@ const EnrichmentState = {
 
 async function openDataEnrichmentModal() {
   modal.show(`
-    <h3>ðŸ”„ Automatisk uppdatering av kontaktuppgifter</h3>
+    <h3>🔄 Automatisk uppdatering av kontaktuppgifter</h3>
     <div class="muted" style="margin-bottom:16px;">
-      Systemet hÃ¤mtar automatiskt uppdaterad information om fÃ¶retag, mÃ¤klare och varumÃ¤rken frÃ¥n olika kÃ¤llor.
+      Systemet hämtar automatiskt uppdaterad information om företag, mäklare och varumärken från olika källor.
     </div>
     
     <div class="panel" style="margin-bottom:16px;">
@@ -5851,11 +5807,11 @@ async function openDataEnrichmentModal() {
       </div>
       <div style="padding:12px;">
         <ul style="margin:0; padding-left:20px;">
-          <li>ðŸ“ž <strong>Telefonnummer</strong> - FÃ¶retagets huvudnummer och mÃ¤klarnas direktnummer</li>
-          <li>ðŸ“§ <strong>E-postadresser</strong> - Kontakt-email (info@, kontakt@) och mÃ¤klarnas professionella emails</li>
-          <li>ðŸŒ <strong>Hemsidor</strong> - FÃ¶retagets webbadress med intelligenta mÃ¶nsterigenkÃ¤nning fÃ¶r kedjor</li>
-          <li>ðŸ“ <strong>Adresser</strong> - BesÃ¶ksadress och postadress frÃ¥n offentliga register</li>
-          <li>ðŸ¢ <strong>Organisationsnummer</strong> - Verifiering och datahÃ¤mtning frÃ¥n Bolagsverket</li>
+          <li>📞 <strong>Telefonnummer</strong> - Företagets huvudnummer och mäklarnas direktnummer</li>
+          <li>📧 <strong>E-postadresser</strong> - Kontakt-email (info@, kontakt@) och mäklarnas professionella emails</li>
+          <li>🌐 <strong>Hemsidor</strong> - Företagets webbadress med intelligenta mönsterigenkänning för kedjor</li>
+          <li>📍 <strong>Adresser</strong> - Besöksadress och postadress från offentliga register</li>
+          <li>🏢 <strong>Organisationsnummer</strong> - Verifiering och datahämtning från Bolagsverket</li>
         </ul>
       </div>
     </div>
@@ -5866,23 +5822,23 @@ async function openDataEnrichmentModal() {
       </div>
       <div style="padding:12px;">
         <ul style="margin:0; padding-left:20px;">
-          <li>ðŸŽ¯ <strong>VarumÃ¤rkesmÃ¶nster</strong> - KÃ¤nner igen ERA, Svensk FastighetsfÃ¶rmedling, MÃ¤klarhuset m.fl.</li>
-          <li>ðŸ” <strong>Multi-kÃ¤lla verifiering</strong> - Korskontrollerar data frÃ¥n flera kÃ¤llor</li>
-          <li>ðŸ“Š <strong>Prioritering</strong> - HÃ¤mtar frÃ¥n mest tillfÃ¶rlitliga kÃ¤llor fÃ¶rst</li>
-          <li>âœ‰ï¸ <strong>Email-mÃ¶nsterigenkÃ¤nning</strong> - Genererar professionella emails baserat pÃ¥ fÃ¶retagets domÃ¤n</li>
+          <li>🎯 <strong>Varumärkesmönster</strong> - Känner igen ERA, Svensk Fastighetsförmedling, Mäklarhuset m.fl.</li>
+          <li>🔍 <strong>Multi-källa verifiering</strong> - Korskontrollerar data från flera källor</li>
+          <li>📊 <strong>Prioritering</strong> - Hämtar från mest tillförlitliga källor först</li>
+          <li>✉️ <strong>Email-mönsterigenkänning</strong> - Genererar professionella emails baserat på företagets domän</li>
         </ul>
       </div>
     </div>
     
     <div class="panel" style="margin-bottom:16px;">
       <div class="panel-header">
-        <h3>DatakÃ¤llor</h3>
+        <h3>Datakällor</h3>
       </div>
       <div style="padding:12px;">
         <div class="grid-2" style="gap:8px;">
           <label style="display:flex; align-items:center; gap:8px;">
             <input type="checkbox" id="source-allabolag" checked />
-            <span>Allabolag.se (FÃ¶retagsinformation)</span>
+            <span>Allabolag.se (Företagsinformation)</span>
           </label>
           <label style="display:flex; align-items:center; gap:8px;">
             <input type="checkbox" id="source-bolagsverket" checked />
@@ -5890,11 +5846,11 @@ async function openDataEnrichmentModal() {
           </label>
           <label style="display:flex; align-items:center; gap:8px;">
             <input type="checkbox" id="source-google" checked />
-            <span>Google/LinkedIn (SÃ¶kningar & profiler)</span>
+            <span>Google/LinkedIn (Sökningar & profiler)</span>
           </label>
           <label style="display:flex; align-items:center; gap:8px;">
             <input type="checkbox" id="source-website" checked />
-            <span>FÃ¶retagens hemsidor (Smart scraping)</span>
+            <span>Företagens hemsidor (Smart scraping)</span>
           </label>
         </div>
       </div>
@@ -5903,26 +5859,26 @@ async function openDataEnrichmentModal() {
     <div class="field">
       <label>Vilka entiteter ska uppdateras?</label>
       <select id="enrichTarget">
-        <option value="companies">Alla fÃ¶retag (${AppState.companies.length})</option>
-        <option value="agents">Alla mÃ¤klare (${AppState.agents.length})</option>
-        <option value="brands">Alla varumÃ¤rken (${AppState.brands.length})</option>
-        <option value="both">FÃ¶retag och mÃ¤klare</option>
-        <option value="all">Allt (fÃ¶retag, mÃ¤klare, varumÃ¤rken)</option>
-        <option value="missing">Endast poster med saknad information â­</option>
+        <option value="companies">Alla företag (${AppState.companies.length})</option>
+        <option value="agents">Alla mäklare (${AppState.agents.length})</option>
+        <option value="brands">Alla varumärken (${AppState.brands.length})</option>
+        <option value="both">Företag och mäklare</option>
+        <option value="all">Allt (företag, mäklare, varumärken)</option>
+        <option value="missing">Endast poster med saknad information ⭐</option>
       </select>
     </div>
     
     <div class="field">
       <label style="display:flex; align-items:center; gap:8px;">
         <input type="checkbox" id="enrichOverwrite" />
-        <span>Skriv Ã¶ver befintlig information</span>
+        <span>Skriv över befintlig information</span>
       </label>
-      <div class="muted">Om avmarkerad fylls endast tomma fÃ¤lt i (rekommenderat)</div>
+      <div class="muted">Om avmarkerad fylls endast tomma fält i (rekommenderat)</div>
     </div>
     
     <div id="enrichProgress" style="display:none; margin-top:16px; padding:12px; background:#f8fafc; border-radius:8px;">
       <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-        <span id="enrichStatus">FÃ¶rbereder...</span>
+        <span id="enrichStatus">Förbereder...</span>
         <span id="enrichCounter">0 / 0</span>
       </div>
       <div style="background:#e2e8f0; height:8px; border-radius:4px; overflow:hidden;">
@@ -5937,8 +5893,8 @@ async function openDataEnrichmentModal() {
     </div>
     
     <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-      <button class="primary" id="startEnrichment">ðŸš€ Starta uppdatering</button>
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="primary" id="startEnrichment">🚀 Starta uppdatering</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
   
@@ -6006,9 +5962,9 @@ async function performDataEnrichment(target, overwrite, sources) {
       if (result.updated) {
         updated++;
         EnrichmentState.results.push(result);
-        logEl.innerHTML = `<div style="color:var(--accent);">âœ“ ${result.name} - ${result.updates.length} uppdateringar</div>`;
+        logEl.innerHTML = `<div style="color:var(--accent);">✓ ${result.name} - ${result.updates.length} uppdateringar</div>`;
       } else {
-        logEl.innerHTML = `<div style="color:var(--muted);">â—‹ ${result.name} - ingen ny information</div>`;
+        logEl.innerHTML = `<div style="color:var(--muted);">○ ${result.name} - ingen ny information</div>`;
       }
       
       // Small delay to avoid rate limiting
@@ -6016,7 +5972,7 @@ async function performDataEnrichment(target, overwrite, sources) {
       
     } catch (error) {
       console.error('Enrichment error:', error);
-      logEl.innerHTML = `<div style="color:var(--danger);">âœ— ${item.data.namn || item.data.fÃ¶rnamn} - fel uppstod</div>`;
+      logEl.innerHTML = `<div style="color:var(--danger);">✗ ${item.data.namn || item.data.förnamn} - fel uppstod</div>`;
     }
   }
   
@@ -6029,7 +5985,7 @@ async function performDataEnrichment(target, overwrite, sources) {
     resultsList.innerHTML = EnrichmentState.results.map(r => `
       <div class="list-item">
         <div>
-          <div class="title">${r.name} ${r.type === 'brand' ? '(VarumÃ¤rke)' : r.type === 'company' ? '(FÃ¶retag)' : '(MÃ¤klare)'}</div>
+          <div class="title">${r.name} ${r.type === 'brand' ? '(Varumärke)' : r.type === 'company' ? '(Företag)' : '(Mäklare)'}</div>
           <div class="subtitle">${r.updates.join(', ')}</div>
         </div>
         <span class="tag accent">${r.updates.length} uppdateringar</span>
@@ -6063,7 +6019,7 @@ async function enrichEntity(type, entity, overwrite, sources) {
   const result = {
     type,
     id: entity.id,
-    name: type === 'company' ? entity.namn : type === 'brand' ? entity.namn : `${entity.fÃ¶rnamn} ${entity.efternamn}`,
+    name: type === 'company' ? entity.namn : type === 'brand' ? entity.namn : `${entity.förnamn} ${entity.efternamn}`,
     updated: false,
     updates: []
   };
@@ -6330,10 +6286,10 @@ async function findOfficePageOnBrandSite(company, brand, sources) {
       });
     }
     
-    if (brandName.includes('mÃ¤klarhuset') && citySlug) {
+    if (brandName.includes('mäklarhuset') && citySlug) {
       possibleUrls.unshift({
         url: `https://www.maklarhuset.se/kontor/${citySlug}`,
-        pattern: 'MÃ¤klarhuset specific',
+        pattern: 'Mäklarhuset specific',
         confidence: 95
       });
     }
@@ -6341,12 +6297,12 @@ async function findOfficePageOnBrandSite(company, brand, sources) {
     if (brandName.includes('fastighetsbyran') && citySlug) {
       possibleUrls.unshift({
         url: `https://www.fastighetsbyran.com/kontor/${citySlug}`,
-        pattern: 'FastighetsbyrÃ¥n specific',
+        pattern: 'Fastighetsbyrån specific',
         confidence: 95
       });
       possibleUrls.unshift({
         url: `https://www.fastighetsbyran.com/hitta-kontor/${citySlug}`,
-        pattern: 'FastighetsbyrÃ¥n specific v2',
+        pattern: 'Fastighetsbyrån specific v2',
         confidence: 95
       });
     }
@@ -6451,7 +6407,7 @@ async function scrapeOfficePage(url, officeName) {
     }
     
     // Extract address
-    const addressMatch = text.match(/([A-ZÃ…Ã„Ã–][a-zÃ¥Ã¤Ã¶]+(?:gatan|vÃ¤gen|atan|plan|grÃ¤nd|torg)\s+\d+[A-Z]?)/);
+    const addressMatch = text.match(/([A-ZÅÄÖ][a-zåäö]+(?:gatan|vägen|atan|plan|gränd|torg)\s+\d+[A-Z]?)/);
     if (addressMatch && !info.address) {
       info.address = addressMatch[1];
     }
@@ -6491,9 +6447,9 @@ async function scrapeOfficePage(url, officeName) {
 // Clean text for URL slug
 function cleanUrlSlug(text) {
   return text.toLowerCase()
-    .replace(/Ã¥/g, 'a')
-    .replace(/Ã¤/g, 'a')
-    .replace(/Ã¶/g, 'o')
+    .replace(/å/g, 'a')
+    .replace(/ä/g, 'a')
+    .replace(/ö/g, 'o')
     .replace(/[^a-z0-9]/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
@@ -6501,7 +6457,7 @@ function cleanUrlSlug(text) {
 
 // Find company website using multiple strategies
 async function findCompanyWebsite(company, sources) {
-  // Strategy 1: Brand website pattern (e.g., ERA SkÃ¥ne -> era.se/skane)
+  // Strategy 1: Brand website pattern (e.g., ERA Skåne -> era.se/skane)
   if (company.brandId) {
     const brand = AppState.brands.find(b => b.id === company.brandId);
     if (brand && brand.website) {
@@ -6523,7 +6479,7 @@ async function findCompanyWebsite(company, sources) {
   
   // Strategy 3: Google search simulation (in production, use real Google Custom Search API)
   if (sources.google) {
-    const searchQuery = `${company.namn} ${company.stad || ''} fastighetsmÃ¤klare`;
+    const searchQuery = `${company.namn} ${company.stad || ''} fastighetsmäklare`;
     const googleResult = await simulateGoogleSearch(searchQuery);
     if (googleResult && await validateWebsite(googleResult)) {
       return googleResult;
@@ -6547,7 +6503,7 @@ function generateBrandWebsitePatterns(company, brand) {
     .replace(/^-|-$/g, '');
   
   const citySlug = company.stad ? company.stad.toLowerCase()
-    .replace(/Ã¥/g, 'a').replace(/Ã¤/g, 'a').replace(/Ã¶/g, 'o')
+    .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
     .replace(/\s+/g, '-') : '';
   
   // Common patterns for franchise/chain websites
@@ -6568,12 +6524,12 @@ function generateBrandWebsitePatterns(company, brand) {
     patterns.push(`https://era.se/${citySlug || companySlug}`);
   }
   
-  // Svensk FastighetsfÃ¶rmedling patterns
+  // Svensk Fastighetsförmedling patterns
   if (brandDomain.includes('svenskfast')) {
     patterns.push(`https://www.svenskfast.se/kontor/${citySlug || companySlug}`);
   }
   
-  // MÃ¤klarhuset patterns
+  // Mäklarhuset patterns
   if (brandDomain.includes('maklarhuset')) {
     patterns.push(`https://www.maklarhuset.se/kontor/${citySlug || companySlug}`);
   }
@@ -6588,7 +6544,7 @@ async function simulateGoogleSearch(query) {
   const words = query.toLowerCase().split(' ').filter(w => w.length > 3);
   
   // Try to build a domain from company name
-  const companyWord = words.find(w => !['fastighetsmÃ¤klare', 'mÃ¤klare', 'fastighet'].includes(w));
+  const companyWord = words.find(w => !['fastighetsmäklare', 'mäklare', 'fastighet'].includes(w));
   if (companyWord) {
     const domain = `https://www.${companyWord}.se`;
     return domain;
@@ -6722,7 +6678,7 @@ async function scrapeWebsiteForContacts(url) {
   }
   
   // Extract address from contact page or footer
-  const addressKeywords = ['besÃ¶ksadress', 'postadress', 'adress', 'address'];
+  const addressKeywords = ['besöksadress', 'postadress', 'adress', 'address'];
   // Look for address patterns near these keywords
   */
   
@@ -6811,7 +6767,7 @@ async function enrichAgentData(agent, sources) {
     if (!data.email && companyData.email) {
       const domain = companyData.email.split('@')[1];
       if (domain) {
-        const firstName = cleanUrlSlug(agent.fÃ¶rnamn);
+        const firstName = cleanUrlSlug(agent.förnamn);
         const lastName = cleanUrlSlug(agent.efternamn);
         
         // Most common pattern for Swedish real estate
@@ -6853,7 +6809,7 @@ async function findAgentOnOfficePage(agent, officeUrl) {
   const html = await response.text();
   const dom = new DOMParser().parseFromString(html, 'text/html');
   
-  const fullName = `${agent.fÃ¶rnamn} ${agent.efternamn}`;
+  const fullName = `${agent.förnamn} ${agent.efternamn}`;
   const nameLower = fullName.toLowerCase();
   
   // Strategy 1: Look for agent cards/sections
@@ -6864,7 +6820,7 @@ async function findAgentOnOfficePage(agent, officeUrl) {
     
     // Check if this section contains the agent's name
     if (sectionText.includes(nameLower) || 
-        sectionText.includes(agent.fÃ¶rnamn.toLowerCase()) && sectionText.includes(agent.efternamn.toLowerCase())) {
+        sectionText.includes(agent.förnamn.toLowerCase()) && sectionText.includes(agent.efternamn.toLowerCase())) {
       
       // Found the agent! Extract contact info
       const emailLink = section.querySelector('a[href^="mailto:"]');
@@ -6960,7 +6916,7 @@ async function findAgentOnWebsite(agent, websiteUrl) {
       const pageHtml = await pageResponse.text();
       
       // Look for agent's name
-      const fullName = `${agent.fÃ¶rnamn} ${agent.efternamn}`;
+      const fullName = `${agent.förnamn} ${agent.efternamn}`;
       if (pageHtml.toLowerCase().includes(fullName.toLowerCase())) {
         // Find email and phone near the name
         const section = extractSectionWithName(pageHtml, fullName);
@@ -6988,11 +6944,11 @@ function generateProfessionalEmail(agent, company) {
   
   try {
     const domain = new URL(company.website).hostname.replace('www.', '');
-    const firstName = agent.fÃ¶rnamn.toLowerCase()
-      .replace(/Ã¥/g, 'a').replace(/Ã¤/g, 'a').replace(/Ã¶/g, 'o')
+    const firstName = agent.förnamn.toLowerCase()
+      .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
       .replace(/[^a-z]/g, '');
     const lastName = agent.efternamn.toLowerCase()
-      .replace(/Ã¥/g, 'a').replace(/Ã¤/g, 'a').replace(/Ã¶/g, 'o')
+      .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
       .replace(/[^a-z]/g, '');
     
     // Most common pattern in Swedish real estate: firstname.lastname@domain
@@ -7011,7 +6967,7 @@ async function searchLinkedIn(agent, company) {
   
   // In production, use LinkedIn API or Sales Navigator:
   /*
-  const query = `${agent.fÃ¶rnamn} ${agent.efternamn} ${company?.namn || ''} fastighetsmÃ¤klare`;
+  const query = `${agent.förnamn} ${agent.efternamn} ${company?.namn || ''} fastighetsmäklare`;
   const response = await fetch(`https://api.linkedin.com/v2/people?q=${encodeURIComponent(query)}`);
   const profiles = await response.json();
   
@@ -7050,19 +7006,19 @@ async function enrichBrandData(brand, sources) {
         email: 'info@era.se',
         headquarters: 'Stockholm'
       },
-      'svensk fastighetsfÃ¶rmedling': {
+      'svensk fastighetsförmedling': {
         website: 'https://www.svenskfast.se',
         phone: '08-400 22 500',
         email: 'info@svenskfast.se',
         headquarters: 'Stockholm'
       },
-      'mÃ¤klarhuset': {
+      'mäklarhuset': {
         website: 'https://www.maklarhuset.se',
         phone: '08-695 57 00',
         email: 'info@maklarhuset.se',
         headquarters: 'Stockholm'
       },
-      'fastighetsbyrÃ¥n': {
+      'fastighetsbyrån': {
         website: 'https://www.fastighetsbyran.com',
         phone: '08-407 01 00',
         email: 'info@fastighetsbyran.se',
@@ -7074,7 +7030,7 @@ async function enrichBrandData(brand, sources) {
         email: 'info@notar.se',
         headquarters: 'Stockholm'
       },
-      'lÃ¤nsfÃ¶rsÃ¤kringar fastighetsfÃ¶rmedling': {
+      'länsförsäkringar fastighetsförmedling': {
         website: 'https://www.lansfast.se',
         phone: '08-588 400 00',
         email: 'info@lansfast.se',
@@ -7084,15 +7040,15 @@ async function enrichBrandData(brand, sources) {
         website: 'https://www.husmanhagberg.se',
         phone: '08-120 116 00',
         email: 'info@husmanhagberg.se',
-        headquarters: 'GÃ¶teborg'
+        headquarters: 'Göteborg'
       },
       'bjurfors': {
         website: 'https://www.bjurfors.se',
         phone: '031-81 86 00',
         email: 'info@bjurfors.se',
-        headquarters: 'GÃ¶teborg'
+        headquarters: 'Göteborg'
       },
-      'skandiamÃ¤klarna': {
+      'skandiamäklarna': {
         website: 'https://www.skandiamaklarna.se',
         phone: '08-522 088 00',
         email: 'info@skandiamaklarna.se',
@@ -7120,7 +7076,7 @@ async function enrichBrandData(brand, sources) {
     
     // If not found in known brands, try to search
     if (!data.website && sources.google) {
-      const searchQuery = `${brand.namn} fastighetsmÃ¤klare huvudkontor Sverige`;
+      const searchQuery = `${brand.namn} fastighetsmäklare huvudkontor Sverige`;
       const searchResult = await simulateGoogleSearch(searchQuery);
       if (searchResult) data.website = searchResult;
     }
@@ -7165,8 +7121,8 @@ function cleanCompanyName(name) {
     .toLowerCase()
     .replace(/\s+ab$/i, '')
     .replace(/\s+aktiebolag$/i, '')
-    .replace(/[Ã¥Ã¤]/g, 'a')
-    .replace(/Ã¶/g, 'o')
+    .replace(/[åä]/g, 'a')
+    .replace(/ö/g, 'o')
     .replace(/[^a-z0-9]/g, '')
     .substring(0, 30);
 }
@@ -7178,49 +7134,49 @@ async function openGDPRMenu() {
   const isAdmin = currentUser()?.roll === 'admin';
   
   modal.show(`
-    <h3>ðŸ”’ GDPR & Dataskydd</h3>
+    <h3>🔒 GDPR & Dataskydd</h3>
     <div class="muted" style="margin-bottom:16px;">
       Hantera personuppgifter enligt GDPR-reglerna
     </div>
     
     <div class="panel" style="margin-bottom:12px;">
       <div class="panel-header">
-        <h3>Dina rÃ¤ttigheter</h3>
+        <h3>Dina rättigheter</h3>
       </div>
       <div style="padding:12px; display:flex; flex-direction:column; gap:8px;">
-        <button class="secondary" onclick="exportMyData()">ðŸ“¥ Exportera min data (Dataportabilitet)</button>
-        <button class="secondary" onclick="viewAuditLog()">ðŸ“‹ Visa Ã¥tkomstlogg</button>
-        ${isAdmin ? '<button class="secondary" onclick="viewDataRetention()">ðŸ“… Datalagring & arkivering</button>' : ''}
-        ${isAdmin ? '<button class="secondary" onclick="viewBackups()">ðŸ’¾ Backuper</button>' : ''}
-        <button class="danger" onclick="requestDataDeletion()">ðŸ—‘ï¸ Radera min data (RÃ¤tten att bli glÃ¶md)</button>
+        <button class="secondary" onclick="exportMyData()">📥 Exportera min data (Dataportabilitet)</button>
+        <button class="secondary" onclick="viewAuditLog()">📋 Visa åtkomstlogg</button>
+        ${isAdmin ? '<button class="secondary" onclick="viewDataRetention()">📅 Datalagring & arkivering</button>' : ''}
+        ${isAdmin ? '<button class="secondary" onclick="viewBackups()">💾 Backuper</button>' : ''}
+        <button class="danger" onclick="requestDataDeletion()">🗑️ Radera min data (Rätten att bli glömd)</button>
       </div>
     </div>
     
     ${isAdmin ? `
     <div class="panel">
       <div class="panel-header">
-        <h3>Admin: SÃ¤kerhet & Compliance</h3>
+        <h3>Admin: Säkerhet & Compliance</h3>
       </div>
       <div style="padding:12px; display:flex; flex-direction:column; gap:8px;">
-        <button class="secondary" onclick="viewFullAuditLog()">ðŸ“Š Full revisionslogg</button>
-        <button class="secondary" onclick="createBackup()">ðŸ’¾ Skapa backup nu</button>
-        <button class="secondary" onclick="viewSecuritySettings()">âš™ï¸ SÃ¤kerhetsinstÃ¤llningar</button>
+        <button class="secondary" onclick="viewFullAuditLog()">📊 Full revisionslogg</button>
+        <button class="secondary" onclick="createBackup()">💾 Skapa backup nu</button>
+        <button class="secondary" onclick="viewSecuritySettings()">⚙️ Säkerhetsinställningar</button>
       </div>
     </div>
     
     <div class="panel">
       <div class="panel-header">
-        <h3>Admin: Integrationer & AnvÃ¤ndarhantering</h3>
+        <h3>Admin: Integrationer & Användarhantering</h3>
       </div>
       <div style="padding:12px; display:flex; flex-direction:column; gap:8px;">
-        <button class="primary" onclick="console.log('Visma button clicked'); modal.hide(); setTimeout(() => vismaIntegration.showConfiguration(), 100)">ðŸ”— Visma.net Integration</button>
-        <button class="primary" onclick="console.log('Dual user button clicked'); modal.hide(); setTimeout(() => dualUserManager.showDualUserManagement(), 100)">ðŸ‘¥ Hybrid AnvÃ¤ndarhantering</button>
+        <button class="primary" onclick="console.log('Visma button clicked'); modal.hide(); setTimeout(() => vismaIntegration.showConfiguration(), 100)">🔗 Visma.net Integration</button>
+        <button class="primary" onclick="console.log('Dual user button clicked'); modal.hide(); setTimeout(() => dualUserManager.showDualUserManagement(), 100)">👥 Hybrid Användarhantering</button>
       </div>
     </div>
     ` : ''}
     
     <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
 }
@@ -7263,9 +7219,9 @@ async function viewAuditLog() {
     const entries = data.entries || [];
     
     modal.show(`
-      <h3>ðŸ“‹ Min Ã¥tkomstlogg</h3>
+      <h3>📋 Min åtkomstlogg</h3>
       <div class="muted" style="margin-bottom:16px;">
-        Senaste 100 aktiviteterna pÃ¥ ditt konto
+        Senaste 100 aktiviteterna på ditt konto
       </div>
       
       <div class="list" style="max-height:400px; overflow:auto;">
@@ -7275,21 +7231,21 @@ async function viewAuditLog() {
               <div class="title">${e.action || e.type}</div>
               <div class="subtitle">
                 ${new Date(e.ts).toLocaleString('sv-SE')}
-                ${e.entityType ? ` Â· ${e.entityType}` : ''}
-                ${e.details ? ` Â· ${JSON.stringify(e.details)}` : ''}
+                ${e.entityType ? ` · ${e.entityType}` : ''}
+                ${e.details ? ` · ${JSON.stringify(e.details)}` : ''}
               </div>
             </div>
           </div>
-        `).join('') : '<div class="muted">Ingen aktivitet Ã¤nnu</div>'}
+        `).join('') : '<div class="muted">Ingen aktivitet ännu</div>'}
       </div>
       
       <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-        <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+        <button class="secondary" onclick="modal.hide()">Stäng</button>
       </div>
     `);
   } catch (error) {
     console.error('Audit log error:', error);
-    showNotification('Kunde inte hÃ¤mta logg', 'danger');
+    showNotification('Kunde inte hämta logg', 'danger');
   }
 }
 
@@ -7305,13 +7261,13 @@ async function viewFullAuditLog() {
     const entries = data.entries || [];
     
     modal.show(`
-      <h3>ðŸ“Š Full revisionslogg (Admin)</h3>
+      <h3>📊 Full revisionslogg (Admin)</h3>
       <div class="muted" style="margin-bottom:16px;">
-        ${entries.length} hÃ¤ndelser (senaste 500)
+        ${entries.length} händelser (senaste 500)
       </div>
       
       <div class="field">
-        <input type="text" id="auditSearch" placeholder="SÃ¶k i loggen..." onkeyup="filterAuditLog()" />
+        <input type="text" id="auditSearch" placeholder="Sök i loggen..." onkeyup="filterAuditLog()" />
       </div>
       
       <div class="list" id="auditLogList" style="max-height:500px; overflow:auto;">
@@ -7321,9 +7277,9 @@ async function viewFullAuditLog() {
               <div class="title">${e.action || e.type} ${e.userId ? `(User: ${e.userId})` : ''}</div>
               <div class="subtitle">
                 ${new Date(e.ts).toLocaleString('sv-SE')}
-                ${e.entityType ? ` Â· ${e.entityType}` : ''}
-                ${e.entityId ? ` Â· ID: ${e.entityId}` : ''}
-                ${e.ip ? ` Â· IP: ${e.ip}` : ''}
+                ${e.entityType ? ` · ${e.entityType}` : ''}
+                ${e.entityId ? ` · ID: ${e.entityId}` : ''}
+                ${e.ip ? ` · IP: ${e.ip}` : ''}
               </div>
             </div>
           </div>
@@ -7331,13 +7287,13 @@ async function viewFullAuditLog() {
       </div>
       
       <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-        <button class="primary" onclick="exportAuditLog()">ðŸ“¥ Exportera logg</button>
-        <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+        <button class="primary" onclick="exportAuditLog()">📥 Exportera logg</button>
+        <button class="secondary" onclick="modal.hide()">Stäng</button>
       </div>
     `);
   } catch (error) {
     console.error('Audit log error:', error);
-    showNotification('Kunde inte hÃ¤mta logg', 'danger');
+    showNotification('Kunde inte hämta logg', 'danger');
   }
 }
 
@@ -7389,31 +7345,31 @@ async function viewDataRetention() {
     const total = report.expiredData.agents.length + report.expiredData.companies.length;
     
     modal.show(`
-      <h3>ðŸ“… Datalagring & arkivering</h3>
+      <h3>📅 Datalagring & arkivering</h3>
       <div class="muted" style="margin-bottom:16px;">
-        Enligt GDPR ska personuppgifter inte lagras lÃ¤ngre Ã¤n nÃ¶dvÃ¤ndigt
+        Enligt GDPR ska personuppgifter inte lagras längre än nödvändigt
       </div>
       
       <div class="panel" style="margin-bottom:12px;">
         <div class="panel-header">
-          <h3>Lagringstid: ${report.retentionPeriodMonths} mÃ¥nader</h3>
+          <h3>Lagringstid: ${report.retentionPeriodMonths} månader</h3>
         </div>
         <div style="padding:12px;">
-          <div>AvskÃ¤rningsdatum: ${new Date(report.cutoffDate).toLocaleDateString('sv-SE')}</div>
+          <div>Avskärningsdatum: ${new Date(report.cutoffDate).toLocaleDateString('sv-SE')}</div>
           <div style="margin-top:8px;">
-            <strong>${total} poster</strong> Ã¤r Ã¤ldre Ã¤n ${report.retentionPeriodMonths} mÃ¥nader
+            <strong>${total} poster</strong> är äldre än ${report.retentionPeriodMonths} månader
           </div>
         </div>
       </div>
       
       <div class="panel" style="margin-bottom:12px;">
         <div class="panel-header">
-          <h3>UtgÃ¥ngen data</h3>
+          <h3>Utgången data</h3>
         </div>
         <div style="padding:12px;">
           <ul style="margin:0; padding-left:20px;">
-            <li>MÃ¤klare: ${report.expiredData.agents.length} st</li>
-            <li>FÃ¶retag: ${report.expiredData.companies.length} st</li>
+            <li>Mäklare: ${report.expiredData.agents.length} st</li>
+            <li>Företag: ${report.expiredData.companies.length} st</li>
             <li>Kunder: ${report.expiredData.customers.length} st</li>
           </ul>
         </div>
@@ -7422,20 +7378,20 @@ async function viewDataRetention() {
       ${total > 0 ? `
       <div class="panel warning" style="margin-bottom:12px;">
         <div style="padding:12px;">
-          <strong>âš ï¸ Varning:</strong> Gammal data bÃ¶r arkiveras eller raderas enligt GDPR.
+          <strong>⚠️ Varning:</strong> Gammal data bör arkiveras eller raderas enligt GDPR.
         </div>
       </div>
       ` : ''}
       
       <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-        ${total > 0 ? '<button class="primary" onclick="archiveOldData(false)">ðŸ—„ï¸ Arkivera gammal data</button>' : ''}
-        <button class="secondary" onclick="archiveOldData(true)">ðŸ” TestkÃ¶ra arkivering</button>
-        <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+        ${total > 0 ? '<button class="primary" onclick="archiveOldData(false)">🗄️ Arkivera gammal data</button>' : ''}
+        <button class="secondary" onclick="archiveOldData(true)">🔍 Testköra arkivering</button>
+        <button class="secondary" onclick="modal.hide()">Stäng</button>
       </div>
     `);
   } catch (error) {
     console.error('Retention report error:', error);
-    showNotification('Kunde inte hÃ¤mta rapport', 'danger');
+    showNotification('Kunde inte hämta rapport', 'danger');
   }
 }
 
@@ -7453,7 +7409,7 @@ async function archiveOldData(dryRun) {
     const result = await response.json();
     
     if (dryRun) {
-      showNotification(`TestkÃ¶ring: ${result.archived.agents + result.archived.companies} poster skulle arkiveras`, 'info');
+      showNotification(`Testköring: ${result.archived.agents + result.archived.companies} poster skulle arkiveras`, 'info');
     } else {
       showNotification(`${result.archived.agents + result.archived.companies} poster arkiverade!`, 'success');
       await loadState(); // Reload data
@@ -7466,18 +7422,18 @@ async function archiveOldData(dryRun) {
 
 async function requestDataDeletion() {
   const confirmed = confirm(
-    'âš ï¸ VARNING: Detta raderar ALL din data permanent enligt GDPR:s "rÃ¤tt att bli glÃ¶md".\n\n' +
+    '⚠️ VARNING: Detta raderar ALL din data permanent enligt GDPR:s "rätt att bli glömd".\n\n' +
     'Detta inkluderar:\n' +
-    '- Ditt anvÃ¤ndarkonto\n' +
+    '- Ditt användarkonto\n' +
     '- All data du skapat\n' +
     '- Din inloggning (du loggas ut)\n\n' +
-    'Data anonymiseras dÃ¤r den inte kan raderas.\n\n' +
-    'Ã„r du HELT SÃ„KER?'
+    'Data anonymiseras där den inte kan raderas.\n\n' +
+    'Är du HELT SÄKER?'
   );
   
   if (!confirmed) return;
   
-  const doubleCheck = prompt('Skriv "RADERA MIN DATA" fÃ¶r att bekrÃ¤fta:');
+  const doubleCheck = prompt('Skriv "RADERA MIN DATA" för att bekräfta:');
   if (doubleCheck !== 'RADERA MIN DATA') {
     showNotification('Radering avbruten', 'info');
     return;
@@ -7515,9 +7471,9 @@ async function viewBackups() {
     const backups = data.backups || [];
     
     modal.show(`
-      <h3>ðŸ’¾ Backuper</h3>
+      <h3>💾 Backuper</h3>
       <div class="muted" style="margin-bottom:16px;">
-        ${backups.length} backuper tillgÃ¤ngliga
+        ${backups.length} backuper tillgängliga
       </div>
       
       <div class="list" style="max-height:400px; overflow:auto;">
@@ -7527,22 +7483,22 @@ async function viewBackups() {
               <div class="title">${b.filename}</div>
               <div class="subtitle">
                 Skapad: ${new Date(b.created).toLocaleString('sv-SE')}
-                Â· Storlek: ${(b.size / 1024).toFixed(2)} KB
+                · Storlek: ${(b.size / 1024).toFixed(2)} KB
               </div>
             </div>
-            <button class="secondary" onclick="restoreBackup('${b.filename}')">Ã…terstÃ¤ll</button>
+            <button class="secondary" onclick="restoreBackup('${b.filename}')">Återställ</button>
           </div>
-        `).join('') : '<div class="muted">Inga backuper Ã¤nnu</div>'}
+        `).join('') : '<div class="muted">Inga backuper ännu</div>'}
       </div>
       
       <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-        <button class="primary" onclick="createBackup()">ðŸ’¾ Skapa ny backup</button>
-        <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+        <button class="primary" onclick="createBackup()">💾 Skapa ny backup</button>
+        <button class="secondary" onclick="modal.hide()">Stäng</button>
       </div>
     `);
   } catch (error) {
     console.error('Backups error:', error);
-    showNotification('Kunde inte hÃ¤mta backuper', 'danger');
+    showNotification('Kunde inte hämta backuper', 'danger');
   }
 }
 
@@ -7570,10 +7526,10 @@ async function createBackup() {
 
 async function restoreBackup(filename) {
   const confirmed = confirm(
-    `âš ï¸ VARNING: Detta Ã¥terstÃ¤ller systemet till backupen:\n\n${filename}\n\n` +
-    'All nuvarande data kommer att ersÃ¤ttas!\n' +
-    'En backup av nuvarande data skapas fÃ¶rst.\n\n' +
-    'FortsÃ¤tt?'
+    `⚠️ VARNING: Detta återställer systemet till backupen:\n\n${filename}\n\n` +
+    'All nuvarande data kommer att ersättas!\n' +
+    'En backup av nuvarande data skapas först.\n\n' +
+    'Fortsätt?'
   );
   
   if (!confirmed) return;
@@ -7588,21 +7544,21 @@ async function restoreBackup(filename) {
     
     if (!response.ok) throw new Error('Restore failed');
     
-    showNotification('Backup Ã¥terstÃ¤lld! Laddar om...', 'success');
+    showNotification('Backup återställd! Laddar om...', 'success');
     setTimeout(() => {
       window.location.reload();
     }, 2000);
   } catch (error) {
     console.error('Restore error:', error);
-    showNotification('Ã…terstÃ¤llning misslyckades', 'danger');
+    showNotification('Återställning misslyckades', 'danger');
   }
 }
 
 async function viewSecuritySettings() {
   modal.show(`
-    <h3>âš™ï¸ SÃ¤kerhetsinstÃ¤llningar</h3>
+    <h3>⚙️ Säkerhetsinställningar</h3>
     <div class="muted" style="margin-bottom:16px;">
-      Konfigurera sÃ¤kerhets- och GDPR-instÃ¤llningar
+      Konfigurera säkerhets- och GDPR-inställningar
     </div>
     
     <div class="panel" style="margin-bottom:12px;">
@@ -7614,21 +7570,21 @@ async function viewSecuritySettings() {
           <strong>Timeout:</strong> 30 minuter inaktivitet
         </div>
         <div>
-          <strong>Varning:</strong> 5 minuter fÃ¶re timeout
+          <strong>Varning:</strong> 5 minuter före timeout
         </div>
       </div>
     </div>
     
     <div class="panel" style="margin-bottom:12px;">
       <div class="panel-header">
-        <h3>LÃ¶senord</h3>
+        <h3>Lösenord</h3>
       </div>
       <div style="padding:12px;">
         <div>
           <strong>Hashning:</strong> bcrypt (10 rounds)
         </div>
         <div>
-          <strong>Ã„ldre lÃ¶senord:</strong> Uppgraderas automatiskt vid nÃ¤sta inloggning
+          <strong>Äldre lösenord:</strong> Uppgraderas automatiskt vid nästa inloggning
         </div>
       </div>
     </div>
@@ -7639,10 +7595,10 @@ async function viewSecuritySettings() {
       </div>
       <div style="padding:12px;">
         <div>
-          <strong>Standard lagringstid:</strong> 24 mÃ¥nader
+          <strong>Standard lagringstid:</strong> 24 månader
         </div>
         <div>
-          <strong>Automatisk arkivering:</strong> Inaktiverad (kÃ¶r manuellt)
+          <strong>Automatisk arkivering:</strong> Inaktiverad (kör manuellt)
         </div>
       </div>
     </div>
@@ -7656,13 +7612,13 @@ async function viewSecuritySettings() {
           <strong>Status:</strong> Aktiv
         </div>
         <div>
-          <strong>Loggas:</strong> Inloggningar, dataÃ¥tkomst, GDPR-hÃ¤ndelser
+          <strong>Loggas:</strong> Inloggningar, dataåtkomst, GDPR-händelser
         </div>
       </div>
     </div>
     
     <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
-      <button class="secondary" onclick="modal.hide()">StÃ¤ng</button>
+      <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
 }
@@ -7672,12 +7628,12 @@ async function viewSecuritySettings() {
 // ============================================================
 
 /**
- * Azure B2C anvÃ¤ndare - extend AppState
+ * Azure B2C användare - extend AppState
  */
 AppState.customers = AppState.customers || []; // Azure B2C customer users
 
 /**
- * Ã–ppna modal fÃ¶r att hantera kunder
+ * Öppna modal för att hantera kunder
  */
 function openManageCustomersModal() {
   const modal = document.getElementById('manageCustomersModal');
@@ -7691,12 +7647,12 @@ function closeManageCustomersModal() {
 }
 
 /**
- * Ã–ppna modal fÃ¶r att skapa anvÃ¤ndare
+ * Öppna modal för att skapa användare
  */
 function openCreateUserModal() {
-  // Populera fÃ¶retag i dropdown
+  // Populera företag i dropdown
   const companySelect = document.getElementById('userCompany');
-  companySelect.innerHTML = '<option value="">VÃ¤lj fÃ¶retag...</option>';
+  companySelect.innerHTML = '<option value="">Välj företag...</option>';
   
   AppState.companies.forEach(company => {
     const option = document.createElement('option');
@@ -7717,7 +7673,7 @@ function closeCreateUserModal() {
 }
 
 /**
- * Ã–ppna modal fÃ¶r att ge tjÃ¤nst
+ * Öppna modal för att ge tjänst
  */
 function openGrantServiceModal(userId) {
   document.getElementById('grantServiceUserId').value = userId;
@@ -7737,7 +7693,7 @@ function closeUserDetailsModal() {
 }
 
 /**
- * Skapa ny anvÃ¤ndare i Azure B2C
+ * Skapa ny användare i Azure B2C
  */
 async function createUserInB2C(event) {
   event.preventDefault();
@@ -7750,7 +7706,7 @@ async function createUserInB2C(event) {
   const role = document.getElementById('userRole').value;
   const sendInviteEmail = document.getElementById('sendInviteEmail').checked;
   
-  // HÃ¤mta valda tjÃ¤nster
+  // Hämta valda tjänster
   const services = Array.from(document.querySelectorAll('input[name="service"]:checked'))
     .map(cb => cb.value);
   
@@ -7759,7 +7715,7 @@ async function createUserInB2C(event) {
   const companyName = companySelect.options[companySelect.selectedIndex]?.dataset.companyName;
   
   try {
-    showNotification('Skapar anvÃ¤ndare i Azure B2C...', 'info');
+    showNotification('Skapar användare i Azure B2C...', 'info');
     
     const response = await fetch(`${API_BASE}/api/users/create-in-b2c`, {
       method: 'POST',
@@ -7788,39 +7744,39 @@ async function createUserInB2C(event) {
     
     const result = await response.json();
     
-    // LÃ¤gg till i lokal state
+    // Lägg till i lokal state
     if (!AppState.customers) AppState.customers = [];
     AppState.customers.push(result.user);
     await saveState();
     
     // Visa meddelande
-    let message = `AnvÃ¤ndare ${email} skapad!`;
+    let message = `Användare ${email} skapad!`;
     if (sendInviteEmail) {
-      message += ' VÃ¤lkomstmail skickat.';
+      message += ' Välkomstmail skickat.';
     } else if (result.temporaryPassword) {
-      message += `\n\nTemporÃ¤rt lÃ¶senord: ${result.temporaryPassword}\n\nâš ï¸ Spara detta nu! Det visas inte igen.`;
+      message += `\n\nTemporärt lösenord: ${result.temporaryPassword}\n\n⚠️ Spara detta nu! Det visas inte igen.`;
       // Show password in alert for copy
       setTimeout(() => {
-        alert(`AnvÃ¤ndare skapad!\n\nE-post: ${email}\nTemporÃ¤rt lÃ¶senord: ${result.temporaryPassword}\n\nâš ï¸ Spara detta lÃ¶senord nu! Det visas inte igen.`);
+        alert(`Användare skapad!\n\nE-post: ${email}\nTemporärt lösenord: ${result.temporaryPassword}\n\n⚠️ Spara detta lösenord nu! Det visas inte igen.`);
       }, 100);
     }
     
     showNotification(message, 'success');
     
-    // StÃ¤ng modal och Ã¥terstÃ¤ll formulÃ¤r
+    // Stäng modal och återställ formulär
     closeCreateUserModal();
     
-    // Uppdatera anvÃ¤ndarlistan
+    // Uppdatera användarlistan
     renderCustomersTable();
     
   } catch (error) {
     console.error('Failed to create user:', error);
-    showNotification('Kunde inte skapa anvÃ¤ndare: ' + error.message, 'error');
+    showNotification('Kunde inte skapa användare: ' + error.message, 'error');
   }
 }
 
 /**
- * Ge anvÃ¤ndare tillgÃ¥ng till tjÃ¤nst
+ * Ge användare tillgång till tjänst
  */
 async function grantServiceAccess(event) {
   event.preventDefault();
@@ -7830,7 +7786,7 @@ async function grantServiceAccess(event) {
   const expiresAt = document.getElementById('grantServiceExpiry').value || null;
   
   try {
-    showNotification(`Ger tillgÃ¥ng till ${serviceName}...`, 'info');
+    showNotification(`Ger tillgång till ${serviceName}...`, 'info');
     
     const response = await fetch(`${API_BASE}/api/users/${userId}/grant-service`, {
       method: 'POST',
@@ -7864,26 +7820,26 @@ async function grantServiceAccess(event) {
       await saveState();
     }
     
-    showNotification(result.message || 'TjÃ¤nst tillagd!', 'success');
+    showNotification(result.message || 'Tjänst tillagd!', 'success');
     closeGrantServiceModal();
     renderCustomersTable();
     
   } catch (error) {
     console.error('Failed to grant service:', error);
-    showNotification('Kunde inte ge tillgÃ¥ng till tjÃ¤nst: ' + error.message, 'error');
+    showNotification('Kunde inte ge tillgång till tjänst: ' + error.message, 'error');
   }
 }
 
 /**
- * Ta bort tillgÃ¥ng till tjÃ¤nst
+ * Ta bort tillgång till tjänst
  */
 async function revokeServiceAccess(userId, serviceName) {
-  if (!confirm(`Ã„r du sÃ¤ker pÃ¥ att du vill ta bort tillgÃ¥ng till ${serviceName}?`)) {
+  if (!confirm(`Är du säker på att du vill ta bort tillgång till ${serviceName}?`)) {
     return;
   }
   
   try {
-    showNotification('Tar bort tjÃ¤nst...', 'info');
+    showNotification('Tar bort tjänst...', 'info');
     
     const response = await fetch(`${API_BASE}/api/users/${userId}/revoke-service`, {
       method: 'POST',
@@ -7908,25 +7864,25 @@ async function revokeServiceAccess(userId, serviceName) {
       await saveState();
     }
     
-    showNotification(result.message || 'TjÃ¤nst borttagen!', 'success');
+    showNotification(result.message || 'Tjänst borttagen!', 'success');
     renderCustomersTable();
     
   } catch (error) {
     console.error('Failed to revoke service:', error);
-    showNotification('Kunde inte ta bort tjÃ¤nst: ' + error.message, 'error');
+    showNotification('Kunde inte ta bort tjänst: ' + error.message, 'error');
   }
 }
 
 /**
- * Inaktivera anvÃ¤ndare
+ * Inaktivera användare
  */
 async function disableUser(userId) {
-  if (!confirm('Ã„r du sÃ¤ker pÃ¥ att du vill inaktivera denna anvÃ¤ndare?')) {
+  if (!confirm('Är du säker på att du vill inaktivera denna användare?')) {
     return;
   }
   
   try {
-    showNotification('Inaktiverar anvÃ¤ndare...', 'info');
+    showNotification('Inaktiverar användare...', 'info');
     
     const response = await fetch(`${API_BASE}/api/users/${userId}/disable`, {
       method: 'POST',
@@ -7947,21 +7903,21 @@ async function disableUser(userId) {
       await saveState();
     }
     
-    showNotification(result.message || 'AnvÃ¤ndare inaktiverad!', 'success');
+    showNotification(result.message || 'Användare inaktiverad!', 'success');
     renderCustomersTable();
     
   } catch (error) {
     console.error('Failed to disable user:', error);
-    showNotification('Kunde inte inaktivera anvÃ¤ndare: ' + error.message, 'error');
+    showNotification('Kunde inte inaktivera användare: ' + error.message, 'error');
   }
 }
 
 /**
- * Aktivera anvÃ¤ndare
+ * Aktivera användare
  */
 async function enableUser(userId) {
   try {
-    showNotification('Aktiverar anvÃ¤ndare...', 'info');
+    showNotification('Aktiverar användare...', 'info');
     
     const response = await fetch(`${API_BASE}/api/users/${userId}/enable`, {
       method: 'POST',
@@ -7982,17 +7938,17 @@ async function enableUser(userId) {
       await saveState();
     }
     
-    showNotification(result.message || 'AnvÃ¤ndare aktiverad!', 'success');
+    showNotification(result.message || 'Användare aktiverad!', 'success');
     renderCustomersTable();
     
   } catch (error) {
     console.error('Failed to enable user:', error);
-    showNotification('Kunde inte aktivera anvÃ¤ndare: ' + error.message, 'error');
+    showNotification('Kunde inte aktivera användare: ' + error.message, 'error');
   }
 }
 
 /**
- * Uppdatera anvÃ¤ndarroll
+ * Uppdatera användarroll
  */
 async function updateUserRole(userId, newRole) {
   try {
@@ -8031,15 +7987,15 @@ async function updateUserRole(userId, newRole) {
 }
 
 /**
- * Ã…terstÃ¤ll lÃ¶senord
+ * Återställ lösenord
  */
 async function resetUserPassword(userId, sendEmail = true) {
-  if (!confirm('Ã„r du sÃ¤ker pÃ¥ att du vill Ã¥terstÃ¤lla lÃ¶senordet fÃ¶r denna anvÃ¤ndare?')) {
+  if (!confirm('Är du säker på att du vill återställa lösenordet för denna användare?')) {
     return;
   }
   
   try {
-    showNotification('Ã…terstÃ¤ller lÃ¶senord...', 'info');
+    showNotification('Återställer lösenord...', 'info');
     
     const response = await fetch(`${API_BASE}/api/users/${userId}/reset-password`, {
       method: 'POST',
@@ -8058,38 +8014,38 @@ async function resetUserPassword(userId, sendEmail = true) {
     const result = await response.json();
     
     if (result.temporaryPassword) {
-      // Visa lÃ¶senordet om det inte skickades via mail
-      alert(`Nytt temporÃ¤rt lÃ¶senord:\n\n${result.temporaryPassword}\n\nâš ï¸ Spara detta nu! Det visas inte igen.`);
+      // Visa lösenordet om det inte skickades via mail
+      alert(`Nytt temporärt lösenord:\n\n${result.temporaryPassword}\n\n⚠️ Spara detta nu! Det visas inte igen.`);
     } else {
-      showNotification('LÃ¶senord Ã¥terstÃ¤llt och mail skickat till anvÃ¤ndaren', 'success');
+      showNotification('Lösenord återställt och mail skickat till användaren', 'success');
     }
     
   } catch (error) {
     console.error('Failed to reset password:', error);
-    showNotification('Kunde inte Ã¥terstÃ¤lla lÃ¶senord: ' + error.message, 'error');
+    showNotification('Kunde inte återställa lösenord: ' + error.message, 'error');
   }
 }
 
 /**
- * Radera anvÃ¤ndare
+ * Radera användare
  */
 async function deleteUserConfirm(userId) {
   const user = AppState.customers?.find(u => u.id === userId);
   if (!user) return;
   
   const confirmed = confirm(
-    `Ã„r du sÃ¤ker pÃ¥ att du vill radera ${user.email}?\n\n` +
+    `Är du säker på att du vill radera ${user.email}?\n\n` +
     `Detta kommer att:\n` +
-    `â€¢ Ta bort anvÃ¤ndaren frÃ¥n CRM\n` +
-    `â€¢ Ta bort anvÃ¤ndaren frÃ¥n Azure B2C\n` +
-    `â€¢ Denna Ã¥tgÃ¤rd kan INTE Ã¥ngras!\n\n` +
-    `FortsÃ¤tt?`
+    `• Ta bort användaren från CRM\n` +
+    `• Ta bort användaren från Azure B2C\n` +
+    `• Denna åtgärd kan INTE ångras!\n\n` +
+    `Fortsätt?`
   );
   
   if (!confirmed) return;
   
   try {
-    showNotification('Raderar anvÃ¤ndare...', 'info');
+    showNotification('Raderar användare...', 'info');
     
     const response = await fetch(`${API_BASE}/api/users/${userId}`, {
       method: 'DELETE',
@@ -8107,18 +8063,18 @@ async function deleteUserConfirm(userId) {
     
     const result = await response.json();
     
-    // Ta bort frÃ¥n lokal state
+    // Ta bort från lokal state
     if (AppState.customers) {
       AppState.customers = AppState.customers.filter(u => u.id !== userId);
       await saveState();
     }
     
-    showNotification(result.message || 'AnvÃ¤ndare raderad!', 'success');
+    showNotification(result.message || 'Användare raderad!', 'success');
     renderCustomersTable();
     
   } catch (error) {
     console.error('Failed to delete user:', error);
-    showNotification('Kunde inte radera anvÃ¤ndare: ' + error.message, 'error');
+    showNotification('Kunde inte radera användare: ' + error.message, 'error');
   }
 }
 
@@ -8131,7 +8087,7 @@ function renderCustomersTable() {
   
   tbody.innerHTML = '';
   
-  // Filtrera baserat pÃ¥ search och filters
+  // Filtrera baserat på search och filters
   const searchTerm = document.getElementById('customerSearch')?.value?.toLowerCase() || '';
   const roleFilter = document.getElementById('customerRoleFilter')?.value || 'all';
   const statusFilter = document.getElementById('customerStatusFilter')?.value || 'all';
@@ -8168,14 +8124,14 @@ function renderCustomersTable() {
     // Services badges with DaisyUI
     const servicesHtml = user.services?.map(s => {
       const isExpired = s.expiresAt && new Date(s.expiresAt) < new Date();
-      const expiryText = s.expiresAt ? ` (utgÃ¥r: ${new Date(s.expiresAt).toLocaleDateString()})` : '';
+      const expiryText = s.expiresAt ? ` (utgår: ${new Date(s.expiresAt).toLocaleDateString()})` : '';
       
       return `
         <span class="badge ${isExpired ? 'badge-error' : 'badge-success'} gap-2" 
               title="Beviljad: ${new Date(s.grantedAt).toLocaleDateString()}${expiryText}">
           ${escapeHTML(s.name)}
           ${(isManager || isAdmin) ? 
-            `<button class="btn btn-ghost btn-xs btn-circle" onclick="revokeServiceAccess('${user.id}', '${escapeHTML(s.name)}')">Ã—</button>` : 
+            `<button class="btn btn-ghost btn-xs btn-circle" onclick="revokeServiceAccess('${user.id}', '${escapeHTML(s.name)}')">×</button>` : 
             ''}
         </span>
       `;
@@ -8188,7 +8144,7 @@ function renderCustomersTable() {
       <td>
         <select class="select select-bordered select-sm" onchange="updateUserRole('${user.id}', this.value)" 
                 ${!(isManager || isAdmin) ? 'disabled' : ''}>
-          <option value="sales" ${user.role === 'sales' ? 'selected' : ''}>MÃ¤klare</option>
+          <option value="sales" ${user.role === 'sales' ? 'selected' : ''}>Mäklare</option>
           <option value="manager" ${user.role === 'manager' ? 'selected' : ''}>Manager</option>
           <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
         </select>
@@ -8208,7 +8164,7 @@ function renderCustomersTable() {
           ${(isSales || isManager || isAdmin) ? `
             <button class="btn btn-sm btn-circle btn-primary" 
                     onclick="openGrantServiceModal('${user.id}')"
-                    title="LÃ¤gg till tjÃ¤nst">
+                    title="Lägg till tjänst">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
               </svg>
@@ -8236,7 +8192,7 @@ function renderCustomersTable() {
             
             <button class="btn btn-sm btn-circle btn-ghost" 
                     onclick="resetUserPassword('${user.id}', true)"
-                    title="Ã…terstÃ¤ll lÃ¶senord">
+                    title="Återställ lösenord">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
               </svg>
@@ -8262,13 +8218,13 @@ function renderCustomersTable() {
   // Show "no results" if empty
   if (customers.length === 0) {
     const tr = document.createElement('tr');
-    tr.innerHTML = '<td colspan="7" class="text-center py-8 text-base-content/50">Inga anvÃ¤ndare hittades</td>';
+    tr.innerHTML = '<td colspan="7" class="text-center py-8 text-base-content/50">Inga användare hittades</td>';
     tbody.appendChild(tr);
   }
 }
 
 /**
- * Escape HTML fÃ¶r sÃ¤kerhet
+ * Escape HTML för säkerhet
  */
 function escapeHTML(str) {
   if (!str) return '';
@@ -8283,16 +8239,16 @@ function escapeHTML(str) {
 function showNotification(message, type = 'info') {
   // Simple alert for now - can be replaced with toast notifications
   if (type === 'error') {
-    alert('âŒ ' + message);
+    alert('❌ ' + message);
   } else if (type === 'success') {
-    alert('âœ… ' + message);
+    alert('✅ ' + message);
   } else {
-    alert('â„¹ï¸ ' + message);
+    alert('ℹ️ ' + message);
   }
 }
 
 /**
- * Visa fÃ¤ltfel i modal
+ * Visa fältfel i modal
  */
 function showFieldError(errorDiv, message) {
   if (errorDiv) {
@@ -8309,7 +8265,7 @@ function showFieldError(errorDiv, message) {
 }
 
 /**
- * DÃ¶lj fÃ¤ltfel i modal
+ * Dölj fältfel i modal
  */
 function hideFieldError(errorDiv) {
   if (errorDiv) {
@@ -8318,7 +8274,7 @@ function hideFieldError(errorDiv) {
 }
 
 /**
- * Visa framgÃ¥ngsmeddelande
+ * Visa framgångsmeddelande
  */
 function showSuccessMessage(message) {
   const successDiv = document.createElement('div');
@@ -8348,7 +8304,7 @@ function showSuccessMessage(message) {
 // ============================================
 
 /**
- * Dual User Management fÃ¶r Azure B2C + Legacy System
+ * Dual User Management för Azure B2C + Legacy System
  */
 class DualUserManager {
   constructor() {
@@ -8361,7 +8317,7 @@ class DualUserManager {
   }
 
   /**
-   * Ladda statistik Ã¶ver dual accounts
+   * Ladda statistik över dual accounts
    */
   async loadStats() {
     try {
@@ -8396,12 +8352,12 @@ class DualUserManager {
       <div class="space-y-6">
         <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
           <div class="flex items-center mb-2">
-            <span class="text-blue-600 text-lg">ðŸ”„</span>
-            <h3 class="text-lg font-medium text-blue-900 ml-2">Hybrid AnvÃ¤ndarhantering</h3>
+            <span class="text-blue-600 text-lg">🔄</span>
+            <h3 class="text-lg font-medium text-blue-900 ml-2">Hybrid Användarhantering</h3>
           </div>
           <p class="text-blue-700 text-sm">
-            Hantera anvÃ¤ndare i bÃ¥de moderna Azure B2C-system och legacy kundadminsystem.
-            Automatisk routing baserat pÃ¥ tjÃ¤nstetyp och kundprofil.
+            Hantera användare i både moderna Azure B2C-system och legacy kundadminsystem.
+            Automatisk routing baserat på tjänstetyp och kundprofil.
           </p>
         </div>
 
@@ -8409,19 +8365,19 @@ class DualUserManager {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-4">
-            <h3 class="text-lg font-medium">Skapa anvÃ¤ndarkonton</h3>
+            <h3 class="text-lg font-medium">Skapa användarkonton</h3>
             
             <div class="space-y-3">
               <button onclick="dualUserManager.showCreateUserDialog()" class="btn btn-primary w-full">
-                ðŸ†• Skapa anvÃ¤ndare fÃ¶r kund
+                🆕 Skapa användare för kund
               </button>
               
               <button onclick="dualUserManager.analyzeCustomerNeeds()" class="btn btn-secondary w-full">
-                ðŸ” Analysera systemkrav
+                🔍 Analysera systemkrav
               </button>
               
               <button onclick="dualUserManager.showMigrationCandidates()" class="btn btn-secondary w-full">
-                ðŸ“ˆ Visa migreringskandidater
+                📈 Visa migreringskandidater
               </button>
             </div>
           </div>
@@ -8431,15 +8387,15 @@ class DualUserManager {
             
             <div class="space-y-3">
               <button onclick="dualUserManager.syncAllAccounts()" class="btn btn-primary w-full">
-                ðŸ”„ Synka alla konton
+                🔄 Synka alla konton
               </button>
               
               <button onclick="dualUserManager.bulkMigrateToAzure()" class="btn btn-secondary w-full">
-                â¬†ï¸ Migrera till Azure B2C
+                ⬆️ Migrera till Azure B2C
               </button>
               
               <button onclick="dualUserManager.showRoutingRules()" class="btn btn-secondary w-full">
-                âš™ï¸ Routing-regler
+                ⚙️ Routing-regler
               </button>
             </div>
           </div>
@@ -8451,7 +8407,7 @@ class DualUserManager {
               Senast synkroniserad: ${this.stats?.lastSync ? new Date(this.stats.lastSync).toLocaleString('sv-SE') : 'Aldrig'}
             </div>
             <button onclick="dualUserManager.refreshStats()" class="btn btn-secondary">
-              ðŸ”„ Uppdatera
+              🔄 Uppdatera
             </button>
           </div>
         </div>
@@ -8491,18 +8447,18 @@ class DualUserManager {
   }
 
   /**
-   * Visa dialog fÃ¶r att skapa anvÃ¤ndare
+   * Visa dialog för att skapa användare
    */
   async showCreateUserDialog() {
-    // HÃ¤mta alla kunder fÃ¶r dropdown
+    // Hämta alla kunder för dropdown
     const customers = state.customers || [];
     
-    openModal('Skapa anvÃ¤ndarkonto', `
+    openModal('Skapa användarkonto', `
       <form id="createUserForm" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">VÃ¤lj kund</label>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Välj kund</label>
           <select id="customerId" class="w-full border border-gray-300 rounded-md px-3 py-2" required>
-            <option value="">-- VÃ¤lj kund --</option>
+            <option value="">-- Välj kund --</option>
             ${customers.map(customer => `
               <option value="${customer.id}">${escapeHTML(customer.namn)}</option>
             `).join('')}
@@ -8510,7 +8466,7 @@ class DualUserManager {
         </div>
         
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">TjÃ¤nster</label>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Tjänster</label>
           <div class="space-y-2" id="servicesContainer">
             <label class="flex items-center">
               <input type="checkbox" value="CRM_MODERN" class="mr-2">
@@ -8530,7 +8486,7 @@ class DualUserManager {
             </label>
             <label class="flex items-center">
               <input type="checkbox" value="API_ACCESS" class="mr-2">
-              <span class="text-sm">API-Ã¥tkomst</span>
+              <span class="text-sm">API-åtkomst</span>
             </label>
           </div>
         </div>
@@ -8561,14 +8517,14 @@ class DualUserManager {
           .map(input => input.value);
         
         if (!selectedCustomerId || selectedServices.length === 0) {
-          showNotification('VÃ¤lj kund och minst en tjÃ¤nst fÃ¶rst', 'error');
+          showNotification('Välj kund och minst en tjänst först', 'error');
           return;
         }
         
         await this.analyzeSystemNeedsForCustomer(selectedCustomerId, selectedServices);
       });
       
-      // Skapa anvÃ¤ndare
+      // Skapa användare
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -8577,7 +8533,7 @@ class DualUserManager {
           .map(input => input.value);
         
         if (!selectedCustomerId || selectedServices.length === 0) {
-          showNotification('VÃ¤lj kund och minst en tjÃ¤nst', 'error');
+          showNotification('Välj kund och minst en tjänst', 'error');
           return;
         }
         
@@ -8587,7 +8543,7 @@ class DualUserManager {
   }
 
   /**
-   * Analysera systemkrav fÃ¶r specifik kund
+   * Analysera systemkrav för specifik kund
    */
   async analyzeSystemNeedsForCustomer(customerId, services) {
     try {
@@ -8622,14 +8578,14 @@ class DualUserManager {
       resultDiv.innerHTML = `
         <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <span class="font-medium">PrimÃ¤rt system:</span>
+            <span class="font-medium">Primärt system:</span>
             <span class="px-2 py-1 rounded text-sm ${systemNeeds.primarySystem === 'azure-b2c' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'}">
               ${systemNeeds.primarySystem === 'azure-b2c' ? 'Azure B2C' : 'Legacy System'}
             </span>
           </div>
           
           <div class="flex items-center justify-between">
-            <span class="font-medium">BehÃ¶ver bÃ¥da systemen:</span>
+            <span class="font-medium">Behöver båda systemen:</span>
             <span class="px-2 py-1 rounded text-sm ${systemNeeds.isDualAccount ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}">
               ${systemNeeds.isDualAccount ? 'Ja' : 'Nej'}
             </span>
@@ -8639,7 +8595,7 @@ class DualUserManager {
             <div>
               <div class="font-medium text-blue-700">Azure B2C anledningar:</div>
               <ul class="text-sm text-blue-600 ml-4">
-                ${systemNeeds.reasoning.azureB2CReasons.map(reason => `<li>â€¢ ${reason}</li>`).join('')}
+                ${systemNeeds.reasoning.azureB2CReasons.map(reason => `<li>• ${reason}</li>`).join('')}
               </ul>
             </div>
           ` : ''}
@@ -8648,7 +8604,7 @@ class DualUserManager {
             <div>
               <div class="font-medium text-yellow-700">Legacy system anledningar:</div>
               <ul class="text-sm text-yellow-600 ml-4">
-                ${systemNeeds.reasoning.legacyReasons.map(reason => `<li>â€¢ ${reason}</li>`).join('')}
+                ${systemNeeds.reasoning.legacyReasons.map(reason => `<li>• ${reason}</li>`).join('')}
               </ul>
             </div>
           ` : ''}
@@ -8660,7 +8616,7 @@ class DualUserManager {
   }
 
   /**
-   * Skapa anvÃ¤ndarkonton
+   * Skapa användarkonton
    */
   async createUserAccounts(customerId, services) {
     try {
@@ -8681,21 +8637,21 @@ class DualUserManager {
       }
     } catch (error) {
       console.error('User creation failed:', error);
-      showNotification(`Kunde inte skapa anvÃ¤ndarkonton: ${error.message}`, 'error');
+      showNotification(`Kunde inte skapa användarkonton: ${error.message}`, 'error');
     }
   }
 
   /**
-   * Visa resultat av anvÃ¤ndarskapande
+   * Visa resultat av användarskapande
    */
   displayCreationResult(result) {
     const accountTypes = Object.keys(result.accounts);
     const hasErrors = result.errors.length > 0;
     
-    let message = `AnvÃ¤ndarkonton skapade fÃ¶r ${result.customerName}!\n\n`;
+    let message = `Användarkonton skapade för ${result.customerName}!\n\n`;
     
     if (accountTypes.length > 0) {
-      message += `Skapade konton:\n${accountTypes.map(type => `â€¢ ${type}`).join('\n')}\n\n`;
+      message += `Skapade konton:\n${accountTypes.map(type => `• ${type}`).join('\n')}\n\n`;
     }
     
     if (hasErrors) {
@@ -8720,7 +8676,7 @@ class DualUserManager {
         const result = await response.json();
         
         const message = `
-          Synkronisering slutfÃ¶rd!
+          Synkronisering slutförd!
           
           Processerade: ${result.processed}
           Uppdaterade: ${result.updated}
@@ -8743,7 +8699,7 @@ class DualUserManager {
    */
   async refreshStats() {
     await this.loadStats();
-    // Uppdatera UI om modalen Ã¤r Ã¶ppen
+    // Uppdatera UI om modalen är öppen
     const modal = document.getElementById('modal');
     if (modal && modal.style.display !== 'none') {
       this.showDualUserManagement();
@@ -8755,48 +8711,48 @@ class DualUserManager {
    */
   async analyzeCustomerNeeds() {
     try {
-      // Visa en enkel analys av systemanvÃ¤ndning
+      // Visa en enkel analys av systemanvändning
       modal.show(`
         <div class="space-y-6">
           <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h3 class="text-lg font-medium text-blue-900 mb-2">ðŸ” Systemanalys</h3>
+            <h3 class="text-lg font-medium text-blue-900 mb-2">🔍 Systemanalys</h3>
             <p class="text-blue-700 text-sm">
-              Analyserar vilka system som passar bÃ¤st fÃ¶r olika kundtyper.
+              Analyserar vilka system som passar bäst för olika kundtyper.
             </p>
           </div>
           
           <div class="space-y-4">
-            <h4 class="font-medium">Rekommendationer baserat pÃ¥ tjÃ¤nstetyp:</h4>
+            <h4 class="font-medium">Rekommendationer baserat på tjänstetyp:</h4>
             
             <div class="bg-green-50 p-3 rounded border border-green-200">
-              <h5 class="font-medium text-green-800">Azure B2C (Moderna tjÃ¤nster)</h5>
+              <h5 class="font-medium text-green-800">Azure B2C (Moderna tjänster)</h5>
               <ul class="text-sm text-green-700 mt-1 space-y-1">
-                <li>â€¢ CRM Modern - Avancerade funktioner</li>
-                <li>â€¢ Analytics Platform - Rapporter och dashboards</li>
-                <li>â€¢ Mobile App - Mobil Ã¥tkomst</li>
-                <li>â€¢ API Access - Integrationer</li>
+                <li>• CRM Modern - Avancerade funktioner</li>
+                <li>• Analytics Platform - Rapporter och dashboards</li>
+                <li>• Mobile App - Mobil åtkomst</li>
+                <li>• API Access - Integrationer</li>
               </ul>
             </div>
             
             <div class="bg-orange-50 p-3 rounded border border-orange-200">
-              <h5 class="font-medium text-orange-800">Legacy System (Klassiska tjÃ¤nster)</h5>
+              <h5 class="font-medium text-orange-800">Legacy System (Klassiska tjänster)</h5>
               <ul class="text-sm text-orange-700 mt-1 space-y-1">
-                <li>â€¢ CRM Classic - Grundfunktioner</li>
-                <li>â€¢ Old Reporting - Basrapporter</li>
-                <li>â€¢ Legacy Integrations - Ã„ldre system</li>
+                <li>• CRM Classic - Grundfunktioner</li>
+                <li>• Old Reporting - Basrapporter</li>
+                <li>• Legacy Integrations - Äldre system</li>
               </ul>
             </div>
             
             <div class="bg-purple-50 p-3 rounded border border-purple-200">
-              <h5 class="font-medium text-purple-800">Hybrid (BÃ¥de system)</h5>
+              <h5 class="font-medium text-purple-800">Hybrid (Både system)</h5>
               <p class="text-sm text-purple-700 mt-1">
-                Kunder som behÃ¶ver bÃ¥de moderna och klassiska tjÃ¤nster fÃ¥r automatiskt tillgÃ¥ng till bÃ¥da systemen.
+                Kunder som behöver både moderna och klassiska tjänster får automatiskt tillgång till båda systemen.
               </p>
             </div>
           </div>
           
           <div class="flex justify-end space-x-3">
-            <button onclick="modal.hide()" class="btn btn-secondary">StÃ¤ng</button>
+            <button onclick="modal.hide()" class="btn btn-secondary">Stäng</button>
             <button onclick="dualUserManager.showDualUserManagement()" class="btn btn-primary">Tillbaka till huvudmeny</button>
           </div>
         </div>
@@ -8823,15 +8779,15 @@ class DualUserManager {
           <div class="flex justify-between items-center">
             <h3 class="text-lg font-medium">Kunder som kan migreras till Azure B2C</h3>
             <div class="text-sm text-gray-600">
-              ${data.totalCount} kandidater (${data.highPriority} hÃ¶g prioritet)
+              ${data.totalCount} kandidater (${data.highPriority} hög prioritet)
             </div>
           </div>
           
           ${data.candidates.length === 0 ? `
             <div class="text-center py-8 text-gray-500">
-              <div class="text-4xl mb-4">ðŸŽ‰</div>
+              <div class="text-4xl mb-4">🎉</div>
               <div>Inga migreringskandidater hittades!</div>
-              <div class="text-sm">Alla kunder anvÃ¤nder redan rÃ¤tt system.</div>
+              <div class="text-sm">Alla kunder använder redan rätt system.</div>
             </div>
           ` : `
             <div class="overflow-x-auto">
@@ -8842,7 +8798,7 @@ class DualUserManager {
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nuvarande</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rekommenderat</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Prioritet</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ã…tgÃ¤rd</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Åtgärd</th>
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -8859,7 +8815,7 @@ class DualUserManager {
                       </td>
                       <td class="px-6 py-4">
                         <span class="px-2 py-1 text-xs rounded-full ${candidate.priority === 'high' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}">
-                          ${candidate.priority === 'high' ? 'HÃ¶g' : 'Medium'}
+                          ${candidate.priority === 'high' ? 'Hög' : 'Medium'}
                         </span>
                       </td>
                       <td class="px-6 py-4 text-sm">
@@ -8876,10 +8832,10 @@ class DualUserManager {
             
             <div class="flex justify-between items-center pt-4 border-t">
               <div class="text-sm text-gray-600">
-                Migrering Ã¶verfÃ¶r kunder frÃ¥n legacy-system till Azure B2C fÃ¶r bÃ¤ttre sÃ¤kerhet och funktionalitet.
+                Migrering överför kunder från legacy-system till Azure B2C för bättre säkerhet och funktionalitet.
               </div>
               <button onclick="dualUserManager.bulkMigrateSelected()" class="btn btn-primary">
-                Migrera alla hÃ¶gprioriterade
+                Migrera alla högprioriterade
               </button>
             </div>
           `}
@@ -8921,35 +8877,35 @@ class DualUserManager {
   }
 
   /**
-   * Bulk migrera anvÃ¤ndare till Azure B2C
+   * Bulk migrera användare till Azure B2C
    */
   async bulkMigrateToAzure() {
     try {
       modal.show(`
         <div class="space-y-6">
           <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
-            <h3 class="text-lg font-medium text-orange-900 mb-2">â¬†ï¸ Bulk-migrering till Azure B2C</h3>
+            <h3 class="text-lg font-medium text-orange-900 mb-2">⬆️ Bulk-migrering till Azure B2C</h3>
             <p class="text-orange-700 text-sm">
-              Migrera flera anvÃ¤ndare frÃ¥n legacy-systemet till Azure B2C samtidigt.
+              Migrera flera användare från legacy-systemet till Azure B2C samtidigt.
             </p>
           </div>
           
           <div class="bg-yellow-50 p-4 rounded border border-yellow-200">
-            <h4 class="font-medium text-yellow-800 mb-2">âš ï¸ Viktigt att veta:</h4>
+            <h4 class="font-medium text-yellow-800 mb-2">⚠️ Viktigt att veta:</h4>
             <ul class="text-sm text-yellow-700 space-y-1">
-              <li>â€¢ AnvÃ¤ndare behÃ¥ller sina befintliga lÃ¶senord</li>
-              <li>â€¢ Alla anvÃ¤ndardata Ã¶verfÃ¶rs sÃ¤kert</li>
-              <li>â€¢ Processen kan ta flera minuter</li>
-              <li>â€¢ Du fÃ¥r en detaljerad rapport efterÃ¥t</li>
+              <li>• Användare behåller sina befintliga lösenord</li>
+              <li>• Alla användardata överförs säkert</li>
+              <li>• Processen kan ta flera minuter</li>
+              <li>• Du får en detaljerad rapport efteråt</li>
             </ul>
           </div>
           
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium mb-2">VÃ¤lj migreringsstrategi:</label>
+              <label class="block text-sm font-medium mb-2">Välj migreringsstrategi:</label>
               <select id="migrationStrategy" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                <option value="priority">Bara hÃ¶ga prioritet-anvÃ¤ndare</option>
-                <option value="all-eligible">Alla kvalificerade anvÃ¤ndare</option>
+                <option value="priority">Bara höga prioritet-användare</option>
+                <option value="all-eligible">Alla kvalificerade användare</option>
                 <option value="custom">Anpassat urval</option>
               </select>
             </div>
@@ -8963,7 +8919,7 @@ class DualUserManager {
       `);
     } catch (error) {
       console.error('Bulk migration setup failed:', error);
-      showNotification('Kunde inte fÃ¶rbereda bulk-migrering', 'error');
+      showNotification('Kunde inte förbereda bulk-migrering', 'error');
     }
   }
 
@@ -8975,9 +8931,9 @@ class DualUserManager {
       modal.show(`
         <div class="space-y-6">
           <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
-            <h3 class="text-lg font-medium text-purple-900 mb-2">âš™ï¸ Routing-regler</h3>
+            <h3 class="text-lg font-medium text-purple-900 mb-2">⚙️ Routing-regler</h3>
             <p class="text-purple-700 text-sm">
-              Konfigurera hur anvÃ¤ndare automatiskt dirigeras till rÃ¤tt system.
+              Konfigurera hur användare automatiskt dirigeras till rätt system.
             </p>
           </div>
           
@@ -8987,7 +8943,7 @@ class DualUserManager {
             <div class="bg-white border rounded-lg p-4 space-y-3">
               <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
                 <div>
-                  <div class="font-medium">Moderna tjÃ¤nster â†’ Azure B2C</div>
+                  <div class="font-medium">Moderna tjänster → Azure B2C</div>
                   <div class="text-sm text-gray-600">CRM_MODERN, ANALYTICS_PLATFORM, MOBILE_APP, API_ACCESS</div>
                 </div>
                 <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Aktiv</span>
@@ -8995,7 +8951,7 @@ class DualUserManager {
               
               <div class="flex justify-between items-center p-3 bg-orange-50 rounded">
                 <div>
-                  <div class="font-medium">Klassiska tjÃ¤nster â†’ Legacy System</div>
+                  <div class="font-medium">Klassiska tjänster → Legacy System</div>
                   <div class="text-sm text-gray-600">CRM_CLASSIC, OLD_REPORTING, LEGACY_INTEGRATIONS</div>
                 </div>
                 <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Aktiv</span>
@@ -9003,8 +8959,8 @@ class DualUserManager {
               
               <div class="flex justify-between items-center p-3 bg-purple-50 rounded">
                 <div>
-                  <div class="font-medium">Hybrid â†’ BÃ¥da system</div>
-                  <div class="text-sm text-gray-600">AnvÃ¤ndare som behÃ¶ver bÃ¥de moderna och klassiska tjÃ¤nster</div>
+                  <div class="font-medium">Hybrid → Båda system</div>
+                  <div class="text-sm text-gray-600">Användare som behöver både moderna och klassiska tjänster</div>
                 </div>
                 <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Aktiv</span>
               </div>
@@ -9013,17 +8969,17 @@ class DualUserManager {
             <div class="bg-gray-50 p-4 rounded">
               <h5 class="font-medium mb-2">Routing-logik:</h5>
               <ol class="text-sm text-gray-700 space-y-1 list-decimal list-inside">
-                <li>Analysera vilka tjÃ¤nster kunden behÃ¶ver</li>
-                <li>Kontrollera om kunden redan finns i nÃ¥got system</li>
-                <li>VÃ¤lj lÃ¤mpligt system baserat pÃ¥ tjÃ¤nstekrav</li>
-                <li>Skapa anvÃ¤ndarkonto i valt system</li>
-                <li>Logga beslut fÃ¶r revision</li>
+                <li>Analysera vilka tjänster kunden behöver</li>
+                <li>Kontrollera om kunden redan finns i något system</li>
+                <li>Välj lämpligt system baserat på tjänstekrav</li>
+                <li>Skapa användarkonto i valt system</li>
+                <li>Logga beslut för revision</li>
               </ol>
             </div>
           </div>
           
           <div class="flex justify-end space-x-3">
-            <button onclick="modal.hide()" class="btn btn-secondary">StÃ¤ng</button>
+            <button onclick="modal.hide()" class="btn btn-secondary">Stäng</button>
             <button onclick="dualUserManager.showDualUserManagement()" class="btn btn-primary">Tillbaka</button>
           </div>
         </div>
@@ -9035,7 +8991,7 @@ class DualUserManager {
   }
 
   /**
-   * KÃ¶r bulk-migrering
+   * Kör bulk-migrering
    */
   async executeBulkMigration() {
     const strategy = document.getElementById('migrationStrategy')?.value || 'priority';
@@ -9052,7 +9008,7 @@ class DualUserManager {
       
       if (response.ok) {
         const result = await response.json();
-        showNotification(`Bulk-migrering slutfÃ¶rd! Migrerade: ${result.migrated}, Fel: ${result.errors}`, 'success');
+        showNotification(`Bulk-migrering slutförd! Migrerade: ${result.migrated}, Fel: ${result.errors}`, 'success');
         await this.refreshStats();
       } else {
         throw new Error('Bulk migration failed');
@@ -9111,10 +9067,10 @@ class VismaIntegration {
       if (response.ok) {
         const { authUrl } = await response.json();
         
-        // Ã–ppna OAuth-flÃ¶de i nytt fÃ¶nster
+        // Öppna OAuth-flöde i nytt fönster
         const authWindow = window.open(authUrl, 'visma_auth', 'width=800,height=600');
         
-        // Lyssna pÃ¥ nÃ¤r fÃ¶nstret stÃ¤ngs
+        // Lyssna på när fönstret stängs
         const checkClosed = setInterval(() => {
           if (authWindow.closed) {
             clearInterval(checkClosed);
@@ -9131,7 +9087,7 @@ class VismaIntegration {
   }
 
   /**
-   * Koppla frÃ¥n Visma.net
+   * Koppla från Visma.net
    */
   async disconnect() {
     try {
@@ -9143,11 +9099,11 @@ class VismaIntegration {
         this.isConnected = false;
         this.companyInfo = null;
         this.updateUI();
-        showNotification('FrÃ¥nkopplad frÃ¥n Visma.net', 'success');
+        showNotification('Frånkopplad från Visma.net', 'success');
       }
     } catch (error) {
       console.error('Failed to disconnect from Visma.net:', error);
-      showNotification('Kunde inte koppla frÃ¥n Visma.net', 'error');
+      showNotification('Kunde inte koppla från Visma.net', 'error');
     }
   }
 
@@ -9156,7 +9112,7 @@ class VismaIntegration {
    */
   async syncProducts(direction = 'bidirectional', syncPrices = true) {
     if (this.syncInProgress) {
-      showNotification('Synkronisering pÃ¥gÃ¥r redan', 'info');
+      showNotification('Synkronisering pågår redan', 'info');
       return;
     }
 
@@ -9207,7 +9163,7 @@ class VismaIntegration {
             clearInterval(pollInterval);
             this.syncInProgress = false;
             this.updateUI();
-            showNotification('Produktsynkronisering slutfÃ¶rd', 'success');
+            showNotification('Produktsynkronisering slutförd', 'success');
           }
         }
       } catch (error) {
@@ -9230,13 +9186,13 @@ class VismaIntegration {
    */
   displayProductSyncResult(result) {
     const message = `
-      Produktsynkronisering slutfÃ¶rd!
+      Produktsynkronisering slutförd!
       
-      CRM â†’ Visma.net:
+      CRM → Visma.net:
       - ${result.crmToVisma.created} produkter skapade
       - ${result.crmToVisma.updated} produkter uppdaterade
       
-      Visma.net â†’ CRM:
+      Visma.net → CRM:
       - ${result.vismaToCrm.created} produkter skapade
       - ${result.vismaToCrm.updated} produkter uppdaterade
       
@@ -9278,7 +9234,7 @@ class VismaIntegration {
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pris (SEK)</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Moms</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ã…tgÃ¤rder</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Åtgärder</th>
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
@@ -9314,7 +9270,7 @@ class VismaIntegration {
           
           <div class="flex justify-between items-center pt-4 border-t">
             <div class="text-sm text-gray-600">
-              ${priceList.products.length} produkter â€¢ Valuta: ${priceList.currency} â€¢ Moms: ${(priceList.vatRate * 100)}%
+              ${priceList.products.length} produkter • Valuta: ${priceList.currency} • Moms: ${(priceList.vatRate * 100)}%
             </div>
             <div class="space-x-3">
               <button onclick="vismaIntegration.exportPriceList()" class="btn btn-secondary">
@@ -9335,7 +9291,7 @@ class VismaIntegration {
   }
 
   /**
-   * LÃ¤gg till ny produkt
+   * Lägg till ny produkt
    */
   async addNewProduct() {
     openModal('Ny produkt', `
@@ -9361,8 +9317,8 @@ class VismaIntegration {
             <select id="productUnit" class="w-full border border-gray-300 rounded-md px-3 py-2">
               <option value="ST">Styck</option>
               <option value="HOUR">Timme</option>
-              <option value="MONTH">MÃ¥nad</option>
-              <option value="YEAR">Ã…r</option>
+              <option value="MONTH">Månad</option>
+              <option value="YEAR">År</option>
             </select>
           </div>
         </div>
@@ -9372,10 +9328,10 @@ class VismaIntegration {
             <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
             <select id="productCategory" class="w-full border border-gray-300 rounded-md px-3 py-2">
               <option value="Software License">Mjukvarulicens</option>
-              <option value="Setup Service">InstallationstjÃ¤nst</option>
-              <option value="Support Service">SupporttjÃ¤nst</option>
+              <option value="Setup Service">Installationstjänst</option>
+              <option value="Support Service">Supporttjänst</option>
               <option value="Training">Utbildning</option>
-              <option value="Consulting">KonsulttjÃ¤nst</option>
+              <option value="Consulting">Konsulttjänst</option>
             </select>
           </div>
           
@@ -9403,7 +9359,7 @@ class VismaIntegration {
       </form>
     `);
     
-    // Hantera formulÃ¤rinlÃ¤mning
+    // Hantera formulärinlämning
     setTimeout(() => {
       const form = document.getElementById('newProductForm');
       if (form) {
@@ -9450,7 +9406,7 @@ class VismaIntegration {
    */
   async syncCustomers(direction = 'bidirectional') {
     if (this.syncInProgress) {
-      showNotification('Synkronisering pÃ¥gÃ¥r redan', 'info');
+      showNotification('Synkronisering pågår redan', 'info');
       return;
     }
 
@@ -9503,7 +9459,7 @@ class VismaIntegration {
             clearInterval(pollInterval);
             this.syncInProgress = false;
             this.updateUI();
-            showNotification('Synkronisering slutfÃ¶rd', 'success');
+            showNotification('Synkronisering slutförd', 'success');
             
             // Uppdatera kunddata
             await loadState();
@@ -9530,13 +9486,13 @@ class VismaIntegration {
    */
   displaySyncResult(result) {
     const message = `
-      Synkronisering slutfÃ¶rd!
+      Synkronisering slutförd!
       
-      CRM â†’ Visma.net:
+      CRM → Visma.net:
       - ${result.crmToVisma.created} kunder skapade
       - ${result.crmToVisma.updated} kunder uppdaterade
       
-      Visma.net â†’ CRM:
+      Visma.net → CRM:
       - ${result.vismaToCrm.created} kunder skapade
       - ${result.vismaToCrm.updated} kunder uppdaterade
       
@@ -9547,7 +9503,7 @@ class VismaIntegration {
   }
 
   /**
-   * Uppdatera UI baserat pÃ¥ anslutningsstatus
+   * Uppdatera UI baserat på anslutningsstatus
    */
   updateUI() {
     const vismaStatus = document.getElementById('vismaStatus');
@@ -9558,10 +9514,10 @@ class VismaIntegration {
 
     if (vismaStatus) {
       if (this.isConnected) {
-        vismaStatus.textContent = 'âœ… Ansluten till Visma.net';
+        vismaStatus.textContent = '✅ Ansluten till Visma.net';
         vismaStatus.className = 'text-green-600 font-medium';
       } else {
-        vismaStatus.textContent = 'âŒ Inte ansluten till Visma.net';
+        vismaStatus.textContent = '❌ Inte ansluten till Visma.net';
         vismaStatus.className = 'text-red-600 font-medium';
       }
     }
@@ -9609,11 +9565,11 @@ class VismaIntegration {
               Anslut till Visma.net
             </button>
             <button id="vismaDisconnect" class="btn btn-secondary" style="display: none;">
-              Koppla frÃ¥n
+              Koppla från
             </button>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            Du kommer att omdirigeras till Visma.net fÃ¶r sÃ¤ker inloggning.
+            Du kommer att omdirigeras till Visma.net för säker inloggning.
           </p>
         </div>
         
@@ -9629,11 +9585,11 @@ class VismaIntegration {
               <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <button onclick="vismaIntegration.syncCustomers('crm-to-visma')" 
                         class="btn btn-secondary text-sm">
-                  CRM â†’ Visma.net
+                  CRM → Visma.net
                 </button>
                 <button onclick="vismaIntegration.syncCustomers('visma-to-crm')" 
                         class="btn btn-secondary text-sm">
-                  Visma.net â†’ CRM
+                  Visma.net → CRM
                 </button>
                 <button onclick="vismaIntegration.syncCustomers('bidirectional')" 
                         class="btn btn-secondary text-sm">
@@ -9658,7 +9614,7 @@ class VismaIntegration {
               </button>
             </div>
             <p class="text-sm text-gray-600 mt-2">
-              Hantera produktkatalog och priser. Synkronisera med Visma.net fÃ¶r korrekt fakturering.
+              Hantera produktkatalog och priser. Synkronisera med Visma.net för korrekt fakturering.
             </p>
           </div>        <div>
           <h3 class="text-lg font-medium mb-4">Automatisering</h3>
@@ -9673,14 +9629,14 @@ class VismaIntegration {
             </label>
             <label class="flex items-center">
               <input type="checkbox" class="mr-2" disabled>
-              <span class="text-sm">BetalningsÃ¶vervakning (kommer snart)</span>
+              <span class="text-sm">Betalningsövervakning (kommer snart)</span>
             </label>
           </div>
         </div>
       </div>
     `);
 
-    // LÃ¤gg till event listeners
+    // Lägg till event listeners
     setTimeout(() => {
       const connectBtn = document.getElementById('vismaConnect');
       const disconnectBtn = document.getElementById('vismaDisconnect');
@@ -9728,14 +9684,14 @@ async function loadVersionInfo() {
                                   buildDate.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
       }
       
-      console.log('ðŸ“Š System Info:', {
+      console.log('📊 System Info:', {
         version: data.version,
         status: data.status,
         uptime: Math.round(data.uptime || 0) + 's'
       });
     }
   } catch (error) {
-    console.warn('âš ï¸ Could not load version info:', error);
+    console.warn('⚠️ Could not load version info:', error);
     const versionElement = document.getElementById('app-version');
     if (versionElement) {
       versionElement.textContent = 'Version: Development';
@@ -9743,18 +9699,16 @@ async function loadVersionInfo() {
   }
 }
 
-// Ladda version info nÃ¤r sidan laddas
+// Ladda version info när sidan laddas
 document.addEventListener('DOMContentLoaded', () => {
   loadVersionInfo();
 });
 
-// LÃ¤gg till Visma.net-knapp i admin-panelen
-// Export fÃ¶r testing
+// Lägg till Visma.net-knapp i admin-panelen
+// Export för testing
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { VismaIntegration };
 }
 
-// Auto-start disabled - now controlled by auth-init.js
-window.initializeApp = init; // Expose for auth-init.js
-
-
+// Auto-start disabled - controlled by auth-init.js
+window.initializeApp = init;
