@@ -4,6 +4,7 @@
  */
 
 let entraAuth = null;
+let appInitialized = false;
 
 // Initialize authentication on page load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -94,16 +95,25 @@ function showApp() {
     });
   }
   
-  // Initialize the main CRM app (from app.js)
+  // Initialize the main CRM app (from app.js) - only once
+  if (appInitialized) {
+    console.log('App already initialized, skipping...');
+    return;
+  }
+  
   if (typeof initializeApp === 'function') {
     console.log('Initializing CRM app...');
+    appInitialized = true;
     initializeApp();
   } else {
     console.warn('initializeApp() not found, app.js may not be loaded yet');
     // Fallback: wait a bit and try again
     setTimeout(() => {
-      if (typeof initializeApp === 'function') {
+      if (typeof initializeApp === 'function' && !appInitialized) {
+        appInitialized = true;
         initializeApp();
+      } else if (appInitialized) {
+        console.log('App already initialized in timeout, skipping...');
       } else {
         console.error('Could not initialize app - initializeApp() function not found');
       }
