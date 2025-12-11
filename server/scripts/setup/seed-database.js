@@ -181,9 +181,17 @@ async function seedDatabase() {
     await db.collection('tasks').insertMany(tasks);
     console.log(`✅ Inserted ${tasks.length} tasks`);
     
-    // Create notes collection (empty for now)
-    await db.createCollection('notes');
-    console.log(`✅ Created notes collection`);
+    // Create notes collection (empty for now) - skip if exists
+    try {
+      await db.createCollection('notes');
+      console.log(`✅ Created notes collection`);
+    } catch (err) {
+      if (err.code === 48) {
+        console.log(`✅ Notes collection already exists`);
+      } else {
+        throw err;
+      }
+    }
     
     console.log('\n🎉 Database seeding completed successfully!');
     console.log('\nSummary:');
