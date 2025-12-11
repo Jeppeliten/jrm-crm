@@ -9,18 +9,19 @@ let appInitialized = false;
 // Initialize authentication on page load
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('Initializing authentication...');
-  
+
   // Create auth instance
   entraAuth = new EntraAuth();
   window.entraAuth = entraAuth;
-  
+
   try {
     // Initialize MSAL and check if user is logged in
     const isLoggedIn = await entraAuth.initialize();
-    
+
     if (isLoggedIn) {
       console.log('User is logged in, showing app...');
-      showApp();
+      // Small delay to ensure redirect is complete
+      setTimeout(() => showApp(), 100);
     } else {
       console.log('User not logged in, showing landing page...');
       showLandingPage();
@@ -29,9 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error during initialization:', error);
     showLandingPage();
   }
-});
-
-// Show landing page and set up login button
+});// Show landing page and set up login button
 function showLandingPage() {
   console.log('Showing landing page...');
   document.getElementById('landingPage').style.display = 'block';
@@ -75,16 +74,22 @@ function showLandingPage() {
 
 // Show main app after successful login
 function showApp() {
+  if (appInitialized) {
+    console.log('App already showing, preventing duplicate initialization...');
+    return;
+  }
+  
+  console.log('Showing app container...');
   document.getElementById('landingPage').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  
+
   // Display user name if element exists
   const user = entraAuth.getUser();
   const userDisplayEl = document.getElementById('userDisplayName');
   if (userDisplayEl && user) {
     userDisplayEl.textContent = user.name || user.username || 'Användare';
   }
-  
+
   // Set up logout button
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
@@ -94,13 +99,8 @@ function showApp() {
       }
     });
   }
-  
+
   // Initialize the main CRM app (from app.js) - only once
-  if (appInitialized) {
-    console.log('App already initialized, skipping...');
-    return;
-  }
-  
   if (typeof initializeApp === 'function') {
     console.log('Initializing CRM app...');
     appInitialized = true;
@@ -112,17 +112,14 @@ function showApp() {
       if (typeof initializeApp === 'function' && !appInitialized) {
         appInitialized = true;
         initializeApp();
-      } else if (appInitialized) {
-        console.log('App already initialized in timeout, skipping...');
-      } else {
+      } else if (!appInitialized) {
         console.error('Could not initialize app - initializeApp() function not found');
       }
     }, 500);
   }
-}
-
-// Listen for successful login (after redirect)
+}// Listen for successful login (after redirect)
 window.addEventListener('entra-login-success', (event) => {
   console.log('Login success event received:', event.detail);
-  showApp();
+  // Don't call showApp here - it's already called from initialize()
+  // This event is just for logging/monitoring
 });
