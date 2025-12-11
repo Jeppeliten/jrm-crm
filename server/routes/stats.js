@@ -7,6 +7,60 @@ const express = require('express');
 const router = express.Router();
 
 /**
+ * GET /api/state
+ * Returns complete application state for client-side hydration
+ * Matches app.js AppState structure: { brands, companies, agents, tasks, notes, contacts, segments, users }
+ */
+router.get('/state', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    
+    if (!db) {
+      // Return mock data matching app.js structure when DB not available
+      return res.json({
+        users: [],
+        brands: [],
+        companies: [],
+        agents: [],
+        tasks: [],
+        notes: [],
+        contacts: [],
+        segments: []
+      });
+    }
+    
+    // Fetch all collections in parallel from Cosmos DB
+    const [users, brands, companies, agents, tasks, notes, contacts, segments] = await Promise.all([
+      db.collection('users').find({}).toArray(),
+      db.collection('brands').find({}).toArray(),
+      db.collection('companies').find({}).toArray(),
+      db.collection('agents').find({}).toArray(),
+      db.collection('tasks').find({}).toArray(),
+      db.collection('notes').find({}).toArray(),
+      db.collection('contacts').find({}).toArray(),
+      db.collection('segments').find({}).toArray()
+    ]);
+    
+    res.json({
+      users,
+      brands,
+      companies,
+      agents,
+      tasks,
+      notes,
+      contacts,
+      segments
+    });
+  } catch (error) {
+    console.error('Error fetching application state:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch application state',
+      details: error.message 
+    });
+  }
+});
+
+/**
  * Calculate MRR based on agent count
  * Pricing tiers:
  * 4-6 agents: 849 kr/mån

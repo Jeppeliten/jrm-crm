@@ -147,10 +147,10 @@ const AppState = {
 async function loadState() {
   // 1) Försök hämta från server
   try {
-    let r = await fetch(`${API_BASE}/api/state`, { credentials: 'include' });
+    let r = await fetch(`${API_BASE}/api/stats/state`, { credentials: 'include' });
     if (r.status === 401) {
       const ok = await promptServerLogin();
-      if (ok) r = await fetch(`${API_BASE}/api/state`, { credentials: 'include' });
+      if (ok) r = await fetch(`${API_BASE}/api/stats/state`, { credentials: 'include' });
     }
     if (r.ok) {
       const data = await r.json();
@@ -206,7 +206,7 @@ async function saveState() {
   const payload = JSON.stringify(stateToSave);
   localStorage.setItem(LS_KEY, payload);
   try {
-    const r = await fetch(`${API_BASE}/api/state`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: payload });
+    const r = await fetch(`${API_BASE}/api/stats/state`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: payload });
     
     // Check for session timeout warning
     const sessionWarning = r.headers.get('X-Session-Warning');
@@ -228,7 +228,7 @@ async function saveState() {
       }
       const ok = await promptServerLogin();
       if (ok) {
-        await fetch(`${API_BASE}/api/state`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: payload });
+        await fetch(`${API_BASE}/api/stats/state`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'include', body: payload });
       }
     }
   } catch (e) {
@@ -4614,15 +4614,15 @@ function renderSettings() {
           if (ok) return clearBtn.click();
         }
         if (!r.ok) {
-          // Fallback: försök rensa via /api/state (kräver bara inloggning)
+          // Fallback: försök rensa via /api/stats/state (kräver bara inloggning)
           let msg = '';
           try { const err = await r.json(); msg = err?.error || ''; } catch {}
           try {
             // Hämta nuvarande state
-            let gs = await fetch(`${API_BASE}/api/state`, { credentials:'include' });
+            let gs = await fetch(`${API_BASE}/api/stats/state`, { credentials:'include' });
             if (gs.status===401) {
               const ok2 = await promptServerLogin();
-              if (ok2) gs = await fetch(`${API_BASE}/api/state`, { credentials:'include' });
+              if (ok2) gs = await fetch(`${API_BASE}/api/stats/state`, { credentials:'include' });
             }
             if (gs.ok) {
               const cur = await gs.json();
@@ -4632,7 +4632,7 @@ function renderSettings() {
                 currentUserId: cur.currentUserId || (users[0]?.id || null),
                 brands: [], companies: [], agents: [], notes: [], tasks: [], contacts: []
               };
-              const ps = await fetch(`${API_BASE}/api/state`, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify(newState) });
+              const ps = await fetch(`${API_BASE}/api/stats/state`, { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify(newState) });
               if (ps.ok) {
                 Object.assign(AppState, newState);
                 localStorage.setItem(LS_KEY, JSON.stringify(AppState));

@@ -1,0 +1,833 @@
+/* Responsive Layout System - Mobile-first responsive layouts
+   Svenska responsiva layouter med CSS Grid och Flexbox
+   Optimerat för svenska företag och användare */
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS - Svenska standarder
+   ========================================================================== */
+
+:root {
+  /* Svenska responsiva breakpoints baserat på vanliga enheter */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;    /* Små telefoner (portrait) */
+  --breakpoint-md: 768px;    /* Tablets (portrait) */
+  --breakpoint-lg: 992px;    /* Laptops / små desktop */
+  --breakpoint-xl: 1200px;   /* Desktop / stora skärmar */
+  --breakpoint-xxl: 1400px;  /* Extra stora skärmar */
+
+  /* Container max-widths för svenska innehåll */
+  --container-xs: 100%;
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-xxl: 1320px;
+
+  /* Responsive spacing för svenska layouter */
+  --spacing-responsive-xs: var(--spacing-2);  /* 8px mobil */
+  --spacing-responsive-sm: var(--spacing-3);  /* 12px tablet */
+  --spacing-responsive-md: var(--spacing-4);  /* 16px laptop */
+  --spacing-responsive-lg: var(--spacing-6);  /* 24px desktop */
+  --spacing-responsive-xl: var(--spacing-8);  /* 32px stora skärmar */
+
+  /* Responsive typography för svenska text */
+  --font-size-responsive-xs: 0.875rem;  /* 14px mobil */
+  --font-size-responsive-sm: 1rem;      /* 16px tablet */
+  --font-size-responsive-md: 1rem;      /* 16px laptop */
+  --font-size-responsive-lg: 1.125rem;  /* 18px desktop */
+  --font-size-responsive-xl: 1.25rem;   /* 20px stora skärmar */
+}
+
+/* ==========================================================================
+   RESPONSIVE CONTAINERS - Svenska behållare
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-responsive-xs);
+  padding-right: var(--spacing-responsive-xs);
+}
+
+/* Container sizes per breakpoint */
+@media (min-width: 576px) {
+  .container {
+    max-width: var(--container-sm);
+    padding-left: var(--spacing-responsive-sm);
+    padding-right: var(--spacing-responsive-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-md);
+    padding-left: var(--spacing-responsive-md);
+    padding-right: var(--spacing-responsive-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: var(--container-lg);
+    padding-left: var(--spacing-responsive-lg);
+    padding-right: var(--spacing-responsive-lg);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: var(--container-xxl);
+    padding-left: var(--spacing-responsive-xl);
+    padding-right: var(--spacing-responsive-xl);
+  }
+}
+
+/* Fluid container - alltid full bredd */
+.container-fluid {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-responsive-xs);
+  padding-right: var(--spacing-responsive-xs);
+}
+
+@media (min-width: 576px) {
+  .container-fluid {
+    padding-left: var(--spacing-responsive-sm);
+    padding-right: var(--spacing-responsive-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .container-fluid {
+    padding-left: var(--spacing-responsive-md);
+    padding-right: var(--spacing-responsive-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .container-fluid {
+    padding-left: var(--spacing-responsive-lg);
+    padding-right: var(--spacing-responsive-lg);
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-fluid {
+    padding-left: var(--spacing-responsive-xl);
+    padding-right: var(--spacing-responsive-xl);
+  }
+}
+
+/* ==========================================================================
+   CSS GRID SYSTEM - Modernt CSS Grid för svenska layouter
+   ========================================================================== */
+
+.grid {
+  display: grid;
+  gap: var(--spacing-responsive-xs);
+  width: 100%;
+}
+
+/* Grid gap responsiv */
+@media (min-width: 576px) {
+  .grid {
+    gap: var(--spacing-responsive-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: var(--spacing-responsive-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .grid {
+    gap: var(--spacing-responsive-lg);
+  }
+}
+
+/* Standard grid templates för svenska affärsapplikationer */
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+/* Responsiva grid-templates */
+@media (max-width: 767px) {
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: 1fr; /* Allt staplas på mobil */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolumner på tablet */
+  }
+}
+
+@media (min-width: 992px) {
+  .grid-4,
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: repeat(3, 1fr); /* 3 kolumner på laptop */
+  }
+}
+
+/* Svenska affärsspecifika grid-layouts */
+.grid-sidebar {
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "header"
+    "main"
+    "sidebar"
+    "footer";
+}
+
+@media (min-width: 992px) {
+  .grid-sidebar {
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: 
+      "sidebar header"
+      "sidebar main"
+      "sidebar footer";
+  }
+}
+
+.grid-dashboard {
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "stats"
+    "charts"
+    "tables"
+    "actions";
+}
+
+@media (min-width: 768px) {
+  .grid-dashboard {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "stats stats"
+      "charts charts"
+      "tables actions";
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid-dashboard {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+      "stats stats"
+      "charts actions"
+      "tables tables";
+  }
+}
+
+/* Grid areas */
+.grid-area-header { grid-area: header; }
+.grid-area-main { grid-area: main; }
+.grid-area-sidebar { grid-area: sidebar; }
+.grid-area-footer { grid-area: footer; }
+.grid-area-stats { grid-area: stats; }
+.grid-area-charts { grid-area: charts; }
+.grid-area-tables { grid-area: tables; }
+.grid-area-actions { grid-area: actions; }
+
+/* ==========================================================================
+   FLEXBOX UTILITIES - Svenska flexbox-verktyg
+   ========================================================================== */
+
+.flex {
+  display: flex;
+}
+
+.flex-inline {
+  display: inline-flex;
+}
+
+/* Flex direction */
+.flex-row { flex-direction: row; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.flex-col { flex-direction: column; }
+.flex-col-reverse { flex-direction: column-reverse; }
+
+/* Responsive flex direction */
+.flex-col-mobile {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .flex-col-mobile {
+    flex-direction: row;
+  }
+}
+
+/* Flex wrap */
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse; }
+
+/* Justify content */
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+/* Align items */
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.items-center { align-items: center; }
+.items-baseline { align-items: baseline; }
+.items-stretch { align-items: stretch; }
+
+/* Align content */
+.content-start { align-content: flex-start; }
+.content-end { align-content: flex-end; }
+.content-center { align-content: center; }
+.content-between { align-content: space-between; }
+.content-around { align-content: space-around; }
+.content-evenly { align-content: space-evenly; }
+
+/* Flex grow/shrink */
+.flex-1 { flex: 1 1 0%; }
+.flex-auto { flex: 1 1 auto; }
+.flex-initial { flex: 0 1 auto; }
+.flex-none { flex: none; }
+
+.flex-grow { flex-grow: 1; }
+.flex-grow-0 { flex-grow: 0; }
+
+.flex-shrink { flex-shrink: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+/* ==========================================================================
+   RESPONSIVE VISIBILITY - Svenska visibilitetsklasser
+   ========================================================================== */
+
+/* Dölj på specifika skärmstorlekar */
+.d-none { display: none !important; }
+.d-inline { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.d-grid { display: grid !important; }
+
+/* Responsiv visibilitet */
+@media (max-width: 575px) {
+  .d-xs-none { display: none !important; }
+  .d-xs-inline { display: inline !important; }
+  .d-xs-inline-block { display: inline-block !important; }
+  .d-xs-block { display: block !important; }
+  .d-xs-flex { display: flex !important; }
+  .d-xs-inline-flex { display: inline-flex !important; }
+  .d-xs-grid { display: grid !important; }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .d-sm-none { display: none !important; }
+  .d-sm-inline { display: inline !important; }
+  .d-sm-inline-block { display: inline-block !important; }
+  .d-sm-block { display: block !important; }
+  .d-sm-flex { display: flex !important; }
+  .d-sm-inline-flex { display: inline-flex !important; }
+  .d-sm-grid { display: grid !important; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .d-md-none { display: none !important; }
+  .d-md-inline { display: inline !important; }
+  .d-md-inline-block { display: inline-block !important; }
+  .d-md-block { display: block !important; }
+  .d-md-flex { display: flex !important; }
+  .d-md-inline-flex { display: inline-flex !important; }
+  .d-md-grid { display: grid !important; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .d-lg-none { display: none !important; }
+  .d-lg-inline { display: inline !important; }
+  .d-lg-inline-block { display: inline-block !important; }
+  .d-lg-block { display: block !important; }
+  .d-lg-flex { display: flex !important; }
+  .d-lg-inline-flex { display: inline-flex !important; }
+  .d-lg-grid { display: grid !important; }
+}
+
+@media (min-width: 1200px) {
+  .d-xl-none { display: none !important; }
+  .d-xl-inline { display: inline !important; }
+  .d-xl-inline-block { display: inline-block !important; }
+  .d-xl-block { display: block !important; }
+  .d-xl-flex { display: flex !important; }
+  .d-xl-inline-flex { display: inline-flex !important; }
+  .d-xl-grid { display: grid !important; }
+}
+
+/* ==========================================================================
+   RESPONSIVE SPACING - Svenska responsiva marginaler och padding
+   ========================================================================== */
+
+/* Responsive margin utilities */
+.m-responsive { margin: var(--spacing-responsive-xs); }
+.mt-responsive { margin-top: var(--spacing-responsive-xs); }
+.mb-responsive { margin-bottom: var(--spacing-responsive-xs); }
+.ml-responsive { margin-left: var(--spacing-responsive-xs); }
+.mr-responsive { margin-right: var(--spacing-responsive-xs); }
+.mx-responsive { 
+  margin-left: var(--spacing-responsive-xs); 
+  margin-right: var(--spacing-responsive-xs); 
+}
+.my-responsive { 
+  margin-top: var(--spacing-responsive-xs); 
+  margin-bottom: var(--spacing-responsive-xs); 
+}
+
+/* Responsive padding utilities */
+.p-responsive { padding: var(--spacing-responsive-xs); }
+.pt-responsive { padding-top: var(--spacing-responsive-xs); }
+.pb-responsive { padding-bottom: var(--spacing-responsive-xs); }
+.pl-responsive { padding-left: var(--spacing-responsive-xs); }
+.pr-responsive { padding-right: var(--spacing-responsive-xs); }
+.px-responsive { 
+  padding-left: var(--spacing-responsive-xs); 
+  padding-right: var(--spacing-responsive-xs); 
+}
+.py-responsive { 
+  padding-top: var(--spacing-responsive-xs); 
+  padding-bottom: var(--spacing-responsive-xs); 
+}
+
+/* Responsive spacing updates per breakpoint */
+@media (min-width: 576px) {
+  .m-responsive { margin: var(--spacing-responsive-sm); }
+  .mt-responsive { margin-top: var(--spacing-responsive-sm); }
+  .mb-responsive { margin-bottom: var(--spacing-responsive-sm); }
+  .ml-responsive { margin-left: var(--spacing-responsive-sm); }
+  .mr-responsive { margin-right: var(--spacing-responsive-sm); }
+  .mx-responsive { 
+    margin-left: var(--spacing-responsive-sm); 
+    margin-right: var(--spacing-responsive-sm); 
+  }
+  .my-responsive { 
+    margin-top: var(--spacing-responsive-sm); 
+    margin-bottom: var(--spacing-responsive-sm); 
+  }
+
+  .p-responsive { padding: var(--spacing-responsive-sm); }
+  .pt-responsive { padding-top: var(--spacing-responsive-sm); }
+  .pb-responsive { padding-bottom: var(--spacing-responsive-sm); }
+  .pl-responsive { padding-left: var(--spacing-responsive-sm); }
+  .pr-responsive { padding-right: var(--spacing-responsive-sm); }
+  .px-responsive { 
+    padding-left: var(--spacing-responsive-sm); 
+    padding-right: var(--spacing-responsive-sm); 
+  }
+  .py-responsive { 
+    padding-top: var(--spacing-responsive-sm); 
+    padding-bottom: var(--spacing-responsive-sm); 
+  }
+}
+
+@media (min-width: 768px) {
+  .m-responsive { margin: var(--spacing-responsive-md); }
+  .mt-responsive { margin-top: var(--spacing-responsive-md); }
+  .mb-responsive { margin-bottom: var(--spacing-responsive-md); }
+  .ml-responsive { margin-left: var(--spacing-responsive-md); }
+  .mr-responsive { margin-right: var(--spacing-responsive-md); }
+  .mx-responsive { 
+    margin-left: var(--spacing-responsive-md); 
+    margin-right: var(--spacing-responsive-md); 
+  }
+  .my-responsive { 
+    margin-top: var(--spacing-responsive-md); 
+    margin-bottom: var(--spacing-responsive-md); 
+  }
+
+  .p-responsive { padding: var(--spacing-responsive-md); }
+  .pt-responsive { padding-top: var(--spacing-responsive-md); }
+  .pb-responsive { padding-bottom: var(--spacing-responsive-md); }
+  .pl-responsive { padding-left: var(--spacing-responsive-md); }
+  .pr-responsive { padding-right: var(--spacing-responsive-md); }
+  .px-responsive { 
+    padding-left: var(--spacing-responsive-md); 
+    padding-right: var(--spacing-responsive-md); 
+  }
+  .py-responsive { 
+    padding-top: var(--spacing-responsive-md); 
+    padding-bottom: var(--spacing-responsive-md); 
+  }
+}
+
+@media (min-width: 992px) {
+  .m-responsive { margin: var(--spacing-responsive-lg); }
+  .mt-responsive { margin-top: var(--spacing-responsive-lg); }
+  .mb-responsive { margin-bottom: var(--spacing-responsive-lg); }
+  .ml-responsive { margin-left: var(--spacing-responsive-lg); }
+  .mr-responsive { margin-right: var(--spacing-responsive-lg); }
+  .mx-responsive { 
+    margin-left: var(--spacing-responsive-lg); 
+    margin-right: var(--spacing-responsive-lg); 
+  }
+  .my-responsive { 
+    margin-top: var(--spacing-responsive-lg); 
+    margin-bottom: var(--spacing-responsive-lg); 
+  }
+
+  .p-responsive { padding: var(--spacing-responsive-lg); }
+  .pt-responsive { padding-top: var(--spacing-responsive-lg); }
+  .pb-responsive { padding-bottom: var(--spacing-responsive-lg); }
+  .pl-responsive { padding-left: var(--spacing-responsive-lg); }
+  .pr-responsive { padding-right: var(--spacing-responsive-lg); }
+  .px-responsive { 
+    padding-left: var(--spacing-responsive-lg); 
+    padding-right: var(--spacing-responsive-lg); 
+  }
+  .py-responsive { 
+    padding-top: var(--spacing-responsive-lg); 
+    padding-bottom: var(--spacing-responsive-lg); 
+  }
+}
+
+@media (min-width: 1400px) {
+  .m-responsive { margin: var(--spacing-responsive-xl); }
+  .mt-responsive { margin-top: var(--spacing-responsive-xl); }
+  .mb-responsive { margin-bottom: var(--spacing-responsive-xl); }
+  .ml-responsive { margin-left: var(--spacing-responsive-xl); }
+  .mr-responsive { margin-right: var(--spacing-responsive-xl); }
+  .mx-responsive { 
+    margin-left: var(--spacing-responsive-xl); 
+    margin-right: var(--spacing-responsive-xl); 
+  }
+  .my-responsive { 
+    margin-top: var(--spacing-responsive-xl); 
+    margin-bottom: var(--spacing-responsive-xl); 
+  }
+
+  .p-responsive { padding: var(--spacing-responsive-xl); }
+  .pt-responsive { padding-top: var(--spacing-responsive-xl); }
+  .pb-responsive { padding-bottom: var(--spacing-responsive-xl); }
+  .pl-responsive { padding-left: var(--spacing-responsive-xl); }
+  .pr-responsive { padding-right: var(--spacing-responsive-xl); }
+  .px-responsive { 
+    padding-left: var(--spacing-responsive-xl); 
+    padding-right: var(--spacing-responsive-xl); 
+  }
+  .py-responsive { 
+    padding-top: var(--spacing-responsive-xl); 
+    padding-bottom: var(--spacing-responsive-xl); 
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE TYPOGRAPHY - Svenska responsiv typografi
+   ========================================================================== */
+
+.text-responsive {
+  font-size: var(--font-size-responsive-xs);
+  line-height: 1.5;
+}
+
+@media (min-width: 576px) {
+  .text-responsive {
+    font-size: var(--font-size-responsive-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: var(--font-size-responsive-md);
+  }
+}
+
+@media (min-width: 992px) {
+  .text-responsive {
+    font-size: var(--font-size-responsive-lg);
+  }
+}
+
+@media (min-width: 1400px) {
+  .text-responsive {
+    font-size: var(--font-size-responsive-xl);
+  }
+}
+
+/* Responsiva rubriker för svenska texter */
+.heading-responsive {
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.heading-1-responsive {
+  font-size: 1.75rem; /* 28px mobil */
+}
+
+.heading-2-responsive {
+  font-size: 1.5rem; /* 24px mobil */
+}
+
+.heading-3-responsive {
+  font-size: 1.25rem; /* 20px mobil */
+}
+
+@media (min-width: 768px) {
+  .heading-1-responsive {
+    font-size: 2.25rem; /* 36px tablet+ */
+  }
+  
+  .heading-2-responsive {
+    font-size: 1.875rem; /* 30px tablet+ */
+  }
+  
+  .heading-3-responsive {
+    font-size: 1.5rem; /* 24px tablet+ */
+  }
+}
+
+@media (min-width: 1200px) {
+  .heading-1-responsive {
+    font-size: 2.5rem; /* 40px desktop+ */
+  }
+  
+  .heading-2-responsive {
+    font-size: 2rem; /* 32px desktop+ */
+  }
+  
+  .heading-3-responsive {
+    font-size: 1.75rem; /* 28px desktop+ */
+  }
+}
+
+/* ==========================================================================
+   SVENSKA CRM-SPECIFIKA RESPONSIVE LAYOUTER
+   ========================================================================== */
+
+/* CRM Header Layout - Responsiv header för svenska CRM */
+.crm-header {
+  display: grid;
+  gap: var(--spacing-responsive-xs);
+  padding: var(--spacing-responsive-xs);
+  background: var(--color-background-primary);
+  border-bottom: 1px solid var(--color-border-primary);
+  
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "brand"
+    "nav"
+    "actions";
+}
+
+@media (min-width: 768px) {
+  .crm-header {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "brand nav actions";
+    align-items: center;
+  }
+}
+
+.crm-header-brand { grid-area: brand; }
+.crm-header-nav { grid-area: nav; }
+.crm-header-actions { grid-area: actions; }
+
+/* CRM Dashboard Layout - Svenska dashboard-layout */
+.crm-dashboard {
+  display: grid;
+  gap: var(--spacing-responsive-xs);
+  padding: var(--spacing-responsive-xs);
+  
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "stats"
+    "quick-actions"
+    "recent-customers"
+    "charts";
+}
+
+@media (min-width: 768px) {
+  .crm-dashboard {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+      "stats stats"
+      "recent-customers quick-actions"
+      "charts charts";
+  }
+}
+
+@media (min-width: 1200px) {
+  .crm-dashboard {
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-areas: 
+      "stats stats quick-actions"
+      "recent-customers charts charts";
+  }
+}
+
+/* CRM Table Layout - Responsiva tabeller för svenska data */
+.crm-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: var(--spacing-responsive-xs) 0;
+  
+  /* Smooth scrolling för svenska användare */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .crm-table-container {
+    /* På mobil, göm vissa kolumner och använd staplade cards istället */
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* CRM Form Layout - Svenska formulärlayouter */
+.crm-form {
+  display: grid;
+  gap: var(--spacing-responsive-xs);
+  
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .crm-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .crm-form .form-group-full {
+    grid-column: 1 / -1;
+  }
+}
+
+/* CRM Sidebar Layout - Responsiv sidebar för svenska menyer */
+.crm-layout-sidebar {
+  display: grid;
+  min-height: 100vh;
+  
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+}
+
+@media (min-width: 992px) {
+  .crm-layout-sidebar {
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: 
+      "sidebar header"
+      "sidebar main"
+      "sidebar footer";
+  }
+}
+
+/* Mobile CRM Navigation - Svenska mobilnavigering */
+.crm-mobile-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navigation);
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  padding: var(--spacing-2);
+  background: var(--color-background-primary);
+  border-top: 1px solid var(--color-border-primary);
+  
+  /* Endast synlig på mobil */
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.crm-mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+  
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-sm);
+  
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  transition: all var(--transition-fast);
+}
+
+.crm-mobile-nav-item:hover,
+.crm-mobile-nav-item.active {
+  color: var(--color-primary);
+  background: var(--color-primary-50);
+}
+
+/* ==========================================================================
+   PRINT STYLES - Svenska utskriftsstilar
+   ========================================================================== */
+
+@media print {
+  /* Dölj navigation och interaktiva element */
+  .crm-header-nav,
+  .crm-header-actions,
+  .crm-mobile-nav,
+  .btn,
+  .form-control,
+  .dropdown,
+  [data-print="hide"] {
+    display: none !important;
+  }
+  
+  /* Optimera för svenska A4-format */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000;
+    background: #fff;
+  }
+  
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+  
+  /* Säkerställ sidbrytningar för svenska dokument */
+  .crm-dashboard,
+  .crm-table-container {
+    page-break-inside: avoid;
+  }
+  
+  /* Svenska företagsinformation tydlig i utskrift */
+  .crm-header-brand {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 12pt;
+    border-bottom: 2pt solid #000;
+    padding-bottom: 6pt;
+  }
+}

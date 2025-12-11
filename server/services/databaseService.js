@@ -9,7 +9,7 @@ const InputValidator = require('../middleware/validation');
 
 class DatabaseService {
   constructor() {
-    this.dataPath = path.join(process.cwd(), 'server');
+    this.dataPath = path.join(process.cwd(), 'data');
     this.backupPath = path.join(process.cwd(), 'backups');
     this.encryption = {
       algorithm: 'aes-256-gcm',

@@ -1,0 +1,271 @@
+/**
+ * Contract Management UI Styles
+ */
+
+.contract-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 20px 0;
+}
+
+.contract-card h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.service-selector {
+  margin: 20px 0;
+}
+
+.service-selector label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.service-selector select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.customization {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.customization h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.customization label {
+  display: block;
+  margin: 12px 0 4px 0;
+  font-weight: 500;
+  color: #555;
+}
+
+.customization input,
+.customization textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.customization textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.btn-primary {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 20px 0;
+}
+
+.btn-primary:hover {
+  background: #0052a3;
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: white;
+  color: #0066cc;
+  border: 2px solid #0066cc;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background: #0066cc;
+  color: white;
+}
+
+.info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #0066cc;
+  padding: 16px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.info-box strong {
+  color: #0066cc;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.info-box ol {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.info-box li {
+  margin: 6px 0;
+  color: #555;
+}
+
+.contract-details {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.contract-details h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.contract-details p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.contract-details strong {
+  color: #333;
+}
+
+.actions {
+  margin: 20px 0;
+  padding: 20px;
+  background: #fff9e6;
+  border-radius: 4px;
+  border: 1px solid #ffd700;
+}
+
+.help-text {
+  color: #666;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.success-message {
+  background: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.success-message h4 {
+  margin-top: 0;
+  color: #2e7d32;
+}
+
+.success-message p {
+  color: #555;
+  margin: 8px 0;
+}
+
+.timeline {
+  margin: 30px 0 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.timeline h4 {
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.timeline ul::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e0e0e0;
+}
+
+.timeline li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 20px;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  border: 3px solid white;
+}
+
+.timeline li.completed::before {
+  background: #4caf50;
+}
+
+.timeline .date {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.timeline .event {
+  display: block;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contract-card {
+    padding: 16px;
+    margin: 10px 0;
+  }
+  
+  .btn-primary {
+    width: 100%;
+  }
+}
