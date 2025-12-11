@@ -1,6 +1,6 @@
-/**
+﻿/**
  * Entra ID Authentication Helper
- * Simple wrapper för MSAL.js authentication
+ * Simple wrapper fÃ¶r MSAL.js authentication
  */
 
 class EntraAuth {
@@ -153,31 +153,6 @@ class EntraAuth {
 
 // Create global instance
 window.entraAuth = new EntraAuth();
-
-// Auto-initialize on page load
-document.addEventListener('DOMContentLoaded', async () => {
-  console.log('Initializing Entra ID authentication...');
-  
-  try {
-    const isLoggedIn = await window.entraAuth.initialize();
-    
-    if (isLoggedIn) {
-      console.log('User authenticated:', window.entraAuth.getUserName());
-      
-      // Dispatch custom event for app to handle
-      window.dispatchEvent(new CustomEvent('entra-login-success', {
-        detail: { user: window.entraAuth.getUser() }
-      }));
-    } else {
-      console.log('User not authenticated - waiting for manual login');
-      
-      // Don't auto-redirect - let the user click the login button
-      // This prevents the double redirect issue
-    }
-  } catch (error) {
-    console.error('Authentication initialization failed:', error);
-  }
-});
 
 // Export for modules
 if (typeof module !== 'undefined' && module.exports) {
