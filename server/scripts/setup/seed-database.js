@@ -181,7 +181,8 @@ async function seedDatabase() {
     await db.collection('tasks').insertMany(tasks);
     console.log(`✅ Inserted ${tasks.length} tasks`);
     
-    await db.collection('notes').insertMany([]);
+    // Create notes collection (empty for now)
+    await db.createCollection('notes');
     console.log(`✅ Created notes collection`);
     
     console.log('\n🎉 Database seeding completed successfully!');
