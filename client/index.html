@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="sv" data-theme="light">
 <head>
   <meta charset="utf-8" />
@@ -246,15 +246,15 @@
       <header class="bg-base-100 border-b border-base-300 p-4">
         <div class="flex gap-3 items-center flex-wrap">
           <div class="flex-1 min-w-[200px]">
-            <input id="globalSearch" type="search" placeholder="SÃ¶k (varumÃ¤rke, fÃ¶retag, mÃ¤klare, e-post, telefon, kundnr)" 
+            <input id="globalSearch" type="search" placeholder="Sök (varumärke, företag, mäklare, e-post, telefon, kundnr)" 
                    class="input input-bordered w-full" />
             <div id="searchSuggest" class="search-suggest hidden"></div>
           </div>
           <select id="segmentFilter" class="select select-bordered select-sm">
             <option value="">Alla segment</option>
           </select>
-          <button id="globalUndoBtn" class="btn btn-ghost" style="display:none;" title="Ã…ngra senaste borttagning">
-            â†¶ Ã…ngra
+          <button id="globalUndoBtn" class="btn btn-ghost" style="display:none;" title="Ångra senaste borttagning">
+            ↶ Ångra
           <div class="flex items-center gap-2 ml-auto">
             <span id="userDisplayName" class="text-sm font-medium"></span>
             <button id="logoutBtn" class="btn btn-ghost btn-sm">Logga ut</button>
@@ -294,31 +294,31 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
             </svg>
-            VarumÃ¤rken
+            Varumärken
           </button></li>
           <li><button data-view="companies" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
             </svg>
-            FÃ¶retag
+            Företag
           </button></li>
           <li><button data-view="agents" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
-            MÃ¤klare
+            Mäklare
           </button></li>
           <li><button data-view="pipeline" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
-            SÃ¤ljtavla
+            Säljtavla
           </button></li>
           <li><button data-view="customer-success" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
-            KundvÃ¥rd
+            Kundvård
           </button></li>
           <li><button data-view="licenses" class="nav-item">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -337,7 +337,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            InstÃ¤llningar
+            Inställningar
           </button></li>
         </ul>
         
@@ -351,24 +351,24 @@
               </svg>
               Visma.net
             </button>
-            <button onclick="console.log('Dual user button clicked'); try { dualUserManager.showDualUserManagement(); } catch(e) { console.error('Dual user error:', e); alert('Fel med AnvÃ¤ndarhantering: ' + e.message); }" class="btn btn-sm btn-outline w-full justify-start">
+            <button onclick="console.log('Dual user button clicked'); try { dualUserManager.showDualUserManagement(); } catch(e) { console.error('Dual user error:', e); alert('Fel med Användarhantering: ' + e.message); }" class="btn btn-sm btn-outline w-full justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              AnvÃ¤ndarhantering
+              Användarhantering
             </button>
           </div>
         </div>
 
         <!-- Rapporter -->
         <div class="border-t border-base-300 pt-4 mt-4 mb-4">
-          <div class="text-xs text-base-content/50 mb-2">SÃ„LJRAPPORTER & ANALYTICS</div>
+          <div class="text-xs text-base-content/50 mb-2">SÄLJRAPPORTER & ANALYTICS</div>
           <div class="space-y-2">
             <button onclick="salesReportManager.showSalesManagerDashboard()" class="btn btn-sm btn-primary w-full justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
-              ðŸ“Š SÃ¤ljchef Dashboard
+              ðŸ“Š Säljchef Dashboard
             </button>
             <button onclick="analytics.showPredictiveAnalytics()" class="btn btn-sm btn-accent w-full justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -427,7 +427,7 @@
   <!-- Modal Container (Legacy system for dynamic modals) -->
   <div id="modal" class="custom-modal hidden">
     <div class="custom-modal-box">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" id="modalClose">âœ•</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" id="modalClose">œ•</button>
       <div id="modalBody"></div>
     </div>
     <div class="custom-modal-backdrop" onclick="document.getElementById('modal').classList.add('hidden')"></div>
@@ -438,50 +438,50 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       <div class="stats shadow">
         <div class="stat">
-          <div class="stat-title">TÃ¤ckningsgrad</div>
-          <div class="stat-value text-primary" id="metricCoverage">â€“</div>
+          <div class="stat-title">Täckningsgrad</div>
+          <div class="stat-value text-primary" id="metricCoverage">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
-          <div class="stat-title">VarumÃ¤rken</div>
-          <div class="stat-value text-secondary" id="metricBrands">â€“</div>
+          <div class="stat-title">Varumärken</div>
+          <div class="stat-value text-secondary" id="metricBrands">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
-          <div class="stat-title">FÃ¶retag</div>
-          <div class="stat-value text-accent" id="metricCompanies">â€“</div>
+          <div class="stat-title">Företag</div>
+          <div class="stat-value text-accent" id="metricCompanies">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
-          <div class="stat-title">MÃ¤klare</div>
-          <div class="stat-value" id="metricAgents">â€“</div>
+          <div class="stat-title">Mäklare</div>
+          <div class="stat-value" id="metricAgents">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Aktiva licenser</div>
-          <div class="stat-value text-success" id="metricActiveLicenses">â€“</div>
+          <div class="stat-value text-success" id="metricActiveLicenses">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
-          <div class="stat-title text-xs">FÃ¶retag: Kunder / Potential</div>
-          <div class="stat-value text-lg" id="metricCompanyCustomerPotential">â€“</div>
+          <div class="stat-title text-xs">Företag: Kunder / Potential</div>
+          <div class="stat-value text-lg" id="metricCompanyCustomerPotential">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
-          <div class="stat-title text-xs">MÃ¤klare: Licenser / Potential</div>
-          <div class="stat-value text-lg" id="metricAgentLicensePotential">â€“</div>
+          <div class="stat-title text-xs">Mäklare: Licenser / Potential</div>
+          <div class="stat-value text-lg" id="metricAgentLicensePotential">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Total MRR</div>
-          <div class="stat-value text-success" id="metricTotalMRR">â€“</div>
+          <div class="stat-value text-success" id="metricTotalMRR">€“</div>
         </div>
       </div>
     </div>
@@ -490,7 +490,7 @@
     <div class="card bg-base-100 shadow-xl mb-6">
       <div class="card-body">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-          <h2 class="card-title">Att gÃ¶ra & Aktiviteter</h2>
+          <h2 class="card-title">Att göra & Aktiviteter</h2>
           <div class="flex flex-wrap gap-2">
             <select id="todoFilter" class="select select-bordered select-sm">
               <option value="all">Alla</option>
@@ -510,14 +510,14 @@
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-          <h2 class="card-title">KedjetÃ¤ckning (Ã¶versikt)</h2>
+          <h2 class="card-title">Kedjetäckning (översikt)</h2>
           <div class="flex flex-wrap gap-2">
             <select id="coverageSort" class="select select-bordered select-sm">
-              <option value="companies">Sortera: FÃ¶retag</option>
-              <option value="agents">Sortera: MÃ¤klare</option>
-              <option value="coverage">Sortera: TÃ¤ckning %</option>
-              <option value="companies_non">Sortera: FÃ¶retag ej kund</option>
-              <option value="agents_non">Sortera: MÃ¤klare utan licens</option>
+              <option value="companies">Sortera: Företag</option>
+              <option value="agents">Sortera: Mäklare</option>
+              <option value="coverage">Sortera: Täckning %</option>
+              <option value="companies_non">Sortera: Företag ej kund</option>
+              <option value="agents_non">Sortera: Mäklare utan licens</option>
             </select>
             <button id="exportCoverage" class="btn btn-ghost btn-sm">Exportera CSV</button>
           </div>
@@ -533,7 +533,7 @@
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-          <h2 class="card-title">VarumÃ¤rken</h2>
+          <h2 class="card-title">Varumärken</h2>
           <div class="flex flex-wrap gap-2">
             <select id="brandPageSize" class="select select-bordered select-sm">
               <option value="10">10</option>
@@ -541,7 +541,7 @@
               <option value="50">50</option>
               <option value="100">100</option>
             </select>
-            <button id="addBrand" class="btn btn-primary btn-sm">Nytt varumÃ¤rke</button>
+            <button id="addBrand" class="btn btn-primary btn-sm">Nytt varumärke</button>
           </div>
         </div>
         <div class="overflow-x-auto">
@@ -549,8 +549,8 @@
         </div>
         <div class="flex items-center justify-end gap-2 mt-4">
           <span class="text-sm text-base-content/50" id="brandPageInfo"></span>
-          <button class="btn btn-sm btn-ghost" id="brandPrev">FÃ¶regÃ¥ende</button>
-          <button class="btn btn-sm btn-ghost" id="brandNext">NÃ¤sta</button>
+          <button class="btn btn-sm btn-ghost" id="brandPrev">Föregående</button>
+          <button class="btn btn-sm btn-ghost" id="brandNext">Nästa</button>
         </div>
       </div>
     </div>
@@ -560,7 +560,7 @@
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-          <h2 class="card-title">FÃ¶retag</h2>
+          <h2 class="card-title">Företag</h2>
           <div class="flex flex-wrap gap-2">
             <select id="companyBrandFilter" class="select select-bordered select-sm"></select>
             <select id="companyStatusFilter" class="select select-bordered select-sm">
@@ -573,9 +573,9 @@
               <option value="all">Alla steg</option>
               <option value="kvalificerad">Kvalificerad</option>
               <option value="offert">Offert</option>
-              <option value="fÃ¶rhandling">FÃ¶rhandling</option>
+              <option value="förhandling">Förhandling</option>
               <option value="vunnit">Vunnit</option>
-              <option value="fÃ¶rlorat">FÃ¶rlorat</option>
+              <option value="förlorat">Förlorat</option>
             </select>
             <select id="companyPageSize" class="select select-bordered select-sm">
               <option value="10">10</option>
@@ -584,7 +584,7 @@
               <option value="100">100</option>
             </select>
             <button id="exportCompanies" class="btn btn-ghost btn-sm">Exportera CSV</button>
-            <button id="addCompany" class="btn btn-primary btn-sm">Nytt fÃ¶retag</button>
+            <button id="addCompany" class="btn btn-primary btn-sm">Nytt företag</button>
           </div>
         </div>
         <div class="overflow-x-auto">
@@ -592,8 +592,8 @@
         </div>
         <div class="flex items-center justify-end gap-2 mt-4">
           <span class="text-sm text-base-content/50" id="companyPageInfo"></span>
-          <button class="btn btn-sm btn-ghost" id="companyPrev">FÃ¶regÃ¥ende</button>
-          <button class="btn btn-sm btn-ghost" id="companyNext">NÃ¤sta</button>
+          <button class="btn btn-sm btn-ghost" id="companyPrev">Föregående</button>
+          <button class="btn btn-sm btn-ghost" id="companyNext">Nästa</button>
         </div>
       </div>
     </div>
@@ -603,7 +603,7 @@
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-          <h2 class="card-title">MÃ¤klare</h2>
+          <h2 class="card-title">Mäklare</h2>
           <div class="flex flex-wrap gap-2">
             <select id="agentCompanyFilter" class="select select-bordered select-sm"></select>
             <select id="agentStatusFilter" class="select select-bordered select-sm">
@@ -619,7 +619,7 @@
               <option value="100">100</option>
             </select>
             <button id="exportAgents" class="btn btn-ghost btn-sm">Exportera CSV</button>
-            <button id="addAgent" class="btn btn-primary btn-sm">Ny mÃ¤klare</button>
+            <button id="addAgent" class="btn btn-primary btn-sm">Ny Mäklare</button>
           </div>
         </div>
         <div class="overflow-x-auto">
@@ -627,8 +627,8 @@
         </div>
         <div class="flex items-center justify-end gap-2 mt-4">
           <span class="text-sm text-base-content/50" id="agentPageInfo"></span>
-          <button class="btn btn-sm btn-ghost" id="agentPrev">FÃ¶regÃ¥ende</button>
-          <button class="btn btn-sm btn-ghost" id="agentNext">NÃ¤sta</button>
+          <button class="btn btn-sm btn-ghost" id="agentPrev">Föregående</button>
+          <button class="btn btn-sm btn-ghost" id="agentNext">Nästa</button>
         </div>
       </div>
     </div>
@@ -638,15 +638,15 @@
     <div class="mb-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
         <div>
-          <h2 class="text-3xl font-bold">ðŸ“Š SÃ¤ljtavla & Pipeline</h2>
-          <p class="text-base-content/70 mt-1">Dra och slÃ¤pp fÃ¶retag mellan stegen fÃ¶r att uppdatera sÃ¤ljprocessen</p>
+          <h2 class="text-3xl font-bold">ðŸ“Š Säljtavla & Pipeline</h2>
+          <p class="text-base-content/70 mt-1">Dra och släpp företag mellan stegen för att uppdatera säljprocessen</p>
         </div>
         <div class="flex flex-wrap gap-2">
           <select id="pipelineUserFilter" class="select select-bordered select-sm">
-            <option value="all">Alla sÃ¤ljare</option>
+            <option value="all">Alla säljare</option>
           </select>
           <button id="pipelineStatsToggle" class="btn btn-ghost btn-sm">ðŸ“ˆ Statistik</button>
-          <button id="addDealBtn" class="btn btn-primary btn-sm">+ Ny affÃ¤r</button>
+          <button id="addDealBtn" class="btn btn-primary btn-sm">+ Ny affär</button>
         </div>
       </div>
 
@@ -655,14 +655,14 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div class="stats shadow">
             <div class="stat">
-              <div class="stat-title">Total pipeline-vÃ¤rde</div>
+              <div class="stat-title">Total pipeline-värde</div>
               <div class="stat-value text-primary text-2xl" id="statTotalValue">0 kr</div>
-              <div class="stat-desc" id="statTotalDeals">0 affÃ¤rer</div>
+              <div class="stat-desc" id="statTotalDeals">0 affärer</div>
             </div>
           </div>
           <div class="stats shadow">
             <div class="stat">
-              <div class="stat-title">VÃ¤ntad revenue (Q)</div>
+              <div class="stat-title">Väntad revenue (Q)</div>
               <div class="stat-value text-secondary text-2xl" id="statExpectedValue">0 kr</div>
               <div class="stat-desc">Viktad sannolikhet</div>
             </div>
@@ -671,14 +671,14 @@
             <div class="stat">
               <div class="stat-title">Konverteringsgrad</div>
               <div class="stat-value text-accent text-2xl" id="statConversionRate">0%</div>
-              <div class="stat-desc" id="statWonLost">0 vunna / 0 fÃ¶rlorade</div>
+              <div class="stat-desc" id="statWonLost">0 vunna / 0 förlorade</div>
             </div>
           </div>
           <div class="stats shadow">
             <div class="stat">
               <div class="stat-title">Genomsnittlig deal-tid</div>
               <div class="stat-value text-2xl" id="statAvgDealTime">0 dagar</div>
-              <div class="stat-desc">FrÃ¥n lead till vunnen</div>
+              <div class="stat-desc">Från lead till vunnen</div>
             </div>
           </div>
         </div>
@@ -697,8 +697,8 @@
     <div class="mb-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
         <div>
-          <h2 class="text-3xl font-bold">ðŸ’š KundvÃ¥rd & Customer Success</h2>
-          <p class="text-base-content/70 mt-1">Prioritera befintliga kunder, fÃ¶rhindra churn och identifiera upsell-mÃ¶jligheter</p>
+          <h2 class="text-3xl font-bold">ðŸ’š Kundvård & Customer Success</h2>
+          <p class="text-base-content/70 mt-1">Prioritera befintliga kunder, förhindra churn och identifiera upsell-möjligheter</p>
         </div>
         <div class="flex flex-wrap gap-2">
           <select id="csUserFilter" class="select select-bordered select-sm">
@@ -743,14 +743,14 @@
             <div class="stat">
               <div class="stat-title">Upsell-potential</div>
               <div class="stat-value text-accent text-2xl" id="csUpsellPotential">0</div>
-              <div class="stat-desc">mÃ¶jligheter</div>
+              <div class="stat-desc">möjligheter</div>
             </div>
           </div>
           <div class="stats shadow">
             <div class="stat">
               <div class="stat-title">Health Score</div>
               <div class="stat-value text-success text-2xl" id="csHealthScore">0%</div>
-              <div class="stat-desc">genomsnittlig kundnÃ¶jdhet</div>
+              <div class="stat-desc">genomsnittlig kundnöjdhet</div>
             </div>
           </div>
         </div>
@@ -790,8 +790,8 @@
         </div>
         <div class="flex items-center justify-end gap-2 mt-4">
           <span class="text-sm text-base-content/50" id="licensePageInfo"></span>
-          <button class="btn btn-sm btn-ghost" id="licensePrev">FÃ¶regÃ¥ende</button>
-          <button class="btn btn-sm btn-ghost" id="licenseNext">NÃ¤sta</button>
+          <button class="btn btn-sm btn-ghost" id="licensePrev">Föregående</button>
+          <button class="btn btn-sm btn-ghost" id="licenseNext">Nästa</button>
         </div>
       </div>
     </div>
@@ -800,11 +800,11 @@
   <template id="tpl-import">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title mb-4">Import frÃ¥n Excel</h2>
+        <h2 class="card-title mb-4">Import från Excel</h2>
         <div class="space-y-4">
           <div class="form-control w-full max-w-xs">
             <label class="label">
-              <span class="label-text">VÃ¤lj Excel-fil</span>
+              <span class="label-text">Välj Excel-fil</span>
             </label>
             <input type="file" id="fileInput" accept=".xlsx" class="file-input file-input-bordered w-full max-w-xs" />
           </div>
@@ -812,21 +812,21 @@
           <div class="flex flex-wrap gap-2">
             <button id="applyImportServer" class="btn btn-ghost btn-sm">Serverimport (standardfil)</button>
             <div class="text-sm text-base-content/50 flex items-center">
-              Servern fÃ¶rsÃ¶ker lÃ¤sa filen i root: SammanstÃ¤llning mÃ¤klardata och kunder 1.xlsx
+              Servern försöker läsa filen i root: Sammanställning mäklardata och kunder 1.xlsx
             </div>
           </div>
           
           <div class="flex flex-wrap gap-2">
             <button id="applyImportOrtspris" class="btn btn-ghost btn-sm">Serverimport (Ortpris)</button>
             <div class="text-sm text-base-content/50 flex items-center">
-              AnvÃ¤nder endast betalnings- och produktdata frÃ¥n Ortpris*.xlsx
+              Använder endast betalnings- och produktdata från Ortpris*.xlsx
             </div>
           </div>
           
           <div class="flex flex-wrap gap-2">
-            <button id="applyImportMaklarpaket" class="btn btn-ghost btn-sm">Serverimport (AnvÃ¤ndare mÃ¤klarpaket)</button>
+            <button id="applyImportMaklarpaket" class="btn btn-ghost btn-sm">Serverimport (Användare mäklarpaket)</button>
             <div class="text-sm text-base-content/50 flex items-center">
-              SÃ¤tter licens och produkt per mÃ¤klare frÃ¥n AnvÃ¤ndare mÃ¤klarpaket*.xlsx
+              Sätter licens och produkt per Mäklare från Användare mäklarpaket*.xlsx
             </div>
           </div>
           
@@ -843,12 +843,12 @@
   <template id="tpl-settings">
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title mb-4">InstÃ¤llningar</h2>
+        <h2 class="card-title mb-4">Inställningar</h2>
         <ul class="menu bg-base-200 rounded-box" id="settingsList">
           <li>
             <div class="flex justify-between items-center">
               <div>
-                <div class="font-semibold">SÃ¤ljare (interna anvÃ¤ndare)</div>
+                <div class="font-semibold">Säljare (interna användare)</div>
                 <div class="text-sm text-base-content/70">Hantera vilka som kan logga in och tilldelas som ansvariga.</div>
               </div>
               <button id="manageUsers" class="btn btn-ghost btn-sm">Hantera</button>
@@ -857,8 +857,8 @@
           <li>
             <div class="flex justify-between items-center">
               <div>
-                <div class="font-semibold">Kunder (Azure B2C anvÃ¤ndare)</div>
-                <div class="text-sm text-base-content/70">Hantera kundanvÃ¤ndare, tjÃ¤nster och roller i Azure B2C.</div>
+                <div class="font-semibold">Kunder (Azure B2C användare)</div>
+                <div class="text-sm text-base-content/70">Hantera kundanvändare, tjänster och roller i Azure B2C.</div>
               </div>
               <button id="manageCustomers" class="btn btn-ghost btn-sm">Hantera kunder</button>
             </div>
@@ -867,7 +867,7 @@
             <div class="flex justify-between items-center">
               <div>
                 <div class="font-semibold text-error">Rensa all CRM-data</div>
-                <div class="text-sm text-base-content/70">Tar bort varumÃ¤rken, fÃ¶retag, mÃ¤klare, kontakter, anteckningar och uppgifter.</div>
+                <div class="text-sm text-base-content/70">Tar bort Varumärken, företag, Mäklare, kontakter, anteckningar och uppgifter.</div>
               </div>
               <button id="clearAllData" class="btn btn-error btn-sm">Rensa allt</button>
             </div>
@@ -877,19 +877,19 @@
     </div>
   </template>
 
-  <!-- Modal: Skapa anvÃ¤ndare i Azure B2C -->
-  <!-- Modal: Skapa anvÃ¤ndare i Azure B2C -->
+  <!-- Modal: Skapa användare i Azure B2C -->
+  <!-- Modal: Skapa användare i Azure B2C -->
   <dialog id="createUserModal" class="modal">
     <div class="modal-box max-w-2xl">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeCreateUserModal()">âœ•</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeCreateUserModal()">œ•</button>
       </form>
-      <h3 class="font-bold text-lg mb-4">âž• Skapa ny anvÃ¤ndare i Azure B2C</h3>
+      <h3 class="font-bold text-lg mb-4">ž• Skapa ny användare i Azure B2C</h3>
       
       <form id="createUserForm" class="space-y-4">
         <div class="form-control">
           <label class="label">
-            <span class="label-text">FÃ¶rnamn *</span>
+            <span class="label-text">Förnamn *</span>
           </label>
           <input type="text" id="userFirstName" required placeholder="Anna" class="input input-bordered w-full" />
         </div>
@@ -917,10 +917,10 @@
         
         <div class="form-control">
           <label class="label">
-            <span class="label-text">FÃ¶retag</span>
+            <span class="label-text">Företag</span>
           </label>
           <select id="userCompany" class="select select-bordered w-full">
-            <option value="">VÃ¤lj fÃ¶retag...</option>
+            <option value="">Välj företag...</option>
           </select>
         </div>
         
@@ -929,7 +929,7 @@
             <span class="label-text">Roll</span>
           </label>
           <select id="userRole" class="select select-bordered w-full">
-            <option value="sales">MÃ¤klare (Sales)</option>
+            <option value="sales">Mäklare (Sales)</option>
             <option value="manager">Manager</option>
             <option value="admin">Admin</option>
           </select>
@@ -937,12 +937,12 @@
         
         <div class="form-control">
           <label class="label">
-            <span class="label-text">TjÃ¤nster</span>
+            <span class="label-text">Tjänster</span>
           </label>
           <div class="space-y-2">
             <label class="label cursor-pointer justify-start gap-3">
-              <input type="checkbox" name="service" value="VÃ¤rderingsdata Premium" class="checkbox checkbox-primary" />
-              <span class="label-text">VÃ¤rderingsdata Premium</span>
+              <input type="checkbox" name="service" value="Värderingsdata Premium" class="checkbox checkbox-primary" />
+              <span class="label-text">Värderingsdata Premium</span>
             </label>
             <label class="label cursor-pointer justify-start gap-3">
               <input type="checkbox" name="service" value="Rapport Pro" class="checkbox checkbox-primary" />
@@ -962,12 +962,12 @@
         <div class="form-control">
           <label class="label cursor-pointer justify-start gap-3">
             <input type="checkbox" id="sendInviteEmail" checked class="checkbox checkbox-primary" />
-            <span class="label-text">Skicka vÃ¤lkomstmail med inloggningsuppgifter</span>
+            <span class="label-text">Skicka välkomstmail med inloggningsuppgifter</span>
           </label>
         </div>
         
         <div class="modal-action">
-          <button type="submit" class="btn btn-primary">Skapa anvÃ¤ndare</button>
+          <button type="submit" class="btn btn-primary">Skapa användare</button>
           <button type="button" class="btn" onclick="closeCreateUserModal()">Avbryt</button>
         </div>
       </form>
@@ -977,24 +977,24 @@
     </form>
   </dialog>
 
-  <!-- Modal: Ge tjÃ¤nst till anvÃ¤ndare -->
+  <!-- Modal: Ge tjänst till användare -->
   <dialog id="grantServiceModal" class="modal">
     <div class="modal-box">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeGrantServiceModal()">âœ•</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeGrantServiceModal()">œ•</button>
       </form>
-      <h3 class="font-bold text-lg mb-4">âž• LÃ¤gg till tjÃ¤nst</h3>
+      <h3 class="font-bold text-lg mb-4">ž• Lägg till tjänst</h3>
       
       <form id="grantServiceForm" class="space-y-4">
         <input type="hidden" id="grantServiceUserId">
         
         <div class="form-control">
           <label class="label">
-            <span class="label-text">TjÃ¤nst *</span>
+            <span class="label-text">Tjänst *</span>
           </label>
           <select id="grantServiceName" required class="select select-bordered w-full">
-            <option value="">VÃ¤lj tjÃ¤nst...</option>
-            <option value="VÃ¤rderingsdata Premium">VÃ¤rderingsdata Premium</option>
+            <option value="">Välj tjänst...</option>
+            <option value="Värderingsdata Premium">Värderingsdata Premium</option>
             <option value="Rapport Pro">Rapport Pro</option>
             <option value="API Access">API Access</option>
             <option value="Ortpris">Ortpris</option>
@@ -1003,14 +1003,14 @@
         
         <div class="form-control">
           <label class="label">
-            <span class="label-text">UtgÃ¥ngsdatum (optional)</span>
-            <span class="label-text-alt">LÃ¤mna tomt fÃ¶r obegrÃ¤nsad tillgÃ¥ng</span>
+            <span class="label-text">Utgångsdatum (optional)</span>
+            <span class="label-text-alt">Lämna tomt för obegränsad tillgång</span>
           </label>
           <input type="date" id="grantServiceExpiry" class="input input-bordered w-full" />
         </div>
         
         <div class="modal-action">
-          <button type="submit" class="btn btn-primary">LÃ¤gg till tjÃ¤nst</button>
+          <button type="submit" class="btn btn-primary">Lägg till tjänst</button>
           <button type="button" class="btn" onclick="closeGrantServiceModal()">Avbryt</button>
         </div>
       </form>
@@ -1020,11 +1020,11 @@
     </form>
   </dialog>
 
-  <!-- Modal: AnvÃ¤ndardetaljer -->
+  <!-- Modal: Användardetaljer -->
   <dialog id="userDetailsModal" class="modal">
     <div class="modal-box max-w-4xl">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeUserDetailsModal()">âœ•</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeUserDetailsModal()">œ•</button>
       </form>
       <div id="userDetailsContent"></div>
     </div>
@@ -1037,15 +1037,15 @@
   <dialog id="manageCustomersModal" class="modal">
     <div class="modal-box max-w-7xl h-[90vh]">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeManageCustomersModal()">âœ•</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeManageCustomersModal()">œ•</button>
       </form>
-      <h3 class="font-bold text-lg mb-4">Hantera kunder (Azure B2C anvÃ¤ndare)</h3>
+      <h3 class="font-bold text-lg mb-4">Hantera kunder (Azure B2C användare)</h3>
       
       <div class="flex flex-wrap gap-3 mb-4">
-        <input type="search" id="customerSearch" placeholder="SÃ¶k anvÃ¤ndare..." class="input input-bordered flex-1 min-w-[200px]" />
+        <input type="search" id="customerSearch" placeholder="Sök användare..." class="input input-bordered flex-1 min-w-[200px]" />
         <select id="customerRoleFilter" class="select select-bordered">
           <option value="all">Alla roller</option>
-          <option value="sales">MÃ¤klare</option>
+          <option value="sales">Mäklare</option>
           <option value="manager">Manager</option>
           <option value="admin">Admin</option>
         </select>
@@ -1054,7 +1054,7 @@
           <option value="active">Aktiva</option>
           <option value="inactive">Inaktiva</option>
         </select>
-        <button onclick="openCreateUserModal()" class="btn btn-primary">âž• Skapa anvÃ¤ndare</button>
+        <button onclick="openCreateUserModal()" class="btn btn-primary">ž• Skapa användare</button>
       </div>
       
       <div class="overflow-x-auto">
@@ -1063,9 +1063,9 @@
             <tr>
               <th>Namn</th>
               <th>E-post</th>
-              <th>FÃ¶retag</th>
+              <th>Företag</th>
               <th>Roll</th>
-              <th>TjÃ¤nster</th>
+              <th>Tjänster</th>
               <th>Status</th>
               <th class="text-right">Actions</th>
             </tr>
@@ -1151,7 +1151,7 @@
         <span id="app-version">Loading version...</span>
       </div>
       <div class="text-sm mt-2 sm:mt-0">
-        <span>CRM System fÃ¶r MÃ¤klarbranschen</span>
+        <span>CRM System för Mäklarbranschen</span>
       </div>
       <div class="text-sm mt-2 sm:mt-0">
         <span id="build-info">Build: <span id="build-timestamp">Loading...</span></span>
