@@ -261,6 +261,59 @@ app.get('/api/stats/state', (req, res) => {
   });
 });
 
+// ============================================
+// USERS ENDPOINTS
+// ============================================
+
+// Dual user stats endpoint
+app.get('/api/users/dual-stats', (req, res) => {
+  try {
+    res.json({
+      totalDualUsers: 0,
+      recentlyCreated: [],
+      syncStatus: 'ok',
+      lastSync: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Error fetching dual stats:', error);
+    res.status(500).json({ error: 'Failed to fetch dual stats' });
+  }
+});
+
+// Routing rules endpoint
+app.get('/api/users/routing-rules', (req, res) => {
+  try {
+    res.json({
+      rules: [],
+      lastUpdated: new Date().toISOString(),
+      status: 'active'
+    });
+  } catch (error) {
+    console.error('Error fetching routing rules:', error);
+    res.status(500).json({ error: 'Failed to fetch routing rules' });
+  }
+});
+
+// ============================================
+// VISMA.NET INTEGRATION ENDPOINTS
+// ============================================
+
+// Check Visma.net connection status
+app.get('/api/visma/status', (req, res) => {
+  try {
+    res.json({
+      connected: false,
+      company: null,
+      message: 'Not connected to Visma.net',
+      lastChecked: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Error checking Visma status:', error);
+    res.status(500).json({ error: 'Failed to check Visma status' });
+  }
+});
+
+// ============================================
 // app.use('/api/search', dbMiddleware, searchRouter);
 // app.use('/api/export', dbMiddleware, exportRouter);
 // app.use('/api/batch', dbMiddleware, batchRouter);

@@ -75,10 +75,10 @@ class CosmosService {
     try {
       console.log('📋 Creating database indexes...');
 
-      // Users collection indexes
+      // Users collection indexes (without unique constraint on Cosmos DB sharded collection)
       await this.db.collection('users').createIndexes([
-        { key: { email: 1 }, unique: true },
-        { key: { azureObjectId: 1 }, unique: true, sparse: true },
+        { key: { email: 1 } },
+        { key: { azureObjectId: 1 }, sparse: true },
         { key: { companyId: 1 } },
         { key: { role: 1 } },
         { key: { isActive: 1 } }
@@ -87,7 +87,7 @@ class CosmosService {
       // Companies collection indexes  
       await this.db.collection('companies').createIndexes([
         { key: { name: 1 } },
-        { key: { organizationNumber: 1 }, unique: true, sparse: true },
+        { key: { organizationNumber: 1 }, sparse: true },
         { key: { brandId: 1 } },
         { key: { isActive: 1 } },
         { key: { createdAt: 1 } }
@@ -119,16 +119,16 @@ class CosmosService {
         { key: { createdAt: 1 } }
       ]);
 
-      // Agents collection indexes
+      // Agents collection indexes (without unique constraint)
       await this.db.collection('agents').createIndexes([
-        { key: { email: 1 }, unique: true },
+        { key: { email: 1 } },
         { key: { companyId: 1 } },
         { key: { isActive: 1 } }
       ]);
 
-      // Brands collection indexes
+      // Brands collection indexes (without unique constraint)
       await this.db.collection('brands').createIndexes([
-        { key: { name: 1 }, unique: true },
+        { key: { name: 1 } },
         { key: { isActive: 1 } }
       ]);
 
