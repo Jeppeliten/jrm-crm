@@ -29,16 +29,16 @@ router.get('/state', async (req, res) => {
       });
     }
     
-    // Fetch all collections in parallel from Cosmos DB
+    // Fetch all collections in parallel from Cosmos DB (using v2 collections)
     const [users, brands, companies, agents, tasks, notes, contacts, segments] = await Promise.all([
-      db.collection('users').find({}).toArray(),
-      db.collection('brands').find({}).toArray(),
-      db.collection('companies').find({}).toArray(),
-      db.collection('agents').find({}).toArray(),
-      db.collection('tasks').find({}).toArray(),
-      db.collection('notes').find({}).toArray(),
-      db.collection('contacts').find({}).toArray(),
-      db.collection('segments').find({}).toArray()
+      db.collection('users').find({}).toArray().catch(() => []),
+      db.collection('brands_v2').find({}).toArray().catch(() => []),
+      db.collection('companies_v2').find({}).toArray().catch(() => []),
+      db.collection('agents_v2').find({}).toArray().catch(() => []),
+      db.collection('tasks').find({}).toArray().catch(() => []),
+      db.collection('notes').find({}).toArray().catch(() => []),
+      db.collection('contacts').find({}).toArray().catch(() => []),
+      db.collection('segments').find({}).toArray().catch(() => [])
     ]);
     
     res.json({
