@@ -36,7 +36,8 @@ function showLandingPage() {
   document.getElementById('landingPage').style.display = 'block';
   document.getElementById('app').style.display = 'none';
   
-  const loginBtn = document.getElementById('loginBtn');
+  // Try both button IDs (landingLoginBtn for new landing page, loginBtn for legacy)
+  const loginBtn = document.getElementById('landingLoginBtn') || document.getElementById('loginBtn');
   const loginError = document.getElementById('loginError');
   const loginErrorText = document.getElementById('loginErrorText');
   
@@ -54,7 +55,7 @@ function showLandingPage() {
     loginBtn.disabled = true;
     const originalHTML = loginBtn.innerHTML;
     loginBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loggar in...';
-    loginError.classList.add('hidden');
+    if (loginError) loginError.classList.add('hidden');
     
     try {
       console.log('Starting login redirect...');
@@ -62,8 +63,8 @@ function showLandingPage() {
       // After redirect, page will reload and user will be logged in
     } catch (error) {
       console.error('Login failed:', error);
-      loginErrorText.textContent = 'Inloggning misslyckades. Försök igen.';
-      loginError.classList.remove('hidden');
+      if (loginErrorText) loginErrorText.textContent = 'Inloggning misslyckades. Försök igen.';
+      if (loginError) loginError.classList.remove('hidden');
       loginBtn.disabled = false;
       loginBtn.innerHTML = originalHTML;
     }
