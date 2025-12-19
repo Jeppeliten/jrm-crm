@@ -251,7 +251,7 @@ const agentsRouter = require('./routes/agents');
 const dealsRouter = require('./routes/deals');
 const tasksRouter = require('./routes/tasks');
 // const adminRouter = require('./routes/admin');
-const statsRouter = require('./routes/stats');
+// const statsRouter = require('./routes/stats');
 // const searchRouter = require('./routes/search');
 // const exportRouter = require('./routes/export');
 // const batchRouter = require('./routes/batch');
@@ -264,7 +264,40 @@ app.use('/api/agents', dbMiddleware, agentsRouter);
 app.use('/api/deals', dbMiddleware, dealsRouter);
 app.use('/api/tasks', dbMiddleware, tasksRouter);
 // app.use('/api/admin', dbMiddleware, adminRouter);
-app.use('/api/stats', dbMiddleware, statsRouter);
+
+// STATS ENDPOINT - INLINE to avoid require() errors
+app.get('/api/stats/state', dbMiddleware, async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.json({
+        users: [],
+        brands: [],
+        companies: [],
+        agents: [],
+        tasks: [],
+        notes: [],
+        contacts: [],
+        segments: []
+      });
+    }
+    const [users, brands, companies, agents, tasks, notes, contacts, segments] = await Promise.all([
+      db.collection('users').find({}).toArray().catch(() => []),
+      db.collection('brands_v2').find({}).toArray().catch(() => []),
+      db.collection('companies_v2').find({}).toArray().catch(() => []),
+      db.collection('agents_v2').find({}).toArray().catch(() => []),
+      db.collection('tasks').find({}).toArray().catch(() => []),
+      db.collection('notes').find({}).toArray().catch(() => []),
+      db.collection('contacts').find({}).toArray().catch(() => []),
+      db.collection('segments').find({}).toArray().catch(() => [])
+    ]);
+    res.json({ users, brands, companies, agents, tasks, notes, contacts, segments });
+  } catch (error) {
+    console.error('Error fetching state:', error);
+    res.status(500).json({ error: 'Failed to fetch state', details: error.message });
+  }
+});
+
 // app.use('/api/search', dbMiddleware, searchRouter);
 // app.use('/api/export', dbMiddleware, exportRouter);
 // app.use('/api/batch', dbMiddleware, batchRouter);
