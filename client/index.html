@@ -54,8 +54,8 @@
   <script src="entra-auth.js"></script>
 </head>
 <body class="bg-base-200">
-  <!-- Landing page (shown before login) -->
-  <div id="landingPage" class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
+  <!-- Landing page (shown before login) - hidden by default, shown by auth-init.js if not logged in -->
+  <div id="landingPage" style="display: none;" class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
     <!-- Decorative elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -211,8 +211,8 @@
     </style>
   </div>
 
-  <!-- Main CRM app (shown after login) -->
-  <div id="app" class="drawer lg:drawer-open" style="display: none;">
+  <!-- Main CRM app (shown after login) - visible by default -->
+  <div id="app" class="drawer lg:drawer-open">
     <input id="drawer-toggle" type="checkbox" class="drawer-toggle" checked />
     
     <!-- Sidebar - Must come BEFORE drawer-content for DaisyUI -->

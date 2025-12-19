@@ -21,10 +21,30 @@ button {
 html, body { height: 100%; }
 body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #f3f6fb; }
 
-/* Let DaisyUI handle drawer layout - minimal overrides */
+/* DaisyUI drawer layout fixes */
 .drawer-side aside {
   background: white;
   border-right: 1px solid #e5e7eb;
+}
+
+/* Ensure drawer-content uses column layout with header at top */
+.drawer-content {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Header stays at top */
+.drawer-content > header {
+  flex-shrink: 0;
+}
+
+/* Main content fills remaining space */
+.drawer-content > main {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .sidebar { background: #ffffff; border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
