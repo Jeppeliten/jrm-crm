@@ -314,10 +314,28 @@ app.get('/api/visma/status', (req, res) => {
 });
 
 // ============================================
-// app.use('/api/search', dbMiddleware, searchRouter);
-// app.use('/api/export', dbMiddleware, exportRouter);
-// app.use('/api/batch', dbMiddleware, batchRouter);
-// app.use('/api/actions', dbMiddleware, actionsRouter);
+// ENTITY ROUTES
+// ============================================
+
+// Import route modules
+const brandsRouter = require('./routes/brands');
+const companiesRouter = require('./routes/companies');
+const agentsRouter = require('./routes/agents');
+const tasksRouter = require('./routes/tasks');
+const searchRouter = require('./routes/search');
+const exportRouter = require('./routes/export');
+const importRouter = require('./routes/import');
+const statsRouter = require('./routes/stats');
+
+// Register routes
+app.use('/api/brands', brandsRouter);
+app.use('/api/companies', companiesRouter);
+app.use('/api/agents', agentsRouter);
+app.use('/api/tasks', tasksRouter);
+app.use('/api/search', searchRouter);
+app.use('/api/export', exportRouter);
+app.use('/api/import', importRouter);
+app.use('/api/stats', statsRouter);
 
 // ============================================
 // ERROR HANDLING MIDDLEWARE (must be AFTER routes)
