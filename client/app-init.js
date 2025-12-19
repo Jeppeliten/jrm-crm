@@ -56,14 +56,24 @@ function initializeApp(user) {
   showMainContent();
   
   // Initialize the main CRM app (app.js)
-  if (typeof window.initializeApp === 'function') {
-    console.log('Calling window.initializeApp() from app.js...');
-    window.initializeApp();
-  } else {
-    console.error('window.initializeApp not found - app.js might not be loaded');
-  }
+  // Wait a bit to ensure app.js is fully loaded
+  setTimeout(() => {
+    if (typeof window.initializeApp === 'function' && window.initializeApp !== initializeApp) {
+      console.log('✅ Calling window.initializeApp() from app.js...');
+      window.initializeApp();
+    } else {
+      console.error('❌ window.initializeApp not found or not ready - app.js might not be loaded');
+      // Retry after another delay
+      setTimeout(() => {
+        if (typeof window.initializeApp === 'function' && window.initializeApp !== initializeApp) {
+          console.log('✅ Retry: Calling window.initializeApp() from app.js...');
+          window.initializeApp();
+        }
+      }, 1000);
+    }
+  }, 500);
   
-  console.log('Application initialized successfully!');
+  console.log('Application initialization started!');
 }
 
 // Expose globally so entra-auth.js can call it
