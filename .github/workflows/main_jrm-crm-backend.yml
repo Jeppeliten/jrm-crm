@@ -23,17 +23,16 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install, build, and test
+      - name: npm install in server directory
         run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+          cd server
+          npm ci --production
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: ./server
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,7 +48,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'jrm-crm-backend'
+          app-name: 'jrm-crm-api-prod-vsdmc5kbydcjc'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C41EA273919B401995233BB2E7FE0564 }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
