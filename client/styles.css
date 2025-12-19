@@ -18,13 +18,40 @@ button {
   --danger: #ef4444;
   --border: #e2e8f0;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #f3f6fb; }
+html, body { height: 100%; margin: 0; }
+body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #f3f6fb; }
 
-/* DaisyUI drawer layout fixes */
+/* DaisyUI drawer layout - ensure sidebar and content are side by side */
+#app.drawer {
+  display: grid !important;
+  height: 100vh;
+  width: 100%;
+}
+
+/* On large screens, show sidebar */
+@media (min-width: 1024px) {
+  #app.drawer.lg\:drawer-open {
+    grid-template-columns: 256px 1fr !important;
+  }
+  
+  #app.drawer.lg\:drawer-open > .drawer-side {
+    position: static !important;
+    display: block !important;
+    width: 256px !important;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  #app.drawer.lg\:drawer-open > .drawer-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
 .drawer-side aside {
   background: white;
   border-right: 1px solid #e5e7eb;
+  height: 100%;
 }
 
 /* Ensure drawer-content uses column layout with header at top */
@@ -45,6 +72,13 @@ body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto
   flex: 1;
   overflow-y: auto;
   min-height: 0;
+}
+
+/* Hide drawer overlay on desktop */
+@media (min-width: 1024px) {
+  .drawer-overlay {
+    display: none !important;
+  }
 }
 
 .sidebar { background: #ffffff; border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
