@@ -243,59 +243,22 @@ const dbMiddleware = (req, res, next) => {
 // API ROUTES
 // ============================================
 
-// Temporarily disabled - these are causing require() errors on Azure
-// const importRouter = require('./routes/import');
-const brandsRouter = require('./routes/brands');
-const companiesRouter = require('./routes/companies');
-const agentsRouter = require('./routes/agents');
-const dealsRouter = require('./routes/deals');
-const tasksRouter = require('./routes/tasks');
-// const adminRouter = require('./routes/admin');
-// const statsRouter = require('./routes/stats');
-// const searchRouter = require('./routes/search');
-// const exportRouter = require('./routes/export');
-// const batchRouter = require('./routes/batch');
-// const actionsRouter = require('./routes/actions');
+// ============================================
+// SIMPLIFIED ROUTES - Testing
+// ============================================
 
-// app.use('/api/import', dbMiddleware, importRouter);
-app.use('/api/brands', dbMiddleware, brandsRouter);
-app.use('/api/companies', dbMiddleware, companiesRouter);
-app.use('/api/agents', dbMiddleware, agentsRouter);
-app.use('/api/deals', dbMiddleware, dealsRouter);
-app.use('/api/tasks', dbMiddleware, tasksRouter);
-// app.use('/api/admin', dbMiddleware, adminRouter);
-
-// STATS ENDPOINT - INLINE to avoid require() errors
-app.get('/api/stats/state', dbMiddleware, async (req, res) => {
-  try {
-    const db = req.app.locals.db;
-    if (!db) {
-      return res.json({
-        users: [],
-        brands: [],
-        companies: [],
-        agents: [],
-        tasks: [],
-        notes: [],
-        contacts: [],
-        segments: []
-      });
-    }
-    const [users, brands, companies, agents, tasks, notes, contacts, segments] = await Promise.all([
-      db.collection('users').find({}).toArray().catch(() => []),
-      db.collection('brands_v2').find({}).toArray().catch(() => []),
-      db.collection('companies_v2').find({}).toArray().catch(() => []),
-      db.collection('agents_v2').find({}).toArray().catch(() => []),
-      db.collection('tasks').find({}).toArray().catch(() => []),
-      db.collection('notes').find({}).toArray().catch(() => []),
-      db.collection('contacts').find({}).toArray().catch(() => []),
-      db.collection('segments').find({}).toArray().catch(() => [])
-    ]);
-    res.json({ users, brands, companies, agents, tasks, notes, contacts, segments });
-  } catch (error) {
-    console.error('Error fetching state:', error);
-    res.status(500).json({ error: 'Failed to fetch state', details: error.message });
-  }
+// Test route - returns static data
+app.get('/api/stats/state', (req, res) => {
+  res.json({
+    users: [],
+    brands: [],
+    companies: [],
+    agents: [],
+    tasks: [],
+    notes: [],
+    contacts: [],
+    segments: []
+  });
 });
 
 // app.use('/api/search', dbMiddleware, searchRouter);
