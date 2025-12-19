@@ -3,6 +3,10 @@
 // CRM Prototyp – enkel SPA utan backend
 // Datamodell i localStorage. Import från Excel via SheetJS.
 
+// Utility functions - must be at top for early access
+const $ = (sel, parent = document) => parent.querySelector(sel);
+const $all = (sel, parent = document) => Array.from(parent.querySelectorAll(sel));
+
 // DOM Cache for performance
 const domCache = {
   modal: null,
@@ -584,10 +588,19 @@ function reopenParentContext(parent) {
 }
 
 function setView(name) {
-  $all('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === name));
-  $all('.view').forEach(v => v.classList.remove('visible'));
+  // Update nav items
+  document.querySelectorAll('.nav-item').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === name);
+  });
+  // Hide all views
+  document.querySelectorAll('.view').forEach(v => {
+    v.classList.remove('visible');
+  });
+  // Show target view
   const el = document.getElementById(`view-${name}`);
-  el.classList.add('visible');
+  if (el) {
+    el.classList.add('visible');
+  }
   renderView(name);
 }
 
