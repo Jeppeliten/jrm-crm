@@ -21,45 +21,10 @@ button {
 html, body { height: 100%; }
 body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #f3f6fb; }
 
-/* Sidebar layout - flexbox approach */
-#app {
-  display: flex !important;
-  flex-direction: row !important;
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-}
-
-/* Sidebar on the left - always first */
-#app > .drawer-side {
-  order: -1 !important;
-  flex-shrink: 0;
-  width: 256px;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  overflow-y: auto;
+/* Let DaisyUI handle drawer layout - minimal overrides */
+.drawer-side aside {
   background: white;
   border-right: 1px solid #e5e7eb;
-  z-index: 10;
-}
-
-/* Main content takes remaining space */
-#app > .drawer-content {
-  flex: 1;
-  height: 100vh;
-  overflow-y: auto;
-  min-width: 0;
-}
-
-/* Hide drawer toggle checkbox */
-#app > .drawer-toggle {
-  display: none;
-}
-
-/* Hide overlay on desktop */
-#app .drawer-overlay {
-  display: none;
 }
 
 .sidebar { background: #ffffff; border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 16px; }

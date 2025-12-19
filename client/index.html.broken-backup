@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CRM Prototyp – Mäklarbranschen</title>
+  <title>CRM Prototyp - Mäklarbranschen</title>
   
   <!-- DaisyUI + Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -46,16 +46,13 @@
   <!-- MSAL.js for Azure AD authentication -->
   <script src="https://alcdn.msauth.net/browser/2.38.1/js/msal-browser.min.js"></script>
   
-  <!-- API Configuration -->
-  <script src="config.js"></script>
-  
   <!-- Entra ID Configuration & Authentication -->
   <script src="entra-config.js"></script>
   <script src="entra-auth.js"></script>
 </head>
 <body class="bg-base-200">
   <!-- Landing page (shown before login) -->
-  <div id="landingPage" class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
+  <div id="landingPage" class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden" style="display: none;">
     <!-- Decorative elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -141,7 +138,7 @@
                   </div>
                   
                   <div class="p-8 space-y-6">
-                    <button id="landingLoginBtn" class="w-full bg-white hover:bg-gray-50 text-gray-800 font-semibold py-4 px-6 border border-gray-300 rounded-lg shadow-sm transition-all duration-200 flex items-center justify-center gap-3 group">
+                    <button id="loginBtn" class="w-full bg-white hover:bg-gray-50 text-gray-800 font-semibold py-4 px-6 border border-gray-300 rounded-lg shadow-sm transition-all duration-200 flex items-center justify-center gap-3 group">
                       <svg class="w-6 h-6 group-hover:scale-110 transition-transform" viewBox="0 0 23 23" fill="none">
                         <path d="M11.5 0h11v11h-11V0z" fill="#f25022"/>
                         <path d="M0 0h11v11H0V0z" fill="#00a4ef"/>
@@ -205,17 +202,82 @@
         33% { transform: translate(30px, -50px) scale(1.1); }
         66% { transform: translate(-20px, 20px) scale(0.9); }
       }
-      .animate-blob { animation: blob 7s infinite; }
-      .animation-delay-2000 { animation-delay: 2s; }
-      .animation-delay-4000 { animation-delay: 4s; }
-    </style>
+      .animate-blob {
+        animation: blob 7s infinite;
+      }
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+      .animation-delay-4000 {
+        animation-delay: 4s;
+      }
+    
+    /* Critical: Ensure login button is clickable */
+    #loginBtn {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      z-index: 9999 !important;
+      position: relative !important;
+    }
+    #loginBtn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }</style>
   </div>
 
-  <!-- Main CRM app (shown after login) -->
-  <div id="app" class="drawer lg:drawer-open" style="display: none;">
-    <input id="drawer-toggle" type="checkbox" class="drawer-toggle" checked />
+    <!-- Main app (shown after login) -->
+    <div id="app" class="drawer lg:drawer-open" style="display: none;">
+      <input id="drawer-toggle" type="checkbox" class="drawer-toggle" checked />    <div class="drawer-content flex flex-col">
+      <!-- Navbar for mobile -->
+      <div class="navbar bg-base-100 lg:hidden">
+        <div class="flex-none">
+          <label for="drawer-toggle" class="btn btn-square btn-ghost">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </label>
+        </div>
+        <div class="flex-1">
+          <a class="btn btn-ghost text-xl">CRM</a>
+        </div>
+      </div>
+      
+      <!-- Topbar -->
+      <header class="bg-base-100 border-b border-base-300 p-4">
+        <div class="flex gap-3 items-center flex-wrap">
+          <div class="flex-1 min-w-[200px]">
+            <input id="globalSearch" type="search" placeholder="Sök (varumärke, företag, mäklare, e-post, telefon, kundnr)" 
+                   class="input input-bordered w-full" />
+            <div id="searchSuggest" class="search-suggest hidden"></div>
+          </div>
+          <select id="segmentFilter" class="select select-bordered select-sm">
+            <option value="">Alla segment</option>
+          </select>
+          <button id="globalUndoBtn" class="btn btn-ghost" style="display:none;" title="Ångra senaste borttagning">
+            ↶ Ångra
+          <div class="flex items-center gap-2 ml-auto">
+            <span id="userDisplayName" class="text-sm font-medium"></span>
+            <button id="logoutBtn" class="btn btn-ghost btn-sm">Logga ut</button>
+          </div>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-auto p-4">
+        <section id="view-dashboard" class="view visible"></section>
+        <section id="view-brands" class="view"></section>
+        <section id="view-companies" class="view"></section>
+        <section id="view-agents" class="view"></section>
+        <section id="view-pipeline" class="view"></section>
+        <section id="view-customer-success" class="view"></section>
+        <section id="view-licenses" class="view"></section>
+        <section id="view-import" class="view"></section>
+        <section id="view-settings" class="view"></section>
+      </main>
+    </div>
     
-    <!-- Sidebar - Must come BEFORE drawer-content for DaisyUI -->
+    <!-- Sidebar -->
     <div class="drawer-side">
       <label for="drawer-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
       <aside class="bg-base-100 min-h-full w-64 p-4 flex flex-col">
@@ -306,13 +368,13 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
-              📊 Säljchef Dashboard
+              ðŸ“Š Säljchef Dashboard
             </button>
             <button onclick="analytics.showPredictiveAnalytics()" class="btn btn-sm btn-accent w-full justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              🔮 Predictive Analytics
+              ðŸ”® Predictive Analytics
             </button>
           </div>
         </div>
@@ -325,7 +387,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              📅 Min Kalender
+              ðŸ“… Min Kalender
             </button>
           </div>
         </div>
@@ -337,7 +399,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              📧 Outlook Dashboard
+              ðŸ“§ Outlook Dashboard
             </button>
           </div>
         </div>
@@ -349,7 +411,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
-              🔧 System Status
+              ðŸ”§ System Status
             </button>
           </div>
         </div>
@@ -360,62 +422,12 @@
         </div>
       </aside>
     </div>
-    
-    <div class="drawer-content flex flex-col">
-      <!-- Navbar for mobile -->
-      <div class="navbar bg-base-100 lg:hidden">
-        <div class="flex-none">
-          <label for="drawer-toggle" class="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </label>
-        </div>
-        <div class="flex-1">
-          <a class="btn btn-ghost text-xl">CRM</a>
-        </div>
-      </div>
-      
-      <!-- Topbar -->
-      <header class="bg-base-100 border-b border-base-300 p-4">
-        <div class="flex gap-3 items-center flex-wrap">
-          <div class="flex-1 min-w-[200px]">
-            <input id="globalSearch" type="search" placeholder="Sök (varumärke, företag, mäklare, e-post, telefon, kundnr)" 
-                   class="input input-bordered w-full" />
-            <div id="searchSuggest" class="search-suggest hidden"></div>
-          </div>
-          <select id="segmentFilter" class="select select-bordered select-sm">
-            <option value="">Alla segment</option>
-          </select>
-          <button id="globalUndoBtn" class="btn btn-ghost" style="display:none;" title="Ångra senaste borttagning">
-            ↶ Ångra
-          </button>
-          <div class="flex items-center gap-2 ml-auto">
-            <span id="userDisplayName" class="text-sm font-medium"></span>
-            <button id="logoutBtn" class="btn btn-ghost btn-sm">Logga ut</button>
-          </div>
-        </div>
-      </header>
-
-      <!-- Main Content -->
-      <main class="flex-1 overflow-auto p-4">
-        <section id="view-dashboard" class="view visible"></section>
-        <section id="view-brands" class="view"></section>
-        <section id="view-companies" class="view"></section>
-        <section id="view-agents" class="view"></section>
-        <section id="view-pipeline" class="view"></section>
-        <section id="view-customer-success" class="view"></section>
-        <section id="view-licenses" class="view"></section>
-        <section id="view-import" class="view"></section>
-        <section id="view-settings" class="view"></section>
-      </main>
-    </div>
   </div>
 
   <!-- Modal Container (Legacy system for dynamic modals) -->
   <div id="modal" class="custom-modal hidden">
     <div class="custom-modal-box">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" id="modalClose">✕</button>
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" id="modalClose">œ•</button>
       <div id="modalBody"></div>
     </div>
     <div class="custom-modal-backdrop" onclick="document.getElementById('modal').classList.add('hidden')"></div>
@@ -427,49 +439,49 @@
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Täckningsgrad</div>
-          <div class="stat-value text-primary" id="metricCoverage">–</div>
+          <div class="stat-value text-primary" id="metricCoverage">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Varumärken</div>
-          <div class="stat-value text-secondary" id="metricBrands">–</div>
+          <div class="stat-value text-secondary" id="metricBrands">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Företag</div>
-          <div class="stat-value text-accent" id="metricCompanies">–</div>
+          <div class="stat-value text-accent" id="metricCompanies">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Mäklare</div>
-          <div class="stat-value" id="metricAgents">–</div>
+          <div class="stat-value" id="metricAgents">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Aktiva licenser</div>
-          <div class="stat-value text-success" id="metricActiveLicenses">–</div>
+          <div class="stat-value text-success" id="metricActiveLicenses">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title text-xs">Företag: Kunder / Potential</div>
-          <div class="stat-value text-lg" id="metricCompanyCustomerPotential">–</div>
+          <div class="stat-value text-lg" id="metricCompanyCustomerPotential">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title text-xs">Mäklare: Licenser / Potential</div>
-          <div class="stat-value text-lg" id="metricAgentLicensePotential">–</div>
+          <div class="stat-value text-lg" id="metricAgentLicensePotential">€“</div>
         </div>
       </div>
       <div class="stats shadow">
         <div class="stat">
           <div class="stat-title">Total MRR</div>
-          <div class="stat-value text-success" id="metricTotalMRR">–</div>
+          <div class="stat-value text-success" id="metricTotalMRR">€“</div>
         </div>
       </div>
     </div>
@@ -607,7 +619,7 @@
               <option value="100">100</option>
             </select>
             <button id="exportAgents" class="btn btn-ghost btn-sm">Exportera CSV</button>
-            <button id="addAgent" class="btn btn-primary btn-sm">Ny mäklare</button>
+            <button id="addAgent" class="btn btn-primary btn-sm">Ny Mäklare</button>
           </div>
         </div>
         <div class="overflow-x-auto">
@@ -626,14 +638,14 @@
     <div class="mb-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
         <div>
-          <h2 class="text-3xl font-bold">📊 Säljtavla & Pipeline</h2>
+          <h2 class="text-3xl font-bold">ðŸ“Š Säljtavla & Pipeline</h2>
           <p class="text-base-content/70 mt-1">Dra och släpp företag mellan stegen för att uppdatera säljprocessen</p>
         </div>
         <div class="flex flex-wrap gap-2">
           <select id="pipelineUserFilter" class="select select-bordered select-sm">
             <option value="all">Alla säljare</option>
           </select>
-          <button id="pipelineStatsToggle" class="btn btn-ghost btn-sm">📈 Statistik</button>
+          <button id="pipelineStatsToggle" class="btn btn-ghost btn-sm">ðŸ“ˆ Statistik</button>
           <button id="addDealBtn" class="btn btn-primary btn-sm">+ Ny affär</button>
         </div>
       </div>
@@ -685,7 +697,7 @@
     <div class="mb-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
         <div>
-          <h2 class="text-3xl font-bold">💚 Kundvård & Customer Success</h2>
+          <h2 class="text-3xl font-bold">ðŸ’š Kundvård & Customer Success</h2>
           <p class="text-base-content/70 mt-1">Prioritera befintliga kunder, förhindra churn och identifiera upsell-möjligheter</p>
         </div>
         <div class="flex flex-wrap gap-2">
@@ -699,7 +711,7 @@
             <option value="standard">Standard (1-5k)</option>
             <option value="starter">Starter (<1k)</option>
           </select>
-          <button id="csStatsToggle" class="btn btn-ghost btn-sm">📈 Statistik</button>
+          <button id="csStatsToggle" class="btn btn-ghost btn-sm">ðŸ“ˆ Statistik</button>
         </div>
       </div>
 
@@ -814,7 +826,7 @@
           <div class="flex flex-wrap gap-2">
             <button id="applyImportMaklarpaket" class="btn btn-ghost btn-sm">Serverimport (Användare mäklarpaket)</button>
             <div class="text-sm text-base-content/50 flex items-center">
-              Sätter licens och produkt per mäklare från Användare mäklarpaket*.xlsx
+              Sätter licens och produkt per Mäklare från Användare mäklarpaket*.xlsx
             </div>
           </div>
           
@@ -855,7 +867,7 @@
             <div class="flex justify-between items-center">
               <div>
                 <div class="font-semibold text-error">Rensa all CRM-data</div>
-                <div class="text-sm text-base-content/70">Tar bort varumärken, företag, mäklare, kontakter, anteckningar och uppgifter.</div>
+                <div class="text-sm text-base-content/70">Tar bort Varumärken, företag, Mäklare, kontakter, anteckningar och uppgifter.</div>
               </div>
               <button id="clearAllData" class="btn btn-error btn-sm">Rensa allt</button>
             </div>
@@ -870,9 +882,9 @@
   <dialog id="createUserModal" class="modal">
     <div class="modal-box max-w-2xl">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeCreateUserModal()">✕</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeCreateUserModal()">œ•</button>
       </form>
-      <h3 class="font-bold text-lg mb-4">➕ Skapa ny användare i Azure B2C</h3>
+      <h3 class="font-bold text-lg mb-4">ž• Skapa ny användare i Azure B2C</h3>
       
       <form id="createUserForm" class="space-y-4">
         <div class="form-control">
@@ -969,9 +981,9 @@
   <dialog id="grantServiceModal" class="modal">
     <div class="modal-box">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeGrantServiceModal()">✕</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeGrantServiceModal()">œ•</button>
       </form>
-      <h3 class="font-bold text-lg mb-4">➕ Lägg till tjänst</h3>
+      <h3 class="font-bold text-lg mb-4">ž• Lägg till tjänst</h3>
       
       <form id="grantServiceForm" class="space-y-4">
         <input type="hidden" id="grantServiceUserId">
@@ -1012,7 +1024,7 @@
   <dialog id="userDetailsModal" class="modal">
     <div class="modal-box max-w-4xl">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeUserDetailsModal()">✕</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeUserDetailsModal()">œ•</button>
       </form>
       <div id="userDetailsContent"></div>
     </div>
@@ -1025,7 +1037,7 @@
   <dialog id="manageCustomersModal" class="modal">
     <div class="modal-box max-w-7xl h-[90vh]">
       <form method="dialog">
-        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeManageCustomersModal()">✕</button>
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="closeManageCustomersModal()">œ•</button>
       </form>
       <h3 class="font-bold text-lg mb-4">Hantera kunder (Azure B2C användare)</h3>
       
@@ -1042,7 +1054,7 @@
           <option value="active">Aktiva</option>
           <option value="inactive">Inaktiva</option>
         </select>
-        <button onclick="openCreateUserModal()" class="btn btn-primary">➕ Skapa användare</button>
+        <button onclick="openCreateUserModal()" class="btn btn-primary">ž• Skapa användare</button>
       </div>
       
       <div class="overflow-x-auto">
@@ -1147,10 +1159,14 @@
     </div>
   </footer>
   
-  <!-- Authentication initialization -->
-  <script src="auth-init.js"></script>
-  
   <!-- Main application script (loads last to ensure dependencies are available) -->
+  <script src="config.js"></script>
+  <script src="auth-helper.js"></script>
   <script src="app.js"></script>
+  
+  <!-- Authentication initialization (MUST load after app.js) -->
+  <script src="auth-init.js"></script>
 </body>
 </html>
+
+
