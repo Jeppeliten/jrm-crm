@@ -1147,10 +1147,10 @@
     </div>
   </footer>
   
-  <!-- Authentication initialization -->
-  <script src="auth-init.js"></script>
-  
-  <!-- Main application script (loads last to ensure dependencies are available) -->
+  <!-- Main application script (must load before auth-init to export initializeApp) -->
   <script src="app.js"></script>
+  
+  <!-- Authentication initialization (runs after app.js exports initializeApp) -->
+  <script src="auth-init.js"></script>
 </body>
 </html>
