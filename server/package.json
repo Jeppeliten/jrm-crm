@@ -6,7 +6,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app-simple.js",
     "dev": "node index.js",
     "test": "echo \"✅ Tests kommer att implementeras\" && exit 0",
     "health-check": "curl -f http://localhost:3000/health || echo 'Server not running'"
