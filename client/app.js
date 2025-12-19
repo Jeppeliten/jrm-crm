@@ -3,10 +3,6 @@
 // CRM Prototyp – enkel SPA utan backend
 // Datamodell i localStorage. Import från Excel via SheetJS.
 
-// Utility functions - must be at top for early access
-const $ = (sel, parent = document) => parent.querySelector(sel);
-const $all = (sel, parent = document) => Array.from(parent.querySelectorAll(sel));
-
 // DOM Cache for performance
 const domCache = {
   modal: null,
@@ -28,6 +24,10 @@ const DEFAULT_USERS = [
   { id: 'u2', namn: 'Sara Sälj', roll: 'sales' },
   { id: 'u3', namn: 'Johan Sälj', roll: 'sales' },
 ];
+
+// Early utility helpers - must be here before use
+function $(sel, parent=document) { return parent.querySelector(sel); }
+function $all(sel, parent=document) { return Array.from(parent.querySelectorAll(sel)); }
 
 // Prislista för butikslicenser baserat på antal medarbetare
 const PRICING_TIERS = [
@@ -556,8 +556,7 @@ function id() { return Math.random().toString(36).slice(2, 10); }
 function fmtDate(d) { return new Date(d).toLocaleString('sv-SE'); }
 
 // --- UI Helpers ---
-function $(sel, parent=document) { return parent.querySelector(sel); }
-function $all(sel, parent=document) { return Array.from(parent.querySelectorAll(sel)); }
+// Note: $ and $all are now defined earlier in the file
 
 let highlightRequest = null;
 function queueHighlight(type, id, options = {}) {
