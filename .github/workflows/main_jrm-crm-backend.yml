@@ -26,7 +26,8 @@ jobs:
       - name: npm install in server directory
         run: |
           cd server
-          npm ci --production
+          npm ci
+          npm prune --production
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -52,5 +53,3 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          clean: true
-          restart: true
