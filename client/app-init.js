@@ -55,6 +55,14 @@ function initializeApp(user) {
   // Hide loading, show content
   showMainContent();
   
+  // Initialize the main CRM app (app.js)
+  if (typeof window.initializeApp === 'function') {
+    console.log('Calling window.initializeApp() from app.js...');
+    window.initializeApp();
+  } else {
+    console.error('window.initializeApp not found - app.js might not be loaded');
+  }
+  
   console.log('Application initialized successfully!');
 }
 
