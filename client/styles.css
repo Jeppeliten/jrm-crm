@@ -20,7 +20,20 @@ button {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: #f3f6fb; }
-#app { display: grid; grid-template-columns: 260px 1fr; height: 100vh; }
+
+/* DaisyUI drawer layout - don't override with grid */
+#app { 
+  height: 100vh; 
+  min-height: 100vh;
+}
+
+/* Ensure drawer-side shows on desktop */
+#app.drawer.lg\:drawer-open > .drawer-side {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
 .sidebar { background: #ffffff; border-right: 1px solid var(--border); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
 .logo { font-weight: 700; letter-spacing: 0.4px; color: var(--primary-700); }
 .nav-item { width: 100%; text-align: left; border: none; background: transparent; color: #0f172a; padding: 10px 12px; border-radius: 8px; cursor: pointer; }
