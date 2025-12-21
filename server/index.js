@@ -283,24 +283,6 @@ const dbMiddleware = (req, res, next) => {
 app.use('/api', dbMiddleware);
 
 // ============================================
-// SIMPLIFIED ROUTES - Testing
-// ============================================
-
-// Test route - returns static data
-app.get('/api/stats/state', (req, res) => {
-  res.json({
-    users: [],
-    brands: [],
-    companies: [],
-    agents: [],
-    tasks: [],
-    notes: [],
-    contacts: [],
-    segments: []
-  });
-});
-
-// ============================================
 // USERS ENDPOINTS
 // ============================================
 
