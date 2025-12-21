@@ -2,6 +2,7 @@
 // Säker databashantering med validering och transaktioner
 
 const fs = require('fs').promises;
+const fsSync = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const ErrorHandler = require('../middleware/errorHandler');
@@ -11,6 +12,11 @@ class DatabaseService {
   constructor() {
     this.dataPath = path.join(process.cwd(), 'data');
     this.backupPath = path.join(process.cwd(), 'backups');
+    try {
+      fsSync.mkdirSync(this.dataPath, { recursive: true });
+    } catch (error) {
+      console.warn('Could not create data directory:', error.message);
+    }
     this.encryption = {
       algorithm: 'aes-256-gcm',
       key: this.getEncryptionKey()
@@ -38,11 +44,12 @@ class DatabaseService {
     // In production, this should come from secure key management
     const keyPath = path.join(this.dataPath, '.encryption.key');
     try {
-      const existingKey = require('fs').readFileSync(keyPath);
+      const existingKey = fsSync.readFileSync(keyPath);
       return existingKey;
     } catch {
       const newKey = crypto.randomBytes(32);
-      require('fs').writeFileSync(keyPath, newKey, { mode: 0o600 });
+      fsSync.mkdirSync(path.dirname(keyPath), { recursive: true });
+      fsSync.writeFileSync(keyPath, newKey, { mode: 0o600 });
       return newKey;
     }
   }
