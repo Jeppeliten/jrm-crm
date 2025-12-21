@@ -314,6 +314,73 @@ app.post('/api/users', async (req, res) => {
   }
 });
 
+// Update user endpoint
+app.put('/api/users/:id', async (req, res) => {
+  try {
+    const db = req.app.locals.db || (cosmosService && cosmosService.db);
+    if (!db) {
+      return res.status(500).json({ error: 'Database not connected' });
+    }
+
+    const { ObjectId } = require('mongodb');
+    const userId = req.params.id;
+    const updates = req.body;
+    
+    // Remove _id from updates if present
+    delete updates._id;
+    updates.updatedAt = new Date();
+
+    let filter;
+    try {
+      filter = { _id: new ObjectId(userId) };
+    } catch {
+      filter = { azureAdId: userId };
+    }
+
+    const result = await db.collection('users').updateOne(filter, { $set: updates });
+    
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ message: 'User updated', modifiedCount: result.modifiedCount });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete user endpoint
+app.delete('/api/users/:id', async (req, res) => {
+  try {
+    const db = req.app.locals.db || (cosmosService && cosmosService.db);
+    if (!db) {
+      return res.status(500).json({ error: 'Database not connected' });
+    }
+
+    const { ObjectId } = require('mongodb');
+    const userId = req.params.id;
+
+    let filter;
+    try {
+      filter = { _id: new ObjectId(userId) };
+    } catch {
+      filter = { azureAdId: userId };
+    }
+
+    const result = await db.collection('users').deleteOne(filter);
+    
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ message: 'User deleted' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Companies endpoint removed - handled by routes/companies.js
 
 // ============================================
