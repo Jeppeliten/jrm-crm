@@ -1,0 +1,11 @@
+<step title="Incoming Request" date="2025-11-13T15:22:49.414" instance="2d174a" url="/deploy?scmType=VSO" method="POST" type="request" pid="835,1,5" Host="jrm-crm-backend.scm.azurewebsites.net" User-Agent="VSServices/20.264.36620.18 (w3wp.exe)" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Expect="100-continue" Request-Id="|24121d190cf7690d2277404bf87c268e.0f03e264fbcfae96." traceparent="00-24121d190cf7690d2277404bf87c268e-0f03e264fbcfae96-00" Content-Length="3534" X-VSS-ActivityId="de217417-e135-0000-1deb-c8f3874cdc01" X-VSS-SubscriptionId="248b843c-baff-4d75-b0a1-7ea624dfc975" Request-Context="appId=cid-v1:170d3aea-0aa1-4cd0-9cf2-018ca9393b0c" X-ARR-LOG-ID="dfaf924b-3d11-432e-835b-43a57f79661e" CLIENT-IP="40.74.28.4:2688" X-SITE-DEPLOYMENT-ID="jrm-crm-backend" WAS-DEFAULT-HOSTNAME="jrm-crm-backend.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/deploy?scmType=VSO" X-Client-IP="40.74.28.4" X-Client-Port="2688" >
+  <step title="FetchHandler" date="2025-11-13T15:22:49.515" >
+    <step title="Executing external process" date="2025-11-13T15:22:49.649" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 96ms -->
+    <step title="Executing external process" date="2025-11-13T15:22:49.754" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 20ms -->
+    <step title="Executing external process" date="2025-11-13T15:22:49.783" type="process" path="git" arguments="log -n 1 master --" /><!-- duration: 201ms -->
+    <step title="Start deployment in the background" date="2025-11-13T15:22:50.003" /><!-- duration: 90ms -->
+>
+    <step title="Executing external process" date="2025-11-13T15:22:50.110" type="process" path="git" arguments="rev-parse --git-dir"   </step><!-- duration: 607ms -->
+  </step><!-- duration: 50ms -->
+  <step title="Executing external process" date="2025-11-13T15:22:50.170" type="process" path="git" arguments="rev-parse --git-dir"     <step title="Outgoing response" date="2025-11-13T15:22:50.160" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 29ms -->
+</step><!-- duration: 789ms -->

@@ -1,0 +1,4 @@
+<exception>System.IO.FileNotFoundException: Could not find file &apos;/home/LogFiles/kudu/trace/2025-11-10T18-03-18_9d4c7e_003_POST_deploy_pending.xml&apos;.
+File name: &apos;/home/LogFiles/kudu/trace/2025-11-10T18-03-18_9d4c7e_003_POST_deploy_pending.xml&apos;
+   at System.IO.File.Move(String sourceFileName, String destFileName, Boolean overwrite)
+   at Kudu.Core.Tracing.XmlTracer.WriteEndTrace() in /tmp/KuduLite/Kudu.Core/Tracing/XmlTracer.cs:line 204</exception>

@@ -1,0 +1,12 @@
+<step title="Incoming Request" date="2025-11-13T15:46:13.502" instance="2d174a" url="/deploy?scmType=VSO" method="POST" type="request" pid="835,1,25" Host="jrm-crm-backend.scm.azurewebsites.net" User-Agent="VSServices/20.264.36620.18 (w3wp.exe)" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Expect="100-continue" Request-Id="|4142fb440c768637feb81906f9ef845b.43849b22964b2a9e." traceparent="00-4142fb440c768637feb81906f9ef845b-43849b22964b2a9e-00" Content-Length="3537" X-VSS-ActivityId="7ce0b302-51f0-0002-3323-64f4874cdc01" X-VSS-SubscriptionId="248b843c-baff-4d75-b0a1-7ea624dfc975" Request-Context="appId=cid-v1:170d3aea-0aa1-4cd0-9cf2-018ca9393b0c" X-ARR-LOG-ID="6b9f07b0-78f3-4dff-b67f-a8f895f79d46" CLIENT-IP="40.74.28.4:10310" X-SITE-DEPLOYMENT-ID="jrm-crm-backend" WAS-DEFAULT-HOSTNAME="jrm-crm-backend.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/deploy?scmType=VSO" X-Client-IP="40.74.28.4" X-Client-Port="10310" >
+  <step title="Cleanup Xml Logs" date="2025-11-13T15:46:13.505" /><!-- duration: 4ms -->
+  <step title="FetchHandler" date="2025-11-13T15:46:13.515" >
+    <step title="Executing external process" date="2025-11-13T15:46:13.564" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 39ms -->
+    <step title="Executing external process" date="2025-11-13T15:46:13.608" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 22ms -->
+    <step title="Executing external process" date="2025-11-13T15:46:13.646" type="process" path="git" arguments="log -n 1 master --" /><!-- duration: 53ms -->
+    <step title="Start deployment in the background" date="2025-11-13T15:46:13.701" /><!-- duration: 15ms -->
+  </step><!-- duration: 204ms -->
+  <step title="Outgoing response" date="2025-11-13T15:46:13.725" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 3ms -->
+</step><!-- duration: 228ms -->
+>
+    <step title="Executing external process" date="2025-11-13T15:46:13.718" type="process" path="git" arguments="rev-parse --git-dir" 

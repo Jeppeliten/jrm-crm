@@ -1,0 +1,13 @@
+<step title="Incoming Request" date="2025-11-13T15:27:08.737" instance="2d174a" url="/deploy?scmType=VSO" method="POST" type="request" pid="835,1,23" Host="jrm-crm-backend.scm.azurewebsites.net" User-Agent="VSServices/20.264.36620.18 (w3wp.exe)" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Expect="100-continue" Request-Id="|10c7d2ef8891cece07d3536054ae7cc3.167c6b9dc76c39d6." traceparent="00-10c7d2ef8891cece07d3536054ae7cc3-167c6b9dc76c39d6-00" Content-Length="3544" X-VSS-ActivityId="211ca303-1f02-0001-cd17-29f7874cdc01" X-VSS-SubscriptionId="248b843c-baff-4d75-b0a1-7ea624dfc975" Request-Context="appId=cid-v1:170d3aea-0aa1-4cd0-9cf2-018ca9393b0c" X-ARR-LOG-ID="a126ea6e-2672-4946-b836-c13da046b2ec" CLIENT-IP="40.74.28.4:14988" X-SITE-DEPLOYMENT-ID="jrm-crm-backend" WAS-DEFAULT-HOSTNAME="jrm-crm-backend.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/deploy?scmType=VSO" X-Client-IP="40.74.28.4" X-Client-Port="14988" >
+  <step title="Cleanup Xml Logs" date="2025-11-13T15:27:08.740" /><!-- duration: 10ms -->
+  <step title="FetchHandler" date="2025-11-13T15:27:08.822" >
+    <step title="Executing external process" date="2025-11-13T15:27:09.100" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 97ms -->
+    <step title="Executing external process" date="2025-11-13T15:27:09.215" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 49ms -->
+    <step title="Executing external process" date="2025-11-13T15:27:09.282" type="process" path="git" arguments="log -n 1 master --" /><!-- duration: 303ms -->
+    <step title="Start deployment in the background" date="2025-11-13T15:27:09.604" >
+    <step title="Executing external process" date="2025-11-13T15:27:09.661" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 57ms -->
+    </step><!-- duration: 87ms -->
+  </step><!-- duration: 961ms -->
+date="2025-11-13T15:27:09.783" type="response" statusCode="202" statusText="Accepted"   <step title="Executing external process" date="2025-11-13T15:27:09.810" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 10ms -->
+  </step><!-- duration: 28ms -->
+</step><!-- duration: 1129ms -->

@@ -1,0 +1,1 @@
+<step title="Executing external process" date="2025-11-13T15:35:34.316" instance="2d174a" type="process" path="git" arguments="log -n 1 master --" /><!-- duration: 50ms -->

@@ -1,0 +1,1 @@
+<step title="Executing external process" date="2025-12-03T09:40:26.714" instance="6a8cb0" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 22ms -->

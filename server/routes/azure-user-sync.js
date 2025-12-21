@@ -158,6 +158,99 @@ async function syncUserToDatabase(db, userDetails, appRoleId) {
 // ============================================
 
 /**
+ * GET /api/users
+ * Hämta alla användare (för dropdown etc)
+ */
+router.get('/', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.status(500).json({ error: 'Database not connected' });
+    }
+
+    const users = await db.collection('users').find({ active: { $ne: false } }).toArray();
+    
+    res.json({
+      users: users.map(u => ({
+        id: u._id?.toString() || u.azureAdId,
+        azureAdId: u.azureAdId,
+        name: u.name || u.displayName,
+        email: u.email,
+        role: u.role || u.appRole,
+        active: u.active !== false
+      })),
+      total: users.length,
+      page: 1,
+      pageSize: 50
+    });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * POST /api/users
+ * Skapa en ny användare manuellt
+ */
+router.post('/', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.status(500).json({ error: 'Database not connected' });
+    }
+
+    const { azureAdId, name, email, role, appRole, active } = req.body;
+    
+    if (!name || !email) {
+      return res.status(400).json({ error: 'name and email are required' });
+    }
+
+    const user = {
+      azureAdId: azureAdId || null,
+      name,
+      displayName: name,
+      email,
+      role: role || 'salesperson',
+      appRole: appRole || 'CRM Salesperson',
+      active: active !== false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    // Check if user already exists
+    const existing = await db.collection('users').findOne({ 
+      $or: [
+        { email },
+        ...(azureAdId ? [{ azureAdId }] : [])
+      ]
+    });
+
+    if (existing) {
+      // Update existing user
+      await db.collection('users').updateOne(
+        { _id: existing._id },
+        { $set: { ...user, updatedAt: new Date() } }
+      );
+      return res.json({ 
+        message: 'User updated',
+        user: { ...existing, ...user }
+      });
+    }
+
+    const result = await db.collection('users').insertOne(user);
+    
+    res.status(201).json({
+      message: 'User created',
+      user: { ...user, _id: result.insertedId }
+    });
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
  * GET /api/users/debug
  * Debug: Visa direkt vad som finns i users-collectionen
  */
