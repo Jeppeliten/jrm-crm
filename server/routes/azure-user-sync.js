@@ -272,11 +272,20 @@ router.get('/debug', async (req, res) => {
     // Lista alla collections
     const collections = await db.listCollections().toArray();
 
+    // Lista alla index på users collection
+    let indexes = [];
+    try {
+      indexes = await db.collection('users').indexes();
+    } catch (e) {
+      indexes = [{ error: e.message }];
+    }
+
     res.json({
       dbAvailable: true,
       databaseName: dbName,
       totalUsers: count,
       collections: collections.map(c => c.name),
+      indexes: indexes,
       users: users.map(u => ({
         _id: u._id,
         displayName: u.displayName,
