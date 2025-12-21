@@ -121,6 +121,42 @@ app.get('/api/health', (req, res) => {
   res.json(health);
 });
 
+// Debug endpoint to verify DB wiring and collection counts
+app.get('/api/debug/db-info', async (req, res) => {
+  try {
+    if (!cosmosService || !cosmosService.db) {
+      return res.status(503).json({
+        status: 'db_not_configured'
+      });
+    }
+
+    const db = cosmosService.db;
+    const collections = await db.listCollections().toArray();
+    const names = collections.map(c => c.name).sort();
+
+    // Light-weight counts for key collections
+    const keyCollections = ['brands_v2', 'companies_v2', 'agents_v2', 'contracts', 'notes', 'tasks'];
+    const counts = {};
+    for (const name of keyCollections) {
+      try {
+        counts[name] = await db.collection(name).countDocuments();
+      } catch {
+        counts[name] = null;
+      }
+    }
+
+    res.json({
+      status: 'ok',
+      database: db.databaseName,
+      collections: names,
+      counts,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    res.status(500).json({ status: 'error', message: error.message });
+  }
+});
+
 app.get('/api/health/cosmos', async (req, res) => {
   if (!cosmosService) {
     return res.status(503).json({
