@@ -20,7 +20,7 @@ const isRateLimitError = (error) => {
   return error.code === 16500 || error.code === 429 || (error.message && error.message.includes('Request rate is large'));
 };
 
-async function withRetry(fn, { retries = 10, baseDelay = 500 } = {}) {
+async function withRetry(fn, { retries = 12, baseDelay = 800 } = {}) {
   let attempt = 0;
   while (true) {
     try {
@@ -240,7 +240,7 @@ async function processImport(data, filename, db) {
   const errors = [];
 
   // Process in chunks to reduce RU spikes
-  const chunkSize = 25;
+  const chunkSize = 10;
   const chunks = [];
   for (let i = 0; i < data.length; i += chunkSize) {
     chunks.push(data.slice(i, i + chunkSize));
@@ -269,7 +269,7 @@ async function processImport(data, filename, db) {
     }
 
     // Small pause between chunks to avoid RU bursts
-    await sleep(200);
+    await sleep(1000);
   }
 
   return {
