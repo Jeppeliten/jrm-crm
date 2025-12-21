@@ -8,28 +8,22 @@ const router = express.Router();
 const xlsx = require('xlsx');
 const path = require('path');
 const fs = require('fs').promises;
+const multer = require('multer');
 
-// Import data from client-uploaded Excel file
+// In-memory file uploads for Excel imports
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+
+// Import data from client-provided JSON payload (legacy)
 router.post('/', async (req, res) => {
   try {
-    const { type, data, filename } = req.body;
-    
+    const { data, filename = 'payload' } = req.body;
     if (!data || !Array.isArray(data)) {
       return res.status(400).json({ 
         error: 'Invalid data format',
         message: 'Data must be an array of objects' 
       });
     }
-    
-    console.log(`Processing import: ${filename} (${data.length} rows)`);
-    
-    // Determine what type of data this is based on columns
-    const columns = Object.keys(data[0] || {});
-    console.log('Columns found:', columns);
-    
-    let imported = 0;
-    const errors = [];
-    
+
     const db = req.app.locals.db;
     if (!db) {
       return res.status(500).json({ 
@@ -37,51 +31,43 @@ router.post('/', async (req, res) => {
         message: 'Database connection not configured' 
       });
     }
-    
-    // Process based on data type
-    // Check if this is a comprehensive customer data file (brands, companies, agents)
-    if (hasColumn(columns, ['kund', 'varumärke', 'org']) || 
-        hasColumn(columns, ['company', 'brand', 'org'])) {
-      // This is a complete customer data export - import everything
-      console.log('Detected comprehensive customer data file');
-      
-      // First pass: Brands and Companies
-      const companyCount = await importBrandsAndCompanies(data, db);
-      console.log(`Imported ${companyCount} brands/companies/contracts`);
-      
-      // Second pass: Agents
-      const agentCount = await importAgents(data, db);
-      console.log(`Imported ${agentCount} agents`);
-      
-      imported = companyCount + agentCount;
-      
-    } else if (hasColumn(columns, ['varumärke', 'företag', 'brand', 'company'])) {
-      // Brand/Company data only
-      imported = await importBrandsAndCompanies(data, db);
-    } else if (hasColumn(columns, ['mäklare', 'agent', 'email'])) {
-      // Agent data only
-      imported = await importAgents(data, db);
-    } else if (hasColumn(columns, ['licens', 'license', 'product'])) {
-      // License data
-      imported = await importLicenses(data, db);
-    } else {
-      // Generic import - try to match to existing collections
-      imported = await importGeneric(data, db);
-    }
-    
-    res.json({
-      success: true,
-      imported,
-      total: data.length,
-      errors: errors.length > 0 ? errors : undefined,
-      message: `Importerade ${imported} av ${data.length} poster`,
-      summary: await getImportSummary(db)
-    });
-    
+
+    const result = await processImport(data, filename, db);
+    res.json(result);
   } catch (error) {
     console.error('Import error:', error);
     res.status(500).json({ 
       error: 'Import failed',
+      message: error.message 
+    });
+  }
+});
+
+// Import Excel file uploaded from client
+router.post('/excel', upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.status(500).json({ 
+        error: 'Database not available',
+        message: 'Database connection not configured' 
+      });
+    }
+
+    const workbook = xlsx.read(req.file.buffer, { type: 'buffer' });
+    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+    const data = xlsx.utils.sheet_to_json(firstSheet);
+
+    const result = await processImport(data, req.file.originalname, db);
+    res.json(result);
+  } catch (error) {
+    console.error('Excel import error:', error);
+    res.status(500).json({ 
+      error: 'Excel import failed',
       message: error.message 
     });
   }
@@ -217,6 +203,45 @@ function hasColumn(columns, searchTerms) {
   return searchTerms.some(term => 
     columns.some(col => col.toLowerCase().includes(term.toLowerCase()))
   );
+}
+
+// Shared import processor used by JSON payloads and uploaded Excel files
+async function processImport(data, filename, db) {
+  console.log(`Processing import: ${filename} (${data.length} rows)`);
+
+  const columns = Object.keys(data[0] || {});
+  console.log('Columns found:', columns);
+
+  let imported = 0;
+  const errors = [];
+
+  // Process based on data type
+  if (hasColumn(columns, ['kund', 'varumärke', 'org']) || 
+      hasColumn(columns, ['company', 'brand', 'org'])) {
+    console.log('Detected comprehensive customer data file');
+    const companyCount = await importBrandsAndCompanies(data, db);
+    console.log(`Imported ${companyCount} brands/companies/contracts`);
+    const agentCount = await importAgents(data, db);
+    console.log(`Imported ${agentCount} agents`);
+    imported = companyCount + agentCount;
+  } else if (hasColumn(columns, ['varumärke', 'företag', 'brand', 'company'])) {
+    imported = await importBrandsAndCompanies(data, db);
+  } else if (hasColumn(columns, ['mäklare', 'agent', 'email'])) {
+    imported = await importAgents(data, db);
+  } else if (hasColumn(columns, ['licens', 'license', 'product'])) {
+    imported = await importLicenses(data, db);
+  } else {
+    imported = await importGeneric(data, db);
+  }
+
+  return {
+    success: true,
+    imported,
+    total: data.length,
+    errors: errors.length > 0 ? errors : undefined,
+    message: `Importerade ${imported} av ${data.length} poster`,
+    summary: await getImportSummary(db)
+  };
 }
 
 async function importBrandsAndCompanies(data, db) {
