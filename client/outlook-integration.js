@@ -1158,5 +1158,9 @@ class OutlookIntegration {
   }
 }
 
-// Skapa global instans
-const outlookIntegration = new OutlookIntegration();
+// Exportera klassen (instans skapas i index.html baserat på config)
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = OutlookIntegration;
+} else {
+  window.OutlookIntegration = OutlookIntegration;
+}

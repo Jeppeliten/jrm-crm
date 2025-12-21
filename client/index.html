@@ -1123,8 +1123,19 @@
   <!-- Calendar view -->
   <script src="calendar-view.js"></script>
   
-  <!-- Outlook integration -->
+  <!-- Microsoft Authentication Library (MSAL) for Outlook integration -->
+  <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
+  
+  <!-- Outlook integration - väljer automatiskt riktig eller mock baserat på config -->
+  <script src="outlook-real.js"></script>
   <script src="outlook-integration.js"></script>
+  <script>
+    // Använd riktig integration om konfigurerad, annars mock
+    const outlookIntegration = MICROSOFT_CONFIGURED 
+      ? new RealOutlookIntegration() 
+      : new OutlookIntegration();
+    console.log('Outlook integration loaded:', MICROSOFT_CONFIGURED ? 'Real (MSAL)' : 'Mock');
+  </script>
 
   <!-- System Status Dashboard -->
   <script src="system-status.js"></script>
