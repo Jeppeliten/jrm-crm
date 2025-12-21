@@ -25,6 +25,65 @@ const DEFAULT_USERS = [
   { id: 'u3', namn: 'Johan Sälj', roll: 'sales' },
 ];
 
+/**
+ * Hämta användare från API:et (Entra ID / Azure AD)
+ * Dessa kan tilldelas som ansvariga på uppgifter etc.
+ */
+async function fetchUsersFromAPI() {
+  try {
+    const response = await fetch(`${API_BASE}/api/users`, { 
+      credentials: 'include',
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (!response.ok) {
+      console.warn('Kunde inte hämta användare från API:', response.status);
+      return null;
+    }
+    
+    const data = await response.json();
+    
+    if (data.users && Array.isArray(data.users)) {
+      // Mappa API-användare till AppState-format
+      return data.users.map(u => ({
+        id: u._id || u.azureObjectId || u.id,
+        namn: u.displayName || `${u.firstName || ''} ${u.lastName || ''}`.trim() || u.email || 'Okänd',
+        roll: u.crmMetadata?.role || u.role || 'viewer',
+        email: u.email,
+        azureObjectId: u.azureObjectId,
+        isActive: u.isActive !== false
+      })).filter(u => u.isActive); // Visa bara aktiva användare
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn('Fel vid hämtning av användare:', error);
+    return null;
+  }
+}
+
+/**
+ * Uppdatera användarlistan från API:et
+ */
+async function refreshUsersFromAPI() {
+  const apiUsers = await fetchUsersFromAPI();
+  if (apiUsers && apiUsers.length > 0) {
+    AppState.users = apiUsers;
+    saveState();
+    console.log(`✅ Uppdaterade ${apiUsers.length} användare från API`);
+    if (typeof showNotification === 'function') {
+      showNotification(`Laddade ${apiUsers.length} användare från Azure AD`, 'success');
+    }
+    return true;
+  } else {
+    console.warn('Inga användare hittades i API');
+    if (typeof showNotification === 'function') {
+      showNotification('Kunde inte hämta användare från API', 'error');
+    }
+    return false;
+  }
+}
+
 // Early utility helpers - must be here before use
 function $(sel, parent=document) { return parent.querySelector(sel); }
 function $all(sel, parent=document) { return Array.from(parent.querySelectorAll(sel)); }
@@ -149,6 +208,9 @@ const AppState = {
 };
 
 async function loadState() {
+  // 0) Försök hämta riktiga användare från API (Entra ID)
+  const apiUsers = await fetchUsersFromAPI();
+  
   // 1) Försök hämta från server
   try {
     let r = await fetch(`${API_BASE}/api/stats/state`, { credentials: 'include' });
@@ -161,7 +223,6 @@ async function loadState() {
       if (data && Object.keys(data).length) {
         Object.assign(AppState, data);
         // defensiv init
-        AppState.users ||= [];
         AppState.brands ||= [];
         AppState.companies ||= [];
         AppState.agents ||= [];
@@ -170,6 +231,15 @@ async function loadState() {
         AppState.contacts ||= [];
         AppState.segments ||= [];
         AppState.undoStack = []; // Always start fresh (not persisted)
+        
+        // Använd API-användare om tillgängliga, annars fallback
+        if (apiUsers && apiUsers.length > 0) {
+          AppState.users = apiUsers;
+          console.log(`✅ Laddade ${apiUsers.length} användare från API`);
+        } else {
+          AppState.users ||= DEFAULT_USERS;
+        }
+        
         runMigrations();
         localStorage.setItem(LS_KEY, JSON.stringify(AppState));
         return;
@@ -184,7 +254,6 @@ async function loadState() {
     try {
       const s = JSON.parse(raw);
       Object.assign(AppState, s);
-      AppState.users ||= [];
       AppState.brands ||= [];
       AppState.companies ||= [];
       AppState.agents ||= [];
@@ -192,14 +261,23 @@ async function loadState() {
       AppState.tasks ||= [];
       AppState.contacts ||= [];
       AppState.segments ||= [];
+      
+      // Använd API-användare om tillgängliga
+      if (apiUsers && apiUsers.length > 0) {
+        AppState.users = apiUsers;
+        console.log(`✅ Laddade ${apiUsers.length} användare från API`);
+      } else {
+        AppState.users ||= DEFAULT_USERS;
+      }
+      
       runMigrations();
       localStorage.setItem(LS_KEY, JSON.stringify(AppState));
       return;
     } catch {}
   }
   // 3) Seed om inget finns
-  AppState.users = DEFAULT_USERS;
-  AppState.currentUserId = DEFAULT_USERS[0].id;
+  AppState.users = (apiUsers && apiUsers.length > 0) ? apiUsers : DEFAULT_USERS;
+  AppState.currentUserId = AppState.users[0]?.id || DEFAULT_USERS[0].id;
   seedExampleData();
   await saveState();
 }
@@ -4718,23 +4796,48 @@ function openChangeServerPassword() {
 }
 
 function openUsersModal() {
+  const hasApiUsers = AppState.users.some(u => u.azureObjectId);
+  
   modal.show(`
     <h3>Användare / Säljare</h3>
+    ${hasApiUsers ? `
+      <div class="alert" style="background:#e8f5e9; border:1px solid #4caf50; border-radius:4px; padding:8px; margin-bottom:12px; font-size:13px;">
+        ✅ Användare synkas från Azure AD / Entra ID
+      </div>
+    ` : `
+      <div class="alert" style="background:#fff3e0; border:1px solid #ff9800; border-radius:4px; padding:8px; margin-bottom:12px; font-size:13px;">
+        ⚠️ Lokala användare (API inte konfigurerat). <button class="secondary" style="padding:2px 8px; font-size:12px;" onclick="refreshUsersFromAPI()">🔄 Försök ladda från API</button>
+      </div>
+    `}
     <div class="list" id="userList">${AppState.users.map(u => `
       <div class="list-item">
-        <div><div class="title">${u.namn}</div><div class="subtitle">${u.roll||''}</div></div>
-          <button class="secondary" data-creds="${u.id}">Inloggning</button>
+        <div>
+          <div class="title">${u.namn} ${u.azureObjectId ? '<span style="color:#4caf50; font-size:11px;">●</span>' : ''}</div>
+          <div class="subtitle">${u.roll || 'viewer'}${u.email ? ` • ${u.email}` : ''}</div>
+        </div>
         <div class="actions">
-          <button class="secondary" data-edit="${u.id}">Byt namn</button>
-          <button class="danger" data-del="${u.id}">Ta bort</button>
+          ${!u.azureObjectId ? `
+            <button class="secondary" data-edit="${u.id}">Byt namn</button>
+            <button class="danger" data-del="${u.id}">Ta bort</button>
+          ` : `
+            <span style="font-size:11px; color:#666;">Azure AD</span>
+          `}
         </div>
       </div>
     `).join('')}</div>
     <div style="margin-top:10px; display:flex; gap:8px;">
-      <button class="primary" id="addUser">Ny användare</button>
+      ${!hasApiUsers ? `<button class="primary" id="addUser">Ny användare</button>` : ''}
+      <button class="secondary" id="refreshUsers">🔄 Uppdatera</button>
       <button class="secondary" onclick="modal.hide()">Stäng</button>
     </div>
   `);
+  
+  // Refresh-knapp
+  document.getElementById('refreshUsers')?.addEventListener('click', async () => {
+    await refreshUsersFromAPI();
+    openUsersModal();
+  });
+  
   const list = document.getElementById('userList');
   list.addEventListener('click', (e) => {
     const btn = e.target.closest('button'); if (!btn) return;
