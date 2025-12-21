@@ -13,6 +13,29 @@ const multer = require('multer');
 // In-memory file uploads for Excel imports
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
+// Basic retry helper for Cosmos 429s
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const isRateLimitError = (error) => {
+  if (!error) return false;
+  return error.code === 16500 || error.code === 429 || (error.message && error.message.includes('Request rate is large'));
+};
+
+async function withRetry(fn, { retries = 6, baseDelay = 200 } = {}) {
+  let attempt = 0;
+  while (true) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (!isRateLimitError(err) || attempt >= retries) {
+        throw err;
+      }
+      const delay = baseDelay * Math.pow(2, attempt);
+      await sleep(delay);
+      attempt += 1;
+    }
+  }
+}
+
 // Import data from client-provided JSON payload (legacy)
 router.post('/', async (req, res) => {
   try {
@@ -215,23 +238,34 @@ async function processImport(data, filename, db) {
   let imported = 0;
   const errors = [];
 
+  // Process in chunks to reduce RU spikes
+  const chunkSize = 50;
+  const chunks = [];
+  for (let i = 0; i < data.length; i += chunkSize) {
+    chunks.push(data.slice(i, i + chunkSize));
+  }
+
+  let chunkIndex = 0;
+
   // Process based on data type
-  if (hasColumn(columns, ['kund', 'varumärke', 'org']) || 
-      hasColumn(columns, ['company', 'brand', 'org'])) {
-    console.log('Detected comprehensive customer data file');
-    const companyCount = await importBrandsAndCompanies(data, db);
-    console.log(`Imported ${companyCount} brands/companies/contracts`);
-    const agentCount = await importAgents(data, db);
-    console.log(`Imported ${agentCount} agents`);
-    imported = companyCount + agentCount;
-  } else if (hasColumn(columns, ['varumärke', 'företag', 'brand', 'company'])) {
-    imported = await importBrandsAndCompanies(data, db);
-  } else if (hasColumn(columns, ['mäklare', 'agent', 'email'])) {
-    imported = await importAgents(data, db);
-  } else if (hasColumn(columns, ['licens', 'license', 'product'])) {
-    imported = await importLicenses(data, db);
-  } else {
-    imported = await importGeneric(data, db);
+  for (const chunk of chunks) {
+    chunkIndex++;
+    console.log(`Processing chunk ${chunkIndex}/${chunks.length} (${chunk.length} rows)`);
+
+    if (hasColumn(columns, ['kund', 'varumärke', 'org']) || 
+        hasColumn(columns, ['company', 'brand', 'org'])) {
+      const companyCount = await importBrandsAndCompanies(chunk, db);
+      const agentCount = await importAgents(chunk, db);
+      imported += companyCount + agentCount;
+    } else if (hasColumn(columns, ['varumärke', 'företag', 'brand', 'company'])) {
+      imported += await importBrandsAndCompanies(chunk, db);
+    } else if (hasColumn(columns, ['mäklare', 'agent', 'email'])) {
+      imported += await importAgents(chunk, db);
+    } else if (hasColumn(columns, ['licens', 'license', 'product'])) {
+      imported += await importLicenses(chunk, db);
+    } else {
+      imported += await importGeneric(chunk, db);
+    }
   }
 
   return {
@@ -279,14 +313,14 @@ async function importBrandsAndCompanies(data, db) {
           hasCentralAgreement: category && category.toLowerCase().includes('central')
         };
         
-        await db.collection('brands_v2').updateOne(
+        await withRetry(() => db.collection('brands_v2').updateOne(
           { name: brand.trim() },
           { 
             $set: brandData,
             $setOnInsert: { createdAt: new Date() }
           },
           { upsert: true }
-        );
+        ));
         stats.brands++;
       }
       
@@ -325,14 +359,14 @@ async function importBrandsAndCompanies(data, db) {
           pipeline: mappedStatus === 'kund' ? 'active_customer' : 'prospect'
         };
         
-        await db.collection('companies_v2').updateOne(
+        await withRetry(() => db.collection('companies_v2').updateOne(
           { name: company.trim() },
           { 
             $set: companyData,
             $setOnInsert: { createdAt: new Date() }
           },
           { upsert: true }
-        );
+        ));
         stats.companies++;
         
         // 3. Create/Update Contract if relevant info exists
@@ -356,16 +390,16 @@ async function importBrandsAndCompanies(data, db) {
           });
         
           if (!existingContract) {
-            await db.collection('contracts').insertOne({
+            await withRetry(() => db.collection('contracts').insertOne({
               ...contractData,
               createdAt: new Date()
-            });
+            }));
             stats.contracts++;
           } else {
-            await db.collection('contracts').updateOne(
+            await withRetry(() => db.collection('contracts').updateOne(
               { _id: existingContract._id },
               { $set: contractData }
-            );
+            ));
           }
         }
       } // End of if (company && company.trim())
@@ -378,11 +412,11 @@ async function importBrandsAndCompanies(data, db) {
   // Update brand company counts
   const brands = await db.collection('brands_v2').find({}).toArray();
   for (const brand of brands) {
-    const companyCount = await db.collection('companies_v2').countDocuments({ brand: brand.name });
-    await db.collection('brands_v2').updateOne(
+    const companyCount = await withRetry(() => db.collection('companies_v2').countDocuments({ brand: brand.name }));
+    await withRetry(() => db.collection('brands_v2').updateOne(
       { _id: brand._id },
       { $set: { companyCount } }
-    );
+    ));
   }
   
   console.log('Import stats:', stats);
@@ -497,18 +531,18 @@ async function importAgents(data, db) {
         { email: { $regex: new RegExp(`^${email.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } } : 
         { name: name, lastName: lastName };
       
-      const result = await db.collection('agents_v2').updateOne(
+      const result = await withRetry(() => db.collection('agents_v2').updateOne(
         query,
         {
           $set: agentData,
           $setOnInsert: { createdAt: new Date() }
         },
         { upsert: true }
-      );
+      ));
       
       // Update aggregations if agent was inserted or company/brand changed
       if (result.upsertedCount > 0 || result.modifiedCount > 0) {
-        await updateAllAggregations(db, companyId, brandId);
+        await withRetry(() => updateAllAggregations(db, companyId, brandId));
       }
       
       count++;
@@ -530,7 +564,7 @@ async function importLicenses(data, db) {
     const product = row['Produkt'] || row['Product'];
     
     if (agentEmail && (license || product)) {
-      await db.collection('licenses').updateOne(
+      await withRetry(() => db.collection('licenses').updateOne(
         { agentEmail },
         {
           $set: {
@@ -541,7 +575,7 @@ async function importLicenses(data, db) {
           }
         },
         { upsert: true }
-      );
+      ));
       count++;
     }
   }
@@ -551,12 +585,12 @@ async function importLicenses(data, db) {
 
 async function importGeneric(data, db) {
   // Try to import to a generic "imports" collection
-  const result = await db.collection('imports').insertMany(
+  const result = await withRetry(() => db.collection('imports').insertMany(
     data.map(row => ({
       ...row,
       importedAt: new Date()
     }))
-  );
+  ));
   
   return result.insertedCount;
 }
@@ -571,7 +605,7 @@ async function importOrtsprisData(data, db) {
     const product = row['Produkt'] || row['Product'];
     
     if (company) {
-      await db.collection('companies_v2').updateOne(
+      await withRetry(() => db.collection('companies_v2').updateOne(
         { name: company },
         {
           $set: {
@@ -583,7 +617,7 @@ async function importOrtsprisData(data, db) {
           }
         },
         { upsert: true }
-      );
+      ));
       count++;
     }
   }
@@ -600,7 +634,7 @@ async function importMaklarpaketData(data, db) {
     const product = row['Produkt'] || row['Product'];
     
     if (email) {
-      await db.collection('agents_v2').updateOne(
+      await withRetry(() => db.collection('agents_v2').updateOne(
         { email },
         {
           $set: {
@@ -610,7 +644,7 @@ async function importMaklarpaketData(data, db) {
           }
         },
         { upsert: true }
-      );
+      ));
       count++;
     }
   }
