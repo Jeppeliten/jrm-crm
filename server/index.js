@@ -329,6 +329,7 @@ const exportRouter = require('./routes/export');
 const importRouter = require('./routes/import');
 const statsRouter = require('./routes/stats');
 const vismaRouter = require('./routes/visma');
+const azureUserSyncRouter = require('./routes/azure-user-sync');
 
 // Register routes
 app.use('/api/brands', brandsRouter);
@@ -340,6 +341,7 @@ app.use('/api/export', exportRouter);
 app.use('/api/import', importRouter);
 app.use('/api/stats', statsRouter);
 app.use('/api/visma', vismaRouter);
+app.use('/api/users', azureUserSyncRouter);  // Azure AD user sync routes
 
 // ============================================
 // ERROR HANDLING MIDDLEWARE (must be AFTER routes)

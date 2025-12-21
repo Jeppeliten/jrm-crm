@@ -215,8 +215,8 @@ class UserService {
         options.skip = parseInt(filters.skip);
       }
 
-      // Sortera efter senast uppdaterad
-      options.sort = { updatedAt: -1 };
+      // Ingen sortering - Cosmos DB MongoDB API har begränsade index
+      // Sortering sker efter hämtning istället
 
       const users = await this.cosmosService.find(this.collection, query, options);
       
