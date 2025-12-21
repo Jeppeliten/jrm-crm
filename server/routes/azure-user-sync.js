@@ -158,6 +158,42 @@ async function syncUserToDatabase(db, userDetails, appRoleId) {
 // ============================================
 
 /**
+ * GET /api/users/debug
+ * Debug: Visa direkt vad som finns i users-collectionen
+ */
+router.get('/debug', async (req, res) => {
+  try {
+    const db = req.app.locals.db;
+    if (!db) {
+      return res.json({ 
+        error: 'No database connection',
+        dbAvailable: false,
+        hint: 'req.app.locals.db is not set'
+      });
+    }
+
+    const users = await db.collection('users').find({}).limit(10).toArray();
+    const count = await db.collection('users').countDocuments();
+
+    res.json({
+      dbAvailable: true,
+      totalUsers: count,
+      users: users.map(u => ({
+        _id: u._id,
+        displayName: u.displayName,
+        email: u.email,
+        role: u.crmMetadata?.appRole
+      }))
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+      stack: error.stack
+    });
+  }
+});
+
+/**
  * GET /api/users/sync-status
  * Visa sync-status och konfiguration
  */
