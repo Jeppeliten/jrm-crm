@@ -1,0 +1,16 @@
+<step title="Incoming Request" date="2025-12-03T12:25:29.835" instance="8357d4" url="/jrm-crm-api-prod-vsdmc5kbydcjc.git/info/refs?service=git-receive-pack" method="GET" type="request" pid="833,1,19" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="git/2.51.1.windows.1" Accept-Encoding="deflate, gzip, br, zstd" Authorization="Bas..." Pragma="no-cache" X-ARR-LOG-ID="261dcb1c-637f-40e1-82bf-b6b01a89259a" CLIENT-IP="94.254.11.250:53189" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/jrm-crm-api-prod-vsdmc5kbydcjc.git/info/refs?service=git-receive-pack" X-Client-IP="94.254.11.250" X-Client-Port="53189" >
+  <step title="Cleanup Xml Logs" date="2025-12-03T12:25:29.838" /><!-- duration: 9ms -->
+  <step title="InfoRefsService.Execute" date="2025-12-03T12:25:29.875" >
+    <step title="Executing external process" date="2025-12-03T12:25:29.932" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 157ms -->
+    <step title="Assuming git repository at /home/site/repository" date="2025-12-03T12:25:30.092" /><!-- duration: 3ms -->
+    <step title="InfoRefsService.SmartInfoRefs" date="2025-12-03T12:25:30.098" >
+      <step title="Executing external process" date="2025-12-03T12:25:30.108" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 56ms -->
+      <step title="Assuming git repository at /home/site/repository" date="2025-12-03T12:25:30.183" /><!-- duration: 3ms -->
+      <step title="GitExeServer.AdvertiseReceivePack" date="2025-12-03T12:25:30.192" >
+        <step title="Executing external process" date="2025-12-03T12:25:30.195" type="process" path="git" arguments="receive-pack --stateless-rpc --advertise-refs &quot;/home/site/repository&quot;" /><!-- duration: 30ms -->
+      </step><!-- duration: 38ms -->
+      <step title="Writing 218 bytes" date="2025-12-03T12:25:30.233" /><!-- duration: 3ms -->
+    </step><!-- duration: 142ms -->
+  </step><!-- duration: 368ms -->
+  <step title="Outgoing response" date="2025-12-03T12:25:30.250" type="response" statusCode="200" statusText="OK" /><!-- duration: 3ms -->
+</step><!-- duration: 425ms -->

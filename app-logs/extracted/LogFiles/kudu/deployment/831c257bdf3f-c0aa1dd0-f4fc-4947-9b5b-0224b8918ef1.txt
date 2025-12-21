@@ -1,0 +1,8 @@
+2025-12-03T09:45:06  Updating branch 'master'.
+2025-12-03T09:45:14  Updating submodules.
+2025-12-03T09:45:15  Preparing deployment for commit id '0a601af8d7'.
+2025-12-03T09:45:17  PreDeployment: context.CleanOutputPath False
+2025-12-03T09:45:17  PreDeployment: context.OutputPath /home/site/wwwroot
+2025-12-03T09:45:18  Repository path is /home/site/repository
+2025-12-03T09:45:19  Running oryx build...
+2025-12-03T09:45:19    Command: oryx build /home/site/repository -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de3250aa4f9017 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log

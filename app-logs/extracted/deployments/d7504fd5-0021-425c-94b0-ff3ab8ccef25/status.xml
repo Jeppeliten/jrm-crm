@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>d7504fd5-0021-425c-94b0-ff3ab8ccef25</id>
+  <author>N/A</author>
+  <deployer>GITHUB_ZIP_DEPLOY</deployer>
+  <authorEmail>N/A</authorEmail>
+  <message>{"type":"deployment","sha":"5fa12a2cc2e46a0ad51f95f2cf3e0534d66624c1","repoName":"Jeppeliten/jrm-crm","actor":"Jeppeliten","slotName":"production","commitMessage":"Fix script load order: app.js before auth-init.js"}</message>
+  <progress></progress>
+  <status>Success</status>
+  <statusText></statusText>
+  <lastSuccessEndTime>2025-12-19T17:37:57.8578022Z</lastSuccessEndTime>
+  <receivedTime>2025-12-19T17:37:22.0767527Z</receivedTime>
+  <startTime>2025-12-19T17:37:23.9268663Z</startTime>
+  <endTime>2025-12-19T17:37:57.8578022Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>

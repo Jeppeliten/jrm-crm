@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>425618f9-0dfd-4733-b824-6eb8e898d76b</id>
+  <author>N/A</author>
+  <deployer>GITHUB_ZIP_DEPLOY</deployer>
+  <authorEmail>N/A</authorEmail>
+  <message>{"type":"deployment","sha":"0fd952fd75639c1aa11e561c62b8ff5c2624eee7","repoName":"Jeppeliten/jrm-crm","actor":"Jeppeliten","slotName":"production","commitMessage":"Fix drawer layout: grid-based sidebar + content side by side"}</message>
+  <progress></progress>
+  <status>Success</status>
+  <statusText></statusText>
+  <lastSuccessEndTime>2025-12-19T17:57:49.6719874Z</lastSuccessEndTime>
+  <receivedTime>2025-12-19T17:55:10.8092956Z</receivedTime>
+  <startTime>2025-12-19T17:55:12.5712125Z</startTime>
+  <endTime>2025-12-19T17:57:49.6719874Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>

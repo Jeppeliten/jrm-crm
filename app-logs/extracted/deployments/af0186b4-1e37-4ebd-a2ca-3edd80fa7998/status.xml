@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>af0186b4-1e37-4ebd-a2ca-3edd80fa7998</id>
+  <author>N/A</author>
+  <deployer>GITHUB_ZIP_DEPLOY</deployer>
+  <authorEmail>N/A</authorEmail>
+  <message>{"type":"deployment","sha":"eaeb1cdf9089dbf1aaf01e0f40e477bad4cf22d4","repoName":"Jeppeliten/jrm-crm","actor":"Jeppeliten","slotName":"production","commitMessage":"Fix view visibility with !important to override Tailwind"}</message>
+  <progress></progress>
+  <status>Success</status>
+  <statusText></statusText>
+  <lastSuccessEndTime>2025-12-19T17:48:03.7879783Z</lastSuccessEndTime>
+  <receivedTime>2025-12-19T17:46:39.3873527Z</receivedTime>
+  <startTime>2025-12-19T17:46:40.7464291Z</startTime>
+  <endTime>2025-12-19T17:48:03.7879783Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>

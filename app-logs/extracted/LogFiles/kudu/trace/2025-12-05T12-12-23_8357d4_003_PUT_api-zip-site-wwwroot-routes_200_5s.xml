@@ -1,0 +1,7 @@
+<step title="Incoming Request" date="2025-12-05T12:12:23.725" instance="8357d4" url="/api/zip/site/wwwroot/routes/" method="PUT" type="request" pid="840,1,20" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="curl/8.16.0" Authorization="Bea..." Content-Type="application/x-www-form-urlencoded" Content-Length="9582" X-ARR-LOG-ID="daa88d87-7afe-4a18-b806-61d63b4b7e1b" CLIENT-IP="94.254.11.250:49977" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zip/site/wwwroot/routes/" X-Client-IP="94.254.11.250" X-Client-Port="49977" >
+  <step title="Cleanup Xml Logs" date="2025-12-05T12:12:23.775" >
+    <step title="Cleanup Infos" date="2025-12-05T12:12:23.807" totalFiles="244" totalCleanup="84" /><!-- duration: 108ms -->
+  </step><!-- duration: 163ms -->
+  <step title="ChmodRecursive Process exited with total time taken in ms: 424" date="2025-12-05T12:12:27.888" /><!-- duration: 189ms -->
+  <step title="Outgoing response" date="2025-12-05T12:12:28.418" type="response" statusCode="200" statusText="OK" /><!-- duration: 11ms -->
+</step><!-- duration: 4715ms -->

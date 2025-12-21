@@ -1,0 +1,422 @@
+<step title="BackgroundTrace" date="2025-11-10T16:44:03.690" instance="427b96" url="/api/zipdeploy" method="POST" >
+  <step title="Creating temporary deployment - FetchDeploymentManager" date="2025-11-10T16:44:03.858" /><!-- duration: 2ms -->
+  <step title="Creating temporary deployment" date="2025-11-10T16:44:03.878" /><!-- duration: 142ms -->
+  <step title="Performing fetch based deployment" date="2025-11-10T16:44:04.239" >
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/a664d0cd-bd06-411b-8f3d-c000b82f532c.zip (0.12 MB) to /tmp/zipdeploy/extracted" date="2025-11-10T16:44:05.470" >
+      <step title="ChmodRecursive Process exited with total time taken in ms: 60" date="2025-11-10T16:44:05.593" /><!-- duration: 2ms -->
+    </step><!-- duration: 131ms -->
+    <step title="Deployment timer started" date="2025-11-10T16:44:07.606" >
+      <step title="DeploymentManager.Deploy(id:019358a4-d9c0-4bf8-a2ea-b4741c5db099)" date="2025-11-10T16:44:07.609" >
+        <step title="Collecting changeset information" date="2025-11-10T16:44:07.625" /><!-- duration: 71ms -->
+        <step title="Updating submodules" date="2025-11-10T16:44:07.699" /><!-- duration: 1097ms -->
+        <step title="Determining deployment builder" date="2025-11-10T16:44:09.004" >
+          <step title="Builder is OryxBuilder" date="2025-11-10T16:44:09.009" /><!-- duration: 2ms -->
+        </step><!-- duration: 8ms -->
+        <step title="PreDeployment: context.CleanOutputPath False" date="2025-11-10T16:44:09.054" >
+          <step title="PreDeployment: context.OutputPath /home/site/wwwroot" date="2025-11-10T16:44:09.176" >
+            <step title="Building" date="2025-11-10T16:44:09.315" >
+              <step title="Executing external process" date="2025-11-10T16:44:09.555" type="process" path="bash" arguments="-c &quot;oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de20785eb31874 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" >
+                <step title="Process dump" date="2025-11-10T16:45:04.409" exitCode="23" type="processOutput" /><!-- duration: 4ms -->
+              </step><!-- duration: 54864ms -->
+              <step title="Error occurred" date="2025-11-10T16:45:04.464" type="error" text="npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-tracing@1.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-util@1.13.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/logger@1.3.0&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@typespec/ts-http-runtime@0.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm notice
+npm notice New major version of npm available! 10.8.2 -&gt; 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\visma-config.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\errorHandler.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\validation.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/routes\contracts.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\authService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\contract-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\cosmos-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\customer-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\databaseService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-manager.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-sync-state.json&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\product-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\user-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\visma-net-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\2fa-backup-codes\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\sample\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\api\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\architecture\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\azure\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\guides\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\security\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\maintenance\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\setup\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\e2e\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\integration\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\unit\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1333) [sender=3.2.3]
+/bin/bash -c &quot;oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de20785eb31874 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122" /><!-- duration: 6ms -->
+              <step title="Error occurred" date="2025-11-10T16:45:04.490" type="error" text="npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-tracing@1.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-util@1.13.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/logger@1.3.0&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@typespec/ts-http-runtime@0.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm notice
+npm notice New major version of npm available! 10.8.2 -&gt; 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\visma-config.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\errorHandler.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\validation.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/routes\contracts.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\authService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\contract-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\cosmos-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\customer-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\databaseService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-manager.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-sync-state.json&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\product-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\user-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\visma-net-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\2fa-backup-codes\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\sample\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\api\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\architecture\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\azure\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\guides\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\security\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\maintenance\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\setup\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\e2e\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\integration\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\unit\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1333) [sender=3.2.3]
+/bin/bash -c &quot;oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de20785eb31874 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771" /><!-- duration: 19ms -->
+              <step title="Using GenericDeploymentLogParser" date="2025-11-10T16:45:04.798" /><!-- duration: 28ms -->
+            </step><!-- duration: 56600ms -->
+          </step><!-- duration: 56742ms -->
+          <step title="Error occurred" date="2025-11-10T16:45:05.920" type="error" text="npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-tracing@1.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-util@1.13.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/logger@1.3.0&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@typespec/ts-http-runtime@0.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm notice
+npm notice New major version of npm available! 10.8.2 -&gt; 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\visma-config.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\errorHandler.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\validation.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/routes\contracts.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\authService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\contract-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\cosmos-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\customer-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\databaseService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-manager.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-sync-state.json&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\product-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\user-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\visma-net-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\2fa-backup-codes\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\sample\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\api\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\architecture\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\azure\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\guides\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\security\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\maintenance\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\setup\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\e2e\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\integration\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\unit\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1333) [sender=3.2.3]
+/bin/bash -c &quot;oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de20785eb31874 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840" /><!-- duration: 2ms -->
+          <step title="Cleaning up temp files" date="2025-11-10T16:45:05.963" /><!-- duration: 444ms -->
+          <step title="Cleaning up temp files" date="2025-11-10T16:45:06.409" /><!-- duration: 527ms -->
+          <step title="Error occurred" date="2025-11-10T16:45:06.957" type="error" text="npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-tracing@1.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-util@1.13.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/logger@1.3.0&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@typespec/ts-http-runtime@0.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm notice
+npm notice New major version of npm available! 10.8.2 -&gt; 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\visma-config.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\errorHandler.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\validation.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/routes\contracts.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\authService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\contract-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\cosmos-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\customer-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\databaseService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-manager.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-sync-state.json&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\product-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\user-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\visma-net-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\2fa-backup-codes\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\sample\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\api\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\architecture\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\azure\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\guides\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\security\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\maintenance\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\setup\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\e2e\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\integration\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\unit\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1333) [sender=3.2.3]
+/bin/bash -c &quot;oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de20785eb31874 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840
+   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 266" /><!-- duration: 2ms -->
+        </step><!-- duration: 57934ms -->
+        <step title="Reloading status file with latest updates" date="2025-11-10T16:45:07.043" >
+          <step title="WebHooksManager.PublishEventAsync: PostDeployment" date="2025-11-10T16:45:07.046" /><!-- duration: 68ms -->
+        </step><!-- duration: 73ms -->
+        <step title="Error occurred" date="2025-11-10T16:45:07.118" type="error" text="npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-tracing@1.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/core-util@1.13.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@azure/logger@1.3.0&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: &apos;@typespec/ts-http-runtime@0.3.1&apos;,
+npm warn EBADENGINE   required: { node: &apos;&gt;=20.0.0&apos; },
+npm warn EBADENGINE   current: { node: &apos;v18.20.8&apos;, npm: &apos;10.8.2&apos; }
+npm warn EBADENGINE }
+npm notice
+npm notice New major version of npm available! 10.8.2 -&gt; 11.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+npm notice To update run: npm install -g npm@11.6.2
+npm notice
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/config\visma-config.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\errorHandler.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\security.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/middleware\validation.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/routes\contracts.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\authService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\contract-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\cosmos-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\customer-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\databaseService.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-manager.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\dual-user-sync-state.json&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\product-sync-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\user-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat &quot;/home/site/wwwroot/services\visma-net-service.js&quot;: Invalid argument (22)
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\2fa-backup-codes\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/data\sample\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\api\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\architecture\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\azure\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\guides\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/docs\security\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\deployment\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\maintenance\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/scripts\setup\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\e2e\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\integration\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync: [generator] recv_generator: mkdir &quot;/home/site/wwwroot/tests\unit\&quot; failed: Invalid argument (22)
+*** Skipping any contents from this failed directory ***
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1333) [sender=3.2.3]
+/bin/bash -c &quot;oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 18 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de20785eb31874 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS &quot;" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, CancellationToken token, Encoding encoding, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 239
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, CancellationToken token, String arguments, Object[] args) in /tmp/KuduLite/Kudu.Core/Infrastructure/Executable.cs:line 118
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, CancellationToken token, String message) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/ExternalCommandBuilder.cs:line 122
+   at Kudu.Core.Deployment.Generator.OryxBuilder.RunBuildCommand(IOryxArguments args, DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 295
+   at Kudu.Core.Deployment.Generator.OryxBuilder.Build(DeploymentContext context, CancellationToken token) in /tmp/KuduLite/Kudu.Core/Deployment/Generator/OryxBuilder.cs:line 136
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 771
+   at Kudu.Core.Deployment.DeploymentManager.Build(ChangeSet changeSet, ITracer tracer, IDisposable deployStep, IRepository repository, DeploymentInfoBase deploymentInfo, DeploymentAnalytics deploymentAnalytics, Boolean fullBuildByDefault, CancellationToken cancellationToken) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 840
+   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 266" /><!-- duration: 2ms -->
+        <step title="Marking deployment as failed and cleaning up the temp deployment" date="2025-11-10T16:45:07.163" /><!-- duration: 2ms -->
+      </step><!-- duration: 59698ms -->
+      <step title="Error occurred" date="2025-11-10T16:45:07.313" type="error" text="One or more errors occurred. (Deployment failed)" stackTrace="   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at System.Threading.Tasks.Task.Wait()
+   at Kudu.Core.Deployment.FetchDeploymentManager.&lt;&gt;c__DisplayClass22_1.&lt;PerformBackgroundDeployment&gt;b__3() in /tmp/KuduLite/Kudu.Core/Deployment/FetchDeploymentManager.cs:line 414
+   at Kudu.Contracts.Infrastructure.LockExtensions.TryLockOperation(IOperationLock lockObj, Action operation, String operationName, TimeSpan timeout) in /tmp/KuduLite/Kudu.Contracts/Infrastructure/LockExtensions.cs:line 34
+   at Kudu.Contracts.Infrastructure.LockExtensions.LockOperation(IOperationLock lockObj, Action operation, String operationName, TimeSpan timeout) in /tmp/KuduLite/Kudu.Contracts/Infrastructure/LockExtensions.cs:line 46
+   at Kudu.Core.Deployment.FetchDeploymentManager.&lt;&gt;c__DisplayClass22_0.&lt;PerformBackgroundDeployment&gt;b__1() in /tmp/KuduLite/Kudu.Core/Deployment/FetchDeploymentManager.cs:line 393" innerText="Deployment failed" innerStackTrace="   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 307
+   at Kudu.Core.Deployment.FetchDeploymentManager.PerformDeployment(DeploymentInfoBase deploymentInfo, IDisposable tempDeployment, ChangeSet tempChangeSet, DeployStatusApiResult updateStatusObj) in /tmp/KuduLite/Kudu.Core/Deployment/FetchDeploymentManager.cs:line 230" /><!-- duration: 1ms -->
+    </step><!-- duration: 59710ms -->

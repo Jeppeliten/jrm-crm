@@ -1,0 +1,18 @@
+<step title="Incoming Request" date="2025-12-19T15:35:52.542" instance="a45adb" url="/api/zipdeploy?isAsync=true&amp;deployer=GITHUB_ZIP_DEPLOY&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22a9284bb2d647b44c5c702407e96230717f845ee1%22%2C%22repoName%22%3A%22Jeppeliten%2Fjrm-crm%22%2C%22actor%22%3A%22Jeppeliten%22%2C%22slotName%22%3A%22production%22%2C%22commitMessage%22%3A%22Fix%20UTF-8%20encoding%20for%20Swedish%20characters%22%7D" method="POST" type="request" pid="831,1,35" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/octet-stream" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Transfer-Encoding="chunked" X-ARR-LOG-ID="ee2350f3-05dc-4253-82fc-696428ab1b01" CLIENT-IP="20.55.223.212:56353" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true&amp;deployer=GITHUB_ZIP_DEPLOY&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22a9284bb2d647b44c5c702407e96230717f845ee1%22%2C%22repoName%22%3A%22Jeppeliten%2Fjrm-crm%22%2C%22actor%22%3A%22Jeppeliten%22%2C%22slotName%22%3A%22production%22%2C%22commitMessage%22%3A%22Fix%20UTF-8%20encoding%20for%20Swedish%20characters%22%7D" X-Client-IP="20.55.223.212" X-Client-Port="56353" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T15:35:52.544" >
+    <step title="Cleanup Infos" date="2025-12-19T15:35:52.559" totalFiles="648" totalCleanup="488" /><!-- duration: 6ms -->
+  </step><!-- duration: 24ms -->
+  <step title="ZipPushDeploy" date="2025-12-19T15:35:52.584" >
+    <step title="ZipDeploy. Extract zip." date="2025-12-19T15:35:52.587" /><!-- duration: 3ms -->
+    <step title="Starting PushDeployAsync" date="2025-12-19T15:35:52.594" /><!-- duration: 4ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/7c004934-0675-4c6f-a66a-9844d8190e9d.zip" date="2025-12-19T15:35:52.614" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/7c004934-0675-4c6f-a66a-9844d8190e9d.zip" date="2025-12-19T15:35:52.618" /><!-- duration: 3ms -->
+    </step><!-- duration: 1311ms -->
+    <step title="Removing previous build artifact&apos;s manifest file" date="2025-12-19T15:35:53.936" >
+      <step title="Start deployment in the background" date="2025-12-19T15:35:53.941" >
+        <step title="Acquiring Deployment Lock" date="2025-12-19T15:35:53.962" /><!-- duration: 4ms -->
+        <step title="Acquired Deployment Lock" date="2025-12-19T15:35:54.008" /><!-- duration: 3ms -->
+      </step><!-- duration: 137ms -->
+    </step><!-- duration: 148ms -->
+    <step title="Outgoing response" date="2025-12-19T15:35:54.091" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 8ms -->
+  </step><!-- duration: 1519ms -->

@@ -1,0 +1,4 @@
+<step title="Incoming Request" date="2025-12-03T09:19:56.074" instance="8357d4" url="/dump" method="GET" type="request" pid="770,1,3" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="AZURECLI/2.79.0 (MSI)" Accept-Encoding="identity" Authorization="Bas..." x-ms-client-request-id="3aaebc58-d029-11f0-a960-2892008010ff" X-ARR-LOG-ID="3aaebc58-d029-11f0-a960-2892008010ff" CLIENT-IP="94.254.11.250:57578" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/dump" X-Client-IP="94.254.11.250" X-Client-Port="57578" >
+  <step title="Cleanup Xml Logs" date="2025-12-03T09:19:56.076" /><!-- duration: 7ms -->
+  <step title="Outgoing response" date="2025-12-03T09:20:10.983" type="response" statusCode="200" statusText="OK" /><!-- duration: 2ms -->
+</step><!-- duration: 14914ms -->

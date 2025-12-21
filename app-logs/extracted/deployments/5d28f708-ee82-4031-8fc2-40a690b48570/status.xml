@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<deployment>
+  <id>5d28f708-ee82-4031-8fc2-40a690b48570</id>
+  <author>N/A</author>
+  <deployer>GITHUB_ZIP_DEPLOY</deployer>
+  <authorEmail>N/A</authorEmail>
+  <message>{"type":"deployment","sha":"c8e38c04594925b7c9811f085e82bbfc48ffa303","repoName":"Jeppeliten/jrm-crm","actor":"Jeppeliten","slotName":"production","commitMessage":"Fix sidebar layout - remove grid conflict with DaisyUI drawer"}</message>
+  <progress></progress>
+  <status>Success</status>
+  <statusText></statusText>
+  <lastSuccessEndTime>2025-12-19T17:16:19.2938786Z</lastSuccessEndTime>
+  <receivedTime>2025-12-19T17:14:10.2579514Z</receivedTime>
+  <startTime>2025-12-19T17:14:11.727693Z</startTime>
+  <endTime>2025-12-19T17:16:19.2938786Z</endTime>
+  <complete>True</complete>
+  <is_temp>False</is_temp>
+  <is_readonly>True</is_readonly>
+  <buildSummary />
+</deployment>

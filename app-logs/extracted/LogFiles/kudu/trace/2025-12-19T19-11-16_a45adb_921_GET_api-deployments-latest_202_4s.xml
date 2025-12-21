@@ -1,0 +1,11 @@
+<step title="Incoming Request" date="2025-12-19T19:11:16.805" instance="a45adb" url="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2025-12-19_19-10-16Z" method="GET" type="request" pid="831,1,26" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="c90c19ee-efc3-43fc-804a-61602f264a53" CLIENT-IP="172.178.119.119:3120" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2025-12-19_19-10-16Z" X-Client-IP="172.178.119.119" X-Client-Port="3120" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T19:11:16.808" >
+    <step title="Cleanup Infos" date="2025-12-19T19:11:16.834" totalFiles="1189" totalCleanup="1029" /><!-- duration: 6ms -->
+  </step><!-- duration: 35ms -->
+  <step title="DeploymentService.GetResult" date="2025-12-19T19:11:16.848" >
+    <step title="DeploymentService.GetLatestDeployment" date="2025-12-19T19:11:16.854" >
+      <step title="DeploymentManager.GetResults" date="2025-12-19T19:11:16.858" /><!-- duration: 4274ms -->
+    </step><!-- duration: 4283ms -->
+  </step><!-- duration: 4295ms -->
+  <step title="Outgoing response" date="2025-12-19T19:11:21.150" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 6ms -->
+</step><!-- duration: 4358ms -->

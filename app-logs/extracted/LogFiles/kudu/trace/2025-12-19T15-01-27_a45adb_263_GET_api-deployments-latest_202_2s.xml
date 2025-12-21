@@ -1,0 +1,11 @@
+<step title="Incoming Request" date="2025-12-19T15:01:27.812" instance="a45adb" url="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2025-12-19_14-59-27Z" method="GET" type="request" pid="831,1,5" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="158b75bb-bc31-4fe4-ac01-eaf121b5664d" CLIENT-IP="68.220.60.230:61504" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2025-12-19_14-59-27Z" X-Client-IP="68.220.60.230" X-Client-Port="61504" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T15:01:27.815" >
+    <step title="Cleanup Infos" date="2025-12-19T15:01:27.829" totalFiles="551" totalCleanup="391" /><!-- duration: 10ms -->
+  </step><!-- duration: 27ms -->
+  <step title="DeploymentService.GetResult" date="2025-12-19T15:01:27.846" >
+    <step title="DeploymentService.GetLatestDeployment" date="2025-12-19T15:01:27.850" >
+      <step title="DeploymentManager.GetResults" date="2025-12-19T15:01:27.853" /><!-- duration: 1849ms -->
+    </step><!-- duration: 1882ms -->
+  </step><!-- duration: 1898ms -->
+  <step title="Outgoing response" date="2025-12-19T15:01:29.763" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 10ms -->
+</step><!-- duration: 1990ms -->

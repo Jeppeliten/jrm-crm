@@ -1,0 +1,17 @@
+<step title="Incoming Request" date="2025-12-09T15:43:56.708" instance="52038d" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="833,1,48" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="AZURECLI/2.79.0 (MSI)" Accept-Encoding="gzip, deflate" Authorization="Bas..." Cache-Control="no-cache" Content-Type="application/octet-stream" Content-Length="249259" x-ms-client-request-id="d82b6350-d515-11f0-aee1-2892008010ff" x-ms-artifact-checksum="caf5de4ce77ae1b621138516ae58778e2ffe23ff8c7b86fa7d25d127793d8998" X-ARR-LOG-ID="d82b6350-d515-11f0-aee1-2892008010ff" CLIENT-IP="94.254.11.250:57821" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" X-Client-IP="94.254.11.250" X-Client-Port="57821" >
+  <step title="Cleanup Xml Logs" date="2025-12-09T15:43:56.713" >
+    <step title="Cleanup Infos" date="2025-12-09T15:43:56.757" totalFiles="289" totalCleanup="129" /><!-- duration: 41ms -->
+  </step><!-- duration: 95ms -->
+  <step title="ZipPushDeploy" date="2025-12-09T15:43:56.837" >
+    <step title="ZipDeploy. Extract zip." date="2025-12-09T15:43:56.859" /><!-- duration: 9ms -->
+    <step title="Starting PushDeployAsync" date="2025-12-09T15:43:56.876" /><!-- duration: 2ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/8c065cac-2f15-47dd-8bfa-237834ed6e01.zip" date="2025-12-09T15:43:56.896" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/8c065cac-2f15-47dd-8bfa-237834ed6e01.zip" date="2025-12-09T15:43:56.906" /><!-- duration: 10ms -->
+    </step><!-- duration: 80ms -->
+    <step title="Start deployment in the background" date="2025-12-09T15:43:56.987" >
+      <step title="Acquiring Deployment Lock" date="2025-12-09T15:43:57.010" /><!-- duration: 2ms -->
+      <step title="Acquired Deployment Lock" date="2025-12-09T15:43:57.036" /><!-- duration: 3ms -->
+    </step><!-- duration: 117ms -->
+  </step><!-- duration: 271ms -->
+  <step title="Outgoing response" date="2025-12-09T15:43:57.110" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 2ms -->
+</step><!-- duration: 407ms -->

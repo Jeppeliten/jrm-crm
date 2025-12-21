@@ -1,0 +1,6 @@
+<step title="Incoming Request" date="2025-12-04T07:48:46.326" instance="8357d4" url="/api/vfs/site/wwwroot/index.js" method="GET" type="request" pid="835,1,23" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="curl/8.16.0" Authorization="Bea..." X-ARR-LOG-ID="6d1abc50-75f1-4968-9ad4-1afd943e8ebd" CLIENT-IP="62.109.60.238:62847" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/vfs/site/wwwroot/index.js" X-Client-IP="62.109.60.238" X-Client-Port="62847" >
+  <step title="Cleanup Xml Logs" date="2025-12-04T07:48:46.346" >
+    <step title="Cleanup Infos" date="2025-12-04T07:48:46.461" totalFiles="234" totalCleanup="74" /><!-- duration: 21ms -->
+  </step><!-- duration: 146ms -->
+  <step title="Outgoing response" date="2025-12-04T07:48:46.580" type="response" statusCode="200" statusText="OK" /><!-- duration: 9ms -->
+</step><!-- duration: 265ms -->

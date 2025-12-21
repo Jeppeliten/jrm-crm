@@ -1,0 +1,11 @@
+<step title="Incoming Request" date="2025-12-19T14:05:46.247" instance="a45adb" url="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2025-12-19_14-05-39Z" method="GET" type="request" pid="831,1,24" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="8f656bb4-bf62-4bd2-a51d-4d676cda5b71" CLIENT-IP="135.119.239.35:47104" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=GITHUB_ZIP_DEPLOY&amp;time=2025-12-19_14-05-39Z" X-Client-IP="135.119.239.35" X-Client-Port="47104" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T14:05:46.257" >
+    <step title="Cleanup Infos" date="2025-12-19T14:05:46.336" totalFiles="307" totalCleanup="147" /><!-- duration: 20ms -->
+  </step><!-- duration: 110ms -->
+  <step title="DeploymentService.GetResult" date="2025-12-19T14:05:46.386" >
+    <step title="DeploymentService.GetLatestDeployment" date="2025-12-19T14:05:46.396" >
+      <step title="DeploymentManager.GetResults" date="2025-12-19T14:05:46.406" /><!-- duration: 1089ms -->
+    </step><!-- duration: 1121ms -->
+  </step><!-- duration: 1160ms -->
+  <step title="Outgoing response" date="2025-12-19T14:05:47.568" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 10ms -->
+</step><!-- duration: 1341ms -->

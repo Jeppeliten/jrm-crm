@@ -1,0 +1,17 @@
+<step title="Incoming Request" date="2025-12-19T15:14:37.182" instance="a45adb" url="/api/publish?async=true&amp;deployer=GITHUB_ONE_DEPLOY&amp;type=zip&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%226142ca40ce7168ba6d742df98ff22c2316ce3ce9%22%2C%22repoName%22%3A%22Jeppeliten%2Fjrm-crm%22%2C%22actor%22%3A%22Jeppeliten%22%2C%22slotName%22%3A%22Production%22%2C%22commitMessage%22%3A%22Fix%3A%20Define%20utility%20functions%20at%20top%20of%20app.js%20and%20fix%20setView%22%7D" method="POST" type="request" pid="831,1,15" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/octet-stream" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Transfer-Encoding="chunked" X-ARR-LOG-ID="d94b5096-dc76-4ba6-a7cc-687016761998" CLIENT-IP="20.161.44.227:36889" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/publish?async=true&amp;deployer=GITHUB_ONE_DEPLOY&amp;type=zip&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%226142ca40ce7168ba6d742df98ff22c2316ce3ce9%22%2C%22repoName%22%3A%22Jeppeliten%2Fjrm-crm%22%2C%22actor%22%3A%22Jeppeliten%22%2C%22slotName%22%3A%22Production%22%2C%22commitMessage%22%3A%22Fix%3A%20Define%20utility%20functions%20at%20top%20of%20app.js%20and%20fix%20setView%22%7D" X-Client-IP="20.161.44.227" X-Client-Port="36889" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T15:14:37.211" >
+    <step title="Cleanup Infos" date="2025-12-19T15:14:37.281" totalFiles="596" totalCleanup="436" /><!-- duration: 11ms -->
+  </step><!-- duration: 90ms -->
+  <step title="OneDeploy" date="2025-12-19T15:14:37.321" >
+    <step title="Starting PushDeployAsync" date="2025-12-19T15:14:37.339" /><!-- duration: 10ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/9a22dbe6-7b68-426e-aa2a-83b6e8f4b397.zip" date="2025-12-19T15:14:37.392" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/9a22dbe6-7b68-426e-aa2a-83b6e8f4b397.zip" date="2025-12-19T15:14:37.412" /><!-- duration: 37ms -->
+    </step><!-- duration: 1319ms -->
+    <step title="Start deployment in the background" date="2025-12-19T15:14:38.730" >
+      <step title="Acquiring Deployment Lock" date="2025-12-19T15:14:38.760" /><!-- duration: 10ms -->
+      <step title="Cannot Acquire Deployment Lock already held" date="2025-12-19T15:14:38.809" /><!-- duration: 19ms -->
+    </step><!-- duration: 219ms -->
+    <step title="There is a deployment currently in progress. Please try again when it completes." date="2025-12-19T15:14:38.970" /><!-- duration: 10ms -->
+  </step><!-- duration: 1669ms -->
+  <step title="Outgoing response" date="2025-12-19T15:14:39.001" type="response" statusCode="409" statusText="Conflict" /><!-- duration: 38ms -->
+</step><!-- duration: 1878ms -->

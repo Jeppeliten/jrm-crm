@@ -1,0 +1,15 @@
+<step title="Incoming Request" date="2025-11-13T15:20:13.537" instance="5d19c6" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="770,1,16" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="AZURECLI/2.79.0 (MSI)" Accept-Encoding="gzip, deflate" Authorization="Bas..." Cache-Control="no-cache" Content-Type="application/octet-stream" Content-Length="137554" x-ms-client-request-id="3aeff65c-c0a4-11f0-bbb5-2892008010ff" x-ms-artifact-checksum="e07506781d5a8f92159b7a1532328a100d60cfc48cfa203c4bb578197338ecf0" X-ARR-LOG-ID="3aeff65c-c0a4-11f0-bbb5-2892008010ff" CLIENT-IP="217.210.58.138:51277" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" X-Client-IP="217.210.58.138" X-Client-Port="51277" >
+  <step title="Cleanup Xml Logs" date="2025-11-13T15:20:13.539" /><!-- duration: 7ms -->
+  <step title="ZipPushDeploy" date="2025-11-13T15:20:13.555" >
+    <step title="ZipDeploy. Extract zip." date="2025-11-13T15:20:13.558" /><!-- duration: 2ms -->
+    <step title="Starting PushDeployAsync" date="2025-11-13T15:20:13.562" /><!-- duration: 2ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/26b6a019-a337-4a53-bc64-98ff01dbcb22.zip" date="2025-11-13T15:20:13.576" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/26b6a019-a337-4a53-bc64-98ff01dbcb22.zip" date="2025-11-13T15:20:13.583" /><!-- duration: 11ms -->
+    </step><!-- duration: 28ms -->
+    <step title="Start deployment in the background" date="2025-11-13T15:20:13.607" >
+      <step title="Acquiring Deployment Lock" date="2025-11-13T15:20:13.611" /><!-- duration: 2ms -->
+      <step title="Acquired Deployment Lock" date="2025-11-13T15:20:13.632" /><!-- duration: 2ms -->
+    </step><!-- duration: 83ms -->
+  </step><!-- duration: 137ms -->
+  <step title="Outgoing response" date="2025-11-13T15:20:13.695" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 2ms -->
+</step><!-- duration: 162ms -->

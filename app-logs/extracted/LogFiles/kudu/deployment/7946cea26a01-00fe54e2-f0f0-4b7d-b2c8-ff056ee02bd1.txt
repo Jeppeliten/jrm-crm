@@ -1,0 +1,41 @@
+2025-12-03T13:21:02  Fetching changes.
+2025-12-03T13:21:02    Starting  LocalZipHandler
+2025-12-03T13:21:02    Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/5ba6f8e5-e8a4-4afd-9f96-9d59b831113b.zip (0.13 MB) to /tmp/zipdeploy/extracted
+2025-12-03T13:21:06  Updating submodules.
+2025-12-03T13:21:06  Preparing deployment for commit id '3112a491-9'.
+2025-12-03T13:21:07  PreDeployment: context.CleanOutputPath False
+2025-12-03T13:21:07  PreDeployment: context.OutputPath /home/site/wwwroot
+2025-12-03T13:21:08  Repository path is /tmp/zipdeploy/extracted
+2025-12-03T13:21:08  Running oryx build...
+2025-12-03T13:21:08    Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de326ed139abd8 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log
+2025-12-03T13:21:15    Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+2025-12-03T13:21:15    You can report issues at https://github.com/Microsoft/Oryx/issues
+2025-12-03T13:21:15    
+2025-12-03T13:21:16    Oryx Version: 0.2.20251022.1+bef98bc7139feefaa74be16de9d835e2c85385d4, Commit: bef98bc7139feefaa74be16de9d835e2c85385d4, ReleaseTagName: 20251022.1
+2025-12-03T13:21:16    
+2025-12-03T13:21:16    Build Operation ID: 17314163c8d19153
+2025-12-03T13:21:16    Repository Commit : 3112a491-9103-448f-9656-d3857876f3f5
+2025-12-03T13:21:16    OS Type           : bookworm
+2025-12-03T13:21:16    Image Type        : githubactions
+2025-12-03T13:21:16    
+2025-12-03T13:21:16    Primary SDK Storage URL: https://oryx-cdn.microsoft.io
+2025-12-03T13:21:17    Backup SDK Storage URL: 
+2025-12-03T13:21:17    Detecting platforms...
+2025-12-03T13:21:17    External SDK provider is enabled.
+2025-12-03T13:21:18    Requesting metadata for platform nodejs from external SDK provider
+2025-12-03T13:21:20    Requesting metadata for platform nodejs from external SDK provider
+2025-12-03T13:21:22    Error: Could not find the .NET Core project file.
+2025-12-03T13:21:31    Error: Could not find the .NET Core project file.
+/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform nodejs --platform-version 20 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8de326ed139abd8 -p compress_node_modules=tar-gz | tee /tmp/oryx-build.log ; exit $PIPESTATUS "
+2025-12-03T13:21:31  
+2025-12-03T13:21:32  
+2025-12-03T13:21:32  Generating summary of Oryx build
+2025-12-03T13:21:33  Parsing the build logs
+2025-12-03T13:21:33  Found 0 issue(s)
+2025-12-03T13:21:34  
+2025-12-03T13:21:34  Build Summary :
+2025-12-03T13:21:35  ===============
+2025-12-03T13:21:36  Errors (0)
+2025-12-03T13:21:37  Warnings (0)
+2025-12-03T13:21:37  
+2025-12-03T13:21:39  Deployment Failed. deployer = OneDeploy deploymentPath = OneDeploy

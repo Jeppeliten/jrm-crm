@@ -1,0 +1,15 @@
+<step title="Incoming Request" date="2025-12-19T16:03:43.388" instance="a45adb" url="/api/zipdeploy?isAsync=true&amp;deployer=GITHUB_ZIP_DEPLOY&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22370c67948314cc0c68ed7239c6f754c0fe051079%22%2C%22repoName%22%3A%22Jeppeliten%2Fjrm-crm%22%2C%22actor%22%3A%22Jeppeliten%22%2C%22slotName%22%3A%22production%22%2C%22commitMessage%22%3A%22Trigger%20backend%20deploy%22%7D" method="POST" type="request" pid="831,1,20" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/octet-stream" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Transfer-Encoding="chunked" X-ARR-LOG-ID="15a8d875-af84-4191-9b57-4ae3b2615448" CLIENT-IP="64.236.133.180:11264" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true&amp;deployer=GITHUB_ZIP_DEPLOY&amp;message=%7B%22type%22%3A%22deployment%22%2C%22sha%22%3A%22370c67948314cc0c68ed7239c6f754c0fe051079%22%2C%22repoName%22%3A%22Jeppeliten%2Fjrm-crm%22%2C%22actor%22%3A%22Jeppeliten%22%2C%22slotName%22%3A%22production%22%2C%22commitMessage%22%3A%22Trigger%20backend%20deploy%22%7D" X-Client-IP="64.236.133.180" X-Client-Port="11264" >
+  <step title="ZipPushDeploy" date="2025-12-19T16:03:43.408" >
+    <step title="ZipDeploy. Extract zip." date="2025-12-19T16:03:43.447" /><!-- duration: 21ms -->
+    <step title="Starting PushDeployAsync" date="2025-12-19T16:03:43.498" /><!-- duration: 31ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/0d7cdf59-774f-4dc5-bc9d-5a1d22385bea.zip" date="2025-12-19T16:03:43.609" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/0d7cdf59-774f-4dc5-bc9d-5a1d22385bea.zip" date="2025-12-19T16:03:43.639" /><!-- duration: 31ms -->
+    </step><!-- duration: 3632ms -->
+    <step title="Start deployment in the background" date="2025-12-19T16:03:47.282" >
+      <step title="Acquiring Deployment Lock" date="2025-12-19T16:03:47.370" /><!-- duration: 31ms -->
+      <step title="Cannot Acquire Deployment Lock already held" date="2025-12-19T16:03:47.482" /><!-- duration: 28ms -->
+    </step><!-- duration: 419ms -->
+    <step title="There is a deployment currently in progress. Please try again when it completes." date="2025-12-19T16:03:47.741" /><!-- duration: 31ms -->
+  </step><!-- duration: 4422ms -->
+  <step title="Outgoing response" date="2025-12-19T16:03:47.901" type="response" statusCode="409" statusText="Conflict" /><!-- duration: 31ms -->
+</step><!-- duration: 4595ms -->

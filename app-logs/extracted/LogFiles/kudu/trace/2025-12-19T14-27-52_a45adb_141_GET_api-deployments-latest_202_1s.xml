@@ -1,0 +1,11 @@
+<step title="Incoming Request" date="2025-12-19T14:27:52.887" instance="a45adb" url="/api/deployments/latest?deployer=OneDeploy&amp;time=2025-12-19_14-27-18Z" method="GET" type="request" pid="831,1,25" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net; ARRAffinitySameSite=a45adbe19489ea2b14e790f681e17ad6f03a5528ca730625ec513d016d2b4c91;Path=/;HttpOnly;SameSite=None;Secure;Domain=jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" Content-Length="0" X-ARR-LOG-ID="019a0790-4b10-4250-8bf6-f0d65b4b5c6f" CLIENT-IP="40.76.191.133:52257" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=OneDeploy&amp;time=2025-12-19_14-27-18Z" X-Client-IP="40.76.191.133" X-Client-Port="52257" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T14:27:52.897" >
+    <step title="Cleanup Infos" date="2025-12-19T14:27:52.957" totalFiles="435" totalCleanup="275" /><!-- duration: 8ms -->
+  </step><!-- duration: 96ms -->
+  <step title="DeploymentService.GetResult" date="2025-12-19T14:27:52.998" >
+    <step title="DeploymentService.GetLatestDeployment" date="2025-12-19T14:27:53.008" >
+      <step title="DeploymentManager.GetResults" date="2025-12-19T14:27:53.030" /><!-- duration: 1199ms -->
+    </step><!-- duration: 1232ms -->
+  </step><!-- duration: 1246ms -->
+  <step title="Outgoing response" date="2025-12-19T14:27:54.247" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 4ms -->
+</step><!-- duration: 1367ms -->

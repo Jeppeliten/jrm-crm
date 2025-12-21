@@ -172,12 +172,18 @@ router.get('/debug', async (req, res) => {
       });
     }
 
+    const dbName = db.databaseName;
     const users = await db.collection('users').find({}).limit(10).toArray();
     const count = await db.collection('users').countDocuments();
 
+    // Lista alla collections
+    const collections = await db.listCollections().toArray();
+
     res.json({
       dbAvailable: true,
+      databaseName: dbName,
       totalUsers: count,
+      collections: collections.map(c => c.name),
       users: users.map(u => ({
         _id: u._id,
         displayName: u.displayName,

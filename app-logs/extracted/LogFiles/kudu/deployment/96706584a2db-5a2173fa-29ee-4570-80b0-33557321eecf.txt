@@ -1,0 +1,407 @@
+2025-12-03T14:20:21  Fetching changes.
+2025-12-03T14:20:21    Starting  LocalZipHandler
+2025-12-03T14:20:21    Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/c64925a5-75f2-4cc8-ad55-2b986c9a8bc0.zip (0.13 MB) to /tmp/zipdeploy/extracted
+2025-12-03T14:20:24  Updating submodules.
+2025-12-03T14:20:25  Preparing deployment for commit id 'e525c63e-5'.
+2025-12-03T14:20:25  PreDeployment: context.CleanOutputPath False
+2025-12-03T14:20:25  PreDeployment: context.OutputPath /home/site/wwwroot
+2025-12-03T14:20:25  Generating deployment script.
+2025-12-03T14:20:25  Running deployment command...
+2025-12-03T14:20:25    Command: /opt/Kudu/Scripts/parallel_rsync.sh /tmp/zipdeploy/extracted /home/site/wwwroot 8 /tmp/ False True  
+2025-12-03T14:20:25    Run rsync from: /tmp/zipdeploy/extracted/ to: /home/site/wwwroot/ in 8 parallel threads
+2025-12-03T14:20:26    Delete options: clean=False, use manifest=True, directory to ignore=
+2025-12-03T14:20:26    Prev manifest = /home/site/deployments/6898a56f-164b-42b7-b70d-f86d0b059904/manifest and next /home/site/deployments/e525c63e-569f-4982-adc5-031ab4615f60/manifest
+2025-12-03T14:20:26    Cleaning up /tmp//filelist.txt and /tmp//splits
+2025-12-03T14:20:26    Creating a list of all files at /tmp//filelist.txt
+2025-12-03T14:20:26    No directory to exclude.
+2025-12-03T14:20:26    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\visma-config.js": Invalid argument (22)
+2025-12-03T14:20:26    Created /tmp//filelist.txt. Total number of files to be synced = 35.
+2025-12-03T14:20:26    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\validation.js": Invalid argument (22)
+2025-12-03T14:20:26    Created batches from the list of files. Processing 5 files in each thread
+2025-12-03T14:20:26    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\agents.js": Invalid argument (22)
+2025-12-03T14:20:26    Running rsync for filelist /tmp//splits/split.aa from /tmp/zipdeploy/extracted/ to /home/site/wwwroot/
+2025-12-03T14:20:26    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\companies.js": Invalid argument (22)
+2025-12-03T14:20:26    Running rsync for filelist /tmp//splits/split.ae from /tmp/zipdeploy/extracted/ to /home/site/wwwroot/
+2025-12-03T14:20:27    Running rsync for filelist /tmp//splits/split.ab from /tmp/zipdeploy/extracted/ to /home/site/wwwroot/
+valid argument (22)
+2025-12-03T14:20:27    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\visma-net-service.js": Invalid argument (22)
+2025-12-03T14:20:27    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\customer-sync-service.js": Invalid argument (22)
+2025-12-03T14:20:27    Running rsync for filelist /tmp//splits/split.ad from /tmp/zipdeploy/extracted/ to /home/site/wwwroot/
+2025-12-03T14:20:27    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-sync-state.json": Invalid argument (22)
+2025-12-03T14:20:27    Running rsync for filelist /tmp//splits/split.af from /tmp/zipdeploy/extracted/ to /home/site/wwwroot/
+2025-12-03T14:20:27    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\contracts.js": Invalid argument (22)
+2025-12-03T14:20:27    Running rsync for filelist /tmp//splits/split.ag from /tmp/zipdeploy/extracted/ to /home/site/wwwroot/
+2025-12-03T14:20:27    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\deals.js": Invalid argument (22)
+2025-12-03T14:20:27    
+2025-12-03T14:20:27    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\product-sync-service.js": Invalid argument (22)
+2025-12-03T14:20:27    Number of files: 5 (reg: 5)
+2025-12-03T14:20:28    Number of created files: 0
+erator: failed to stat "/home/site/wwwroot/routes\import.js": Invalid argument (22)
+2025-12-03T14:20:28    Number of deleted files: 0
+erator: failed to stat "/home/site/wwwroot/routes\tasks.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\databaseService.js": Invalid argument (22)
+2025-12-03T14:20:28    Number of regular files transferred: 0
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-manager.js": Invalid argument (22)
+2025-12-03T14:20:28    Total file size: 38.14K bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\errorHandler.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\security.js": Invalid argument (22)
+2025-12-03T14:20:28    Total transferred file size: 0 bytes
+iled to stat "/home/site/wwwroot/middleware\security.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\cosmos-service.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\authService.js": Invalid argument (22)
+2025-12-03T14:20:28    Literal data: 0 bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\user-service.js": Invalid argument (22)
+2025-12-03T14:20:28    Matched data: 0 bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\brands.js": Invalid argument (22)
+2025-12-03T14:20:28    File list size: 0
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    File list generation time: 0.009 seconds
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    File list transfer time: 0.000 seconds
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    Total bytes sent: 245
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    Total bytes received: 15
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    sent 245 bytes  received 15 bytes  520.00 bytes/sec
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\contracts.js": Invalid argument (22)
+2025-12-03T14:20:28    total size is 38.14K  speedup is 146.68
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\deals.js": Invalid argument (22)
+2025-12-03T14:20:28    Attempt 1: Rsync for filelist /tmp//splits/split.ag completed with exit code 23
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\product-sync-service.js": Invalid argument (22)
+2025-12-03T14:20:28    
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    Number of files: 5 (reg: 5)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\errorHandler.js": Invalid argument (22)
+2025-12-03T14:20:28    Number of created files: 0
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\authService.js": Invalid argument (22)
+2025-12-03T14:20:28    Number of deleted files: 0
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\user-service.js": Invalid argument (22)
+2025-12-03T14:20:28    Number of regular files transferred: 0
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    Total file size: 53.27K bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\import.js": Invalid argument (22)
+2025-12-03T14:20:28    Total transferred file size: 0 bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\tasks.js": Invalid argument (22)
+2025-12-03T14:20:28    Literal data: 0 bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\databaseService.js": Invalid argument (22)
+2025-12-03T14:20:28    Matched data: 0 bytes
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-manager.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\security.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\security.js": Invalid argument (22)
+2025-12-03T14:20:28    File list size: 0
+ recv_generator: failed to stat "/home/site/wwwroot/services\cosmos-service.js": Invalid argument (22)
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\visma-config.js": Invalid argument (22)
+2025-12-03T14:20:28    File list generation time: 0.008 seconds
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\validation.js": Invalid argument (22)
+2025-12-03T14:20:28    File list transfer time: 0.000 seconds
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\customer-sync-service.js": Invalid argument (22)
+2025-12-03T14:20:28    Total bytes sent: 243
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-sync-state.json": Invalid argument (22)
+2025-12-03T14:20:28    Total bytes received: 19
+2025-12-03T14:20:28    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\brands.js": Invalid argument (22)
+2025-12-03T14:20:28    
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:28    sent 243 bytes  received 19 bytes  524.00 bytes/sec
+2025-12-03T14:20:28    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:29    total size is 53.27K  speedup is 203.33
+ransferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:29    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\agents.js": Invalid argument (22)
+2025-12-03T14:20:29    Attempt 1: Rsync for filelist /tmp//splits/split.aa completed with exit code 23
+2025-12-03T14:20:29    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\companies.js": Invalid argument (22)
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\contract-service.js": Invalid argument (22)
+2025-12-03T14:20:29    Number of files: 5 (reg: 5)
+2025-12-03T14:20:29    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\visma-net-service.js": Invalid argument (22)
+2025-12-03T14:20:29    Number of created files: 0
+2025-12-03T14:20:29    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:29    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:29    Number of deleted files: 0
+2025-12-03T14:20:29    rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+2025-12-03T14:20:29    Number of regular files transferred: 0
+2025-12-03T14:20:29    Total file size: 43.49K bytes
+2025-12-03T14:20:29    Total transferred file size: 0 bytes
+2025-12-03T14:20:29    Literal data: 0 bytes
+2025-12-03T14:20:29    Matched data: 0 bytes
+2025-12-03T14:20:29    File list size: 0
+2025-12-03T14:20:29    File list generation time: 0.001 seconds
+2025-12-03T14:20:29    File list transfer time: 0.000 seconds
+2025-12-03T14:20:29    Total bytes sent: 234
+2025-12-03T14:20:29    Total bytes received: 22
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    sent 234 bytes  received 22 bytes  512.00 bytes/sec
+2025-12-03T14:20:29    total size is 43.49K  speedup is 169.89
+2025-12-03T14:20:29    Attempt 1: Rsync for filelist /tmp//splits/split.ab completed with exit code 23
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    Number of files: 5 (reg: 5)
+2025-12-03T14:20:29    Number of created files: 0
+2025-12-03T14:20:29    Number of deleted files: 0
+2025-12-03T14:20:29    Number of regular files transferred: 0
+2025-12-03T14:20:29    Total file size: 183.96K bytes
+2025-12-03T14:20:29    Total transferred file size: 0 bytes
+2025-12-03T14:20:29    Literal data: 0 bytes
+2025-12-03T14:20:29    Matched data: 0 bytes
+2025-12-03T14:20:29    File list size: 0
+2025-12-03T14:20:29    File list generation time: 0.047 seconds
+2025-12-03T14:20:29    File list transfer time: 0.000 seconds
+2025-12-03T14:20:29    Total bytes sent: 240
+2025-12-03T14:20:29    Total bytes received: 22
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    sent 240 bytes  received 22 bytes  524.00 bytes/sec
+2025-12-03T14:20:29    total size is 183.96K  speedup is 702.12
+2025-12-03T14:20:29    Attempt 1: Rsync for filelist /tmp//splits/split.ad completed with exit code 23
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    Number of files: 5 (reg: 5)
+2025-12-03T14:20:29    Number of created files: 0
+2025-12-03T14:20:29    Number of deleted files: 0
+2025-12-03T14:20:29    Number of regular files transferred: 0
+2025-12-03T14:20:29    Total file size: 36.11K bytes
+2025-12-03T14:20:29    Total transferred file size: 0 bytes
+2025-12-03T14:20:29    Literal data: 0 bytes
+2025-12-03T14:20:29    Matched data: 0 bytes
+2025-12-03T14:20:29    File list size: 0
+2025-12-03T14:20:29    File list generation time: 0.001 seconds
+2025-12-03T14:20:29    File list transfer time: 0.000 seconds
+2025-12-03T14:20:29    Total bytes sent: 241
+2025-12-03T14:20:29    Total bytes received: 22
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    sent 241 bytes  received 22 bytes  526.00 bytes/sec
+2025-12-03T14:20:29    total size is 36.11K  speedup is 137.32
+2025-12-03T14:20:29    Attempt 1: Rsync for filelist /tmp//splits/split.ae completed with exit code 23
+2025-12-03T14:20:29    
+2025-12-03T14:20:29    Number of files: 5 (reg: 5)
+2025-12-03T14:20:29    Number of created files: 0
+2025-12-03T14:20:29    Number of deleted files: 0
+2025-12-03T14:20:29    Number of regular files transferred: 0
+2025-12-03T14:20:29    Total file size: 62.88K bytes
+2025-12-03T14:20:29    Total transferred file size: 0 bytes
+2025-12-03T14:20:29    Literal data: 0 bytes
+2025-12-03T14:20:29    Matched data: 0 bytes
+2025-12-03T14:20:29    File list size: 0
+2025-12-03T14:20:29    File list generation time: 0.008 seconds
+2025-12-03T14:20:29    File list transfer time: 0.000 seconds
+2025-12-03T14:20:29    Total bytes sent: 252
+2025-12-03T14:20:30    Total bytes received: 19
+2025-12-03T14:20:30    
+2025-12-03T14:20:30    sent 252 bytes  received 19 bytes  542.00 bytes/sec
+2025-12-03T14:20:30    total size is 62.88K  speedup is 232.03
+2025-12-03T14:20:30    Attempt 1: Rsync for filelist /tmp//splits/split.ac completed with exit code 23
+2025-12-03T14:20:30    
+2025-12-03T14:20:30    Number of files: 5 (reg: 5)
+2025-12-03T14:20:30    Number of created files: 0
+2025-12-03T14:20:30    Number of deleted files: 0
+2025-12-03T14:20:30    Number of regular files transferred: 1
+2025-12-03T14:20:30    Total file size: 134.72K bytes
+2025-12-03T14:20:30    Total transferred file size: 90.14K bytes
+2025-12-03T14:20:30    Literal data: 90.14K bytes
+2025-12-03T14:20:30    Matched data: 0 bytes
+2025-12-03T14:20:30    File list size: 0
+2025-12-03T14:20:30    File list generation time: 0.001 seconds
+2025-12-03T14:20:30    File list transfer time: 0.000 seconds
+2025-12-03T14:20:30    Total bytes sent: 22.45K
+2025-12-03T14:20:31    Total bytes received: 44
+2025-12-03T14:20:31    
+2025-12-03T14:20:31    sent 22.45K bytes  received 44 bytes  44.99K bytes/sec
+2025-12-03T14:20:31    total size is 134.72K  speedup is 5.99
+2025-12-03T14:20:31    Attempt 1: Rsync for filelist /tmp//splits/split.af completed with exit code 23
+2025-12-03T14:20:31    
+2025-12-03T14:20:31    Number of files: 5 (reg: 5)
+2025-12-03T14:20:31    Number of created files: 0
+2025-12-03T14:20:32    Number of deleted files: 0
+2025-12-03T14:20:32    Number of regular files transferred: 0
+2025-12-03T14:20:32    Total file size: 43.49K bytes
+2025-12-03T14:20:32    Total transferred file size: 0 bytes
+2025-12-03T14:20:32    Literal data: 0 bytes
+2025-12-03T14:20:32    Matched data: 0 bytes
+2025-12-03T14:20:32    File list size: 0
+2025-12-03T14:20:32    File list generation time: 0.001 seconds
+2025-12-03T14:20:33    File list transfer time: 0.000 seconds
+2025-12-03T14:20:33    Total bytes sent: 234
+2025-12-03T14:20:33    Total bytes received: 22
+2025-12-03T14:20:33    
+2025-12-03T14:20:33    sent 234 bytes  received 22 bytes  512.00 bytes/sec
+2025-12-03T14:20:33    total size is 43.49K  speedup is 169.89
+2025-12-03T14:20:33    Attempt 2: Rsync for filelist /tmp//splits/split.ab completed with exit code 23
+2025-12-03T14:20:33    
+2025-12-03T14:20:33    Number of files: 5 (reg: 5)
+2025-12-03T14:20:33    Number of created files: 0
+2025-12-03T14:20:33    Number of deleted files: 0
+2025-12-03T14:20:33    Number of regular files transferred: 0
+2025-12-03T14:20:33    Total file size: 62.88K bytes
+2025-12-03T14:20:33    Total transferred file size: 0 bytes
+2025-12-03T14:20:33    Literal data: 0 bytes
+2025-12-03T14:20:33    Matched data: 0 bytes
+2025-12-03T14:20:33    File list size: 0
+2025-12-03T14:20:34    File list generation time: 0.001 seconds
+2025-12-03T14:20:34    File list transfer time: 0.000 seconds
+2025-12-03T14:20:34    Total bytes sent: 252
+2025-12-03T14:20:34    Total bytes received: 19
+2025-12-03T14:20:34    
+2025-12-03T14:20:34    sent 252 bytes  received 19 bytes  180.67 bytes/sec
+2025-12-03T14:20:34    total size is 62.88K  speedup is 232.03
+2025-12-03T14:20:34    
+2025-12-03T14:20:34    Number of files: 5 (reg: 5)
+2025-12-03T14:20:34    Number of created files: 0
+2025-12-03T14:20:34    Number of deleted files: 0
+2025-12-03T14:20:34    Number of regular files transferred: 0
+2025-12-03T14:20:34    Total file size: 36.11K bytes
+2025-12-03T14:20:34    Total transferred file size: 0 bytes
+2025-12-03T14:20:34    Literal data: 0 bytes
+2025-12-03T14:20:34    Matched data: 0 bytes
+2025-12-03T14:20:34    File list size: 0
+2025-12-03T14:20:34    File list generation time: 0.001 seconds
+2025-12-03T14:20:34    File list transfer time: 0.000 seconds
+2025-12-03T14:20:35    Total bytes sent: 237
+2025-12-03T14:20:35    Total bytes received: 22
+2025-12-03T14:20:35    
+2025-12-03T14:20:35    sent 237 bytes  received 22 bytes  518.00 bytes/sec
+2025-12-03T14:20:35    total size is 36.11K  speedup is 139.44
+2025-12-03T14:20:35    Attempt 2: Rsync for filelist /tmp//splits/split.ae completed with exit code 23
+2025-12-03T14:20:35    Attempt 2: Rsync for filelist /tmp//splits/split.ac completed with exit code 23
+2025-12-03T14:20:36    
+2025-12-03T14:20:36    Number of files: 5 (reg: 5)
+2025-12-03T14:20:36    Number of created files: 0
+2025-12-03T14:20:36    Number of deleted files: 0
+2025-12-03T14:20:36    Number of regular files transferred: 0
+2025-12-03T14:20:36    Total file size: 183.96K bytes
+2025-12-03T14:20:36    Total transferred file size: 0 bytes
+2025-12-03T14:20:36    Literal data: 0 bytes
+2025-12-03T14:20:36    Matched data: 0 bytes
+2025-12-03T14:20:36    File list size: 0
+2025-12-03T14:20:36    File list generation time: 0.087 seconds
+2025-12-03T14:20:36    File list transfer time: 0.000 seconds
+2025-12-03T14:20:36    Total bytes sent: 236
+2025-12-03T14:20:36    Total bytes received: 22
+2025-12-03T14:20:36    
+2025-12-03T14:20:37    sent 236 bytes  received 22 bytes  172.00 bytes/sec
+2025-12-03T14:20:37    total size is 183.96K  speedup is 713.01
+2025-12-03T14:20:37    Attempt 2: Rsync for filelist /tmp//splits/split.ad completed with exit code 23
+2025-12-03T14:20:37    
+2025-12-03T14:20:37    Number of files: 5 (reg: 5)
+2025-12-03T14:20:37    Number of created files: 0
+2025-12-03T14:20:37    Number of deleted files: 0
+2025-12-03T14:20:37    Number of regular files transferred: 0
+2025-12-03T14:20:37    Total file size: 38.14K bytes
+2025-12-03T14:20:37    Total transferred file size: 0 bytes
+2025-12-03T14:20:37    Literal data: 0 bytes
+2025-12-03T14:20:37    Matched data: 0 bytes
+2025-12-03T14:20:37    File list size: 0
+2025-12-03T14:20:37    File list generation time: 0.068 seconds
+2025-12-03T14:20:37    File list transfer time: 0.000 seconds
+2025-12-03T14:20:37    Total bytes sent: 245
+2025-12-03T14:20:37    Total bytes received: 15
+2025-12-03T14:20:37    
+2025-12-03T14:20:37    sent 245 bytes  received 15 bytes  520.00 bytes/sec
+2025-12-03T14:20:37    total size is 38.14K  speedup is 146.68
+2025-12-03T14:20:37    
+2025-12-03T14:20:37    Number of files: 5 (reg: 5)
+2025-12-03T14:20:37    Number of created files: 0
+2025-12-03T14:20:37    Number of deleted files: 0
+2025-12-03T14:20:37    Number of regular files transferred: 0
+2025-12-03T14:20:37    Total file size: 134.72K bytes
+2025-12-03T14:20:37    Total transferred file size: 0 bytes
+2025-12-03T14:20:37    Literal data: 0 bytes
+2025-12-03T14:20:37    Matched data: 0 bytes
+2025-12-03T14:20:37    File list size: 0
+2025-12-03T14:20:37    File list generation time: 0.001 seconds
+2025-12-03T14:20:37    File list transfer time: 0.000 seconds
+2025-12-03T14:20:37    Total bytes sent: 223
+2025-12-03T14:20:37    Total bytes received: 28
+2025-12-03T14:20:37    
+2025-12-03T14:20:37    sent 223 bytes  received 28 bytes  167.33 bytes/sec
+2025-12-03T14:20:37    total size is 134.72K  speedup is 536.75
+2025-12-03T14:20:37    Attempt 2: Rsync for filelist /tmp//splits/split.af completed with exit code 23
+2025-12-03T14:20:37    Attempt 2: Rsync for filelist /tmp//splits/split.ag completed with exit code 23
+2025-12-03T14:20:37    
+2025-12-03T14:20:37    Number of files: 5 (reg: 5)
+2025-12-03T14:20:37    Number of created files: 0
+2025-12-03T14:20:37    Number of deleted files: 0
+2025-12-03T14:20:37    Number of regular files transferred: 0
+2025-12-03T14:20:37    Total file size: 53.27K bytes
+2025-12-03T14:20:37    Total transferred file size: 0 bytes
+2025-12-03T14:20:37    Literal data: 0 bytes
+2025-12-03T14:20:37    Matched data: 0 bytes
+2025-12-03T14:20:37    File list size: 0
+2025-12-03T14:20:37    File list generation time: 0.096 seconds
+2025-12-03T14:20:38    File list transfer time: 0.000 seconds
+2025-12-03T14:20:38    Total bytes sent: 243
+2025-12-03T14:20:38    Total bytes received: 19
+2025-12-03T14:20:38    
+2025-12-03T14:20:38    sent 243 bytes  received 19 bytes  524.00 bytes/sec
+2025-12-03T14:20:38    total size is 53.27K  speedup is 203.33
+2025-12-03T14:20:38    Attempt 2: Rsync for filelist /tmp//splits/split.aa completed with exit code 23
+2025-12-03T14:20:38    An error has occurred during web site deployment.
+2025-12-03T14:20:38    Rsync failed in 2 seconds
+2025-12-03T14:20:38    rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\visma-config.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\validation.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\agents.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\companies.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\contract-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\visma-net-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\customer-sync-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-sync-state.json": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\contracts.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\deals.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\product-sync-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\import.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\tasks.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\databaseService.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-manager.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\errorHandler.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\security.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\security.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\cosmos-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\authService.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\user-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\brands.js": Invalid argument (22)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\contracts.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\deals.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\product-sync-service.js": Invalid argument (22)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\errorHandler.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\authService.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\user-service.js": Invalid argument (22)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\import.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\tasks.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\databaseService.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-manager.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\security.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\security.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\cosmos-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/config\visma-config.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/middleware\validation.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\customer-sync-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\dual-user-sync-state.json": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\brands.js": Invalid argument (22)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\agents.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/routes\companies.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\contract-service.js": Invalid argument (22)
+rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/services\visma-net-service.js": Invalid argument (22)
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]
+/opt/Kudu/Scripts/starter.sh /opt/Kudu/Scripts/parallel_rsync.sh /tmp/zipdeploy/extracted /home/site/wwwroot 8 /tmp/ False True  
+2025-12-03T14:20:38  
+2025-12-03T14:20:38    Using cached version of deployment script (command: 'azure -y --no-dot-deployment -r "/tmp/zipdeploy/extracted" -o "/home/site/deployments/tools" --basic --sitePath "/tmp/zipdeploy/extracted/server"').
+2025-12-03T14:20:38  Running deployment command...
+2025-12-03T14:20:38    Command: "/home/site/deployments/tools/deploy.sh"
+2025-12-03T14:20:39    Handling Basic Web Site deployment.
+2025-12-03T14:20:39    Error: From directory doesn't exist
+2025-12-03T14:20:39    An error has occurred during web site deployment.
+2025-12-03T14:20:39    Kudu Sync failed
+2025-12-03T14:20:40    
+/opt/Kudu/Scripts/starter.sh "/home/site/deployments/tools/deploy.sh"
+2025-12-03T14:20:40  
+2025-12-03T14:20:40  Deployment Failed. deployer = Push-Deployer deploymentPath = ZipDeploy. Extract zip.

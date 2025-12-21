@@ -1,0 +1,10 @@
+<step title="Incoming Request" date="2025-12-03T09:44:38.620" instance="8357d4" url="/jrm-crm-api-prod-vsdmc5kbydcjc.git/git-receive-pack" method="POST" type="request" pid="770,1,33" Accept="application/x-git-receive-pack-result" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="git/2.51.1.windows.1" Accept-Encoding="deflate, gzip, br, zstd" Authorization="Bas..." Content-Type="application/x-git-receive-pack-request" Transfer-Encoding="chunked" X-ARR-LOG-ID="b2a8faa9-8c35-4663-8050-b8425e2ed0ea" CLIENT-IP="94.254.11.250:61336" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/jrm-crm-api-prod-vsdmc5kbydcjc.git/git-receive-pack" X-Client-IP="94.254.11.250" X-Client-Port="61336" >
+  <step title="Cleanup Xml Logs" date="2025-12-03T09:44:38.637" /><!-- duration: 38ms -->
+  <step title="RpcService.ReceivePack" date="2025-12-03T09:44:38.775" >
+    <step title="Executing external process" date="2025-12-03T09:44:38.794" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 40ms -->
+    <step title="Assuming git repository at /home/site/repository" date="2025-12-03T09:44:38.843" /><!-- duration: 10ms -->
+    <step title="Acquiring Deployment Lock" date="2025-12-03T09:44:38.863" /><!-- duration: 10ms -->
+    <step title="Acquired Deployment Lock" date="2025-12-03T09:44:38.931" /><!-- duration: 18ms -->
+    <step title="Creating temporary deployment" date="2025-12-03T09:44:38.968" /><!-- duration: 135ms -->
+    <step title="GitExeServer.Receive" date="2025-12-03T09:44:39.124" >
+      <step title="Executing external process" date="2025-12-03T09:44:39.301" type="process" path="git" arguments="receive-pack --stateless-rpc &quot;/home/site/repository&quot;" 

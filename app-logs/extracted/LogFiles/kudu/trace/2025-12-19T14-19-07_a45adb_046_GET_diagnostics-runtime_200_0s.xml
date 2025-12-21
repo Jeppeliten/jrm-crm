@@ -1,0 +1,7 @@
+<step title="Incoming Request" date="2025-12-19T14:19:07.873" instance="a45adb" url="/diagnostics/runtime" method="GET" type="request" pid="831,1,20" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_bdd6d39c9194eaf55e018ce1aa76a4dc269a88024ee43d480bc50e24dfcd50c9" Authorization="Bas..." Content-Type="application/json; charset=utf-8" Content-Length="0" X-ARR-LOG-ID="abb749a4-d99e-48a1-acb8-1905ba4e3677" CLIENT-IP="20.168.118.84:15496" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/diagnostics/runtime" X-Client-IP="20.168.118.84" X-Client-Port="15496" >
+  <step title="Cleanup Xml Logs" date="2025-12-19T14:19:07.876" >
+    <step title="Cleanup Infos" date="2025-12-19T14:19:07.886" totalFiles="344" totalCleanup="184" /><!-- duration: 7ms -->
+  </step><!-- duration: 34ms -->
+  <step title="RuntimeController.GetRuntimeVersions" date="2025-12-19T14:19:07.916" /><!-- duration: 7ms -->
+  <step title="Outgoing response" date="2025-12-19T14:19:07.936" type="response" statusCode="200" statusText="OK" /><!-- duration: 15ms -->
+</step><!-- duration: 82ms -->
