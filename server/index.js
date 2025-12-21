@@ -243,6 +243,9 @@ const dbMiddleware = (req, res, next) => {
 // API ROUTES
 // ============================================
 
+// Attach database middleware for all API routes
+app.use('/api', dbMiddleware);
+
 // ============================================
 // SIMPLIFIED ROUTES - Testing
 // ============================================
