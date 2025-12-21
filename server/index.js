@@ -316,25 +316,6 @@ app.get('/api/users/routing-rules', (req, res) => {
 });
 
 // ============================================
-// VISMA.NET INTEGRATION ENDPOINTS
-// ============================================
-
-// Check Visma.net connection status
-app.get('/api/visma/status', (req, res) => {
-  try {
-    res.json({
-      connected: false,
-      company: null,
-      message: 'Not connected to Visma.net',
-      lastChecked: new Date().toISOString()
-    });
-  } catch (error) {
-    console.error('Error checking Visma status:', error);
-    res.status(500).json({ error: 'Failed to check Visma status' });
-  }
-});
-
-// ============================================
 // ENTITY ROUTES
 // ============================================
 
@@ -347,6 +328,7 @@ const searchRouter = require('./routes/search');
 const exportRouter = require('./routes/export');
 const importRouter = require('./routes/import');
 const statsRouter = require('./routes/stats');
+const vismaRouter = require('./routes/visma');
 
 // Register routes
 app.use('/api/brands', brandsRouter);
@@ -357,6 +339,7 @@ app.use('/api/search', searchRouter);
 app.use('/api/export', exportRouter);
 app.use('/api/import', importRouter);
 app.use('/api/stats', statsRouter);
+app.use('/api/visma', vismaRouter);
 
 // ============================================
 // ERROR HANDLING MIDDLEWARE (must be AFTER routes)
