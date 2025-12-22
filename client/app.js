@@ -480,7 +480,7 @@ async function loadState() {
   // Hämta delade uppgifter från API
   await loadTasksFromAPI();
   
-  seedExampleData();
+  // seedExampleData();
   await saveState();
 }
 
@@ -597,7 +597,7 @@ function runMigrations() {
   const hasBankingSegment = AppState.segments.some(s => s.id === 'banking');
   const hasBankingData = AppState.brands.some(b => b.segmentId === 'banking');
   if (hasBankingSegment && !hasBankingData) {
-    seedBankingData();
+    // seedBankingData();
   }
   
   // Uppdatera alla företags potential automatiskt baserat på prislistan
