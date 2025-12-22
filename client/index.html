@@ -25,59 +25,163 @@
     select,
     textarea {
       pointer-events: auto !important;
-            </button>
-            <button onclick="analytics.showPredictiveAnalytics()" class="btn btn-sm btn-accent w-full justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              🔮 Predictive Analytics
-            </button>
+    }
+  </style>
+</head>
+<body>
+  <!-- Landing Page (shown before authentication) -->
+  <div id="landing-page" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-base-200 to-secondary/10">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Logo/Brand -->
+        <div class="mb-8">
+          <h1 class="text-6xl font-bold text-primary mb-4">CRM</h1>
+          <p class="text-2xl text-base-content/80 font-light">Mäklarbranschens affärssystem</p>
+        </div>
+        <!-- Feature Cards -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <div class="text-4xl mb-2">🏢</div>
+              <h3 class="card-title text-lg justify-center">Företagshantering</h3>
+              <p class="text-sm text-base-content/70">Hantera varumärken, mäklarfirmor och licensavtal på ett och samma ställe</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <div class="text-4xl mb-2">👥</div>
+              <h3 class="card-title text-lg justify-center">Mäklaröversikt</h3>
+              <p class="text-sm text-base-content/70">Full kontroll över alla anslutna mäklare och deras företagstillhörighet</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <div class="text-4xl mb-2">📊</div>
+              <h3 class="card-title text-lg justify-center">Säljtavla & Kundvård</h3>
+              <div class="flex gap-2 mt-2">
+                <button onclick="showDealsSection()" class="btn btn-sm btn-primary">Säljtavla</button>
+                <button onclick="showCustomerCareSection()" class="btn btn-sm btn-secondary">Kundvård</button>
+              </div>
+              <p class="text-sm text-base-content/70">Följ affärsprocessen från lead till kund med strukturerade uppgifter</p>
+            </div>
+          </div>
+        </div>
+        <!-- Loading State -->
+        <div id="auth-status" class="mb-8">
+          <div class="loading loading-spinner loading-lg text-primary mb-4"></div>
+          <p class="text-lg text-base-content/70">Kontrollerar inloggning...</p>
+        </div>
+        <!-- Login Button (shown if not logged in) -->
+        <button id="landing-login-btn" class="btn btn-primary btn-lg" style="display: none;">
+          🔐 Logga in med Azure AD
+        </button>
+        <!-- Footer Info -->
+        <div class="mt-12 text-sm text-base-content/50">
+          <p>Säker inloggning via Microsoft Azure Active Directory</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col h-screen">
+    <div class="flex flex-1 overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-base-100 border-r border-base-300 p-4 hidden md:block">
+        <!-- User info (top of sidebar) -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="avatar placeholder">
+            <div class="bg-neutral-focus text-neutral-content rounded-full w-12 h-12">
+              <span class="text-xl">A</span>
+            </div>
+          </div>
+          <div class="flex-1">
+            <div class="font-semibold" id="userName">Välkommen, användare!</div>
+            <div class="text-sm text-base-content/70" id="userRoleDisplay">Roll: Mäklare</div>
           </div>
         </div>
 
-        <!-- Kalender -->
-        <div class="border-t border-base-300 pt-4 mt-4 mb-4">
-          <div class="text-xs text-base-content/50 mb-2">KALENDER & AKTIVITETER</div>
-          <div class="space-y-2">
-            <button onclick="calendarManager.showCalendarDashboard()" class="btn btn-sm btn-outline w-full justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              📅 Min Kalender
-            </button>
+        <!-- Navigation sections (collapsible) -->
+        <div class="flex-1 space-y-4">
+          <!-- Dashboard -->
+          <div>
+            <div class="text-xs text-base-content/50 mb-2">DASHBOARD</div>
+            <div class="space-y-2">
+              <button onclick="showDashboard()" class="btn btn-sm btn-primary w-full justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3z" />
+                </svg>
+                📊 Översikt
+              </button>
+            </div>
+          </div>
+
+          <!-- Företag (Companies) -->
+          <div>
+            <div class="text-xs text-base-content/50 mb-2">FÖRETAG</div>
+            <div class="space-y-2">
+              <button onclick="showCompanies()" class="btn btn-sm btn-accent w-full justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4h4V7H3zm0 6v4h4v-4H3zm6-6v4h12V7H9zm0 6v4h12v-4H9z" />
+                </svg>
+                🏢 Företag
+              </button>
+            </div>
+          </div>
+
+          <!-- Mäklare (Agents) -->
+          <div>
+            <div class="text-xs text-base-content/50 mb-2">MÄKLARE</div>
+            <div class="space-y-2">
+              <button onclick="showAgents()" class="btn btn-sm btn-outline w-full justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2L2 7h20L12 2zm0 4L2 11h20L12 6zm0 4L2 15h20l-10-9zm0 4l10 9H2l10-9z" />
+                </svg>
+                👥 Mäklare
+              </button>
+            </div>
+          </div>
+
+          <!-- Licenser (Licenses) -->
+          <div>
+            <div class="text-xs text-base-content/50 mb-2">LICENSER</div>
+            <div class="space-y-2">
+              <button onclick="showLicenses()" class="btn btn-sm btn-error w-full justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                📜 Licenser
+              </button>
+            </div>
+          </div>
+
+          <!-- Importera (Import) -->
+          <div>
+            <div class="text-xs text-base-content/50 mb-2">IMPORTERA</div>
+            <div class="space-y-2">
+              <button onclick="showImport()" class="btn btn-sm btn-outline w-full justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10l4-5 4 5V7l-4 5-4-5z" />
+                </svg>
+                📥 Importera
+              </button>
+            </div>
+          </div>
+
+          <!-- Inställningar (Settings) - Only for admins -->
+          <div id="settingsSection" class="hidden">
+            <div class="text-xs text-base-content/50 mb-2">INSTÄLLNINGAR</div>
+            <div class="space-y-2">
+              <button onclick="showSettings()" class="btn btn-sm btn-ghost w-full justify-start">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 00-7.45 17.55l1.4-1.4A8 8 0 1118.36 4.64l1.4-1.4A10 10 0 0012 2zm0 18a8 8 0 100-16 8 8 0 000 16z" />
+                </svg>
+                ⚙️ Inställningar
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="border-t border-base-300 pt-4 mt-4 mb-4">
-          <div class="text-xs text-base-content/50 mb-2">OUTLOOK INTEGRATION</div>
-          <div class="space-y-2">
-            <button onclick="outlookIntegration.showOutlookDashboard()" class="btn btn-sm btn-outline w-full justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              📧 Outlook Dashboard
-            </button>
-          </div>
-        </div>
-
-        <div class="border-t border-base-300 pt-4 mt-4 mb-4">
-          <div class="text-xs text-base-content/50 mb-2">SYSTEM & MONITORING</div>
-          <div class="space-y-2">
-            <button onclick="systemStatus.showSystemStatus()" class="btn btn-sm btn-outline w-full justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              🛠 System Status
-            </button>
-            <button onclick="securityDashboard.showSecurityDashboard()" class="btn btn-sm btn-error w-full justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              🔒 Säkerhetsdashboard
-            </button>
-          </div>
-        </div>
-
+        <!-- Logout section (bottom of sidebar) -->
         <div class="border-t border-base-300 pt-4 mt-4">
           <div class="text-sm text-base-content/70 mb-2" id="currentUser">Inte inloggad</div>
           <button id="loginBtn" class="btn btn-sm btn-outline w-full">Logga in</button>
