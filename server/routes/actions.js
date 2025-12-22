@@ -121,13 +121,7 @@ router.post('/undo/:id', async (req, res) => {
     // Find the action
     let action;
     if (!db) {
-      action = mockActionHistory.find(a => a._id === id);
-      if (!action) {
-        return res.status(404).json({ error: 'Action not found' });
-      }
-      if (action.undone) {
-        return res.status(400).json({ error: 'Action already undone' });
-      }
+      return res.status(503).json({ error: 'Database not available' });
     } else {
       action = await db.collection('action_history').findOne({ _id: id });
       if (!action) {
@@ -245,23 +239,7 @@ router.get('/stats', async (req, res) => {
     const db = req.app.locals.db;
     
     if (!db) {
-      // Mock mode stats
-      const stats = {
-        total: mockActionHistory.length,
-        byType: {
-          create: mockActionHistory.filter(a => a.type === ACTION_TYPES.CREATE).length,
-          update: mockActionHistory.filter(a => a.type === ACTION_TYPES.UPDATE).length,
-          delete: mockActionHistory.filter(a => a.type === ACTION_TYPES.DELETE).length
-        },
-        byEntity: {
-          company: mockActionHistory.filter(a => a.entity === ENTITY_TYPES.COMPANY).length,
-          brand: mockActionHistory.filter(a => a.entity === ENTITY_TYPES.BRAND).length,
-          agent: mockActionHistory.filter(a => a.entity === ENTITY_TYPES.AGENT).length,
-          task: mockActionHistory.filter(a => a.entity === ENTITY_TYPES.TASK).length
-        },
-        undoable: mockActionHistory.filter(a => !a.undone).length
-      };
-      return res.json(stats);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     // Database mode

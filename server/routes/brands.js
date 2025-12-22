@@ -2,128 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getBrandAggregatedStats } = require('../services/aggregation-service');
 
-// 🧪 TEMPORARY: In-memory storage for testing
-let mockBrands = [
-  { 
-    _id: 'mock1', 
-    name: 'ERA Mäklare', 
-    description: 'Internationellt fastighetsmäklarnätverk',
-    website: 'https://www.era.se',
-    centralContract: {
-      active: true,
-      product: 'Enterprise Plan',
-      mrr: 125000,
-      startDate: new Date('2024-01-01'),
-      contactPerson: 'Anders Svensson',
-      contactEmail: 'anders@era.se'
-    },
-    contacts: [
-      {
-        id: 'contact-1',
-        name: 'Anders Svensson',
-        role: 'VD',
-        email: 'anders@era.se',
-        phone: '08-123 45 67'
-      },
-      {
-        id: 'contact-2',
-        name: 'Maria Andersson',
-        role: 'Marknadschef',
-        email: 'maria@era.se',
-        phone: '08-123 45 68'
-      }
-    ],
-    tasks: [
-      {
-        id: 'task-1',
-        title: 'Följ upp avtalsförnyelse',
-        dueAt: new Date('2025-12-15'),
-        done: false,
-        ownerId: 'user-1',
-        createdAt: new Date()
-      }
-    ],
-    notes: [
-      {
-        id: 'note-1',
-        text: 'Nöjda med tjänsten, funderar på att utöka till fler kontor',
-        authorId: 'user-1',
-        createdAt: new Date('2025-12-01')
-      }
-    ],
-    createdAt: new Date('2024-01-01'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: 'mock2', 
-    name: 'Mäklarhuset', 
-    description: 'Sveriges största mäklarkedja',
-    website: 'https://www.maklarhuset.se',
-    centralContract: {
-      active: false
-    },
-    contacts: [],
-    tasks: [],
-    notes: [],
-    createdAt: new Date('2023-06-15'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: 'mock3', 
-    name: 'Svensk Fastighetsförmedling', 
-    description: 'Rikstäckande fastighetsmäklare',
-    website: 'https://www.svenskfast.se',
-    centralContract: {
-      active: false
-    },
-    contacts: [],
-    tasks: [],
-    notes: [],
-    createdAt: new Date('2023-08-20'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: 'mock4', 
-    name: 'Fastighetsbyrån', 
-    description: 'Premiumfastigheter i storstadsregioner',
-    website: 'https://www.fastighetsbyran.se',
-    centralContract: {
-      active: true,
-      product: 'Professional Plan',
-      mrr: 85000,
-      startDate: new Date('2024-06-01'),
-      contactPerson: 'Maria Karlsson',
-      contactEmail: 'maria@fastighetsbyran.se'
-    },
-    contacts: [
-      {
-        id: 'contact-3',
-        name: 'Maria Karlsson',
-        role: 'Regionchef',
-        email: 'maria@fastighetsbyran.se',
-        phone: '08-234 56 78'
-      }
-    ],
-    tasks: [],
-    notes: [],
-    createdAt: new Date('2024-05-10'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: 'mock5', 
-    name: 'Notar', 
-    description: 'Familjeägd mäklarkedja',
-    website: 'https://www.notar.se',
-    centralContract: {
-      active: false
-    },
-    contacts: [],
-    tasks: [],
-    notes: [],
-    createdAt: new Date('2023-11-05'),
-    updatedAt: new Date()
-  }
-];
+// ...existing code...
 
 /**
  * GET /api/brands - Get all brands
@@ -369,28 +248,6 @@ router.post('/:id/contacts', async (req, res) => {
     const { id } = req.params;
     const { name, role, email, phone } = req.body;
     
-    if (!db) {
-      // Mock mode
-      const brand = mockBrands.find(b => b._id === id);
-      if (!brand) {
-        return res.status(404).json({ error: 'Brand not found' });
-      }
-      
-      const newContact = {
-        id: `contact-${Date.now()}`,
-        name,
-        role,
-        email,
-        phone,
-        createdAt: new Date()
-      };
-      
-      if (!brand.contacts) brand.contacts = [];
-      brand.contacts.push(newContact);
-      brand.updatedAt = new Date();
-      
-      return res.status(201).json(newContact);
-    }
     
     const newContact = {
       id: `contact-${Date.now()}`,
@@ -432,18 +289,9 @@ router.delete('/:id/contacts/:contactId', async (req, res) => {
     const db = req.app.locals.db;
     const { id, contactId } = req.params;
     
-    if (!db) {
-      const brand = mockBrands.find(b => b._id === id);
-      if (!brand) {
-        return res.status(404).json({ error: 'Brand not found' });
-      }
-      
-      brand.contacts = brand.contacts.filter(c => c.id !== contactId);
-      brand.updatedAt = new Date();
-      
-      return res.json({ message: 'Contact deleted successfully' });
-    }
-    
+        if (!db) {
+          return res.status(503).json({ error: 'Database not available' });
+        }
     const query = id.match(/^[0-9a-fA-F]{24}$/) 
       ? { _id: require('mongodb').ObjectId(id) }
       : { _id: id };
@@ -475,28 +323,8 @@ router.post('/:id/tasks', async (req, res) => {
     const db = req.app.locals.db;
     const { id } = req.params;
     const { title, description, dueAt, ownerId } = req.body;
-    
     if (!db) {
-      const brand = mockBrands.find(b => b._id === id);
-      if (!brand) {
-        return res.status(404).json({ error: 'Brand not found' });
-      }
-      
-      const newTask = {
-        id: `task-${Date.now()}`,
-        title,
-        description,
-        dueAt: dueAt ? new Date(dueAt) : null,
-        done: false,
-        ownerId,
-        createdAt: new Date()
-      };
-      
-      if (!brand.tasks) brand.tasks = [];
-      brand.tasks.push(newTask);
-      brand.updatedAt = new Date();
-      
-      return res.status(201).json(newTask);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     const newTask = {
@@ -543,23 +371,9 @@ router.put('/:id/tasks/:taskId', async (req, res) => {
     
     if (!db) {
       const brand = mockBrands.find(b => b._id === id);
-      if (!brand) {
-        return res.status(404).json({ error: 'Brand not found' });
+      if (!db) {
+        return res.status(503).json({ error: 'Database not available' });
       }
-      
-      const task = brand.tasks.find(t => t.id === taskId);
-      if (!task) {
-        return res.status(404).json({ error: 'Task not found' });
-      }
-      
-      if (title !== undefined) task.title = title;
-      if (description !== undefined) task.description = description;
-      if (dueAt !== undefined) task.dueAt = dueAt ? new Date(dueAt) : null;
-      if (done !== undefined) task.done = done;
-      task.updatedAt = new Date();
-      brand.updatedAt = new Date();
-      
-      return res.json(task);
     }
     
     const updateFields = {};
@@ -644,22 +458,9 @@ router.post('/:id/notes', async (req, res) => {
     
     if (!db) {
       const brand = mockBrands.find(b => b._id === id);
-      if (!brand) {
-        return res.status(404).json({ error: 'Brand not found' });
+      if (!db) {
+        return res.status(503).json({ error: 'Database not available' });
       }
-      
-      const newNote = {
-        id: `note-${Date.now()}`,
-        text,
-        authorId,
-        createdAt: new Date()
-      };
-      
-      if (!brand.notes) brand.notes = [];
-      brand.notes.push(newNote);
-      brand.updatedAt = new Date();
-      
-      return res.status(201).json(newNote);
     }
     
     const newNote = {
@@ -699,15 +500,9 @@ router.delete('/:id/notes/:noteId', async (req, res) => {
   try {
     const db = req.app.locals.db;
     const { id, noteId } = req.params;
-    
     if (!db) {
-      const brand = mockBrands.find(b => b._id === id);
-      if (!brand) {
-        return res.status(404).json({ error: 'Brand not found' });
-      }
-      
-      brand.notes = brand.notes.filter(n => n.id !== noteId);
-      brand.updatedAt = new Date();
+      return res.status(503).json({ error: 'Database not available' });
+    }
       
       return res.json({ message: 'Note deleted successfully' });
     }

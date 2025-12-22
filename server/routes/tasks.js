@@ -118,111 +118,17 @@ router.get('/', async (req, res) => {
           localField: 'brandId',
           foreignField: '_id',
           as: 'brand'
-        }
-      },
-      { $unwind: { path: '$brand', preserveNullAndEmptyArrays: true } },
-      {
-        $lookup: {
-          from: 'companies',
-          localField: 'companyId',
-          foreignField: '_id',
-          as: 'company'
-        }
-      },
-      { $unwind: { path: '$company', preserveNullAndEmptyArrays: true } },
-      {
-        $addFields: {
-          entityType: {
-            $cond: [{ $ne: ['$brandId', null] }, 'brand', 
-              { $cond: [{ $ne: ['$companyId', null] }, 'company', 'general'] }
-            ]
-          },
-          entityName: {
-            $cond: [{ $ne: ['$brand.name', null] }, '$brand.name', '$company.name']
-          }
-        }
-      }
-    ];
-    
-    const tasks = await db.collection('tasks').aggregate(aggregation).toArray();
-    let filteredTasks = applyTaskFilters(tasks, filter);
-    
-    if (entityType) {
-      filteredTasks = filteredTasks.filter(t => t.entityType === entityType);
-    }
-    if (entityId) {
-      filteredTasks = filteredTasks.filter(t => 
-        (t.brandId && t.brandId.toString() === entityId) ||
-        (t.companyId && t.companyId.toString() === entityId)
-      );
-    }
-    if (done !== undefined) {
-      const isDone = done === 'true';
-      filteredTasks = filteredTasks.filter(t => t.done === isDone);
-    }
-    
-    res.json(filteredTasks);
-  } catch (error) {
-    console.error('Error fetching tasks:', error);
-    res.status(500).json({ error: 'Failed to fetch tasks' });
-  }
-});
-
-/**
- * GET /api/tasks/stats - Get task statistics
+              if (!db) {
+                return res.status(503).json({ error: 'Database not available' });
+              }
  */
 router.get('/stats', async (req, res) => {
   try {
     const db = req.app.locals.db;
     
-    // Use mock data if no database
-    if (!db) {
-      console.log('📦 Calculating task stats from mock data');
-      const mockData = loadMockData();
-      let allTasks = [];
-      
-      // Aggregate from all entities
-      if (mockData.brands) {
-        mockData.brands.forEach(brand => {
-          if (brand.tasks) {
-            allTasks.push(...brand.tasks.map(t => ({ ...t, entityType: 'brand' })));
-          }
-        });
+      if (!db) {
+        return res.status(503).json({ error: 'Database not available' });
       }
-      if (mockData.companies) {
-        mockData.companies.forEach(company => {
-          if (company.tasks) {
-            allTasks.push(...company.tasks.map(t => ({ ...t, entityType: 'company' })));
-          }
-        });
-      }
-      
-      const now = new Date();
-      const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const todayEnd = new Date(todayStart);
-      todayEnd.setDate(todayEnd.getDate() + 1);
-      const weekEnd = new Date(now);
-      weekEnd.setDate(weekEnd.getDate() + 7);
-      
-      const stats = {
-        total: allTasks.length,
-        completed: allTasks.filter(t => t.done).length,
-        pending: allTasks.filter(t => !t.done).length,
-        overdue: allTasks.filter(t => !t.done && new Date(t.dueDate) < now).length,
-        today: allTasks.filter(t => {
-          const dueDate = new Date(t.dueDate);
-          return !t.done && dueDate >= todayStart && dueDate < todayEnd;
-        }).length,
-        thisWeek: allTasks.filter(t => !t.done && new Date(t.dueDate) <= weekEnd).length,
-        byEntity: {
-          brand: allTasks.filter(t => t.entityType === 'brand').length,
-          company: allTasks.filter(t => t.entityType === 'company').length,
-          agent: allTasks.filter(t => t.entityType === 'agent').length
-        }
-      };
-      
-      return res.json(stats);
-    }
     
     // Database aggregation
     const tasks = await db.collection('tasks').find({}).toArray();

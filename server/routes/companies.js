@@ -2,104 +2,7 @@
 const router = express.Router();
 const { getCompanyAggregatedStats } = require('../services/aggregation-service');
 
-// 🧪 TEMPORARY: In-memory storage for testing (replace with real DB later)
-let mockCompanies = [
-  {
-    _id: '1',
-    name: 'ERA Sverige Fastighetsförmedling AB',
-    orgNumber: '556123-4567',
-    email: 'info@era.se',
-    phone: '08-123 45 67',
-    address: 'Storgatan 1, Stockholm',
-    status: 'kund',
-    brandId: 'mock1',
-    brand: 'ERA Mäklare',
-    agentCount: 12,
-    payment: 1649,
-    lastContact: new Date('2025-12-01'),
-    nextAction: 'Uppföljning Q1 2026',
-    pipelineStage: 'vunnit',
-    pipelineValue: 19788,
-    createdAt: new Date('2024-01-15'),
-    updatedAt: new Date()
-  },
-  {
-    _id: '2',
-    name: 'Mäklarhuset Stockholm Syd',
-    orgNumber: '556789-0123',
-    email: 'stockholm@maklarhuset.se',
-    phone: '08-555 44 33',
-    address: 'Södermalmsvägen 12, Stockholm',
-    status: 'kund',
-    brandId: 'mock2',
-    brand: 'Mäklarhuset',
-    agentCount: 8,
-    payment: 1249,
-    lastContact: new Date('2025-11-20'),
-    nextAction: 'Kontraktsförnyelse i mars',
-    pipelineStage: 'vunnit',
-    pipelineValue: 9992,
-    createdAt: new Date('2023-08-10'),
-    updatedAt: new Date()
-  },
-  {
-    _id: '3',
-    name: 'Svensk Fastighetsförmedling Göteborg',
-    orgNumber: '559988-7766',
-    email: 'goteborg@svenskfast.se',
-    phone: '031-123 45 67',
-    address: 'Avenyn 45, Göteborg',
-    status: 'prospekt',
-    brandId: 'mock3',
-    brand: 'Svensk Fastighetsförmedling',
-    agentCount: 15,
-    payment: 0,
-    lastContact: new Date('2025-11-15'),
-    nextAction: 'Demo-möte bokad 15 dec',
-    pipelineStage: 'kvalificerad',
-    pipelineValue: 24735,
-    createdAt: new Date('2025-10-01'),
-    updatedAt: new Date()
-  },
-  {
-    _id: '4',
-    name: 'Fastighetsbyrån Malmö City',
-    orgNumber: '556234-5678',
-    email: 'malmo@fastighetsbyran.se',
-    phone: '040-789 12 34',
-    address: 'Stortorget 8, Malmö',
-    status: 'kund',
-    brandId: 'mock4',
-    brand: 'Fastighetsbyrån',
-    agentCount: 6,
-    payment: 849,
-    lastContact: new Date('2025-12-05'),
-    nextAction: null,
-    pipelineStage: 'vunnit',
-    pipelineValue: 5094,
-    createdAt: new Date('2024-06-20'),
-    updatedAt: new Date()
-  },
-  {
-    _id: '5',
-    name: 'Notar Mäklare Uppsala',
-    orgNumber: '559876-5432',
-    email: 'uppsala@notar.se',
-    phone: '018-456 78 90',
-    address: 'Svartbäcksgatan 23, Uppsala',
-    status: 'prospekt',
-    brandId: 'mock5',
-    brand: 'Notar',
-    agentCount: 10,
-    payment: 0,
-    lastContact: new Date('2025-11-28'),
-    nextAction: 'Skickat offert - väntar på svar',
-    pipelineStage: 'offert',
-    pipelineValue: 16490,
-    createdAt: new Date('2025-11-10'),
-    updatedAt: new Date()
-  }
-];
+// ...existing code...
 
 /**
  * GET /api/companies/:id/stats - Get statistics for a specific company
@@ -267,8 +170,7 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     
     if (!db) {
-      const company = mockCompanies.find(c => c._id === id);
-      return company ? res.json(company) : res.status(404).json({ error: 'Company not found' });
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     const query = id.match(/^[0-9a-fA-F]{24}$/) 
@@ -352,68 +254,9 @@ router.get('/', async (req, res) => {
         filtered = filtered.filter(c => c.lastContact && new Date(c.lastContact) <= toDate);
       }
       
-      // Agent count filters
-      if (agentMin !== undefined) {
-        const min = parseInt(agentMin);
-        filtered = filtered.filter(c => (c.agentCount || 0) >= min);
+      if (!db) {
+        return res.status(503).json({ error: 'Database not available' });
       }
-      if (agentMax !== undefined) {
-        const max = parseInt(agentMax);
-        filtered = filtered.filter(c => (c.agentCount || 0) <= max);
-      }
-      
-      // Apply sorting
-      filtered.sort((a, b) => {
-        let aVal = a[sort];
-        let bVal = b[sort];
-        
-        if (sort === 'lastContact') {
-          aVal = aVal ? new Date(aVal).getTime() : 0;
-          bVal = bVal ? new Date(bVal).getTime() : 0;
-        } else if (typeof aVal === 'string') {
-          aVal = aVal.toLowerCase();
-          bVal = bVal?.toLowerCase() || '';
-        }
-        
-        const comparison = aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
-        return order === 'desc' ? -comparison : comparison;
-      });
-      
-      return res.json(filtered);
-    }
-    
-    // Build database query
-    const query = {};
-    if (status) query.status = status;
-    if (brandId) query.brandId = brandId;
-    if (search) {
-      query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { email: { $regex: search, $options: 'i' } },
-        { orgNumber: { $regex: search, $options: 'i' } }
-      ];
-    }
-    
-    // MRR filters
-    if (mrrMin !== undefined || mrrMax !== undefined) {
-      query.payment = {};
-      if (mrrMin !== undefined) query.payment.$gte = parseFloat(mrrMin);
-      if (mrrMax !== undefined) query.payment.$lte = parseFloat(mrrMax);
-    }
-    
-    // Date range filters
-    if (dateFrom || dateTo) {
-      query.lastContact = {};
-      if (dateFrom) query.lastContact.$gte = new Date(dateFrom);
-      if (dateTo) query.lastContact.$lte = new Date(dateTo);
-    }
-    
-    // Agent count filters
-    if (agentMin !== undefined || agentMax !== undefined) {
-      query.agentCount = {};
-      if (agentMin !== undefined) query.agentCount.$gte = parseInt(agentMin);
-      if (agentMax !== undefined) query.agentCount.$lte = parseInt(agentMax);
-    }
     
     // Build sort
     const sortObj = {};
@@ -596,24 +439,7 @@ router.put('/:id/pipeline', async (req, res) => {
     }
 
     if (!db) {
-      // Mock mode
-      const company = mockCompanies.find(c => c._id === id);
-      if (!company) {
-        return res.status(404).json({ error: 'Company not found' });
-      }
-
-      company.pipelineStage = stage;
-      if (value !== undefined) company.pipelineValue = value;
-      company.updatedAt = new Date();
-
-      // Auto-update status based on stage
-      if (stage === 'vunnit') {
-        company.status = 'kund';
-      } else if (['forlorat'].includes(stage)) {
-        company.status = 'prospekt';
-      }
-
-      return res.json(company);
+      return res.status(503).json({ error: 'Database not available' });
     }
 
     // Database mode
@@ -686,30 +512,7 @@ router.delete('/:id', async (req, res) => {
 // Filter Presets System
 // =============================================================================
 
-let mockFilterPresets = [
-  {
-    _id: 'preset1',
-    name: 'Stora kunder',
-    filters: {
-      status: 'kund',
-      mrrMin: 1000,
-      agentMin: 10
-    },
-    createdAt: new Date(),
-    userId: 'demo-user'
-  },
-  {
-    _id: 'preset2',
-    name: 'Heta prospekt',
-    filters: {
-      status: 'prospekt',
-      agentMin: 5,
-      dateFrom: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
-    },
-    createdAt: new Date(),
-    userId: 'demo-user'
-  }
-];
+// ...existing code...
 
 /**
  * GET /api/companies/filter-presets - Get all filter presets
@@ -719,7 +522,7 @@ router.get('/filter-presets', async (req, res) => {
     const db = req.app.locals.db;
     
     if (!db) {
-      return res.json(mockFilterPresets);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     const presets = await db.collection('filter_presets')
@@ -755,8 +558,7 @@ router.post('/filter-presets', async (req, res) => {
     };
     
     if (!db) {
-      mockFilterPresets.push(preset);
-      return res.status(201).json(preset);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     await db.collection('filter_presets').insertOne(preset);
@@ -776,12 +578,7 @@ router.delete('/filter-presets/:id', async (req, res) => {
     const { id } = req.params;
     
     if (!db) {
-      const index = mockFilterPresets.findIndex(p => p._id === id);
-      if (index === -1) {
-        return res.status(404).json({ error: 'Preset not found' });
-      }
-      mockFilterPresets.splice(index, 1);
-      return res.json({ message: 'Preset deleted' });
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     const result = await db.collection('filter_presets').deleteOne({ _id: id });

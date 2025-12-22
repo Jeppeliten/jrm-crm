@@ -2,89 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { updateAllAggregations } = require('../services/aggregation-service');
 
-// 🧪 TEMPORARY: In-memory storage for testing
-let mockAgents = [
-  { 
-    _id: '1', 
-    name: 'Anna', 
-    lastName: 'Andersson',
-    email: 'anna.andersson@era.se', 
-    phone: '070-123 45 67',
-    registrationType: 'Fastighetsmäklare',
-    company: 'ERA Sverige Fastighetsförmedling AB',
-    companyId: '1',
-    brand: 'ERA Mäklare',
-    brandId: 'mock1',
-    status: 'aktiv',
-    brokerPackage: { active: true, startDate: new Date('2024-01-15') },
-    createdAt: new Date('2024-01-15'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: '2', 
-    name: 'Erik', 
-    lastName: 'Eriksson',
-    email: 'erik.eriksson@era.se', 
-    phone: '070-234 56 78',
-    registrationType: 'Fastighetsmäklare',
-    company: 'ERA Sverige Fastighetsförmedling AB',
-    companyId: '1',
-    brand: 'ERA Mäklare',
-    brandId: 'mock1',
-    status: 'aktiv',
-    brokerPackage: { active: true, startDate: new Date('2024-02-01') },
-    createdAt: new Date('2024-02-01'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: '3', 
-    name: 'Maria', 
-    lastName: 'Svensson',
-    email: 'maria.svensson@maklarhuset.se', 
-    phone: '070-345 67 89',
-    registrationType: 'Fastighetsmäklare',
-    company: 'Mäklarhuset Stockholm Syd',
-    companyId: '2',
-    brand: 'Mäklarhuset',
-    brandId: 'mock2',
-    status: 'aktiv',
-    brokerPackage: { active: true, startDate: new Date('2023-08-10') },
-    createdAt: new Date('2023-08-10'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: '4', 
-    name: 'Johan', 
-    lastName: 'Johansson',
-    email: 'johan.johansson@svenskfast.se', 
-    phone: '070-456 78 90',
-    registrationType: 'Fastighetsmäklare',
-    company: 'Svensk Fastighetsförmedling Göteborg',
-    companyId: '3',
-    brand: 'Svensk Fastighetsförmedling',
-    brandId: 'mock3',
-    status: 'inaktiv',
-    brokerPackage: { active: false },
-    createdAt: new Date('2025-10-01'),
-    updatedAt: new Date()
-  },
-  { 
-    _id: '5', 
-    name: 'Lisa', 
-    lastName: 'Lindberg',
-    email: 'lisa.lindberg@fastighetsbyran.se', 
-    phone: '070-567 89 01',
-    registrationType: 'Fastighetsmäklare',
-    company: 'Fastighetsbyrån Malmö City',
-    companyId: '4',
-    brand: 'Fastighetsbyrån',
-    brandId: 'mock4',
-    status: 'aktiv',
-    brokerPackage: { active: true, startDate: new Date('2024-06-20') },
-    createdAt: new Date('2024-06-20'),
-    updatedAt: new Date()
-  }
-];
+// ...existing code...
 
 /**
  * GET /api/agents - Get all agents with optional filtering
@@ -102,47 +20,7 @@ router.get('/', async (req, res) => {
     const { status, companyId, brandId, search, sort = 'name', order = 'asc' } = req.query;
     
     if (!db) {
-      console.log('📦 Using mock agents data');
-      let filtered = [...mockAgents];
-      
-      // Apply filters
-      if (status) {
-        filtered = filtered.filter(a => a.status === status);
-      }
-      if (companyId) {
-        filtered = filtered.filter(a => a.companyId === companyId);
-      }
-      if (brandId) {
-        filtered = filtered.filter(a => a.brandId === brandId);
-      }
-      if (search) {
-        const searchLower = search.toLowerCase();
-        filtered = filtered.filter(a => 
-          a.name?.toLowerCase().includes(searchLower) ||
-          a.lastName?.toLowerCase().includes(searchLower) ||
-          a.email?.toLowerCase().includes(searchLower) ||
-          a.company?.toLowerCase().includes(searchLower)
-        );
-      }
-      
-      // Apply sorting
-      filtered.sort((a, b) => {
-        let aVal = a[sort];
-        let bVal = b[sort];
-        
-        if (sort === 'createdAt') {
-          aVal = aVal ? new Date(aVal).getTime() : 0;
-          bVal = bVal ? new Date(bVal).getTime() : 0;
-        } else if (typeof aVal === 'string') {
-          aVal = aVal.toLowerCase();
-          bVal = bVal?.toLowerCase() || '';
-        }
-        
-        const comparison = aVal > bVal ? 1 : aVal < bVal ? -1 : 0;
-        return order === 'desc' ? -comparison : comparison;
-      });
-      
-      return res.json(filtered);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     // Build database query
@@ -183,11 +61,7 @@ router.get('/:id', async (req, res) => {
     const { ObjectId } = require('mongodb');
     
     if (!db) {
-      const agent = mockAgents.find(a => a._id === req.params.id);
-      if (!agent) {
-        return res.status(404).json({ error: 'Agent not found' });
-      }
-      return res.json(agent);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     let query;
@@ -225,56 +99,8 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Name is required' });
     }
     
-    // Use mock storage if no database
     if (!db) {
-      console.log('📦 Saving to mock agents storage');
-      const agent = {
-        // Basic info
-        name: name.trim(),
-        lastName: lastName?.trim() || '',
-        email: email?.trim() || '',
-        phone: phone?.trim() || '',
-        registrationType: registrationType?.trim() || '',
-        
-        // Company and Brand
-        company: company?.trim() || '',
-        companyId: companyId || null,
-        brand: brand?.trim() || '',
-        brandId: brandId || null,
-        
-        // Address info
-        address: req.body.address?.trim() || '',
-        postalCode: req.body.postalCode?.trim() || '',
-        city: req.body.city?.trim() || '',
-        office: req.body.office?.trim() || '',
-        
-        // Mäklarpaket fields
-        brokerPackage: {
-          userId: req.body.brokerPackageUserId?.trim() || '',
-          msnName: req.body.brokerPackageMsnName?.trim() || '',
-          uid: req.body.brokerPackageUid?.trim() || '',
-          epost: req.body.brokerPackageEpost?.trim() || '',
-          active: req.body.brokerPackageActive || false,
-          customerNumber: req.body.brokerPackageCustomerNumber?.trim() || '',
-          accountNumber: req.body.brokerPackageAccountNumber?.trim() || '',
-          totalCost: parseFloat(req.body.brokerPackageTotalCost) || 0,
-          discount: parseFloat(req.body.brokerPackageDiscount) || 0
-        },
-        
-        // Products and matching
-        products: req.body.products || [],
-        matchType: req.body.matchType?.trim() || '',
-        
-        // Status and metadata
-        status: req.body.status?.trim() || 'aktiv',
-        role: req.body.role?.trim() || '',
-        licenseType: req.body.licenseType?.trim() || '',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      };
-      const mockAgent = { ...agent, _id: Date.now().toString() };
-      mockAgents.push(mockAgent);
-      return res.status(201).json(mockAgent);
+      return res.status(503).json({ error: 'Database not available' });
     }
     
     // Check for existing agent with same email (if email provided)
