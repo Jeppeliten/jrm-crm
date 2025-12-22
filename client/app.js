@@ -138,6 +138,141 @@ async function refreshUsersFromAPI() {
   }
 }
 
+// ============================================
+// TASKS API FUNCTIONS - Delade uppgifter via server
+// ============================================
+
+/**
+ * Hämta alla uppgifter från servern
+ */
+async function fetchTasksFromAPI() {
+  try {
+    const response = await fetch(`${API_BASE}/api/tasks`, {
+      credentials: 'include',
+      headers: { 'Accept': 'application/json' }
+    });
+    
+    if (!response.ok) {
+      console.warn('Kunde inte hämta uppgifter från API:', response.status);
+      return null;
+    }
+    
+    const tasks = await response.json();
+    
+    if (Array.isArray(tasks)) {
+      return tasks.map(t => ({
+        id: t._id || t.id,
+        title: t.title,
+        dueAt: t.dueAt || t.dueDate,
+        ownerId: t.ownerId,
+        done: t.done || false,
+        entityType: t.entityType,
+        entityId: t.entityId,
+        createdAt: t.createdAt,
+        updatedAt: t.updatedAt
+      }));
+    }
+    
+    return null;
+  } catch (error) {
+    console.warn('Fel vid hämtning av uppgifter:', error);
+    return null;
+  }
+}
+
+/**
+ * Skapa ny uppgift via API
+ */
+async function createTaskAPI(taskData) {
+  try {
+    const response = await fetch(`${API_BASE}/api/tasks`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(taskData)
+    });
+    
+    if (!response.ok) {
+      console.warn('Kunde inte skapa uppgift:', response.status);
+      return null;
+    }
+    
+    const result = await response.json();
+    console.log('✅ Uppgift skapad:', result.task?.title);
+    return result.task;
+  } catch (error) {
+    console.warn('Fel vid skapande av uppgift:', error);
+    return null;
+  }
+}
+
+/**
+ * Uppdatera uppgift via API
+ */
+async function updateTaskAPI(taskId, taskData) {
+  try {
+    const response = await fetch(`${API_BASE}/api/tasks/${encodeURIComponent(taskId)}`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(taskData)
+    });
+    
+    if (!response.ok) {
+      console.warn('Kunde inte uppdatera uppgift:', response.status);
+      return false;
+    }
+    
+    console.log('✅ Uppgift uppdaterad');
+    return true;
+  } catch (error) {
+    console.warn('Fel vid uppdatering av uppgift:', error);
+    return false;
+  }
+}
+
+/**
+ * Ta bort uppgift via API
+ */
+async function deleteTaskAPI(taskId) {
+  try {
+    const response = await fetch(`${API_BASE}/api/tasks/${encodeURIComponent(taskId)}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+    
+    if (!response.ok) {
+      console.warn('Kunde inte ta bort uppgift:', response.status);
+      return false;
+    }
+    
+    console.log('✅ Uppgift borttagen');
+    return true;
+  } catch (error) {
+    console.warn('Fel vid borttagning av uppgift:', error);
+    return false;
+  }
+}
+
+/**
+ * Ladda uppgifter från API och synka med AppState
+ */
+async function loadTasksFromAPI() {
+  const apiTasks = await fetchTasksFromAPI();
+  if (apiTasks && apiTasks.length >= 0) {
+    AppState.tasks = apiTasks;
+    console.log(`✅ Laddade ${apiTasks.length} uppgifter från API`);
+    return true;
+  }
+  return false;
+}
+
 // Early utility helpers - must be here before use
 function $(sel, parent=document) { return parent.querySelector(sel); }
 function $all(sel, parent=document) { return Array.from(parent.querySelectorAll(sel)); }
@@ -297,6 +432,9 @@ async function loadState() {
           AppState.users ||= DEFAULT_USERS;
         }
         
+        // Hämta delade uppgifter från API (överskriv lokala)
+        await loadTasksFromAPI();
+        
         runMigrations();
         localStorage.setItem(LS_KEY, JSON.stringify(AppState));
         return;
@@ -327,6 +465,9 @@ async function loadState() {
         AppState.users ||= DEFAULT_USERS;
       }
       
+      // Hämta delade uppgifter från API (överskriv lokala)
+      await loadTasksFromAPI();
+      
       runMigrations();
       localStorage.setItem(LS_KEY, JSON.stringify(AppState));
       return;
@@ -335,6 +476,10 @@ async function loadState() {
   // 3) Seed om inget finns
   AppState.users = (apiUsers && apiUsers.length > 0) ? apiUsers : DEFAULT_USERS;
   AppState.currentUserId = AppState.users[0]?.id || DEFAULT_USERS[0].id;
+  
+  // Hämta delade uppgifter från API
+  await loadTasksFromAPI();
+  
   seedExampleData();
   await saveState();
 }
@@ -2498,23 +2643,47 @@ function openTaskModal(preset={}) {
   }
   typeSel.addEventListener('change', drawPicker);
   drawPicker();
-  $('#saveTask').addEventListener('click', () => {
+  $('#saveTask').addEventListener('click', async () => {
     const title = $('#tTitle').value.trim(); if (!title) return;
     const dueStr = $('#tDue').value; const dueAt = dueStr ? new Date(dueStr).toISOString() : null;
     const ownerId = $('#tOwner').value;
     const entityType = $('#tEntityType').value || editing?.entityType || null;
     const entityId = entityType ? ($('#tEntity')?.value || editing?.entityId || preset.entityId || null) : null;
+    
+    const taskData = { title, dueAt, ownerId, entityType, entityId };
+    
     if (editing) {
-      editing.title = title; editing.dueAt = dueAt; editing.ownerId = ownerId; editing.entityType = entityType; editing.entityId = entityId;
+      // Uppdatera befintlig uppgift via API
+      const success = await updateTaskAPI(editing.id, taskData);
+      if (success) {
+        // Uppdatera lokalt också
+        Object.assign(editing, taskData);
+      }
     } else {
-      AppState.tasks.push({ id: id(), title, dueAt, ownerId, done:false, entityType, entityId });
+      // Skapa ny uppgift via API
+      const newTask = await createTaskAPI({ ...taskData, done: false });
+      if (newTask) {
+        AppState.tasks.push({
+          id: newTask.id || newTask._id,
+          title: newTask.title,
+          dueAt: newTask.dueAt,
+          ownerId: newTask.ownerId,
+          done: newTask.done || false,
+          entityType: newTask.entityType,
+          entityId: newTask.entityId
+        });
+      } else {
+        // Fallback: spara lokalt om API misslyckades
+        AppState.tasks.push({ id: id(), title, dueAt, ownerId, done: false, entityType, entityId });
+      }
     }
-  saveState(); modal.hide();
-  // Reopen relevant context after saving
-  if (entityType==='brand' && entityId) openBrand(entityId, { fromStack: true });
-  else if (entityType==='company' && entityId) openCompany(entityId, { fromStack: true });
-  else if (entityType==='agent' && entityId) openAgent(entityId, { fromStack: true });
-  else renderDashboard();
+    
+    saveState(); modal.hide();
+    // Reopen relevant context after saving
+    if (entityType==='brand' && entityId) openBrand(entityId, { fromStack: true });
+    else if (entityType==='company' && entityId) openCompany(entityId, { fromStack: true });
+    else if (entityType==='agent' && entityId) openAgent(entityId, { fromStack: true });
+    else renderDashboard();
   });
 }
 
