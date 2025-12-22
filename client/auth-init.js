@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });// Show landing page and set up login button
 function showLandingPage() {
   console.log('Showing landing page...');
-  document.getElementById('landingPage').style.display = 'block';
+  document.getElementById('landing-page').style.display = 'block';
   document.getElementById('app').style.display = 'none';
   
   // Try both button IDs (landingLoginBtn for new landing page, loginBtn for legacy)
@@ -81,7 +81,7 @@ function showApp() {
   }
   
   console.log('Showing app container...');
-  document.getElementById('landingPage').style.display = 'none';
+  document.getElementById('landing-page').style.display = 'none';
   document.getElementById('app').style.display = 'block';
 
   // Display user name if element exists
