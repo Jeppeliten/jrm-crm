@@ -955,22 +955,26 @@ function renderDashboard() {
 
   // Determine active segment for dashboard labels
   const activeSegmentId = AppState.activeSegmentId;
-  const activeSegment = AppState.segments.find(s => s.id === activeSegmentId);
+  const segments = Array.isArray(AppState.segments) ? AppState.segments : [];
+  const brands = Array.isArray(AppState.brands) ? AppState.brands : [];
+  const companies = Array.isArray(AppState.companies) ? AppState.companies : [];
+  const agents = Array.isArray(AppState.agents) ? AppState.agents : [];
+  const activeSegment = segments.find(s => s.id === activeSegmentId);
   const isBanking = activeSegmentId === 'banking';
-  
+
   // Filter data by active segment
   const filteredBrands = activeSegmentId 
-    ? AppState.brands.filter(b => b.segmentId === activeSegmentId)
-    : AppState.brands;
+    ? brands.filter(b => b.segmentId === activeSegmentId)
+    : brands;
   const filteredCompanies = activeSegmentId 
-    ? AppState.companies.filter(c => c.segmentId === activeSegmentId)
-    : AppState.companies;
+    ? companies.filter(c => c.segmentId === activeSegmentId)
+    : companies;
   const filteredAgents = activeSegmentId 
-    ? AppState.agents.filter(a => {
-        const company = AppState.companies.find(c => c.id === a.companyId);
+    ? agents.filter(a => {
+        const company = companies.find(c => c.id === a.companyId);
         return company && company.segmentId === activeSegmentId;
       })
-    : AppState.agents;
+    : agents;
 
   // Unique agents across multiple offices
   const personsMap = new Map();
@@ -979,7 +983,7 @@ function renderDashboard() {
     if (!personsMap.has(k)) personsMap.set(k, []);
     personsMap.get(k).push(a);
   }
-  const totalAgents = personsMap.size || 1;
+  const totalAgents = personsMap.size;
   
   // Normalize agent license status for counts
   function licStatus(a) {
@@ -995,22 +999,22 @@ function renderDashboard() {
   
   
   
-  const totalCompanies = filteredCompanies.length || 1;
+  const totalCompanies = filteredCompanies.length;
   const customerCompanies = filteredCompanies.filter(isCompanyCustomer).length;
-  const coverage = Math.round((customerCompanies / totalCompanies) * 100);
+  const coverage = totalCompanies > 0 ? Math.round((customerCompanies / totalCompanies) * 100) : 0;
 
   document.getElementById('metricCoverage').textContent = `${coverage}%`;
-  document.getElementById('metricBrands').textContent = filteredBrands.length;
-  document.getElementById('metricCompanies').textContent = filteredCompanies.length;
+  document.getElementById('metricBrands').textContent = filteredBrands.length || 0;
+  document.getElementById('metricCompanies').textContent = filteredCompanies.length || 0;
   
   // Segment-specific label for agents/advisors
   const agentsLabel = isBanking ? 'Rådgivare' : 'Mäklare';
   const agentsMetric = document.getElementById('metricAgents');
-  agentsMetric.textContent = totalAgents;
+  agentsMetric.textContent = totalAgents || 0;
   const agentsTitle = agentsMetric.closest('.stat').querySelector('.stat-title');
   if (agentsTitle) agentsTitle.textContent = agentsLabel;
   
-  document.getElementById('metricActiveLicenses').textContent = activeLic;
+  document.getElementById('metricActiveLicenses').textContent = activeLic || 0;
   
   // New metrics
   const companyCustomers = filteredCompanies.filter(isCompanyCustomer).length;
