@@ -198,6 +198,108 @@ app.get('/api/auth/config', (req, res) => {
 });
 
 // ============================================
+// AUTH ME ENDPOINT - Registrera/synka användare vid inloggning
+// ============================================
+
+app.post('/api/auth/me', async (req, res) => {
+  try {
+    // Validera token
+    if (!req.headers.authorization) {
+      return res.status(401).json({ error: 'No authorization header' });
+    }
+
+    let user = null;
+    
+    // Validera token och extrahera användarinfo
+    if (azureAuth && azureAuth.validateToken) {
+      const authResult = await azureAuth.validateToken(req.headers.authorization);
+      if (!authResult.valid) {
+        return res.status(401).json({ error: 'Invalid token' });
+      }
+      user = authResult.user;
+    } else {
+      // Fallback: dekoda JWT utan validering (för utveckling)
+      const token = req.headers.authorization.replace('Bearer ', '');
+      const decoded = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+      user = {
+        oid: decoded.oid || decoded.sub,
+        email: decoded.email || decoded.preferred_username || decoded.emails?.[0],
+        name: decoded.name,
+        given_name: decoded.given_name,
+        family_name: decoded.family_name,
+        roles: decoded.roles || []
+      };
+    }
+
+    if (!user) {
+      return res.status(401).json({ error: 'Could not extract user from token' });
+    }
+
+    // Synka användare till databasen
+    if (userService) {
+      const azureUser = {
+        id: user.oid || user.sub || user.id,
+        email: user.email || user.emails?.[0] || user.preferred_username,
+        displayName: user.name || `${user.given_name || ''} ${user.family_name || ''}`.trim(),
+        givenName: user.given_name || user.firstName,
+        surname: user.family_name || user.lastName,
+        userPrincipalName: user.email || user.preferred_username,
+        accountEnabled: true,
+        roles: user.roles || []
+      };
+
+      // Synka till databas (skapar om inte finns, uppdaterar om finns)
+      const syncedUser = await userService.syncUserFromAzure(azureUser);
+      
+      // Bestäm roll från token roles
+      let role = 'viewer';
+      if (user.roles?.includes('CRM Admin') || user.roles?.includes('admin')) {
+        role = 'admin';
+      } else if (user.roles?.includes('CRM Salesperson') || user.roles?.includes('salesperson')) {
+        role = 'salesperson';
+      }
+
+      // Uppdatera CRM-metadata om roll ändrats
+      if (syncedUser && syncedUser.crmMetadata?.role !== role) {
+        await userService.updateUserCrmMetadata(syncedUser._id || syncedUser.id, {
+          role: role,
+          permissions: role === 'admin' ? ['read', 'write', 'delete', 'admin'] : 
+                       role === 'salesperson' ? ['read', 'write'] : ['read']
+        });
+      }
+
+      console.log(`✅ Synced user ${azureUser.displayName} (${azureUser.email}) with role: ${role}`);
+
+      return res.json({
+        success: true,
+        user: {
+          id: syncedUser?._id || azureUser.id,
+          email: azureUser.email,
+          displayName: azureUser.displayName,
+          role: role
+        }
+      });
+    }
+
+    // Om ingen userService, returnera bara användarinfo från token
+    res.json({
+      success: true,
+      user: {
+        id: user.oid || user.sub,
+        email: user.email || user.emails?.[0],
+        displayName: user.name,
+        role: user.roles?.includes('CRM Admin') ? 'admin' : 
+              user.roles?.includes('CRM Salesperson') ? 'salesperson' : 'viewer'
+      }
+    });
+
+  } catch (error) {
+    console.error('Auth/me error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ============================================
 // BASIC API ENDPOINTS
 // ============================================
 

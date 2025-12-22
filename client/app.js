@@ -26,6 +26,60 @@ const DEFAULT_USERS = [
 ];
 
 /**
+ * Registrera/synka den inloggade användaren till databasen
+ * Anropas vid inloggning för att säkerställa att användaren finns i users-tabellen
+ */
+async function registerCurrentUser() {
+  try {
+    // Hämta access token om vi har entraAuth
+    let token = null;
+    if (window.entraAuth && typeof window.entraAuth.getAccessToken === 'function') {
+      try {
+        token = await window.entraAuth.getAccessToken();
+      } catch (e) {
+        console.warn('Kunde inte hämta access token:', e);
+      }
+    }
+
+    if (!token) {
+      console.log('Ingen token tillgänglig, hoppar över användarregistrering');
+      return null;
+    }
+
+    const response = await fetch(`${API_BASE}/api/auth/me`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      console.warn('Kunde inte registrera användare:', response.status);
+      return null;
+    }
+
+    const data = await response.json();
+    
+    if (data.success && data.user) {
+      console.log(`✅ Användare registrerad: ${data.user.displayName} (${data.user.role})`);
+      
+      // Sätt currentUserId till den inloggade användaren
+      AppState.currentUserId = data.user.id;
+      
+      return data.user;
+    }
+
+    return null;
+  } catch (error) {
+    console.warn('Fel vid registrering av användare:', error);
+    return null;
+  }
+}
+
+/**
  * Hämta användare från API:et (Entra ID / Azure AD)
  * Dessa kan tilldelas som ansvariga på uppgifter etc.
  */
@@ -208,10 +262,13 @@ const AppState = {
 };
 
 async function loadState() {
-  // 0) Försök hämta riktiga användare från API (Entra ID)
+  // 0) Registrera inloggad användare först (synkar till databasen)
+  await registerCurrentUser();
+  
+  // 1) Hämta alla användare från API (inklusive den nyregistrerade)
   const apiUsers = await fetchUsersFromAPI();
   
-  // 1) Försök hämta från server
+  // 2) Försök hämta från server
   try {
     let r = await fetch(`${API_BASE}/api/stats/state`, { credentials: 'include' });
     if (r.status === 401) {
