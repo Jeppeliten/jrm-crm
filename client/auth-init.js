@@ -35,41 +35,41 @@ function showLandingPage() {
   console.log('Showing landing page...');
   document.getElementById('landing-page').style.display = 'block';
   document.getElementById('app').style.display = 'none';
-  
-  // Try both button IDs (landingLoginBtn for new landing page, loginBtn for legacy)
-  const loginBtn = document.getElementById('landingLoginBtn') || document.getElementById('loginBtn');
-  const loginError = document.getElementById('loginError');
-  const loginErrorText = document.getElementById('loginErrorText');
-  
+
+  // Dölj "Kontrollerar inloggning..."
+  const authStatus = document.getElementById('auth-status');
+  if (authStatus) authStatus.style.display = 'none';
+
+  // Visa login-knappen
+  const loginBtn = document.getElementById('landing-login-btn');
   if (!loginBtn) {
-    console.error('Login button not found!');
+    console.error('Login button (landing-login-btn) not found!');
     return;
   }
-  
-  console.log('Login button ready, adding click handler...');
-  loginBtn.addEventListener('click', async (e) => {
+  loginBtn.style.display = 'inline-block';
+  loginBtn.disabled = false;
+  loginBtn.innerHTML = '🔐 Logga in med Azure AD';
+
+  // Ta bort ev. gamla event listeners
+  const newBtn = loginBtn.cloneNode(true);
+  loginBtn.parentNode.replaceChild(newBtn, loginBtn);
+
+  newBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Login button clicked!');
-    
-    loginBtn.disabled = true;
-    const originalHTML = loginBtn.innerHTML;
-    loginBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loggar in...';
-    if (loginError) loginError.classList.add('hidden');
-    
+    newBtn.disabled = true;
+    const originalHTML = newBtn.innerHTML;
+    newBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Loggar in...';
     try {
       console.log('Starting login redirect...');
       await entraAuth.loginRedirect();
-      // After redirect, page will reload and user will be logged in
     } catch (error) {
       console.error('Login failed:', error);
-      if (loginErrorText) loginErrorText.textContent = 'Inloggning misslyckades. Försök igen.';
-      if (loginError) loginError.classList.remove('hidden');
-      loginBtn.disabled = false;
-      loginBtn.innerHTML = originalHTML;
+      newBtn.disabled = false;
+      newBtn.innerHTML = originalHTML;
     }
   });
-  
   console.log('Click handler attached to login button');
 }
 
