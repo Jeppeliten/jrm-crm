@@ -252,12 +252,16 @@ app.post('/api/auth/me', async (req, res) => {
       const syncedUser = await userService.syncUserFromAzure(azureUser);
       
       // Bestäm roll från token roles
-      let role = 'viewer';
+      // OBS: App-roller finns vanligtvis bara i access tokens för API:et, inte i ID-tokens
+      // Om användaren kan logga in alls, ge dem minst salesperson-roll
+      let role = 'salesperson'; // Default för alla inloggade användare
       if (user.roles?.includes('CRM Admin') || user.roles?.includes('admin')) {
         role = 'admin';
       } else if (user.roles?.includes('CRM Salesperson') || user.roles?.includes('salesperson')) {
         role = 'salesperson';
       }
+
+      console.log(`👤 User roles from token: ${JSON.stringify(user.roles || [])}, assigned role: ${role}`);
 
       // Uppdatera CRM-metadata om roll ändrats
       if (syncedUser && syncedUser.crmMetadata?.role !== role) {
