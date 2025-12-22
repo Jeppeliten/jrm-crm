@@ -1746,7 +1746,6 @@ function openBrand(id, options = {}) {
   document.getElementById('addBrandNote2').addEventListener('click',()=>openNoteModal('brand', b.id));
 }
 
-function openBrandModal() {
   const segmentOptions = (AppState.segments || []).map(s => 
     `<option value="${s.id}">${s.icon} ${s.name}</option>`
   ).join('');
@@ -1770,6 +1769,37 @@ function openBrandModal() {
     const namn = $('#brandName').value.trim(); 
     const segmentId = $('#brandSegment').value || 'real-estate'; // Default to real-estate
     if (!namn) return;
+    AppState.brands.push({ id: id(), namn, segmentId });
+    saveState(); modal.hide(); renderBrands();
+  });
+}
+function openBrandModal() {
+  // Säkerställ att AppState.segments är en array
+  if (!Array.isArray(AppState.segments)) AppState.segments = [];
+  const segmentOptions = AppState.segments.map(s => 
+    `<option value="${s.id}">${s.icon || ''} ${s.name || ''}</option>`
+  ).join('');
+
+  modal.show(`
+    <h3>Nytt varumärke</h3>
+    <div class="field"><label>Namn</label><input id="brandName" /></div>
+    <div class="field">
+      <label>Segment</label>
+      <select id="brandSegment">
+        <option value="">Välj segment...</option>
+        ${segmentOptions}
+      </select>
+    </div>
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <button class="primary" id="saveBrand">Spara</button>
+      <button class="secondary" onclick="modal.hide()">Avbryt</button>
+    </div>
+  `);
+  $('#saveBrand').addEventListener('click', () => {
+    const namn = $('#brandName').value.trim(); 
+    const segmentId = $('#brandSegment').value || 'real-estate'; // Default to real-estate
+    if (!namn) return;
+    if (!Array.isArray(AppState.brands)) AppState.brands = [];
     AppState.brands.push({ id: id(), namn, segmentId });
     saveState(); modal.hide(); renderBrands();
   });
@@ -3519,7 +3549,6 @@ function isCompanyCustomer(c) {
 }
 
 // Person identity helpers (dedupe agents across multiple offices)
-function personKey(agent) {
   const email = String(agent?.email||'').trim().toLowerCase();
   if (email) return `em:${email}`;
   const first = String(agent?.förnamn||'').trim().toLowerCase();
@@ -3560,6 +3589,51 @@ function openAgent(id, options = {}) {
       <div class="field"><label>Status</label>
         <select id="aStatus">
           <option value="kund" ${a.status==='kund'?'selected':''}>Kund</option>
+function openCompanyModal() {
+  // Säkerställ att AppState.segments och AppState.brands är arrays
+  if (!Array.isArray(AppState.segments)) AppState.segments = [];
+  if (!Array.isArray(AppState.brands)) AppState.brands = [];
+  const segmentOptions = AppState.segments.map(s => 
+    `<option value="${s.id}">${s.icon || ''} ${s.name || ''}</option>`
+  ).join('');
+  const brandOptions = AppState.brands.map(b => `<option value="${b.id}">${b.namn || ''}</option>`).join('');
+
+  modal.show(`
+    <h3>Nytt företag</h3>
+    <div class="grid-2">
+      <div class="field"><label>Namn</label><input id="cName" /></div>
+      <div class="field"><label>Varumärke</label><select id="cBrand">${brandOptions}</select></div>
+      <div class="field"><label>Stad</label><input id="cCity" /></div>
+      <div class="field"><label>Segment</label>
+        <select id="cSegment">
+          <option value="">Ärv från varumärke</option>
+          ${segmentOptions}
+        </select>
+      </div>
+      <div class="field"><label>Status</label>
+        <select id="cStatus">
+          <option value="kund">Kund</option>
+          <option value="prospekt" selected>Prospekt</option>
+          <option value="ej">Ej kontakt</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:10px; display:flex; gap:8px;">
+      <button class="primary" id="saveCompany2">Spara</button>
+      <button class="secondary" onclick="modal.hide()">Avbryt</button>
+    </div>
+  `);
+
+  // Auto-select segment from brand
+  $('#cBrand').addEventListener('change', () => {
+    const selectedBrand = AppState.brands.find(b => b.id === $('#cBrand').value);
+    if (selectedBrand && selectedBrand.segmentId && !$('#cSegment').value) {
+      // Show brand's segment as hint, user can still override
+    }
+  });
+
+  $('#saveCompany2').addEventListener('click', () => {
+    const brandId = $('#cBrand').value;
           <option value="prospekt" ${a.status==='prospekt'?'selected':''}>Prospekt</option>
           <option value="ej" ${a.status==='ej'?'selected':''}>Ej kontakt</option>
         </select>
