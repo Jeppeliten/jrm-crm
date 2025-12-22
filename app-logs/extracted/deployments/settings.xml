@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<settings>
-  <deployment>
-    <add key="RepoUrl" value="https://varderingsdata@dev.azure.com/varderingsdata/VD%20Laboratory/_git/JRM" />
-    <add key="branch" value="master" />
-  </deployment>
-</settings>

@@ -1,6 +1,0 @@
-<step title="Incoming Request" date="2025-12-04T07:41:02.237" instance="8357d4" url="/api/vfs/site/wwwroot/index.js" method="PUT" type="request" pid="835,1,16" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="curl/8.16.0" Authorization="Bea..." Content-Type="application/octet-stream" Content-Length="10120" X-ARR-LOG-ID="95837cfe-7050-43cb-853a-be85f01b1097" CLIENT-IP="62.109.60.238:59899" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/vfs/site/wwwroot/index.js" X-Client-IP="62.109.60.238" X-Client-Port="59899" >
-  <step title="Cleanup Xml Logs" date="2025-12-04T07:41:02.240" >
-    <step title="Cleanup Infos" date="2025-12-04T07:41:02.263" totalFiles="229" totalCleanup="69" /><!-- duration: 27ms -->
-  </step><!-- duration: 61ms -->
-  <step title="Outgoing response" date="2025-12-04T07:41:03.191" type="response" statusCode="412" statusText="PreconditionFailed" /><!-- duration: 6ms -->
-</step><!-- duration: 985ms -->

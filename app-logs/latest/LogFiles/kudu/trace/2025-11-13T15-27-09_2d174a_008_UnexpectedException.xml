@@ -1,2 +1,0 @@
-<exception>System.NullReferenceException: Object reference not set to an instance of an object.
-   at Kudu.Core.Tracing.XmlTracer.WriteEndTrace() in /tmp/KuduLite/Kudu.Core/Tracing/XmlTracer.cs:line 197</exception>

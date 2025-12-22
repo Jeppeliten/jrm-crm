@@ -1,1 +1,0 @@
-2025-12-03T14:15:59  Startup Request, url: /api/vfs/site/wwwroot/routes/, method: GET, type: request, pid: 837,1,16, SCM_DO_BUILD_DURING_DEPLOYMENT: false, ScmType: None

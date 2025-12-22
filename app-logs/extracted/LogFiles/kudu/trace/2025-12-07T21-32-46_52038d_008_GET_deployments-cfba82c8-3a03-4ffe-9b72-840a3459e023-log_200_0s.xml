@@ -1,9 +1,0 @@
-<step title="Incoming Request" date="2025-12-07T21:32:46.745" instance="52038d" url="/deployments/cfba82c8-3a03-4ffe-9b72-840a3459e023/log" method="GET" type="request" pid="831,1,5" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="curl/8.16.0" Authorization="Bas..." X-ARR-LOG-ID="39dad63c-a13d-4e8c-ad25-596edf29bf51" CLIENT-IP="217.210.58.138:51140" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/deployments/cfba82c8-3a03-4ffe-9b72-840a3459e023/log" X-Client-IP="217.210.58.138" X-Client-Port="51140" >
-  <step title="Cleanup Xml Logs" date="2025-12-07T21:32:46.754" >
-    <step title="Cleanup Infos" date="2025-12-07T21:32:46.770" totalFiles="251" totalCleanup="91" /><!-- duration: 4ms -->
-  </step><!-- duration: 22ms -->
-  <step title="DeploymentService.GetLogEntry" date="2025-12-07T21:32:46.786" >
-    <step title="DeploymentManager.GetLogEntries(id:cfba82c8-3a03-4ffe-9b72-840a3459e023)" date="2025-12-07T21:32:46.788" /><!-- duration: 29ms -->
-  </step><!-- duration: 34ms -->
-  <step title="Outgoing response" date="2025-12-07T21:32:46.837" type="response" statusCode="200" statusText="OK" /><!-- duration: 9ms -->
-</step><!-- duration: 109ms -->

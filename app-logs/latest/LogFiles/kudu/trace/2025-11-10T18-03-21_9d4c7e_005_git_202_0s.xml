@@ -1,3 +1,0 @@
-<step title="Executing external process" date="2025-11-10T18:03:21.291" instance="9d4c7e" type="process" path="git" arguments="rev-parse --git-dir" >
-  <step title="Cleanup Xml Logs" date="2025-11-10T18:03:21.333" /><!-- duration: 88ms -->
-</step><!-- duration: 191ms -->

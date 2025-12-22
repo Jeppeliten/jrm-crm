@@ -1,0 +1,44 @@
+{
+    "navigationFallback": {
+        "rewrite": "/index.html"
+    },
+    "auth": {
+        "rolesSource": "/api/GetRoles",
+        "identityProviders": {
+            "azureActiveDirectory": {
+                "registration": {
+                    "openIdConnectConfiguration": {
+                        "wellKnownConfigUrl": "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration"
+                    }
+                }
+            }
+        }
+    },
+    "routes": [
+        {
+            "route": "/api/*",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "DELETE"
+            ],
+            "allowedRoles": [
+                "authenticated"
+            ]
+        },
+        {
+            "route": "/*",
+            "allowedRoles": [
+                "anonymous",
+                "authenticated"
+            ]
+        }
+    ],
+    "responseOverrides": {
+        "401": {
+            "redirect": "/.auth/login/aad",
+            "statusCode": 302
+        }
+    }
+}

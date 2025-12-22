@@ -1,8 +1,0 @@
-<exception>System.ArgumentNullException: Value cannot be null. (Parameter &apos;path&apos;)
-   at System.ArgumentNullException.Throw(String paramName)
-   at System.ArgumentNullException.ThrowIfNull(Object argument, String paramName)
-   at System.ArgumentException.ThrowNullOrEmptyException(String argument, String paramName)
-   at System.IO.Strategies.FileStreamHelpers.ValidateArguments(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
-   at System.IO.File.Open(String path, FileMode mode, FileAccess access, FileShare share)
-   at Kudu.Core.Infrastructure.FileSystemHelpers.AppendAllTextToFile(String path, String content) in /tmp/KuduLite/Kudu.Core/Infrastructure/FileSystemHelpers.cs:line 194
-   at Kudu.Core.Tracing.XmlTracer.WriteEndTrace() in /tmp/KuduLite/Kudu.Core/Tracing/XmlTracer.cs:line 170</exception>

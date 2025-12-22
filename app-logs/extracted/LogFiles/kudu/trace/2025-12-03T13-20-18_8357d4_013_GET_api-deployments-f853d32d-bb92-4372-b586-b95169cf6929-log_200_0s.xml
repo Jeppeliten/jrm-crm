@@ -1,6 +1,0 @@
-<step title="Incoming Request" date="2025-12-03T13:20:18.784" instance="8357d4" url="/api/deployments/f853d32d-bb92-4372-b586-b95169cf6929/log" method="GET" type="request" pid="835,1,47" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="python/3.13.9 (Windows-11-10.0.26100-SP0) AZURECLI/2.79.0 (MSI)" Accept-Encoding="gzip, deflate" Authorization="Bea..." x-ms-client-request-id="94c873de-1fa6-4afd-ab75-1a4e65b6cc64" CommandName="rest" ParameterSetName="--method --uri --resource" X-ARR-LOG-ID="94c873de-1fa6-4afd-ab75-1a4e65b6cc64" CLIENT-IP="94.254.11.250:58175" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/f853d32d-bb92-4372-b586-b95169cf6929/log" X-Client-IP="94.254.11.250" X-Client-Port="58175" >
-  <step title="DeploymentService.GetLogEntry" date="2025-12-03T13:20:18.788" >
-    <step title="DeploymentManager.GetLogEntries(id:f853d32d-bb92-4372-b586-b95169cf6929)" date="2025-12-03T13:20:18.790" /><!-- duration: 14ms -->
-  </step><!-- duration: 19ms -->
-  <step title="Outgoing response" date="2025-12-03T13:20:18.813" type="response" statusCode="200" statusText="OK" /><!-- duration: 2ms -->
-</step><!-- duration: 33ms -->

@@ -1,0 +1,16 @@
+{
+    "name": "api",
+    "version": "1.0.0",
+    "description": "Azure Functions API for Sweden Broker CRM",
+    "main": "src/functions/*.js",
+    "scripts": {
+        "start": "func start",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "mongodb": "^6.3.0"
+    },
+    "devDependencies": {
+        "@azure/functions": "^4.0.0"
+    }
+}

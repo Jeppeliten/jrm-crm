@@ -1,5 +1,0 @@
-<step title="Startup Request" date="2025-12-03T14:15:59.112" instance="8357d4" url="/api/vfs/site/wwwroot/routes/" method="GET" type="request" pid="837,1,16" SCM_DO_BUILD_DURING_DEPLOYMENT="false" ScmType="None" >
-  <step title="Cleanup Xml Logs" date="2025-12-03T14:15:59.120" >
-    <step title="Cleanup Infos" date="2025-12-03T14:15:59.127" totalFiles="215" totalCleanup="55" /><!-- duration: 9ms -->
-  </step><!-- duration: 21ms -->
-</step><!-- duration: 31ms -->

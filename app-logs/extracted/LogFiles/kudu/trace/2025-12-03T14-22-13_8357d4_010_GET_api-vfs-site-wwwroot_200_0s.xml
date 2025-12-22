@@ -1,6 +1,0 @@
-<step title="Incoming Request" date="2025-12-03T14:22:13.880" instance="8357d4" url="/api/vfs/site/wwwroot/" method="GET" type="request" pid="837,1,15" Accept="*/*" Host="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" User-Agent="python/3.13.9 (Windows-11-10.0.26100-SP0) AZURECLI/2.79.0 (MSI)" Accept-Encoding="gzip, deflate" Authorization="Bea..." x-ms-client-request-id="3661b5a7-f595-43cb-99bb-89c5c3a96dfe" CommandName="rest" ParameterSetName="--method --uri --resource" X-ARR-LOG-ID="3661b5a7-f595-43cb-99bb-89c5c3a96dfe" CLIENT-IP="94.254.11.250:62407" X-SITE-DEPLOYMENT-ID="jrm-crm-api-prod-vsdmc5kbydcjc" WAS-DEFAULT-HOSTNAME="jrm-crm-api-prod-vsdmc5kbydcjc.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/vfs/site/wwwroot/" X-Client-IP="94.254.11.250" X-Client-Port="62407" >
-  <step title="Cleanup Xml Logs" date="2025-12-03T14:22:13.901" >
-    <step title="Cleanup Infos" date="2025-12-03T14:22:13.950" totalFiles="224" totalCleanup="64" /><!-- duration: 91ms -->
-  </step><!-- duration: 151ms -->
-  <step title="Outgoing response" date="2025-12-03T14:22:14.133" type="response" statusCode="200" statusText="OK" /><!-- duration: 9ms -->
-</step><!-- duration: 272ms -->
